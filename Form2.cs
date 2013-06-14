@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace TRAWebServer
 {
@@ -16,14 +17,8 @@ namespace TRAWebServer
             InitializeComponent();
         }
 
-        private void display_TextChanged(object sender, EventArgs e)
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

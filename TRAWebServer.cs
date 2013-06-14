@@ -278,7 +278,7 @@ namespace TRAWebServer {
     public class TestMain
     {
         public static Form2 mainForm = new Form2();
-       
+        public static Thread thread;
         public static int Main(String[] args)
         {
             HttpServer httpServer;
@@ -291,11 +291,18 @@ namespace TRAWebServer {
             {
                 httpServer = new PortalHttpServer(8080);
             }
-            Thread thread = new Thread(new ThreadStart(httpServer.listen));
+            thread = new Thread(new ThreadStart(httpServer.listen));
             thread.Start();
+
+            mainForm.FormClosing += new FormClosingEventHandler(mainForm_FormClosing);
 
             Application.Run(mainForm);
             return 0;
+        }
+
+        static void mainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
         }
 
         delegate void WriteDisplayCallabck(string text);

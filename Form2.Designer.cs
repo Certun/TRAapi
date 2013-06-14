@@ -41,7 +41,6 @@
             this.display.Size = new System.Drawing.Size(512, 396);
             this.display.TabIndex = 0;
             this.display.Text = "";
-            this.display.TextChanged += new System.EventHandler(this.display_TextChanged);
             // 
             // pictureBox1
             // 
@@ -62,7 +61,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form2";
             this.Text = "TRA Portal Server";
-            this.Load += new System.EventHandler(this.Form2_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
