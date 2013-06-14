@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Windows.Forms;
 
 // offered to the public domain for any use with no restriction
 // and also with no warranty of any kind, please enjoy. - David Jeske. 
@@ -56,6 +57,9 @@ namespace TRAWebServer {
 
         public void process()
         {
+            
+            TestMain.WriteDisplay("Processing resquest!!!!!!");
+
             // we can't use a StreamReader for input, because it buffers up extra data on us inside it's
             // "processed" view of the world, and we want the data raw after the headers
             inputStream = new BufferedStream(socket.GetStream());
@@ -127,6 +131,7 @@ namespace TRAWebServer {
 
                 string value = line.Substring(pos, line.Length - pos);
                 Console.WriteLine("header: {0}:{1}", name, value);
+                TestMain.WriteDisplay("header: " + name + ":" + value);
                 httpHeaders[name] = value;
             }
         }
@@ -254,8 +259,10 @@ namespace TRAWebServer {
             //}
 
             Console.WriteLine("request: {0}", p.http_url);
+            TestMain.WriteDisplay("request: " + p.http_url);
             p.writeSuccess();
             p.outputStream.WriteLine("Handle GET Request");
+
         }
 
         public override void handlePOSTRequest(HttpProcessor p, StreamReader inputData)
@@ -271,9 +278,12 @@ namespace TRAWebServer {
 
     public class TestMain
     {
+        public static Form2 mainForm = new Form2();
+       
         public static int Main(String[] args)
         {
             HttpServer httpServer;
+         
             if (args.GetLength(0) > 0)
             {
                 httpServer = new PortalHttpServer(Convert.ToInt16(args[0]));
@@ -284,7 +294,26 @@ namespace TRAWebServer {
             }
             Thread thread = new Thread(new ThreadStart(httpServer.listen));
             thread.Start();
+
+            Application.Run(mainForm);
             return 0;
+        }
+
+        delegate void WriteDisplayCallabck(string text);
+
+        public static void WriteDisplay(string text)
+        {
+
+            RichTextBox textBox = mainForm.display;
+            if (textBox.InvokeRequired)
+            {
+                WriteDisplayCallabck d = new WriteDisplayCallabck(WriteDisplay);
+                textBox.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                textBox.Text += text + Environment.NewLine;
+            }
         }
     }
 }
