@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 // offered to the public domain for any use with no restriction
 // and also with no warranty of any kind, please enjoy. - David Jeske. 
@@ -27,17 +28,13 @@ namespace TRAWebServer {
         public String http_protocol_versionstring;
         public Hashtable httpHeaders = new Hashtable();
 
-
         private static int MAX_POST_SIZE = 10 * 1024 * 1024; // 10MB
 
         public HttpProcessor(TcpClient s, HttpServer srv)
         {
             this.socket = s;
             this.srv = srv;
-            //sfhjkshfhskfkdh
-            //hhhhhhhhhhhhhhhhhhhhhhhhhhhh
         }
-
 
         private string streamReadLine(Stream inputStream)
         {
@@ -261,6 +258,8 @@ namespace TRAWebServer {
             Console.WriteLine("request: {0}", p.http_url);
             TestMain.WriteDisplay("request: " + p.http_url);
             p.writeSuccess();
+
+
             p.outputStream.WriteLine("Handle GET Request");
 
         }
