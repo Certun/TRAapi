@@ -296,8 +296,15 @@ namespace TRAWebServer {
 
             mainForm.FormClosing += new FormClosingEventHandler(mainForm_FormClosing);
 
+            mainForm.resetBtn.Click += resetBtn_Click;
+
             Application.Run(mainForm);
             return 0;
+        }
+
+        static void resetBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.display.ResetText();
         }
 
         static void mainForm_FormClosing(object sender, FormClosingEventArgs e)
