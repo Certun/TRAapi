@@ -53,5 +53,11 @@ namespace TRAWebServer
             config.Save(ConfigurationSaveMode.Modified);
         
         }
+
+        private void enableDebug_CheckedChanged(object sender, EventArgs e)
+        {
+            Server.debug = enableDebug.Checked;
+        }
+        
     }
 }

@@ -6,10 +6,8 @@ using System.Text;
 
 namespace TRAWebServer
 {
-    class Request
+    class RequestData
     {
-        public string secretKey { get; set; }
-        public string action { get; set; }
         public DataSet data { get; set; }
     }
 }

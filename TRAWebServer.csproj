@@ -73,14 +73,17 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="HttpProcessor.cs" />
+    <Compile Include="HttpServer.cs" />
+    <Compile Include="PortalHttpServer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Request.cs" />
-    <Compile Include="Resposnse.cs" />
-    <Compile Include="TRAWebServer.cs" />
+    <Compile Include="RequestData.cs" />
+    <Compile Include="Response.cs" />
+    <Compile Include="Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

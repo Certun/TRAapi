@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
-using System.Net;
+using System.Linq;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
-using System.Windows.Forms;
-using Newtonsoft.Json;
 
-// offered to the public domain for any use with no restriction
-// and also with no warranty of any kind, please enjoy. - David Jeske. 
-
-// simple HTTP explanation
-// http://www.jmarshall.com/easy/http/
-
-namespace TRAWebServer {
-
+namespace TRAWebServer
+{
     public class HttpProcessor
     {
         public TcpClient socket;
@@ -54,8 +48,8 @@ namespace TRAWebServer {
 
         public void process()
         {
-            
-            TestMain.WriteDisplay("Processing resquest!!!!!!");
+
+            Server.WriteDisplay("Processing resquest!!!!!!");
 
             // we can't use a StreamReader for input, because it buffers up extra data on us inside it's
             // "processed" view of the world, and we want the data raw after the headers
@@ -67,6 +61,10 @@ namespace TRAWebServer {
             {
                 parseRequest();
                 readHeaders();
+
+                if(){
+                }
+
                 if (http_method.Equals("GET"))
                 {
                     handleGETRequest();
@@ -128,8 +126,10 @@ namespace TRAWebServer {
 
                 string value = line.Substring(pos, line.Length - pos);
                 Console.WriteLine("header: {0}:{1}", name, value);
-                TestMain.WriteDisplay("header: " + name + ":" + value);
-                httpHeaders[name] = value;
+
+                if (Server.debug) Server.WriteDisplay("header: " + name + ":" + value);
+                
+                httpHeaders[name] = (string) value;
             }
         }
 
@@ -202,131 +202,6 @@ namespace TRAWebServer {
             outputStream.WriteLine("HTTP/1.0 404 File not found");
             outputStream.WriteLine("Connection: close");
             outputStream.WriteLine("");
-        }
-    }
-
-    public abstract class HttpServer
-    {
-
-        protected int port;
-        TcpListener listener;
-        bool is_active = true;
-
-        public HttpServer(int port)
-        {
-            this.port = port;
-        }
-
-        public void listen()
-        {
-            System.Net.IPAddress localIP = IPAddress.Parse("127.0.0.1");
-            listener = new TcpListener(localIP, port);
-            listener.Start();
-            while (is_active)
-            {
-                TcpClient s = listener.AcceptTcpClient();
-                HttpProcessor processor = new HttpProcessor(s, this);
-                Thread thread = new Thread(new ThreadStart(processor.process));
-                thread.Start();
-                Thread.Sleep(1);
-            }
-        }
-
-        public abstract void handleGETRequest(HttpProcessor p);
-        public abstract void handlePOSTRequest(HttpProcessor p, StreamReader inputData);
-    }
-
-
-    public class PortalHttpServer : HttpServer
-    {
-        public PortalHttpServer(int port)
-            : base(port)
-        {
-        }
-        public override void handleGETRequest(HttpProcessor p)
-        {
-
-            //if (p.http_url.Equals("/Test.png"))
-            //{
-            //    Stream fs = File.Open("../../Test.png", FileMode.Open);
-
-            //    p.writeSuccess("image/png");
-            //    fs.CopyTo(p.outputStream.BaseStream);
-            //    p.outputStream.BaseStream.Flush();
-            //}
-
-            Console.WriteLine("request: {0}", p.http_url);
-            TestMain.WriteDisplay("request: " + p.http_url);
-            p.writeSuccess();
-
-
-            p.outputStream.WriteLine("Handle GET Request");
-
-        }
-
-        public override void handlePOSTRequest(HttpProcessor p, StreamReader inputData)
-        {
-            Console.WriteLine("POST request: {0}", p.http_url);
-            string data = inputData.ReadToEnd();
-
-            p.writeSuccess();
-            p.outputStream.WriteLine("Handle POST Request");
-            p.outputStream.WriteLine("postbody: <pre>{0}</pre>", data);
-        }
-    }
-
-    public class TestMain
-    {
-        public static Form2 mainForm = new Form2();
-        public static Thread thread;
-        public static int Main(String[] args)
-        {
-            HttpServer httpServer;
-         
-            if (args.GetLength(0) > 0)
-            {
-                httpServer = new PortalHttpServer(Convert.ToInt16(args[0]));
-            }
-            else
-            {
-                httpServer = new PortalHttpServer(8080);
-            }
-            thread = new Thread(new ThreadStart(httpServer.listen));
-            thread.Start();
-
-            mainForm.FormClosing += new FormClosingEventHandler(mainForm_FormClosing);
-
-            mainForm.resetBtn.Click += resetBtn_Click;
-
-            Application.Run(mainForm);
-            return 0;
-        }
-
-        static void resetBtn_Click(object sender, EventArgs e)
-        {
-            mainForm.display.ResetText();
-        }
-
-        static void mainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Environment.Exit(0);
-        }
-
-        delegate void WriteDisplayCallabck(string text);
-
-        public static void WriteDisplay(string text)
-        {
-
-            RichTextBox textBox = mainForm.display;
-            if (textBox.InvokeRequired)
-            {
-                WriteDisplayCallabck d = new WriteDisplayCallabck(WriteDisplay);
-                textBox.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                textBox.Text += text + Environment.NewLine;
-            }
         }
     }
 }
