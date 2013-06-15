@@ -32,10 +32,7 @@ namespace TRAWebServer
         };
 
         public override void handleGETRequest(HttpProcessor p)
-        {
-            // not sure what this is for... jeje :-)
-            string request = p.http_url.Substring(1);
-
+        {           
             // write request success headers (THis is required for every reuqest)
             p.writeSuccess();
 
@@ -58,9 +55,10 @@ namespace TRAWebServer
                 // start valid reqiest --------------------------------------------------------------->>>>
                 
                 // store header action for easiest access
-                var action = (string)p.httpHeaders["action"];
-                // define success
-                response.success = true;
+                string action = (string)p.httpHeaders["action"];
+                // request if a single data for example and ID of a patient or an appoointment book
+                string request = p.http_url.Substring(1);
+                
                 // DO STUFF HERE!
                 switch (action)
                 {
@@ -99,6 +97,11 @@ namespace TRAWebServer
 
 
                         break;
+
+                    default:
+                        response.error = "Nothing to do";
+                        break;
+
                 }
 
 
@@ -122,7 +125,7 @@ namespace TRAWebServer
 
         public override void handlePOSTRequest(HttpProcessor p, StreamReader inputData)
         {
-            string data = inputData.ReadToEnd();
+            string rawData = inputData.ReadToEnd();
             // write request success headers (THis is required for every reuqest)
             p.writeSuccess();
             // create  new response object
@@ -156,13 +159,12 @@ namespace TRAWebServer
                 var action = (string) p.httpHeaders["action"];
 
 
-                // here is the data parsed 
-                string dataScaped = Uri.UnescapeDataString(data);
-                dynamic jData = JObject.Parse(dataScaped) as JObject;
-                foreach (object row in jData)
-                {
-                    Server.WriteDisplay(row.ToString());
-                }
+                // parse the data into an object
+                JObject data = JObject.Parse(Uri.UnescapeDataString(rawData)) as JObject;
+
+                // do stuuf with the object data
+                // Server.WriteDisplay(data.ToString());
+
 
 
                 switch (action)
@@ -202,6 +204,12 @@ namespace TRAWebServer
                         
                         
                         break;
+
+                    default:
+                        // define default case
+                        response.success = false;
+                        response.error = "Nothing to do";
+                        break;
                 }
  
                 // write this stuff on display for de bugging
@@ -209,7 +217,7 @@ namespace TRAWebServer
                 {
                     Server.WriteDisplay("secretKey: " + p.httpHeaders["secretKey"]);
                     Server.WriteDisplay("action: " + p.httpHeaders["action"]);
-                    Server.WriteDisplay("request: " + data);
+                    Server.WriteDisplay("request: " + Uri.UnescapeDataString(rawData));
                 }
 
                 // end valid reqiest <<<<---------------------------------------------------------------

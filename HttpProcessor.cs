@@ -48,9 +48,7 @@ namespace TRAWebServer
 
         public void process()
         {
-
-            Server.WriteDisplay("Processing resquest!!!!!!");
-
+            if(Server.debug) Server.WriteDisplay("************* Request Recived *************");
             // we can't use a StreamReader for input, because it buffers up extra data on us inside it's
             // "processed" view of the world, and we want the data raw after the headers
             inputStream = new BufferedStream(socket.GetStream());
@@ -122,9 +120,11 @@ namespace TRAWebServer
                 }
 
                 string value = line.Substring(pos, line.Length - pos);
-                Console.WriteLine("header: {0}:{1}", name, value);
-
-                if (Server.debug) Server.WriteDisplay("header: " + name + ":" + value);
+                
+                if (Server.debug)
+                {
+                    Server.WriteDisplay("header: " + name + ":" + value);
+                }
                 
                 httpHeaders[name] = (string) value;
             }
