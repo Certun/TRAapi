@@ -62,9 +62,6 @@ namespace TRAWebServer
                 parseRequest();
                 readHeaders();
 
-                if(){
-                }
-
                 if (http_method.Equals("GET"))
                 {
                     handleGETRequest();

@@ -34,7 +34,7 @@ namespace TRAWebServer
         public override void handleGETRequest(HttpProcessor p)
         {
             // not sure what this is for... jeje :-)
-            string request = p.http_url;
+            string request = p.http_url.Substring(1);
 
             // write request success headers (THis is required for every reuqest)
             p.writeSuccess();
@@ -146,7 +146,7 @@ namespace TRAWebServer
             else if (!setActions.Contains((string) p.httpHeaders["action"]))
             {
                 // handle action definition error
-                response.error = "Action not defined as a get actions";
+                response.error = "Action not defined as a set actions";
             }
             else
             {
@@ -157,7 +157,8 @@ namespace TRAWebServer
 
 
                 // here is the data parsed 
-                dynamic jData = JArray.Parse(data) as JArray;
+                string dataScaped = Uri.UnescapeDataString(data);
+                dynamic jData = JObject.Parse(dataScaped) as JObject;
                 foreach (object row in jData)
                 {
                     Server.WriteDisplay(row.ToString());
