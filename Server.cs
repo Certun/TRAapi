@@ -33,12 +33,19 @@ namespace TRAWebServer
 
         static void requestTest_Click(object sender, EventArgs e)
         {
-            if(debug) Server.WriteDisplay("************* Sending Request *************");
+            
             //mainForm.enableDebug.Checked = false;
             
-            HttpRest res = new HttpRest("http://certun.com/salus/dataProvider/request/router.php");
-            string response = res.Send("getPatientData", "5");
+            HttpRest rest = new HttpRest("http://certun.com/salus/dataProvider/request/api.php");
             
+            // Test GET request
+            if (debug) Server.WriteDisplay("************* Sending GET Request *************");
+            string response = rest.Send("getPatientData", "5");
+            if (debug) WriteDisplay("Response: " + response);
+
+            // Test POST request
+            if (debug) Server.WriteDisplay("************* Sending POST Request *************");
+            response = rest.Send("getPatientData", "[{\"id\":2},{\"id\":3}]");
             if (debug) WriteDisplay("Response: " + response);
             
         }

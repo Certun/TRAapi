@@ -52,6 +52,9 @@
             // 
             // display
             // 
+            this.display.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.display.Location = new System.Drawing.Point(6, 6);
             this.display.Name = "display";
             this.display.Size = new System.Drawing.Size(492, 368);
@@ -60,6 +63,8 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
@@ -69,6 +74,7 @@
             // 
             // resetBtn
             // 
+            this.resetBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.resetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.resetBtn.Location = new System.Drawing.Point(423, 380);
             this.resetBtn.Name = "resetBtn";
@@ -80,6 +86,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabDisplay);
             this.tabControl1.Controls.Add(this.tabSettings);
             this.tabControl1.Location = new System.Drawing.Point(12, 149);
@@ -104,6 +113,7 @@
             // 
             // requestTest
             // 
+            this.requestTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.requestTest.AutoSize = true;
             this.requestTest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.requestTest.Location = new System.Drawing.Point(333, 380);
@@ -116,6 +126,7 @@
             // 
             // enableDebug
             // 
+            this.enableDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.enableDebug.AutoSize = true;
             this.enableDebug.Location = new System.Drawing.Point(6, 384);
             this.enableDebug.Name = "enableDebug";
@@ -144,6 +155,8 @@
             // 
             // ip
             // 
+            this.ip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ip.Location = new System.Drawing.Point(116, 22);
             this.ip.Name = "ip";
             this.ip.Size = new System.Drawing.Size(158, 20);
@@ -152,6 +165,8 @@
             // 
             // port
             // 
+            this.port.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.port.Location = new System.Drawing.Point(116, 54);
             this.port.Name = "port";
             this.port.Size = new System.Drawing.Size(158, 20);
@@ -186,6 +201,8 @@
             // 
             // secretKey
             // 
+            this.secretKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.secretKey.Location = new System.Drawing.Point(116, 86);
             this.secretKey.Name = "secretKey";
             this.secretKey.Size = new System.Drawing.Size(158, 20);
@@ -193,6 +210,7 @@
             // 
             // saveSettings
             // 
+            this.saveSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.saveSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.saveSettings.Location = new System.Drawing.Point(423, 380);
             this.saveSettings.Name = "saveSettings";
@@ -210,6 +228,7 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(554, 634);
             this.Name = "Form2";
             this.Text = "TRA Portal Server";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
