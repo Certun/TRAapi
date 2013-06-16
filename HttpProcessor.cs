@@ -48,7 +48,7 @@ namespace TRAWebServer
 
         public void process()
         {
-            if(Server.debug) Server.WriteDisplay("************* Receiving Request *************");
+
             // we can't use a StreamReader for input, because it buffers up extra data on us inside it's
             // "processed" view of the world, and we want the data raw after the headers
             inputStream = new BufferedStream(socket.GetStream());
@@ -58,6 +58,9 @@ namespace TRAWebServer
             try
             {
                 parseRequest();
+
+                if (Server.debug) Server.WriteDisplay("************* Receiving " + http_method + " Request *************");
+                
                 readHeaders();
 
                 if (http_method.Equals("GET"))

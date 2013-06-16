@@ -49,7 +49,7 @@ namespace TRAWebServer
 
             // Test POST request
             if (debug) Server.WriteDisplay("************* Sending POST Request *************");
-            response = rest.Send("getPatientData", "[{\"id\":2},{\"id\":3}]");
+            response = rest.Send("setPatientData", "[{\"id\":2},{\"id\":3}]");
             if (debug)
             {
                 WriteDisplay("URL: " + url);
