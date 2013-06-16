@@ -20,14 +20,14 @@ namespace TRAWebServer
         // allow get actions array
         private string[] getActions = new string[] {
             "getPatientData",
-            "getIsuranceData",
+            "getInsuranceData",
             "getBooks"
         };
 
         // allow set action array
         private string[] setActions = new string[] {
             "setPatientData",
-            "setIsuranceData",
+            "setInsuranceData",
             "setAppointmentStatus"
         };
 
@@ -42,10 +42,10 @@ namespace TRAWebServer
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            if ((string)p.httpHeaders["SecretKey"] != "carli")
+            if ((string)p.httpHeaders["Secret-Key"] != "carli")
             {   
                 // handle wrong secretkey error
-                response.error = "Acceess denied";
+                response.error = "Access denied";
             }else if(String.IsNullOrEmpty((string)p.httpHeaders["Action"])){
                 // handle no action error
                 response.error = "No action provided";   
@@ -75,7 +75,7 @@ namespace TRAWebServer
 
                         break;
 
-                    case "getIsuranceData":
+                    case "getInsuranceData":
                         // DO STUFF HERE!
 
 
@@ -109,8 +109,8 @@ namespace TRAWebServer
                 // write this stuff on display for de bugging
                 if (Server.debug)
                 {
-                    Server.WriteDisplay("secretKey: " + p.httpHeaders["secretKey"]);
-                    Server.WriteDisplay("action: " + p.httpHeaders["action"]);
+                    Server.WriteDisplay("secretKey: " + p.httpHeaders["Secret-Key"]);
+                    Server.WriteDisplay("action: " + p.httpHeaders["Action"]);
                     Server.WriteDisplay("request: " + request);
                 }
 
@@ -137,10 +137,10 @@ namespace TRAWebServer
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            if ((string)p.httpHeaders["SecretKey"] != "carli")
+            if ((string)p.httpHeaders["Secret-Key"] != "carli")
             {
                 // handle wrong secretkey error
-                response.error = "Acceess denied";
+                response.error = "Access denied";
             }
             else if (String.IsNullOrEmpty((string) p.httpHeaders["Action"]))
             {
@@ -182,7 +182,7 @@ namespace TRAWebServer
 
                         break;
 
-                    case "setIsuranceData":
+                    case "setInsuranceData":
                         // DO STUFF HERE!
 
 
@@ -216,8 +216,8 @@ namespace TRAWebServer
                 // write this stuff on display for de bugging
                 if (Server.debug)
                 {
-                    Server.WriteDisplay("secretKey: " + p.httpHeaders["secretKey"]);
-                    Server.WriteDisplay("action: " + p.httpHeaders["action"]);
+                    Server.WriteDisplay("secretKey: " + p.httpHeaders["Secret-Key"]);
+                    Server.WriteDisplay("action: " + p.httpHeaders["Action"]);
                     Server.WriteDisplay("request: " + Uri.UnescapeDataString(rawData));
                 }
 

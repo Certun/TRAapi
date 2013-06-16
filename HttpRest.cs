@@ -55,7 +55,7 @@ namespace TRAWebServer
             }
 
             request.AddHeader("Action", action);
-            request.AddHeader("AecretKey", secretKey);
+            request.AddHeader("Secret-Key", secretKey);
             
             RestResponse response = (RestResponse) client.Execute(request);
             var content = response.Content; // raw content as string
