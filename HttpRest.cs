@@ -49,7 +49,7 @@ namespace TRAWebServer
             {
                 // if data is JOSN then send a POST
                 if (Server.debug) Server.WriteDisplay("Method: POST");
-                if (Server.debug) Server.WriteDisplay("Data: " + data);
+                if (Server.debug) Server.WriteDisplay("Request Data: " + data);
                 request = new RestRequest("", Method.POST);
                 request.AddParameter("application/json", data.ToString(), ParameterType.RequestBody);
             }
