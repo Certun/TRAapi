@@ -18,19 +18,12 @@ namespace TRAWebServer
 
         RestClient client;
         RestRequest request;
-        private string url;
 
         public HttpRest(string url)
         {
             // TODO: Complete member initialization
-            this.url = url;
+            client = new RestClient(url);
             this.setSecretKey();
-        }
-
-        private void buildHeaders()
-        {
-            request.AddHeader("Action", action);
-            request.AddHeader("AecretKey", secretKey);
         }
 
         private void setSecretKey()
@@ -39,33 +32,41 @@ namespace TRAWebServer
             this.secretKey = "carli";
         }
 
-        public void BuildRequest(string action, object data, Method method)
-        {
-            client = new RestClient(url);
-            this.action = action;
-            
-            
-            bool dataType = data.GetType() == typeof(Object);
-            if (dataType)
-            {
 
+        public string Send(string action, dynamic data)
+        {
+            // convert object or int to string (JSON)
+            data = data.ToString();
+
+            if (!isJson(data))
+            {
+                // if data is not a json send a GET
+                if (Server.debug) Server.WriteDisplay("Method: GET");
+                if (Server.debug) Server.WriteDisplay("Request: " + data);
+                request = new RestRequest(data, Method.GET);
+            }
+            else
+            {
+                // if data is JOSN then send a POST
+                if (Server.debug) Server.WriteDisplay("Method: POST");
+                if (Server.debug) Server.WriteDisplay("Data: " + data);
+                request = new RestRequest("", Method.POST);
+                request.AddParameter("application/json", data.ToString(), ParameterType.RequestBody);
             }
 
-            request = new RestRequest("", method);
-            buildHeaders();
-            
-            
-
-
-        }
-
-        public string Send()
-        {
+            request.AddHeader("Action", action);
+            request.AddHeader("AecretKey", secretKey);
             
             RestResponse response = (RestResponse) client.Execute(request);
             var content = response.Content; // raw content as string
 
             return content;
+        }
+
+        private bool isJson(string str)
+        {
+            str = str.Trim();
+            return ((str.StartsWith("{") && str.EndsWith("}")) || (str.StartsWith("[") && str.EndsWith("]")));
         }
 
 

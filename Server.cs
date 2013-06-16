@@ -35,10 +35,10 @@ namespace TRAWebServer
         {
             if(debug) Server.WriteDisplay("************* Sending Request *************");
             //mainForm.enableDebug.Checked = false;
+            
             HttpRest res = new HttpRest("http://certun.com/salus/dataProvider/request/router.php");
-            var data = new RequestData();
-            res.BuildRequest("getPatientData", data, res.get);
-            string response = res.Send();
+            string response = res.Send("getPatientData", "5");
+            
             if (debug) WriteDisplay("Response: " + response);
             
         }

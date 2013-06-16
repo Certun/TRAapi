@@ -34,6 +34,7 @@
             this.resetBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabDisplay = new System.Windows.Forms.TabPage();
+            this.requestTest = new System.Windows.Forms.Button();
             this.enableDebug = new System.Windows.Forms.CheckBox();
             this.tabSettings = new System.Windows.Forms.TabPage();
             this.ip = new System.Windows.Forms.TextBox();
@@ -43,7 +44,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.secretKey = new System.Windows.Forms.TextBox();
             this.saveSettings = new System.Windows.Forms.Button();
-            this.requestTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabDisplay.SuspendLayout();
@@ -102,6 +102,18 @@
             this.tabDisplay.Text = "Log";
             this.tabDisplay.UseVisualStyleBackColor = true;
             // 
+            // requestTest
+            // 
+            this.requestTest.AutoSize = true;
+            this.requestTest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.requestTest.Location = new System.Drawing.Point(333, 380);
+            this.requestTest.Name = "requestTest";
+            this.requestTest.Size = new System.Drawing.Size(75, 23);
+            this.requestTest.TabIndex = 7;
+            this.requestTest.Text = "Send Test";
+            this.requestTest.UseVisualStyleBackColor = true;
+            this.requestTest.Click += new System.EventHandler(this.requestTest_Click);
+            // 
             // enableDebug
             // 
             this.enableDebug.AutoSize = true;
@@ -132,7 +144,7 @@
             // 
             // ip
             // 
-            this.ip.Location = new System.Drawing.Point(80, 22);
+            this.ip.Location = new System.Drawing.Point(116, 22);
             this.ip.Name = "ip";
             this.ip.Size = new System.Drawing.Size(158, 20);
             this.ip.TabIndex = 6;
@@ -140,7 +152,7 @@
             // 
             // port
             // 
-            this.port.Location = new System.Drawing.Point(80, 54);
+            this.port.Location = new System.Drawing.Point(116, 54);
             this.port.Name = "port";
             this.port.Size = new System.Drawing.Size(158, 20);
             this.port.TabIndex = 5;
@@ -150,31 +162,31 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(14, 57);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
+            this.label3.Size = new System.Drawing.Size(93, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Server Port";
+            this.label3.Text = "Portal Server Port:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(15, 25);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
+            this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Server IP";
+            this.label2.Text = "Portal Server IP:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(15, 89);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 13);
+            this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Secret Key";
+            this.label1.Text = "Secret Key:";
             // 
             // secretKey
             // 
-            this.secretKey.Location = new System.Drawing.Point(80, 86);
+            this.secretKey.Location = new System.Drawing.Point(116, 86);
             this.secretKey.Name = "secretKey";
             this.secretKey.Size = new System.Drawing.Size(158, 20);
             this.secretKey.TabIndex = 1;
@@ -189,18 +201,6 @@
             this.saveSettings.Text = "Save";
             this.saveSettings.UseVisualStyleBackColor = true;
             this.saveSettings.Click += new System.EventHandler(this.saveSettings_Click);
-            // 
-            // requestTest
-            // 
-            this.requestTest.AutoSize = true;
-            this.requestTest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.requestTest.Location = new System.Drawing.Point(333, 380);
-            this.requestTest.Name = "requestTest";
-            this.requestTest.Size = new System.Drawing.Size(75, 23);
-            this.requestTest.TabIndex = 7;
-            this.requestTest.Text = "Send Test";
-            this.requestTest.UseVisualStyleBackColor = true;
-            this.requestTest.Click += new System.EventHandler(this.requestTest_Click);
             // 
             // Form2
             // 
