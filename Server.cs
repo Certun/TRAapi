@@ -33,12 +33,13 @@ namespace TRAWebServer
 
         static void requestTest_Click(object sender, EventArgs e)
         {
-            mainForm.enableDebug.Checked = false;
-            HttpRest res = new HttpRest("http://127.0.0.1:8080");
+            if(debug) Server.WriteDisplay("************* Sending Request *************");
+            //mainForm.enableDebug.Checked = false;
+            HttpRest res = new HttpRest("http://certun.com/salus/dataProvider/request/router.php");
             var data = new RequestData();
             res.BuildRequest("getPatientData", data, res.get);
-            res.Send();
-            WriteDisplay(res.Send());
+            string response = res.Send();
+            if (debug) WriteDisplay("Response: " + response);
             
         }
 

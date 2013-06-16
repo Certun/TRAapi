@@ -48,7 +48,7 @@ namespace TRAWebServer
 
         public void process()
         {
-            if(Server.debug) Server.WriteDisplay("************* Request Recived *************");
+            if(Server.debug) Server.WriteDisplay("************* Receiving Request *************");
             // we can't use a StreamReader for input, because it buffers up extra data on us inside it's
             // "processed" view of the world, and we want the data raw after the headers
             inputStream = new BufferedStream(socket.GetStream());
@@ -186,7 +186,7 @@ namespace TRAWebServer
 
         }
 
-        public void writeSuccess(string content_type = "text/html")
+        public void writeSuccess(string content_type = "text/json")
         {
             outputStream.WriteLine("HTTP/1.0 200 OK");
             outputStream.WriteLine("Content-Type: " + content_type);

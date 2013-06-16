@@ -29,12 +29,13 @@ namespace TRAWebServer
 
         private void buildHeaders()
         {
-            request.AddHeader("action", action);
-            request.AddHeader("secretKey", secretKey);
+            request.AddHeader("Action", action);
+            request.AddHeader("AecretKey", secretKey);
         }
 
         private void setSecretKey()
         {
+            //TODO get secretKey form App.config
             this.secretKey = "carli";
         }
 
@@ -60,7 +61,7 @@ namespace TRAWebServer
 
         public string Send()
         {
-
+            
             RestResponse response = (RestResponse) client.Execute(request);
             var content = response.Content; // raw content as string
 

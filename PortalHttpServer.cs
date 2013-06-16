@@ -42,20 +42,21 @@ namespace TRAWebServer
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            if((string) p.httpHeaders["secretKey"] != "carli"){   
+            if ((string)p.httpHeaders["SecretKey"] != "carli")
+            {   
                 // handle wrong secretkey error
                 response.error = "Acceess denied";
-            }else if(String.IsNullOrEmpty((string)p.httpHeaders["action"])){
+            }else if(String.IsNullOrEmpty((string)p.httpHeaders["Action"])){
                 // handle no action error
                 response.error = "No action provided";   
-            }else if(!getActions.Contains((string)p.httpHeaders["action"])){
+            }else if(!getActions.Contains((string)p.httpHeaders["Action"])){
                 // handle action definition error
                 response.error = "Action not defined as a get actions"; 
             }else{
                 // start valid reqiest --------------------------------------------------------------->>>>
                 
                 // store header action for easiest access
-                string action = (string)p.httpHeaders["action"];
+                string action = (string)p.httpHeaders["Action"];
                 // request if a single data for example and ID of a patient or an appoointment book
                 string request = p.http_url.Substring(1);
                 
@@ -136,17 +137,17 @@ namespace TRAWebServer
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            if ((string)p.httpHeaders["secretKey"] != "carli")
+            if ((string)p.httpHeaders["SecretKey"] != "carli")
             {
                 // handle wrong secretkey error
                 response.error = "Acceess denied";
             }
-            else if (String.IsNullOrEmpty((string) p.httpHeaders["action"]))
+            else if (String.IsNullOrEmpty((string) p.httpHeaders["Action"]))
             {
                 // handle no action error
                 response.error = "No action provided";
             }
-            else if (!setActions.Contains((string) p.httpHeaders["action"]))
+            else if (!setActions.Contains((string) p.httpHeaders["Action"]))
             {
                 // handle action definition error
                 response.error = "Action not defined as a set actions";
@@ -156,7 +157,7 @@ namespace TRAWebServer
                 // start valid reqiest --------------------------------------------------------------->>>>
 
                 // store header action for easiest access
-                var action = (string) p.httpHeaders["action"];
+                var action = (string) p.httpHeaders["Action"];
 
 
                 // parse the data into an object
