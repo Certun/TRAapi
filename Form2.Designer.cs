@@ -43,6 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.secretKey = new System.Windows.Forms.TextBox();
             this.saveSettings = new System.Windows.Forms.Button();
+            this.requestTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabDisplay.SuspendLayout();
@@ -68,6 +69,7 @@
             // 
             // resetBtn
             // 
+            this.resetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.resetBtn.Location = new System.Drawing.Point(423, 380);
             this.resetBtn.Name = "resetBtn";
             this.resetBtn.Size = new System.Drawing.Size(75, 23);
@@ -88,6 +90,7 @@
             // 
             // tabDisplay
             // 
+            this.tabDisplay.Controls.Add(this.requestTest);
             this.tabDisplay.Controls.Add(this.enableDebug);
             this.tabDisplay.Controls.Add(this.display);
             this.tabDisplay.Controls.Add(this.resetBtn);
@@ -178,6 +181,7 @@
             // 
             // saveSettings
             // 
+            this.saveSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.saveSettings.Location = new System.Drawing.Point(423, 380);
             this.saveSettings.Name = "saveSettings";
             this.saveSettings.Size = new System.Drawing.Size(75, 23);
@@ -185,6 +189,18 @@
             this.saveSettings.Text = "Save";
             this.saveSettings.UseVisualStyleBackColor = true;
             this.saveSettings.Click += new System.EventHandler(this.saveSettings_Click);
+            // 
+            // requestTest
+            // 
+            this.requestTest.AutoSize = true;
+            this.requestTest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.requestTest.Location = new System.Drawing.Point(333, 380);
+            this.requestTest.Name = "requestTest";
+            this.requestTest.Size = new System.Drawing.Size(75, 23);
+            this.requestTest.TabIndex = 7;
+            this.requestTest.Text = "Send Test";
+            this.requestTest.UseVisualStyleBackColor = true;
+            this.requestTest.Click += new System.EventHandler(this.requestTest_Click);
             // 
             // Form2
             // 
@@ -223,7 +239,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox secretKey;
         private System.Windows.Forms.Button saveSettings;
-        private System.Windows.Forms.CheckBox enableDebug;
+        public System.Windows.Forms.Button requestTest;
+        public System.Windows.Forms.CheckBox enableDebug;
 
     }
 }

@@ -58,6 +58,11 @@ namespace TRAWebServer
         {
             Server.debug = enableDebug.Checked;
         }
+
+        private void requestTest_Click(object sender, EventArgs e)
+        {
+
+        }
         
     }
 }

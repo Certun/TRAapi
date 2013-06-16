@@ -23,11 +23,23 @@ namespace TRAWebServer
             thread.Start();
 
 
-
             mainForm.FormClosing += new FormClosingEventHandler(mainForm_FormClosing);
             mainForm.resetBtn.Click += resetBtn_Click;
+            mainForm.requestTest.Click += requestTest_Click;
+
             Application.Run(mainForm);
             return 0;
+        }
+
+        static void requestTest_Click(object sender, EventArgs e)
+        {
+            mainForm.enableDebug.Checked = false;
+            HttpRest res = new HttpRest("http://127.0.0.1:8080");
+            var data = new RequestData();
+            res.BuildRequest("getPatientData", data, res.get);
+            res.Send();
+            WriteDisplay(res.Send());
+            
         }
 
         static void resetBtn_Click(object sender, EventArgs e)
