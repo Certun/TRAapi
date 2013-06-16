@@ -41,15 +41,23 @@ namespace TRAWebServer
             if (!isJson(data))
             {
                 // if data is not a json send a GET
-                if (Server.debug) Server.WriteDisplay("Method: GET");
-                if (Server.debug) Server.WriteDisplay("Request: " + data);
+                if (Server.debug)
+                {
+                    Server.WriteDisplay("Method: GET");
+                    Server.WriteDisplay("Action: " + action);
+                    Server.WriteDisplay("Request: " + data);
+                }
                 request = new RestRequest(data, Method.GET);
             }
             else
             {
                 // if data is JOSN then send a POST
-                if (Server.debug) Server.WriteDisplay("Method: POST");
-                if (Server.debug) Server.WriteDisplay("Request Data: " + data);
+                if (Server.debug)
+                {
+                    Server.WriteDisplay("Method: POST");
+                    Server.WriteDisplay("Action: " + action);
+                    Server.WriteDisplay("Request Data: " + data);
+                }
                 request = new RestRequest("", Method.POST);
                 request.AddParameter("application/json", data.ToString(), ParameterType.RequestBody);
             }
