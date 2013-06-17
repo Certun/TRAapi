@@ -20,6 +20,7 @@ namespace TRAWebServer
         public static int port;
         public static string secretKey;
 
+
         public static int Main(String[] args)
         {          
 
@@ -59,12 +60,17 @@ namespace TRAWebServer
 
         static void requestTest_Click(object sender, EventArgs e)
         {
-            
+            Thread requestThread = new Thread(new ThreadStart(sendRequest));
+            requestThread.Start();
+        }
+
+        public static void sendRequest()
+        {
             //mainForm.enableDebug.Checked = false;
             string url = "http://certun.com/salus/dataProvider/Api.php";
             //string url = "http://localhost/salus/app/dataProvider/Api.php";
             HttpRest rest = new HttpRest(url);
-            
+
             // Test GET request
             if (debug) Server.WriteDisplay("************* Sending GET Request *************");
             string response = rest.Send("getPatientData", "16");
