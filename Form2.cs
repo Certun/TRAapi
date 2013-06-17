@@ -34,7 +34,7 @@ namespace TRAWebServer
         {
             ip.Text = ConfigurationManager.AppSettings["ip"];
             port.Text = ConfigurationManager.AppSettings["port"];
-            secretKey.Text = ConfigurationManager.AppSettings["sercretKey"];
+            secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
 
         }
 
@@ -42,16 +42,14 @@ namespace TRAWebServer
         {
 
             Console.WriteLine("saveSettings_Click");
-
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            AppSettingsSection app = config.AppSettings;
-
-            app.Settings.Add("ip", ip.Text);
-            app.Settings.Add("port", port.Text);
-            app.Settings.Add("sercretKey", secretKey.Text);
-
-            config.Save(ConfigurationSaveMode.Modified);
-        
+            config.AppSettings.Settings["ip"].Value = ip.Text;
+            config.AppSettings.Settings["port"].Value = port.Text;
+            config.AppSettings.Settings["secretKey"].Value = secretKey.Text;
+            config.Save();
+            ConfigurationManager.RefreshSection("appSettings");
+            Server.loadAppConfigSetting();
+            Server.reStartServer();
         }
 
         private void enableDebug_CheckedChanged(object sender, EventArgs e)

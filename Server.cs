@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -9,19 +10,26 @@ namespace TRAWebServer
 {
     public class Server
     {
+        public static HttpServer httpServer;
+
         public static Form2 mainForm = new Form2();
         public static Thread thread;
         public static bool debug = false;
 
+        public static string ip;
+        public static int port;
+        public static string secretKey;
+
         public static int Main(String[] args)
-        {
-            HttpServer httpServer;
-            
+        {          
+
+            loadAppConfigSetting();
+
             // create Portal Server
-            httpServer = new PortalHttpServer(8080);
+            WriteDisplay("Starting Local Server on Port: " + port);
+            httpServer = new PortalHttpServer(port);
             thread = new Thread(new ThreadStart(httpServer.listen));
             thread.Start();
-
 
             mainForm.FormClosing += new FormClosingEventHandler(mainForm_FormClosing);
             mainForm.resetBtn.Click += resetBtn_Click;
@@ -31,12 +39,30 @@ namespace TRAWebServer
             return 0;
         }
 
+        public static void reStartServer()
+        {
+            WriteDisplay("Shutting Down Server");
+            httpServer.stop();
+            WriteDisplay("Restarting Local Server on Port: " + port);
+            httpServer = new PortalHttpServer(port);
+            thread = new Thread(new ThreadStart(httpServer.listen));
+            thread.Start();
+        }
+
+        public static void loadAppConfigSetting()
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            ip = config.AppSettings.Settings["ip"].Value;
+            port = Convert.ToInt32(config.AppSettings.Settings["port"].Value);
+            secretKey = config.AppSettings.Settings["secretKey"].Value;
+        }
+
         static void requestTest_Click(object sender, EventArgs e)
         {
             
             //mainForm.enableDebug.Checked = false;
-            //string url = "http://certun.com/salus/dataProvider/Api.php";
-            string url = "http://localhost/salus/app/dataProvider/Api.php";
+            string url = "http://certun.com/salus/dataProvider/Api.php";
+            //string url = "http://localhost/salus/app/dataProvider/Api.php";
             HttpRest rest = new HttpRest(url);
             
             // Test GET request

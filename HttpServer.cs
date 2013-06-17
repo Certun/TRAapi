@@ -13,8 +13,10 @@ namespace TRAWebServer
     {
 
         protected int port;
-        TcpListener listener;
-        bool is_active = true;
+        public TcpListener listener;
+        public bool is_active = true;
+        public Thread thread;
+        private HttpProcessor processor;
 
 
         public HttpServer(int port)
@@ -29,15 +31,30 @@ namespace TRAWebServer
             listener.Start();
             while (is_active)
             {
-                TcpClient s = listener.AcceptTcpClient();
-                HttpProcessor processor = new HttpProcessor(s, this);
-                Thread thread = new Thread(new ThreadStart(processor.process));
-                thread.Start();
-                Thread.Sleep(1);
+                try
+                {
+                    TcpClient s = listener.AcceptTcpClient();
+                    processor = new HttpProcessor(s, this);
+                    thread = new Thread(new ThreadStart(processor.process));
+                    thread.Start();
+                    Thread.Sleep(1);
+                }
+                catch (SocketException) // or whatever the exception is that you're getting
+                {
+
+                }
+
             }
+        }
+
+        public void stop()
+        {
+            is_active = false;
+            listener.Stop();
         }
 
         public abstract void handleGETRequest(HttpProcessor p);
         public abstract void handlePOSTRequest(HttpProcessor p, StreamReader inputData);
+
     }
 }
