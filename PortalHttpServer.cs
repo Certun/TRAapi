@@ -7,6 +7,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Data.SqlClient;
 
 namespace TRAWebServer
 {
@@ -57,7 +58,10 @@ namespace TRAWebServer
                 response.error = "Action not defined as a get actions"; 
             }else{
                 // start valid reqiest --------------------------------------------------------------->>>>
-                
+                DBManager dbMngr = new DBManager("Data Source=TRA-PC\\TRASQLSERVER; Initial Catalog=TraData; User ID=sa; Password=couz2431");
+                DataSet data = new DataSet();
+                DataTable results = new DataTable();
+                string query = string.Empty;
                 // store header action for easiest access
                 string action = (string)p.httpHeaders["Action"];
                 // request if a single data for example and ID of a patient or an appoointment book
@@ -68,7 +72,23 @@ namespace TRAWebServer
                 {
                     case "getPatientData":
                         // DO STUFF HERE!
+                        query = @"SELECT * FROM DAT2000 WHERE pt_portal_id = @portalId";
+                        SqlCommand cmd = new SqlCommand(query, dbMngr.Connection);
+                        cmd.Parameters.AddWithValue("@portalId", request);
+                        results = dbMngr.GetDataTableResults(cmd);
 
+                        results.TableName = "patient";
+                        data.Tables.Add(results);
+
+                        query = @"SELECT * FROM Apoint WHERE book_code = '1'";
+                        cmd = new SqlCommand(query, dbMngr.Connection);
+                     
+                        results = dbMngr.GetDataTableResults(cmd);
+                        results.TableName = "appointment";
+                        data.Tables.Add(results);
+
+                        response.data = data;
+    
 
                         // define success
                         response.success = true;

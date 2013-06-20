@@ -10,6 +10,6 @@ namespace TRAWebServer
     {
         public bool success { get; set; }
         public string error { get; set; }
-        public DataSet data { get; set; }
+        public dynamic data { get; set; }
     }
 }
