@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace TRAWebServer
@@ -35,7 +31,7 @@ namespace TRAWebServer
                 {
                     TcpClient s = listener.AcceptTcpClient();
                     processor = new HttpProcessor(s, this);
-                    thread = new Thread(new ThreadStart(processor.process));
+                    thread = new Thread(new ThreadStart(processor.Process));
                     thread.Start();
                     Thread.Sleep(1);
                 }

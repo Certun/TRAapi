@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
 
 namespace TRAWebServer
 {
-    class DBManager
+    class DbManager
     {
-        private SqlConnection connection;
-        private string connString;
+        private string _connString;
 
-        public SqlConnection Connection
-        {
-            get { return connection; }
-        }
+        public SqlConnection Connection { get; private set; }
 
-        public DBManager(string connectionString)
+        public DbManager(string connectionString)
         {
             NewConnection(connectionString);
         }
@@ -29,19 +21,17 @@ namespace TRAWebServer
         /// <param name="connectionString"></param>
         private void NewConnection(string connectionString)
         {
-            connString = connectionString;
-            connection = new SqlConnection(connectionString);
+            _connString = connectionString;
+            Connection = new SqlConnection(connectionString);
 
-            if (!IsConnectionOpen())
+            if (IsConnectionOpen()) return;
+            try
             {
-                try
-                {
-                    connection.Open();
-                }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show("SQL error. " + ex.ErrorCode + ":" + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                Connection.Open();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(@"SQL error. " + ex.ErrorCode + @":" + ex.Message, @"SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -50,9 +40,9 @@ namespace TRAWebServer
         /// </summary>
         public void CloseConnection()
         {
-            if (connection.State == ConnectionState.Open)
+            if (Connection.State == ConnectionState.Open)
             {
-                connection.Close();
+                Connection.Close();
             }
         }
 
@@ -62,14 +52,7 @@ namespace TRAWebServer
         /// <returns></returns>
         public bool IsConnectionOpen()
         {
-            if (connection.State == ConnectionState.Open)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Connection.State == ConnectionState.Open;
         }
 
         /// <summary>
@@ -81,18 +64,18 @@ namespace TRAWebServer
         {
             cmd.CommandTimeout = 180;
 
-            DataTable results = new DataTable();
+            var results = new DataTable();
 
             try
             {
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                var adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(results);
                 return results;
 
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("SQL error. " + ex.ErrorCode + ":" + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"SQL error. " + ex.ErrorCode + @":" + ex.Message, @"SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return results;
             }
             finally
@@ -113,12 +96,13 @@ namespace TRAWebServer
             
             try
             {
+                cmd.Connection.Open();
                 cmd.ExecuteNonQuery();
                 return true;
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("SQL error. " + ex.ErrorCode + ":" + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"SQL error. " + ex.ErrorCode + @":" + ex.Message, @"SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             finally
@@ -152,7 +136,7 @@ namespace TRAWebServer
 
         public object ExecuteScalar(SqlCommand cmd)
         {
-            object result = new object();
+            var result = new object();
 
             try
             {
@@ -162,7 +146,7 @@ namespace TRAWebServer
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("SQL error. " + ex.ErrorCode + ":" + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"SQL error. " + ex.ErrorCode + @":" + ex.Message, @"SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return result;
             }
             finally

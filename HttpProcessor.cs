@@ -1,112 +1,108 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace TRAWebServer
 {
     public class HttpProcessor
     {
-        public TcpClient socket;
-        public HttpServer srv;
+        public TcpClient TcpSocket;
+        public HttpServer Srv;
 
-        private Stream inputStream;
-        public StreamWriter outputStream;
+        private Stream _inputStream;
+        public StreamWriter OutputStream;
 
-        public String http_method;
-        public String http_url;
-        public String http_protocol_versionstring;
-        public Hashtable httpHeaders = new Hashtable();
+        public String HttpMethod;
+        public String HttpUrl;
+        public String HttpProtocolVersionstring;
+        public Hashtable HttpHeaders = new Hashtable();
 
-        private static int MAX_POST_SIZE = 10 * 1024 * 1024; // 10MB
+        private const int MaxPostSize = 10*1024*1024; // 10MB
 
         public HttpProcessor(TcpClient s, HttpServer srv)
         {
-            this.socket = s;
-            this.srv = srv;
+            TcpSocket = s;
+            Srv = srv;
         }
 
         private string streamReadLine(Stream inputStream)
         {
-            int next_char;
-            string data = "";
+            var data = "";
             while (true)
             {
-                next_char = inputStream.ReadByte();
-                if (next_char == '\n') { break; }
-                if (next_char == '\r') { continue; }
-                if (next_char == -1) { Thread.Sleep(1); continue; };
-                data += Convert.ToChar(next_char);
+                int nextChar = inputStream.ReadByte();
+                if (nextChar == '\n') { break; }
+                if (nextChar == '\r') { continue; }
+                if (nextChar == -1) { Thread.Sleep(1); continue; }
+                data += Convert.ToChar(nextChar);
             }
             return data;
         }
 
 
-        public void process()
+        public void Process()
         {
 
             // we can't use a StreamReader for input, because it buffers up extra data on us inside it's
             // "processed" view of the world, and we want the data raw after the headers
-            inputStream = new BufferedStream(socket.GetStream());
+            _inputStream = new BufferedStream(TcpSocket.GetStream());
 
             // we probably shouldn't be using a streamwriter for all output from handlers either
-            outputStream = new StreamWriter(new BufferedStream(socket.GetStream()));
+            OutputStream = new StreamWriter(new BufferedStream(TcpSocket.GetStream()));
             try
             {
-                parseRequest();
+                ParseRequest();
 
-                if (Server.debug) Server.WriteDisplay("************* Receiving " + http_method + " Request *************");
+                if (Server.Debug) Server.WriteDisplay("************* Receiving " + HttpMethod + " Request *************");
                 
-                readHeaders();
+                ReadHeaders();
 
-                if (http_method.Equals("GET"))
+                if (HttpMethod.Equals("GET"))
                 {
-                    handleGETRequest();
+                    HandleGetRequest();
                 }
-                else if (http_method.Equals("POST"))
+                else if (HttpMethod.Equals("POST"))
                 {
-                    handlePOSTRequest();
+                    HandlePostRequest();
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception: " + e.ToString());
-                writeFailure();
+                Console.WriteLine(@"Exception: " + e);
+                WriteFailure();
             }
-            outputStream.Flush();
+            OutputStream.Flush();
             // bs.Flush(); // flush any remaining output
-            inputStream = null; outputStream = null; // bs = null;            
-            socket.Close();
+            _inputStream = null; OutputStream = null; // bs = null;            
+            TcpSocket.Close();
         }
 
-        public void parseRequest()
+        public void ParseRequest()
         {
-            String request = streamReadLine(inputStream);
+            String request = streamReadLine(_inputStream);
             string[] tokens = request.Split(' ');
             if (tokens.Length != 3)
             {
                 throw new Exception("invalid http request line");
             }
-            http_method = tokens[0].ToUpper();
-            http_url = tokens[1];
-            http_protocol_versionstring = tokens[2];
+            HttpMethod = tokens[0].ToUpper();
+            HttpUrl = tokens[1];
+            HttpProtocolVersionstring = tokens[2];
 
-            Console.WriteLine("starting: " + request);
+            Console.WriteLine(@"starting: " + request);
         }
 
-        public void readHeaders()
+        public void ReadHeaders()
         {
-            Console.WriteLine("readHeaders()");
+            Console.WriteLine(@"readHeaders()");
             String line;
-            while ((line = streamReadLine(inputStream)) != null)
+            while ((line = streamReadLine(_inputStream)) != null)
             {
                 if (line.Equals(""))
                 {
-                    Console.WriteLine("got headers");
+                    Console.WriteLine(@"got headers");
                     return;
                 }
 
@@ -124,23 +120,23 @@ namespace TRAWebServer
 
                 string value = line.Substring(pos, line.Length - pos);
                 
-                if (Server.debug)
+                if (Server.Debug)
                 {
                     Server.WriteDisplay("header: " + name + ":" + value);
                 }
                 
-                httpHeaders[name] = (string) value;
+                HttpHeaders[name] = value;
             }
         }
 
-        public void handleGETRequest()
+        public void HandleGetRequest()
         {
-            srv.handleGETRequest(this);
+            Srv.handleGETRequest(this);
         }
 
-        private const int BUF_SIZE = 4096;
+        private const int BufSize = 4096;
 
-        public void handlePOSTRequest()
+        public void HandlePostRequest()
         {
             // this post data processing just reads everything into a memory stream.
             // this is fine for smallish things, but for large stuff we should really
@@ -148,60 +144,56 @@ namespace TRAWebServer
             // we hand him needs to let him see the "end of the stream" at this content 
             // length, because otherwise he won't know when he's seen it all! 
 
-            Console.WriteLine("get post data start");
-            int content_len = 0;
-            MemoryStream ms = new MemoryStream();
-            if (this.httpHeaders.ContainsKey("Content-Length"))
+            Console.WriteLine(@"get post data start");
+            var ms = new MemoryStream();
+            if (HttpHeaders.ContainsKey("Content-Length"))
             {
-                content_len = Convert.ToInt32(this.httpHeaders["Content-Length"]);
-                if (content_len > MAX_POST_SIZE)
+                int contentLen = Convert.ToInt32(HttpHeaders["Content-Length"]);
+                if (contentLen > MaxPostSize)
                 {
                     throw new Exception(
                         String.Format("POST Content-Length({0}) too big for this simple server",
-                          content_len));
+                          contentLen));
                 }
-                byte[] buf = new byte[BUF_SIZE];
-                int to_read = content_len;
-                while (to_read > 0)
+                var buf = new byte[BufSize];
+                var toRead = contentLen;
+                while (toRead > 0)
                 {
-                    Console.WriteLine("starting Read, to_read={0}", to_read);
+                    Console.WriteLine(@"starting Read, to_read={0}", toRead);
 
-                    int numread = this.inputStream.Read(buf, 0, Math.Min(BUF_SIZE, to_read));
-                    Console.WriteLine("read finished, numread={0}", numread);
+                    int numread = _inputStream.Read(buf, 0, Math.Min(BufSize, toRead));
+                    Console.WriteLine(@"read finished, numread={0}", numread);
                     if (numread == 0)
                     {
-                        if (to_read == 0)
+                        if (toRead == 0)
                         {
                             break;
                         }
-                        else
-                        {
-                            throw new Exception("client disconnected during post");
-                        }
+                        throw new Exception("client disconnected during post");
                     }
-                    to_read -= numread;
+                    toRead -= numread;
                     ms.Write(buf, 0, numread);
                 }
                 ms.Seek(0, SeekOrigin.Begin);
             }
-            Console.WriteLine("get post data end");
-            srv.handlePOSTRequest(this, new StreamReader(ms));
+            Console.WriteLine(@"get post data end");
+            Srv.handlePOSTRequest(this, new StreamReader(ms));
 
         }
 
-        public void writeSuccess(string content_type = "text/json")
+        public void WriteSuccess(string contentType = "text/json")
         {
-            outputStream.WriteLine("HTTP/1.0 200 OK");
-            outputStream.WriteLine("Content-Type: " + content_type);
-            outputStream.WriteLine("Connection: close");
-            outputStream.WriteLine("");
+            OutputStream.WriteLine("HTTP/1.0 200 OK");
+            OutputStream.WriteLine("Content-Type: " + contentType);
+            OutputStream.WriteLine("Connection: close");
+            OutputStream.WriteLine("");
         }
 
-        public void writeFailure()
+        public void WriteFailure()
         {
-            outputStream.WriteLine("HTTP/1.0 404 File not found");
-            outputStream.WriteLine("Connection: close");
-            outputStream.WriteLine("");
+            OutputStream.WriteLine("HTTP/1.0 404 File not found");
+            OutputStream.WriteLine("Connection: close");
+            OutputStream.WriteLine("");
         }
     }
 }

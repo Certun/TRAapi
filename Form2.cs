@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Threading;
 using System.Configuration;
 
 namespace TRAWebServer
@@ -32,7 +25,7 @@ namespace TRAWebServer
         }
         private void Form2_Load(object sender, EventArgs e)
         {
-            ip.Text = ConfigurationManager.AppSettings["ip"];
+            host.Text = ConfigurationManager.AppSettings["host"];
             port.Text = ConfigurationManager.AppSettings["port"];
             secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
 
@@ -41,25 +34,33 @@ namespace TRAWebServer
         private void saveSettings_Click(object sender, EventArgs e)
         {
 
-            Console.WriteLine("saveSettings_Click");
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["ip"].Value = ip.Text;
-            config.AppSettings.Settings["port"].Value = port.Text;
-            config.AppSettings.Settings["secretKey"].Value = secretKey.Text;
-            config.Save();
-            ConfigurationManager.RefreshSection("appSettings");
-            Server.loadAppConfigSetting();
-            Server.reStartServer();
         }
 
         private void enableDebug_CheckedChanged(object sender, EventArgs e)
         {
-            Server.debug = enableDebug.Checked;
+            Server.Debug = enableDebug.Checked;
         }
 
         private void requestTest_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void StartStop_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void generateKey_Click(object sender, EventArgs e)
+        {
+            secretKey.Text = Guid.NewGuid().ToString();
+        }
+
+        private void configCancel_Click(object sender, EventArgs e)
+        {
+            host.Text = ConfigurationManager.AppSettings["host"];
+            port.Text = ConfigurationManager.AppSettings["port"];
+            secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
         }
         
     }

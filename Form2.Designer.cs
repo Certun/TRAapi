@@ -34,16 +34,19 @@
             this.resetBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabDisplay = new System.Windows.Forms.TabPage();
+            this.StartStop = new System.Windows.Forms.Button();
             this.requestTest = new System.Windows.Forms.Button();
             this.enableDebug = new System.Windows.Forms.CheckBox();
             this.tabSettings = new System.Windows.Forms.TabPage();
-            this.ip = new System.Windows.Forms.TextBox();
+            this.host = new System.Windows.Forms.TextBox();
             this.port = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.secretKey = new System.Windows.Forms.TextBox();
-            this.saveSettings = new System.Windows.Forms.Button();
+            this.configSave = new System.Windows.Forms.Button();
+            this.configCancel = new System.Windows.Forms.Button();
+            this.generateKey = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabDisplay.SuspendLayout();
@@ -76,7 +79,7 @@
             // 
             this.resetBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.resetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.resetBtn.Location = new System.Drawing.Point(423, 380);
+            this.resetBtn.Location = new System.Drawing.Point(342, 380);
             this.resetBtn.Name = "resetBtn";
             this.resetBtn.Size = new System.Drawing.Size(75, 23);
             this.resetBtn.TabIndex = 2;
@@ -99,6 +102,7 @@
             // 
             // tabDisplay
             // 
+            this.tabDisplay.Controls.Add(this.StartStop);
             this.tabDisplay.Controls.Add(this.requestTest);
             this.tabDisplay.Controls.Add(this.enableDebug);
             this.tabDisplay.Controls.Add(this.display);
@@ -111,12 +115,24 @@
             this.tabDisplay.Text = "Log";
             this.tabDisplay.UseVisualStyleBackColor = true;
             // 
+            // StartStop
+            // 
+            this.StartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.StartStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.StartStop.Location = new System.Drawing.Point(423, 380);
+            this.StartStop.Name = "StartStop";
+            this.StartStop.Size = new System.Drawing.Size(75, 23);
+            this.StartStop.TabIndex = 8;
+            this.StartStop.Text = "Start";
+            this.StartStop.UseVisualStyleBackColor = true;
+            this.StartStop.Click += new System.EventHandler(this.StartStop_Click);
+            // 
             // requestTest
             // 
             this.requestTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.requestTest.AutoSize = true;
             this.requestTest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.requestTest.Location = new System.Drawing.Point(333, 380);
+            this.requestTest.Location = new System.Drawing.Point(261, 380);
             this.requestTest.Name = "requestTest";
             this.requestTest.Size = new System.Drawing.Size(75, 23);
             this.requestTest.TabIndex = 7;
@@ -138,13 +154,15 @@
             // 
             // tabSettings
             // 
-            this.tabSettings.Controls.Add(this.ip);
+            this.tabSettings.Controls.Add(this.generateKey);
+            this.tabSettings.Controls.Add(this.configCancel);
+            this.tabSettings.Controls.Add(this.host);
             this.tabSettings.Controls.Add(this.port);
             this.tabSettings.Controls.Add(this.label3);
             this.tabSettings.Controls.Add(this.label2);
             this.tabSettings.Controls.Add(this.label1);
             this.tabSettings.Controls.Add(this.secretKey);
-            this.tabSettings.Controls.Add(this.saveSettings);
+            this.tabSettings.Controls.Add(this.configSave);
             this.tabSettings.Location = new System.Drawing.Point(4, 22);
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.Padding = new System.Windows.Forms.Padding(3);
@@ -153,15 +171,15 @@
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
             // 
-            // ip
+            // host
             // 
-            this.ip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.host.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ip.Location = new System.Drawing.Point(116, 22);
-            this.ip.Name = "ip";
-            this.ip.Size = new System.Drawing.Size(158, 20);
-            this.ip.TabIndex = 6;
-            this.ip.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.host.Location = new System.Drawing.Point(116, 22);
+            this.host.Name = "host";
+            this.host.Size = new System.Drawing.Size(354, 20);
+            this.host.TabIndex = 6;
+            this.host.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // port
             // 
@@ -169,7 +187,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.port.Location = new System.Drawing.Point(116, 54);
             this.port.Name = "port";
-            this.port.Size = new System.Drawing.Size(158, 20);
+            this.port.Size = new System.Drawing.Size(354, 20);
             this.port.TabIndex = 5;
             // 
             // label3
@@ -186,9 +204,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(15, 25);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.Size = new System.Drawing.Size(88, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Portal Server IP:";
+            this.label2.Text = "Web Portal Host:";
             // 
             // label1
             // 
@@ -205,20 +223,44 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.secretKey.Location = new System.Drawing.Point(116, 86);
             this.secretKey.Name = "secretKey";
-            this.secretKey.Size = new System.Drawing.Size(158, 20);
+            this.secretKey.Size = new System.Drawing.Size(354, 20);
             this.secretKey.TabIndex = 1;
             // 
-            // saveSettings
+            // configSave
             // 
-            this.saveSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.saveSettings.Location = new System.Drawing.Point(423, 380);
-            this.saveSettings.Name = "saveSettings";
-            this.saveSettings.Size = new System.Drawing.Size(75, 23);
-            this.saveSettings.TabIndex = 0;
-            this.saveSettings.Text = "Save";
-            this.saveSettings.UseVisualStyleBackColor = true;
-            this.saveSettings.Click += new System.EventHandler(this.saveSettings_Click);
+            this.configSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.configSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.configSave.Location = new System.Drawing.Point(423, 380);
+            this.configSave.Name = "configSave";
+            this.configSave.Size = new System.Drawing.Size(75, 23);
+            this.configSave.TabIndex = 0;
+            this.configSave.Text = "Save";
+            this.configSave.UseVisualStyleBackColor = true;
+            this.configSave.Click += new System.EventHandler(this.saveSettings_Click);
+            // 
+            // configCancel
+            // 
+            this.configCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.configCancel.Location = new System.Drawing.Point(342, 380);
+            this.configCancel.Name = "configCancel";
+            this.configCancel.Size = new System.Drawing.Size(75, 23);
+            this.configCancel.TabIndex = 7;
+            this.configCancel.Text = "Cancel";
+            this.configCancel.UseVisualStyleBackColor = true;
+            this.configCancel.Click += new System.EventHandler(this.configCancel_Click);
+            // 
+            // generateKey
+            // 
+            this.generateKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.generateKey.AutoSize = true;
+            this.generateKey.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.generateKey.Location = new System.Drawing.Point(363, 112);
+            this.generateKey.Name = "generateKey";
+            this.generateKey.Size = new System.Drawing.Size(107, 23);
+            this.generateKey.TabIndex = 8;
+            this.generateKey.Text = "Generate New Key";
+            this.generateKey.UseVisualStyleBackColor = true;
+            this.generateKey.Click += new System.EventHandler(this.generateKey_Click);
             // 
             // Form2
             // 
@@ -251,15 +293,18 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabDisplay;
         private System.Windows.Forms.TabPage tabSettings;
-        private System.Windows.Forms.TextBox ip;
-        private System.Windows.Forms.TextBox port;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox secretKey;
-        private System.Windows.Forms.Button saveSettings;
         public System.Windows.Forms.Button requestTest;
         public System.Windows.Forms.CheckBox enableDebug;
+        public System.Windows.Forms.Button StartStop;
+        public System.Windows.Forms.Button configSave;
+        public System.Windows.Forms.TextBox host;
+        public System.Windows.Forms.TextBox port;
+        public System.Windows.Forms.TextBox secretKey;
+        private System.Windows.Forms.Button generateKey;
+        private System.Windows.Forms.Button configCancel;
 
     }
 }

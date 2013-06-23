@@ -1,12 +1,8 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Data.SqlClient;
 
 namespace TRAWebServer
@@ -22,14 +18,14 @@ namespace TRAWebServer
         }
 
         // allow get actions array
-        private string[] getActions = new string[] {
+        private readonly string[] _getActions = new[] {
             "getPatientData",
             "getInsuranceData",
             "getBooks"
         };
 
         // allow set action array
-        private string[] setActions = new string[] {
+        private readonly string[] _setActions = new[] {
             "setPatientData",
             "setInsuranceData",
             "setAppointmentStatus"
@@ -38,44 +34,43 @@ namespace TRAWebServer
         public override void handleGETRequest(HttpProcessor p)
         {           
             // write request success headers (THis is required for every reuqest)
-            p.writeSuccess();
+            p.WriteSuccess();
 
             // create  new response object
-            Response response = new Response();
+            var response = new Response();
 
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            if ((string)p.httpHeaders["Secret-Key"] != "carli")
+            if ((string)p.HttpHeaders["Secret-Key"] != "carli")
             {   
                 // handle wrong secretkey error
                 response.error = "Access denied";
-            }else if(String.IsNullOrEmpty((string)p.httpHeaders["Action"])){
+            }else if(String.IsNullOrEmpty((string)p.HttpHeaders["Action"])){
                 // handle no action error
                 response.error = "No action provided";   
-            }else if(!getActions.Contains((string)p.httpHeaders["Action"])){
+            }else if(!_getActions.Contains((string)p.HttpHeaders["Action"])){
                 // handle action definition error
                 response.error = "Action not defined as a get actions"; 
             }else{
                 // start valid reqiest --------------------------------------------------------------->>>>
-                DBManager dbMngr = new DBManager("Data Source=TRA-PC\\TRASQLSERVER; Initial Catalog=TraData; User ID=sa; Password=couz2431");
-                DataSet data = new DataSet();
-                DataTable results = new DataTable();
-                string query = string.Empty;
+                // Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;
+                var dbMngr = new DbManager("Data Source=ernestoTHINK\\TRA; Initial Catalog=dbProjectCita; Trusted_Connection=True");
+                var data = new DataSet();
                 // store header action for easiest access
-                string action = (string)p.httpHeaders["Action"];
+                var action = (string)p.HttpHeaders["Action"];
                 // request if a single data for example and ID of a patient or an appoointment book
-                string request = p.http_url.Substring(1);
+                var request = p.HttpUrl.Substring(1);
                 
                 // DO STUFF HERE!
                 switch (action)
                 {
                     case "getPatientData":
                         // DO STUFF HERE!
-                        query = @"SELECT * FROM DAT2000 WHERE pt_portal_id = @portalId";
-                        SqlCommand cmd = new SqlCommand(query, dbMngr.Connection);
+                        var query = @"SELECT * FROM DAT2000 WHERE pt_portal_id = @portalId";
+                        var cmd = new SqlCommand(query, dbMngr.Connection);
                         cmd.Parameters.AddWithValue("@portalId", request);
-                        results = dbMngr.GetDataTableResults(cmd);
+                        DataTable results = dbMngr.GetDataTableResults(cmd);
 
                         results.TableName = "patient";
                         data.Tables.Add(results);
@@ -130,10 +125,10 @@ namespace TRAWebServer
 
 
                 // write this stuff on display for de bugging
-                if (Server.debug)
+                if (Server.Debug)
                 {
-                    Server.WriteDisplay("secretKey: " + p.httpHeaders["Secret-Key"]);
-                    Server.WriteDisplay("action: " + p.httpHeaders["Action"]);
+                    Server.WriteDisplay("secretKey: " + p.HttpHeaders["Secret-Key"]);
+                    Server.WriteDisplay("action: " + p.HttpHeaders["Action"]);
                     Server.WriteDisplay("request: " + request);
                 }
 
@@ -143,7 +138,7 @@ namespace TRAWebServer
             // JOSN convert response
             string jresponse = JsonConvert.SerializeObject(response);
             // send back response as json
-            p.outputStream.WriteLine(jresponse);
+            p.OutputStream.WriteLine(jresponse);
         }
 
 
@@ -151,26 +146,26 @@ namespace TRAWebServer
         {
             string rawData = inputData.ReadToEnd();
             // write request success headers (THis is required for every reuqest)
-            p.writeSuccess();
+            p.WriteSuccess();
             // create  new response object
-            Response response = new Response();
+            var response = new Response();
             
             
             // EDGARDO!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // TODO get secretKey from App.config !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            if ((string)p.httpHeaders["Secret-Key"] != "carli")
+            if ((string)p.HttpHeaders["Secret-Key"] != "carli")
             {
                 // handle wrong secretkey error
                 response.error = "Access denied";
             }
-            else if (String.IsNullOrEmpty((string) p.httpHeaders["Action"]))
+            else if (String.IsNullOrEmpty((string) p.HttpHeaders["Action"]))
             {
                 // handle no action error
                 response.error = "No action provided";
             }
-            else if (!setActions.Contains((string) p.httpHeaders["Action"]))
+            else if (!_setActions.Contains((string) p.HttpHeaders["Action"]))
             {
                 // handle action definition error
                 response.error = "Action not defined as a set actions";
@@ -180,11 +175,11 @@ namespace TRAWebServer
                 // start valid reqiest --------------------------------------------------------------->>>>
 
                 // store header action for easiest access
-                var action = (string) p.httpHeaders["Action"];
+                var action = (string) p.HttpHeaders["Action"];
 
 
                 // parse the data into an object
-                JObject data = JObject.Parse(Uri.UnescapeDataString(rawData)) as JObject;
+                // var data = JObject.Parse(Uri.UnescapeDataString(rawData)) as JObject;
 
                 // do stuuf with the object data
                 // Server.WriteDisplay(data.ToString());
@@ -237,10 +232,10 @@ namespace TRAWebServer
                 }
  
                 // write this stuff on display for de bugging
-                if (Server.debug)
+                if (Server.Debug)
                 {
-                    Server.WriteDisplay("secretKey: " + p.httpHeaders["Secret-Key"]);
-                    Server.WriteDisplay("action: " + p.httpHeaders["Action"]);
+                    Server.WriteDisplay("secretKey: " + p.HttpHeaders["Secret-Key"]);
+                    Server.WriteDisplay("action: " + p.HttpHeaders["Action"]);
                     Server.WriteDisplay("request: " + Uri.UnescapeDataString(rawData));
                 }
 
@@ -250,7 +245,7 @@ namespace TRAWebServer
             // JOSN convert
             string jresponse = JsonConvert.SerializeObject(response);
             // Send back response
-            p.outputStream.WriteLine(jresponse);
+            p.OutputStream.WriteLine(jresponse);
         }
     }
 }
