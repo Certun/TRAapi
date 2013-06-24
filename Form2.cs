@@ -28,6 +28,7 @@ namespace TRAWebServer
             host.Text = ConfigurationManager.AppSettings["host"];
             port.Text = ConfigurationManager.AppSettings["port"];
             secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
+            traDirectory.Text = ConfigurationManager.AppSettings["traDirectory"];
 
         }
 
@@ -61,6 +62,7 @@ namespace TRAWebServer
             host.Text = ConfigurationManager.AppSettings["host"];
             port.Text = ConfigurationManager.AppSettings["port"];
             secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
+            traDirectory.Text = ConfigurationManager.AppSettings["traDirectory"];
         }
         
     }

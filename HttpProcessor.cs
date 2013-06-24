@@ -70,7 +70,7 @@ namespace TRAWebServer
             }
             catch (Exception e)
             {
-                Console.WriteLine(@"Exception: " + e);
+                Server.WriteDisplay(e);
                 WriteFailure();
             }
             OutputStream.Flush();

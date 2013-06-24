@@ -28,9 +28,11 @@ namespace TRAWebServer
 
         public static void ProcessResults(dynamic results)
         {
-            if (results.GetType() != typeof (JObject)) return;
+            
             try
             {
+                if (results.GetType() != typeof(JObject)) return;
+
                 if (!(bool)results["success"])
                 {
                     Server.WriteDisplay((string) results["error"]);

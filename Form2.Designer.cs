@@ -38,6 +38,8 @@
             this.requestTest = new System.Windows.Forms.Button();
             this.enableDebug = new System.Windows.Forms.CheckBox();
             this.tabSettings = new System.Windows.Forms.TabPage();
+            this.generateKey = new System.Windows.Forms.Button();
+            this.configCancel = new System.Windows.Forms.Button();
             this.host = new System.Windows.Forms.TextBox();
             this.port = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,8 +47,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.secretKey = new System.Windows.Forms.TextBox();
             this.configSave = new System.Windows.Forms.Button();
-            this.configCancel = new System.Windows.Forms.Button();
-            this.generateKey = new System.Windows.Forms.Button();
+            this.traDirectory = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabDisplay.SuspendLayout();
@@ -154,6 +156,8 @@
             // 
             // tabSettings
             // 
+            this.tabSettings.Controls.Add(this.label4);
+            this.tabSettings.Controls.Add(this.traDirectory);
             this.tabSettings.Controls.Add(this.generateKey);
             this.tabSettings.Controls.Add(this.configCancel);
             this.tabSettings.Controls.Add(this.host);
@@ -170,6 +174,30 @@
             this.tabSettings.TabIndex = 1;
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
+            // 
+            // generateKey
+            // 
+            this.generateKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.generateKey.AutoSize = true;
+            this.generateKey.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.generateKey.Location = new System.Drawing.Point(363, 140);
+            this.generateKey.Name = "generateKey";
+            this.generateKey.Size = new System.Drawing.Size(107, 23);
+            this.generateKey.TabIndex = 8;
+            this.generateKey.Text = "Generate New Key";
+            this.generateKey.UseVisualStyleBackColor = true;
+            this.generateKey.Click += new System.EventHandler(this.generateKey_Click);
+            // 
+            // configCancel
+            // 
+            this.configCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.configCancel.Location = new System.Drawing.Point(342, 380);
+            this.configCancel.Name = "configCancel";
+            this.configCancel.Size = new System.Drawing.Size(75, 23);
+            this.configCancel.TabIndex = 7;
+            this.configCancel.Text = "Cancel";
+            this.configCancel.UseVisualStyleBackColor = true;
+            this.configCancel.Click += new System.EventHandler(this.configCancel_Click);
             // 
             // host
             // 
@@ -211,7 +239,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 89);
+            this.label1.Location = new System.Drawing.Point(15, 117);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 2;
@@ -221,7 +249,7 @@
             // 
             this.secretKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.secretKey.Location = new System.Drawing.Point(116, 86);
+            this.secretKey.Location = new System.Drawing.Point(116, 114);
             this.secretKey.Name = "secretKey";
             this.secretKey.Size = new System.Drawing.Size(354, 20);
             this.secretKey.TabIndex = 1;
@@ -238,29 +266,21 @@
             this.configSave.UseVisualStyleBackColor = true;
             this.configSave.Click += new System.EventHandler(this.saveSettings_Click);
             // 
-            // configCancel
+            // traDirectory
             // 
-            this.configCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.configCancel.Location = new System.Drawing.Point(342, 380);
-            this.configCancel.Name = "configCancel";
-            this.configCancel.Size = new System.Drawing.Size(75, 23);
-            this.configCancel.TabIndex = 7;
-            this.configCancel.Text = "Cancel";
-            this.configCancel.UseVisualStyleBackColor = true;
-            this.configCancel.Click += new System.EventHandler(this.configCancel_Click);
+            this.traDirectory.Location = new System.Drawing.Point(116, 83);
+            this.traDirectory.Name = "traDirectory";
+            this.traDirectory.Size = new System.Drawing.Size(354, 20);
+            this.traDirectory.TabIndex = 9;
             // 
-            // generateKey
+            // label4
             // 
-            this.generateKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.generateKey.AutoSize = true;
-            this.generateKey.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.generateKey.Location = new System.Drawing.Point(363, 112);
-            this.generateKey.Name = "generateKey";
-            this.generateKey.Size = new System.Drawing.Size(107, 23);
-            this.generateKey.TabIndex = 8;
-            this.generateKey.Text = "Generate New Key";
-            this.generateKey.UseVisualStyleBackColor = true;
-            this.generateKey.Click += new System.EventHandler(this.generateKey_Click);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 86);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "TRA Directory";
             // 
             // Form2
             // 
@@ -305,6 +325,8 @@
         public System.Windows.Forms.TextBox secretKey;
         private System.Windows.Forms.Button generateKey;
         private System.Windows.Forms.Button configCancel;
+        private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.TextBox traDirectory;
 
     }
 }

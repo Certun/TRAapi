@@ -19,6 +19,7 @@ namespace TRAWebServer
         public static string Host;
         public static int Port;
         public static string SecretKey;
+        public static string TraDirectory;
 
         public static CronObject Cron;
 
@@ -55,9 +56,10 @@ namespace TRAWebServer
         public static void LoadAppConfigSetting()
         {
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            Host = config.AppSettings.Settings["host"].Value;
-            Port = Convert.ToInt32(config.AppSettings.Settings["port"].Value);
-            SecretKey = config.AppSettings.Settings["secretKey"].Value;
+            Host         = config.AppSettings.Settings["host"].Value;
+            Port         = Convert.ToInt32(config.AppSettings.Settings["port"].Value);
+            SecretKey    = config.AppSettings.Settings["secretKey"].Value;
+            TraDirectory = config.AppSettings.Settings["traDirectory"].Value;
         }
 
         static void requestTest_Click(object sender, EventArgs e)
@@ -153,13 +155,15 @@ namespace TRAWebServer
         {
             Console.WriteLine(@"saveSettings_Click");
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["host"].Value = MainForm.host.Text;
-            config.AppSettings.Settings["port"].Value = MainForm.port.Text;
-            config.AppSettings.Settings["secretKey"].Value = MainForm.secretKey.Text;
+            config.AppSettings.Settings["host"].Value           = MainForm.host.Text.Trim();
+            config.AppSettings.Settings["port"].Value           = MainForm.port.Text.Trim();
+            config.AppSettings.Settings["secretKey"].Value      = MainForm.secretKey.Text.Trim();
+            config.AppSettings.Settings["traDirectory"].Value   = MainForm.traDirectory.Text.Trim();
             config.Save();
             ConfigurationManager.RefreshSection("appSettings");
             LoadAppConfigSetting();
             ReStartServer();
+            MessageBox.Show(@"Configuration Saved!");
         }
 
         private static void Cron_OnCronTrigger(CronObject cronObject)

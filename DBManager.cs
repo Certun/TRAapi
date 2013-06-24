@@ -96,7 +96,7 @@ namespace TRAWebServer
             
             try
             {
-                cmd.Connection.Open();
+//                cmd.Connection.Open();
                 cmd.ExecuteNonQuery();
                 return true;
             }
