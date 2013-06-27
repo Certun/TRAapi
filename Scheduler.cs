@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -18,7 +20,14 @@ namespace TRAWebServer
         public static void Run()
         {
             // get all data
-            var data = new { appointments = NewApointments(), books = GetBooks(), referrals = GetReferrals() };
+            var data = new
+                {
+                    appointments = NewApointments(), 
+                    books = GetBooks(), 
+                    referrals = GetReferrals(), 
+                    insuranceCombo = GetInsuranceComboData(),
+                    facultyCombo = GetFacultyComboData()
+                };
             // process appointments
             var results = Send("syncData", JsonConvert.SerializeObject(data));
             // process results
@@ -118,12 +127,62 @@ namespace TRAWebServer
             return ConvertTableToArray(table, "TRAWebServer.DataClasses.Insurance");
         }
 
+        /// <summary>
+        /// This will return an array of all books available where book_code is not 0
+        /// </summary>
+        /// <returns></returns>
         private static Array GetBooks()
         {
             const string query = @"SELECT * FROM Book_Table WHERE Book_Code != '0'";
             var cmd = new SqlCommand(query, Db.Connection);
             var table = Db.GetDataTableResults(cmd);
             return ConvertTableToArray(table, "TRAWebServer.DataClasses.Books");
+        }
+
+        /// <summary>
+        /// The 
+        /// </summary>
+        /// <returns></returns>
+        private static Array GetInsuranceComboData()
+        {
+            const string query = @"SELECT INS_CODE, INS_NAME FROM DAT3000";
+            var cmd = new SqlCommand(query, Db.Connection);
+            var table = Db.GetDataTableResults(cmd);
+            return ConvertTableToArray(table, "TRAWebServer.DataClasses.InsuranceCombo");
+        }
+
+        /// <summary>
+        /// The 
+        /// </summary>
+        /// <returns></returns>
+        private static Array GetFacultyComboData()
+        {
+            const string query = @"SELECT fac_code, fac_last_name + ', ' + fac_first_name + ' ' + fac_init_name AS fac_fullname FROM DAT9397F";
+            var cmd = new SqlCommand(query, Db.Connection);
+            var table = Db.GetDataTableResults(cmd);
+            return ConvertTableToArray(table, "TRAWebServer.DataClasses.FacultyCombo");
+        }
+
+        /// <summary>
+        /// TODO: get image from???
+        /// </summary>
+        /// <param name="type">Record Type</param>
+        /// <param name="no">Record Num</param>
+        /// <param name="suffix">Record Suffix</param>
+        /// <param name="imgType">photoId = Patient Photo ID, insImage = Insurance Image</param>
+        /// <param name="identifier">Special identyfier for the image, like "pi_orden" in Insurance Table</param>
+        /// <returns></returns>
+        private static string GetBase64ImgageByRecNumAndType(string type, string no, string suffix, string imgType, string identifier)
+        {
+            var file = Assembly.GetEntryAssembly().GetManifestResourceStream("MyProject.Resources.myimage.png");
+            if (file == null) return "";
+
+            var img = new Bitmap(file);
+            var ms = new MemoryStream();
+            img.Save(ms, img.RawFormat);
+            var imageBytes = ms.ToArray();
+            return Convert.ToBase64String(imageBytes);
+            
         }
 
         private static Array GetReferrals()
@@ -183,7 +242,7 @@ namespace TRAWebServer
             catch (Exception ex)
             {
 
-                Server.WriteDisplay(ex);
+               // Server.WriteDisplay(ex);
             }
 
             return null;
@@ -212,6 +271,7 @@ namespace TRAWebServer
                 }
                 catch (Exception ex)
                 {
+                    Server.WriteDisplay("ConvertDataRowtoObject");
                     Server.WriteDisplay(ex);
                 }
             }

@@ -41,16 +41,13 @@ namespace TRAWebServer
 
         public static void ReStartServer()
         {
-            if (HttpServer != null)
-            {
-                WriteDisplay("Shutting Down Server");
-                HttpServer.stop();
-                WriteDisplay("Restarting Local Server on Port: " + Port);
-                HttpServer = new PortalHttpServer(Port);
-                MainThread = new Thread(HttpServer.listen);
-                MainThread.Start();
-            }
-
+            if (HttpServer == null) return;
+            WriteDisplay("Shutting Down Server");
+            HttpServer.Stop();
+            WriteDisplay("Restarting Local Server on Port: " + Port);
+            HttpServer = new PortalHttpServer(Port);
+            MainThread = new Thread(HttpServer.Listen);
+            MainThread.Start();
         }
 
         public static void LoadAppConfigSetting()
@@ -110,7 +107,7 @@ namespace TRAWebServer
                 {
                     // Startting HTTP server
                     HttpServer = new PortalHttpServer(Port);
-                    MainThread = new Thread(HttpServer.listen);
+                    MainThread = new Thread(HttpServer.Listen);
                     MainThread.Start();
                     // Starting Cron Job
                     var now = DateTime.Now;
@@ -141,7 +138,7 @@ namespace TRAWebServer
             else
             {
                 // Stopping server 
-                HttpServer.stop();
+                HttpServer.Stop();
                 // Stoping Cron Job
                 Cron.Stop();
                 WriteDisplay("Server Stopped");

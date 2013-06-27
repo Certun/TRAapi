@@ -96,9 +96,35 @@ namespace TRAWebServer
             
             try
             {
-//                cmd.Connection.Open();
+                if (!IsConnectionOpen()) cmd.Connection.Open();
                 cmd.ExecuteNonQuery();
                 return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(@"SQL error. " + ex.ErrorCode + @":" + ex.Message, @"SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Executes a NonQuery 
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
+        public dynamic ExecuteReader(SqlCommand cmd)
+        {
+
+            cmd.CommandTimeout = 180;
+            
+            try
+            {
+                if (!IsConnectionOpen()) cmd.Connection.Open();
+                return cmd.ExecuteReader();
             }
             catch (SqlException ex)
             {
@@ -140,6 +166,7 @@ namespace TRAWebServer
 
             try
             {
+                if (!IsConnectionOpen()) cmd.Connection.Open();
                 result = cmd.ExecuteScalar();
 
                 return result;

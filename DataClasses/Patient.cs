@@ -54,7 +54,7 @@ namespace TRAWebServer.DataClasses
         public string pt_religion { set; get; }
         public string pt_birth_place { set; get; }
         public string pt_responsible_relation { set; get; }
-        public int pt_weight { set; get; }
+        public string pt_weight { set; get; }
         public string pt_aut_last_1 { set; get; }
         public string pt_aut_first_1 { set; get; }
         public string pt_aut_init_1 { set; get; }
@@ -70,5 +70,6 @@ namespace TRAWebServer.DataClasses
         public string pt_race { set; get; }
         public string pt_celsup { set; get; }
         public string pt_emr_mrn { set; get; }
+        public string pt_photo_id { set; get; }
     }
 }

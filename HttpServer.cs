@@ -8,31 +8,31 @@ namespace TRAWebServer
     public abstract class HttpServer
     {
 
-        protected int port;
-        public TcpListener listener;
-        public bool is_active = true;
-        public Thread thread;
-        private HttpProcessor processor;
+        protected int Port;
+        public TcpListener Listener;
+        public bool IsActive = true;
+        public Thread Thread;
+        private HttpProcessor _processor;
 
 
-        public HttpServer(int port)
+        protected HttpServer(int port)
         {
-            this.port = port;
+            Port = port;
         }
 
-        public void listen()
+        public void Listen()
         {
-            System.Net.IPAddress localIP = IPAddress.Parse("127.0.0.1");
-            listener = new TcpListener(localIP, port);
-            listener.Start();
-            while (is_active)
+            var localIp = IPAddress.Parse("192.168.1.105");
+            Listener = new TcpListener(localIp, Port);
+            Listener.Start();
+            while (IsActive)
             {
                 try
                 {
-                    TcpClient s = listener.AcceptTcpClient();
-                    processor = new HttpProcessor(s, this);
-                    thread = new Thread(new ThreadStart(processor.Process));
-                    thread.Start();
+                    var s = Listener.AcceptTcpClient();
+                    _processor = new HttpProcessor(s, this);
+                    Thread = new Thread(_processor.Process);
+                    Thread.Start();
                     Thread.Sleep(1);
                 }
                 catch (SocketException) // or whatever the exception is that you're getting
@@ -43,14 +43,14 @@ namespace TRAWebServer
             }
         }
 
-        public void stop()
+        public void Stop()
         {
-            is_active = false;
-            listener.Stop();
+            IsActive = false;
+            Listener.Stop();
         }
 
-        public abstract void handleGETRequest(HttpProcessor p);
-        public abstract void handlePOSTRequest(HttpProcessor p, StreamReader inputData);
+        public abstract void HandleGetRequest(HttpProcessor p);
+        public abstract void HandlePostRequest(HttpProcessor p, StreamReader inputData);
 
     }
 }
