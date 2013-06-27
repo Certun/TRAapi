@@ -18,6 +18,5 @@ namespace TRAWebServer.DataClasses
         public string Proc_code { set; get; }
         public string ap_ins { set; get; }
         public string app_ack { set; get; }
-        public string web_portal_error { set; get; }
     }
 }

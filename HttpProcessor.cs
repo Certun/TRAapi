@@ -27,7 +27,7 @@ namespace TRAWebServer
             Srv = srv;
         }
 
-        private string streamReadLine(Stream inputStream)
+        private static string StreamReadLine(Stream inputStream)
         {
             var data = "";
             while (true)
@@ -81,8 +81,8 @@ namespace TRAWebServer
 
         public void ParseRequest()
         {
-            String request = streamReadLine(_inputStream);
-            string[] tokens = request.Split(' ');
+            var request = StreamReadLine(_inputStream);
+            var tokens = request.Split(' ');
             if (tokens.Length != 3)
             {
                 throw new Exception("invalid http request line");
@@ -98,7 +98,7 @@ namespace TRAWebServer
         {
             Console.WriteLine(@"readHeaders()");
             String line;
-            while ((line = streamReadLine(_inputStream)) != null)
+            while ((line = StreamReadLine(_inputStream)) != null)
             {
                 if (line.Equals(""))
                 {
@@ -106,19 +106,19 @@ namespace TRAWebServer
                     return;
                 }
 
-                int separator = line.IndexOf(':');
+                var separator = line.IndexOf(':');
                 if (separator == -1)
                 {
                     throw new Exception("invalid http header line: " + line);
                 }
-                String name = line.Substring(0, separator);
-                int pos = separator + 1;
+                var name = line.Substring(0, separator);
+                var pos = separator + 1;
                 while ((pos < line.Length) && (line[pos] == ' '))
                 {
                     pos++; // strip any spaces
                 }
 
-                string value = line.Substring(pos, line.Length - pos);
+                var value = line.Substring(pos, line.Length - pos);
                 
                 if (Server.Debug)
                 {
