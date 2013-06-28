@@ -54,7 +54,7 @@ namespace TRAWebServer
         {
             var config   = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             Host         = config.AppSettings.Settings["host"].Value;
-            ServerIp     = Convert.ToInt32(config.AppSettings.Settings["serverIp"].Value);
+            ServerIp     = config.AppSettings.Settings["serverIp"].Value;
             ServerPort   = Convert.ToInt32(config.AppSettings.Settings["serverPort"].Value);
             SecretKey    = config.AppSettings.Settings["secretKey"].Value;
             TraDirectory = config.AppSettings.Settings["traDirectory"].Value;
