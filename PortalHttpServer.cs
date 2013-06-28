@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using System.Globalization;
-using System.Reflection;
 using Newtonsoft.Json;
 using System;
 using System.Data;
@@ -153,7 +152,6 @@ namespace TRAWebServer
         #region POST Request
         public override void HandlePostRequest(HttpProcessor p, StreamReader inputData)
         {
-            var dbMngr = new DbManager("Data Source=ernesto-THINK\\TRA; Initial Catalog=TraData; Trusted_Connection=True");
             var rawData = inputData.ReadToEnd();
             // write request success headers (THis is required for every reuqest)
             p.WriteSuccess();
@@ -387,7 +385,7 @@ namespace TRAWebServer
                     {
                         var img = Image.FromStream(stream);
                         var imgfrmt = img.RawFormat;
-                        img.Save(Server.TraDirectory + "\\Patients\\" + data["pt_rec_type"].ToString() + data["pt_rec_no"].ToString() + data["pt_rec_suffx"].ToString() + ".png", imgfrmt);
+                        img.Save(Server.TraDirectory + "\\Patients\\" + data["pt_rec_type"] + data["pt_rec_no"] + data["pt_rec_suffx"] + ".png", imgfrmt);
                         img.Dispose();
                     }
                 }
@@ -437,8 +435,8 @@ namespace TRAWebServer
                 if (table.Rows.Count == 0)
                 {
                     // get next orden number
-                    query = @"SELECT MAX(pi_orden) AS next_orden, 
-                                     MAX(pi_display_order) AS pi_display_order 
+                    query = @"SELECT MAX(pi_orden)          AS next_orden, 
+                                     MAX(pi_display_order)  AS pi_display_order 
                                 FROM DAT8000 
                                WHERE pi_pat_type    = @pi_pat_type 
                                  AND pi_pat_no      = @pi_pat_no  
@@ -541,7 +539,6 @@ namespace TRAWebServer
                     cmd.Parameters.AddWithValue("@pi_id_subscriber", ins["pi_id_subscriber"].ToString());
                     _dbMngr.ExecuteNonQuery(cmd);
 
-
                     query = @"SELECT * 
                                 FROM DAT8000 
                                WHERE pi_pat_type    = @pi_pat_type 
@@ -561,9 +558,8 @@ namespace TRAWebServer
                         nextOrden.ToString(CultureInfo.InvariantCulture)
                     );
                 }
-                else
-                {
-                    query = @"UPDATE DAT8000
+
+                query = @"UPDATE DAT8000
                                      SET pi_exp_date                = @pi_exp_date,
                                          pi_work_place              = @pi_work_place,
                                          pi_address_1               = @pi_address_1,
@@ -577,25 +573,21 @@ namespace TRAWebServer
                                      AND pi_pat_no                  = @pi_pat_no
                                      AND pi_pat_sufx                = @pi_pat_sufx
                                      AND pi_orden                   = @pi_orden";
-                    cmd = new SqlCommand(query, _dbMngr.Connection);
-                    cmd.Parameters.AddWithValue("@pi_exp_date", ins["pi_exp_date"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_work_place", ins["pi_work_place"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_address_1", ins["pi_address_1"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_address_2", ins["pi_address_2"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_city", ins["pi_city"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_state", ins["pi_state"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_zip", ins["pi_zip"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_relation", ins["pi_relation"].ToString());
+                cmd = new SqlCommand(query, _dbMngr.Connection);
+                cmd.Parameters.AddWithValue("@pi_exp_date", ins["pi_exp_date"].ToString());
+                cmd.Parameters.AddWithValue("@pi_work_place", ins["pi_work_place"].ToString());
+                cmd.Parameters.AddWithValue("@pi_address_1", ins["pi_address_1"].ToString());
+                cmd.Parameters.AddWithValue("@pi_address_2", ins["pi_address_2"].ToString());
+                cmd.Parameters.AddWithValue("@pi_city", ins["pi_city"].ToString());
+                cmd.Parameters.AddWithValue("@pi_state", ins["pi_state"].ToString());
+                cmd.Parameters.AddWithValue("@pi_zip", ins["pi_zip"].ToString());
+                cmd.Parameters.AddWithValue("@pi_relation", ins["pi_relation"].ToString());
 
-                    cmd.Parameters.AddWithValue("@pi_pat_type", ins["pi_pat_type"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_pat_no", ins["pi_pat_no"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_orden", ins["pi_orden"].ToString());
-                    _dbMngr.ExecuteNonQuery(cmd);
-                    
-                    
-                    
-                }
+                cmd.Parameters.AddWithValue("@pi_pat_type", ins["pi_pat_type"].ToString());
+                cmd.Parameters.AddWithValue("@pi_pat_no", ins["pi_pat_no"].ToString());
+                cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
+                cmd.Parameters.AddWithValue("@pi_orden", ins["pi_orden"].ToString());
+                _dbMngr.ExecuteNonQuery(cmd);
                 return true;
             }
             catch (Exception e)
@@ -605,31 +597,6 @@ namespace TRAWebServer
             }
          
 
-        }
-
-        private static void ConvertDataRowtoObject(DataRow dataRow, Object objectType)
-        {
-            var t = objectType.GetType();
-            var propertiesList = t.GetProperties();
-            foreach (var properties in propertiesList)
-            {
-                try
-                {
-                    t.InvokeMember(
-                        properties.Name,
-                        BindingFlags.SetProperty,
-                        null,
-                        objectType,
-                        new object[] { dataRow[properties.Name].ToString().Trim() 
-                        }
-                    );
-                }
-                catch (Exception ex)
-                {
-                    Server.WriteDisplay("ConvertDataRowtoObject");
-                    Server.WriteDisplay(ex);
-                }
-            }
         }
     }
 }

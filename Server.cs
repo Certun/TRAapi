@@ -24,7 +24,7 @@ namespace TRAWebServer
         public static CronObject Cron;
 
 
-        public static int Main(String[] args)
+        public static void Main(String[] args)
         {
 
             LoadAppConfigSetting();
@@ -36,7 +36,6 @@ namespace TRAWebServer
             MainForm.configSave.Click +=configSave_Click;
 
             Application.Run(MainForm);
-            return 0;
         }
 
         public static void ReStartServer()
