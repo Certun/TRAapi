@@ -17,7 +17,8 @@ namespace TRAWebServer
         public static bool Debug = false;
 
         public static string Host;
-        public static int Port;
+        public static string ServerIp;
+        public static int ServerPort;
         public static string SecretKey;
         public static string TraDirectory;
 
@@ -43,17 +44,18 @@ namespace TRAWebServer
             if (HttpServer == null) return;
             WriteDisplay("Shutting Down Server");
             HttpServer.Stop();
-            WriteDisplay("Restarting Local Server on Port: " + Port);
-            HttpServer = new PortalHttpServer(Port);
+            WriteDisplay("Restarting Local Server on Port: " + ServerPort);
+            HttpServer = new PortalHttpServer(ServerPort);
             MainThread = new Thread(HttpServer.Listen);
             MainThread.Start();
         }
 
         public static void LoadAppConfigSetting()
         {
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var config   = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             Host         = config.AppSettings.Settings["host"].Value;
-            Port         = Convert.ToInt32(config.AppSettings.Settings["port"].Value);
+            ServerIp     = Convert.ToInt32(config.AppSettings.Settings["serverIp"].Value);
+            ServerPort   = Convert.ToInt32(config.AppSettings.Settings["serverPort"].Value);
             SecretKey    = config.AppSettings.Settings["secretKey"].Value;
             TraDirectory = config.AppSettings.Settings["traDirectory"].Value;
         }
@@ -105,7 +107,7 @@ namespace TRAWebServer
                 try
                 {
                     // Startting HTTP server
-                    HttpServer = new PortalHttpServer(Port);
+                    HttpServer = new PortalHttpServer(ServerPort);
                     MainThread = new Thread(HttpServer.Listen);
                     MainThread.Start();
                     // Starting Cron Job
@@ -125,7 +127,7 @@ namespace TRAWebServer
                     MainForm.StartStop.Text = @"Stop";
                     MainForm.display.BackColor = Color.Aquamarine;
 
-                    WriteDisplay("Server Started on port: " + Port);
+                    WriteDisplay("Server Started on port: " + ServerPort);
                 }
                 catch (Exception)
                 {
@@ -152,7 +154,8 @@ namespace TRAWebServer
             Console.WriteLine(@"saveSettings_Click");
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings["host"].Value           = MainForm.host.Text.Trim();
-            config.AppSettings.Settings["port"].Value           = MainForm.port.Text.Trim();
+            config.AppSettings.Settings["serverIp"].Value       = MainForm.serverIp.Text.Trim();
+            config.AppSettings.Settings["serverPort"].Value     = MainForm.serverPort.Text.Trim();
             config.AppSettings.Settings["secretKey"].Value      = MainForm.secretKey.Text.Trim();
             config.AppSettings.Settings["traDirectory"].Value   = MainForm.traDirectory.Text.Trim();
             config.Save();

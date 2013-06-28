@@ -294,6 +294,9 @@ namespace TRAWebServer
             p.OutputStream.WriteLine(jresponse);
         }
 
+
+        #region  Workers
+
         private bool WorkAppointment(JToken data)
         {
             try
@@ -313,7 +316,7 @@ namespace TRAWebServer
                 return false;
 
             }
-            
+
         }
 
         private bool WorkPaitnet(JToken data)
@@ -377,20 +380,16 @@ namespace TRAWebServer
                 _dbMngr.ExecuteNonQuery(cmd);
 
                 // photo handler
-                if (data["pt_photo_id"].ToString() != "")
-                {
-                    var photoBase64 = data["pt_photo_id"].ToString();
-                    byte[] photo = Convert.FromBase64String(photoBase64.Substring(photoBase64.IndexOf(',') + 1));
-                    using (var stream = new MemoryStream(photo, 0, photo.Length))
-                    {
-                        var img = Image.FromStream(stream);
-                        var imgfrmt = img.RawFormat;
-                        img.Save(Server.TraDirectory + "\\Patients\\" + data["pt_rec_type"] + data["pt_rec_no"] + data["pt_rec_suffx"] + ".png", imgfrmt);
-                        img.Dispose();
-                    }
-                }
 
-                return true; 
+
+                ImageBase64ToImageDirectoryByRecTypeRecNoRecSuffixAndCategory(
+                    data["pt_photo_id"].ToString(),
+                    data["pt_rec_type"].ToString(),
+                    data["pt_rec_no"].ToString(),
+                    data["pt_rec_suffx"].ToString(),
+                    "pateint-id"
+                    );
+                return true;
             }
             catch (Exception e)
             {
@@ -400,20 +399,41 @@ namespace TRAWebServer
 
         }
 
+        private static void ImageBase64ToImageDirectoryByRecTypeRecNoRecSuffixAndCategory(string base64Img, string type, string no, string sufix, string category)
+        {
+            if (base64Img == "") return;
+            try
+            {
+                var photo = Convert.FromBase64String(base64Img.Substring(base64Img.IndexOf(',') + 1));
+                using (var stream = new MemoryStream(photo, 0, photo.Length))
+                {
+                    var img = Image.FromStream(stream);
+                    var imgfrmt = img.RawFormat;
+                    img.Save(
+                        Server.TraDirectory + "\\Patients\\" + category + "-" + type + "-" + no + "-" + sufix + ".png", imgfrmt);
+                    img.Dispose();
+                }
+            }
+            catch (Exception e)
+            {
+                Server.WriteDisplay(e);
+            }
+        }
+
         private dynamic GetInsuranceByRecTypeMumberSuffixAndOrden(string type, string no, string suffix, string orden)
         {
-                const string query = @"SELECT * 
+            const string query = @"SELECT * 
                                          FROM DAT8000 
                                         WHERE pi_pat_type = @pi_pat_type
                                           AND pi_pat_no   = @pi_pat_no
                                           AND pi_pat_sufx = @pi_pat_sufx
                                           AND pi_orden    = @pi_orden";
-                var cmd = new SqlCommand(query, _dbMngr.Connection);
-                cmd.Parameters.AddWithValue("@pi_pat_type", type);
-                cmd.Parameters.AddWithValue("@pi_pat_no", no);
-                cmd.Parameters.AddWithValue("@pi_pat_sufx", suffix);
-                cmd.Parameters.AddWithValue("@pi_orden", orden);
-                return _dbMngr.GetDataTableResults(cmd);
+            var cmd = new SqlCommand(query, _dbMngr.Connection);
+            cmd.Parameters.AddWithValue("@pi_pat_type", type);
+            cmd.Parameters.AddWithValue("@pi_pat_no", no);
+            cmd.Parameters.AddWithValue("@pi_pat_sufx", suffix);
+            cmd.Parameters.AddWithValue("@pi_orden", orden);
+            return _dbMngr.GetDataTableResults(cmd);
         }
 
         private dynamic WorkInsurence(JToken ins)
@@ -426,7 +446,7 @@ namespace TRAWebServer
                     (string) ins["pi_pat_no"],
                     (string) ins["pi_pat_sufx"],
                     (string) ins["pi_orden"]
-                );
+                    );
 
                 string query;
                 SqlCommand cmd;
@@ -520,8 +540,9 @@ namespace TRAWebServer
                     cmd.Parameters.AddWithValue("@pi_last_name", ins["pi_last_name"].ToString());
                     cmd.Parameters.AddWithValue("@pi_first_name", ins["pi_first_name"].ToString());
                     cmd.Parameters.AddWithValue("@pi_init_name", ins["pi_init_name"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_type", "T");           // defautlt "T" insert value
-                    cmd.Parameters.AddWithValue("@pi_ins_code", ins["pi_ins_code"].ToString());     // defautlt "999" insert value
+                    cmd.Parameters.AddWithValue("@pi_type", "T"); // defautlt "T" insert value
+                    cmd.Parameters.AddWithValue("@pi_ins_code", ins["pi_ins_code"].ToString());
+                        // defautlt "999" insert value
                     cmd.Parameters.AddWithValue("@pi_group", ins["pi_group"].ToString());
                     cmd.Parameters.AddWithValue("@pi_exp_date", ins["pi_exp_date"].ToString());
                     cmd.Parameters.AddWithValue("@pi_subscriber_last_name", ins["pi_subscriber_last_name"].ToString());
@@ -550,13 +571,20 @@ namespace TRAWebServer
                     cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
                     _dbMngr.GetDataTableResults(cmd);
 
+                    ImageBase64ToImageDirectoryByRecTypeRecNoRecSuffixAndCategory(
+                        ins["pi_image"].ToString(),
+                        ins["pi_pat_type"].ToString(),
+                        ins["pi_pat_no"].ToString(),
+                        ins["pi_pat_sufx"].ToString(),
+                        "insurance-" + nextOrden.ToString(CultureInfo.InvariantCulture)
+                        );
 
                     return GetInsuranceByRecTypeMumberSuffixAndOrden(
-                        (string)ins["pi_pat_type"],
-                        (string)ins["pi_pat_no"],
-                        (string)ins["pi_pat_sufx"],
+                        (string) ins["pi_pat_type"],
+                        (string) ins["pi_pat_no"],
+                        (string) ins["pi_pat_sufx"],
                         nextOrden.ToString(CultureInfo.InvariantCulture)
-                    );
+                        );
                 }
 
                 query = @"UPDATE DAT8000
@@ -588,6 +616,15 @@ namespace TRAWebServer
                 cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
                 cmd.Parameters.AddWithValue("@pi_orden", ins["pi_orden"].ToString());
                 _dbMngr.ExecuteNonQuery(cmd);
+
+                ImageBase64ToImageDirectoryByRecTypeRecNoRecSuffixAndCategory(
+                    ins["pi_image"].ToString(),
+                    ins["pi_pat_type"].ToString(),
+                    ins["pi_pat_no"].ToString(),
+                    ins["pi_pat_sufx"].ToString(),
+                    "insurance-" + ins["pi_orden"]
+                    );
+
                 return true;
             }
             catch (Exception e)
@@ -595,8 +632,10 @@ namespace TRAWebServer
                 Server.WriteDisplay(e);
                 return false;
             }
-         
+
 
         }
+
+        #endregion
     }
 }

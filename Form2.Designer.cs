@@ -38,17 +38,19 @@
             this.requestTest = new System.Windows.Forms.Button();
             this.enableDebug = new System.Windows.Forms.CheckBox();
             this.tabSettings = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.traDirectory = new System.Windows.Forms.TextBox();
             this.generateKey = new System.Windows.Forms.Button();
             this.configCancel = new System.Windows.Forms.Button();
             this.host = new System.Windows.Forms.TextBox();
-            this.port = new System.Windows.Forms.TextBox();
+            this.serverPort = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.secretKey = new System.Windows.Forms.TextBox();
             this.configSave = new System.Windows.Forms.Button();
-            this.traDirectory = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.serverIp = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabDisplay.SuspendLayout();
@@ -156,12 +158,14 @@
             // 
             // tabSettings
             // 
+            this.tabSettings.Controls.Add(this.label5);
+            this.tabSettings.Controls.Add(this.serverIp);
             this.tabSettings.Controls.Add(this.label4);
             this.tabSettings.Controls.Add(this.traDirectory);
             this.tabSettings.Controls.Add(this.generateKey);
             this.tabSettings.Controls.Add(this.configCancel);
             this.tabSettings.Controls.Add(this.host);
-            this.tabSettings.Controls.Add(this.port);
+            this.tabSettings.Controls.Add(this.serverPort);
             this.tabSettings.Controls.Add(this.label3);
             this.tabSettings.Controls.Add(this.label2);
             this.tabSettings.Controls.Add(this.label1);
@@ -175,12 +179,28 @@
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 116);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "TRA Directory";
+            // 
+            // traDirectory
+            // 
+            this.traDirectory.Location = new System.Drawing.Point(116, 113);
+            this.traDirectory.Name = "traDirectory";
+            this.traDirectory.Size = new System.Drawing.Size(354, 20);
+            this.traDirectory.TabIndex = 9;
+            // 
             // generateKey
             // 
             this.generateKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.generateKey.AutoSize = true;
             this.generateKey.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.generateKey.Location = new System.Drawing.Point(363, 140);
+            this.generateKey.Location = new System.Drawing.Point(363, 170);
             this.generateKey.Name = "generateKey";
             this.generateKey.Size = new System.Drawing.Size(107, 23);
             this.generateKey.TabIndex = 8;
@@ -209,28 +229,28 @@
             this.host.TabIndex = 6;
             this.host.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
-            // port
+            // serverPort
             // 
-            this.port.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.serverPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.port.Location = new System.Drawing.Point(116, 54);
-            this.port.Name = "port";
-            this.port.Size = new System.Drawing.Size(354, 20);
-            this.port.TabIndex = 5;
+            this.serverPort.Location = new System.Drawing.Point(116, 84);
+            this.serverPort.Name = "serverPort";
+            this.serverPort.Size = new System.Drawing.Size(354, 20);
+            this.serverPort.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 57);
+            this.label3.Location = new System.Drawing.Point(14, 87);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 13);
+            this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Portal Server Port:";
+            this.label3.Text = "Server Port:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 25);
+            this.label2.Location = new System.Drawing.Point(12, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 13);
             this.label2.TabIndex = 3;
@@ -239,7 +259,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 117);
+            this.label1.Location = new System.Drawing.Point(15, 147);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 2;
@@ -249,7 +269,7 @@
             // 
             this.secretKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.secretKey.Location = new System.Drawing.Point(116, 114);
+            this.secretKey.Location = new System.Drawing.Point(116, 144);
             this.secretKey.Name = "secretKey";
             this.secretKey.Size = new System.Drawing.Size(354, 20);
             this.secretKey.TabIndex = 1;
@@ -266,21 +286,23 @@
             this.configSave.UseVisualStyleBackColor = true;
             this.configSave.Click += new System.EventHandler(this.saveSettings_Click);
             // 
-            // traDirectory
+            // serverIp
             // 
-            this.traDirectory.Location = new System.Drawing.Point(116, 83);
-            this.traDirectory.Name = "traDirectory";
-            this.traDirectory.Size = new System.Drawing.Size(354, 20);
-            this.traDirectory.TabIndex = 9;
+            this.serverIp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.serverIp.Location = new System.Drawing.Point(116, 53);
+            this.serverIp.Name = "serverIp";
+            this.serverIp.Size = new System.Drawing.Size(354, 20);
+            this.serverIp.TabIndex = 11;
             // 
-            // label4
+            // label5
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 86);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "TRA Directory";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 56);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(54, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Server IP:";
             // 
             // Form2
             // 
@@ -321,12 +343,14 @@
         public System.Windows.Forms.Button StartStop;
         public System.Windows.Forms.Button configSave;
         public System.Windows.Forms.TextBox host;
-        public System.Windows.Forms.TextBox port;
+        public System.Windows.Forms.TextBox serverPort;
         public System.Windows.Forms.TextBox secretKey;
         private System.Windows.Forms.Button generateKey;
         private System.Windows.Forms.Button configCancel;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.TextBox traDirectory;
+        private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.TextBox serverIp;
 
     }
 }

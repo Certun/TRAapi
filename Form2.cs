@@ -26,7 +26,8 @@ namespace TRAWebServer
         private void Form2_Load(object sender, EventArgs e)
         {
             host.Text = ConfigurationManager.AppSettings["host"];
-            port.Text = ConfigurationManager.AppSettings["port"];
+            serverPort.Text = ConfigurationManager.AppSettings["serverIp"];
+            serverPort.Text = ConfigurationManager.AppSettings["serverPort"];
             secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
             traDirectory.Text = ConfigurationManager.AppSettings["traDirectory"];
 
@@ -60,7 +61,8 @@ namespace TRAWebServer
         private void configCancel_Click(object sender, EventArgs e)
         {
             host.Text = ConfigurationManager.AppSettings["host"];
-            port.Text = ConfigurationManager.AppSettings["port"];
+            serverPort.Text = ConfigurationManager.AppSettings["serverIp"];
+            serverPort.Text = ConfigurationManager.AppSettings["serverPort"];
             secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
             traDirectory.Text = ConfigurationManager.AppSettings["traDirectory"];
         }

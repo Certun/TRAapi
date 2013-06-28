@@ -22,7 +22,7 @@ namespace TRAWebServer
 
         public void Listen()
         {
-            var localIp = IPAddress.Parse("192.168.1.105");
+            var localIp = IPAddress.Parse(Server.ServerIp);
             Listener = new TcpListener(localIp, Port);
             Listener.Start();
             while (IsActive)
