@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.display = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -59,19 +58,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.secretKey = new System.Windows.Forms.TextBox();
             this.configSave = new System.Windows.Forms.Button();
-            this.scangroupsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.scangroupsBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.scangroupsBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.scangroupsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabDisplay.SuspendLayout();
             this.tabSettings.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // display
@@ -415,22 +406,6 @@
             this.configSave.UseVisualStyleBackColor = true;
             this.configSave.Click += new System.EventHandler(this.saveSettings_Click);
             // 
-            // scangroupsBindingSource1
-            // 
-            this.scangroupsBindingSource1.DataMember = "scan_groups";
-            // 
-            // scangroupsBindingSource2
-            // 
-            this.scangroupsBindingSource2.DataMember = "scan_groups";
-            // 
-            // scangroupsBindingSource3
-            // 
-            this.scangroupsBindingSource3.DataMember = "scan_groups";
-            // 
-            // scangroupsBindingSource
-            // 
-            this.scangroupsBindingSource.DataMember = "scan_groups";
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -452,10 +427,6 @@
             this.tabSettings.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -488,10 +459,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.BindingSource scangroupsBindingSource;
-        private System.Windows.Forms.BindingSource scangroupsBindingSource1;
-        private System.Windows.Forms.BindingSource scangroupsBindingSource2;
-        private System.Windows.Forms.BindingSource scangroupsBindingSource3;
         public System.Windows.Forms.ComboBox documentsCategory;
         public System.Windows.Forms.ComboBox insuranceImgCategory;
         public System.Windows.Forms.ComboBox patientImgCategory;
