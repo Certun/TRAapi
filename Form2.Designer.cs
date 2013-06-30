@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.display = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -38,6 +39,15 @@
             this.requestTest = new System.Windows.Forms.Button();
             this.enableDebug = new System.Windows.Forms.CheckBox();
             this.tabSettings = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.documentsCategory = new System.Windows.Forms.ComboBox();
+            this.insuranceImgCategory = new System.Windows.Forms.ComboBox();
+            this.patientImgCategory = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.serverIp = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.traDirectory = new System.Windows.Forms.TextBox();
             this.generateKey = new System.Windows.Forms.Button();
@@ -49,12 +59,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.secretKey = new System.Windows.Forms.TextBox();
             this.configSave = new System.Windows.Forms.Button();
-            this.serverIp = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.scangroupsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.scangroupsBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.scangroupsBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.scangroupsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabDisplay.SuspendLayout();
             this.tabSettings.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // display
@@ -62,6 +79,7 @@
             this.display.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.display.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.display.Location = new System.Drawing.Point(6, 6);
             this.display.Name = "display";
             this.display.Size = new System.Drawing.Size(492, 368);
@@ -158,6 +176,7 @@
             // 
             // tabSettings
             // 
+            this.tabSettings.Controls.Add(this.groupBox1);
             this.tabSettings.Controls.Add(this.label5);
             this.tabSettings.Controls.Add(this.serverIp);
             this.tabSettings.Controls.Add(this.label4);
@@ -179,9 +198,112 @@
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.documentsCategory);
+            this.groupBox1.Controls.Add(this.insuranceImgCategory);
+            this.groupBox1.Controls.Add(this.patientImgCategory);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBox1.Location = new System.Drawing.Point(18, 218);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(452, 144);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Document Categories";
+            // 
+            // documentsCategory
+            // 
+            this.documentsCategory.DisplayMember = "group_description";
+            this.documentsCategory.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.documentsCategory.FormattingEnabled = true;
+            this.documentsCategory.Location = new System.Drawing.Point(137, 81);
+            this.documentsCategory.Name = "documentsCategory";
+            this.documentsCategory.Size = new System.Drawing.Size(293, 21);
+            this.documentsCategory.TabIndex = 5;
+            this.documentsCategory.ValueMember = "group_code";
+            // 
+            // insuranceImgCategory
+            // 
+            this.insuranceImgCategory.DisplayMember = "group_description";
+            this.insuranceImgCategory.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.insuranceImgCategory.FormattingEnabled = true;
+            this.insuranceImgCategory.Location = new System.Drawing.Point(137, 54);
+            this.insuranceImgCategory.Name = "insuranceImgCategory";
+            this.insuranceImgCategory.Size = new System.Drawing.Size(293, 21);
+            this.insuranceImgCategory.TabIndex = 4;
+            this.insuranceImgCategory.ValueMember = "group_code";
+            // 
+            // patientImgCategory
+            // 
+            this.patientImgCategory.DisplayMember = "group_description";
+            this.patientImgCategory.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.patientImgCategory.FormattingEnabled = true;
+            this.patientImgCategory.Location = new System.Drawing.Point(137, 26);
+            this.patientImgCategory.Name = "patientImgCategory";
+            this.patientImgCategory.Size = new System.Drawing.Size(293, 21);
+            this.patientImgCategory.TabIndex = 3;
+            this.patientImgCategory.ValueMember = "group_code";
+            this.patientImgCategory.SelectedIndexChanged += new System.EventHandler(this.patientImgCategory_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label8.Location = new System.Drawing.Point(10, 84);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(110, 13);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Uploaded Documents";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label7.Location = new System.Drawing.Point(10, 57);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(86, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Insurance Image";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label6.Location = new System.Drawing.Point(10, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(72, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Patient Image";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label5.Location = new System.Drawing.Point(12, 56);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(54, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Server IP:";
+            // 
+            // serverIp
+            // 
+            this.serverIp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.serverIp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.serverIp.Location = new System.Drawing.Point(116, 53);
+            this.serverIp.Name = "serverIp";
+            this.serverIp.Size = new System.Drawing.Size(354, 20);
+            this.serverIp.TabIndex = 11;
+            this.serverIp.TextChanged += new System.EventHandler(this.serverIp_TextChanged);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label4.Location = new System.Drawing.Point(12, 116);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 13);
@@ -190,6 +312,7 @@
             // 
             // traDirectory
             // 
+            this.traDirectory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.traDirectory.Location = new System.Drawing.Point(116, 113);
             this.traDirectory.Name = "traDirectory";
             this.traDirectory.Size = new System.Drawing.Size(354, 20);
@@ -223,6 +346,7 @@
             // 
             this.host.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.host.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.host.Location = new System.Drawing.Point(116, 22);
             this.host.Name = "host";
             this.host.Size = new System.Drawing.Size(354, 20);
@@ -233,6 +357,7 @@
             // 
             this.serverPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.serverPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.serverPort.Location = new System.Drawing.Point(116, 84);
             this.serverPort.Name = "serverPort";
             this.serverPort.Size = new System.Drawing.Size(354, 20);
@@ -241,6 +366,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label3.Location = new System.Drawing.Point(14, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
@@ -250,6 +376,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label2.Location = new System.Drawing.Point(12, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 13);
@@ -259,6 +386,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label1.Location = new System.Drawing.Point(15, 147);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
@@ -269,6 +397,7 @@
             // 
             this.secretKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.secretKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.secretKey.Location = new System.Drawing.Point(116, 144);
             this.secretKey.Name = "secretKey";
             this.secretKey.Size = new System.Drawing.Size(354, 20);
@@ -286,23 +415,21 @@
             this.configSave.UseVisualStyleBackColor = true;
             this.configSave.Click += new System.EventHandler(this.saveSettings_Click);
             // 
-            // serverIp
+            // scangroupsBindingSource1
             // 
-            this.serverIp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.serverIp.Location = new System.Drawing.Point(116, 53);
-            this.serverIp.Name = "serverIp";
-            this.serverIp.Size = new System.Drawing.Size(354, 20);
-            this.serverIp.TabIndex = 11;
+            this.scangroupsBindingSource1.DataMember = "scan_groups";
             // 
-            // label5
+            // scangroupsBindingSource2
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 56);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Server IP:";
+            this.scangroupsBindingSource2.DataMember = "scan_groups";
+            // 
+            // scangroupsBindingSource3
+            // 
+            this.scangroupsBindingSource3.DataMember = "scan_groups";
+            // 
+            // scangroupsBindingSource
+            // 
+            this.scangroupsBindingSource.DataMember = "scan_groups";
             // 
             // Form2
             // 
@@ -323,6 +450,12 @@
             this.tabDisplay.PerformLayout();
             this.tabSettings.ResumeLayout(false);
             this.tabSettings.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scangroupsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -351,6 +484,17 @@
         public System.Windows.Forms.TextBox traDirectory;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.TextBox serverIp;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.BindingSource scangroupsBindingSource;
+        private System.Windows.Forms.BindingSource scangroupsBindingSource1;
+        private System.Windows.Forms.BindingSource scangroupsBindingSource2;
+        private System.Windows.Forms.BindingSource scangroupsBindingSource3;
+        public System.Windows.Forms.ComboBox documentsCategory;
+        public System.Windows.Forms.ComboBox insuranceImgCategory;
+        public System.Windows.Forms.ComboBox patientImgCategory;
 
     }
 }

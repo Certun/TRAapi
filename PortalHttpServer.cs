@@ -14,7 +14,7 @@ namespace TRAWebServer
 
     public class PortalHttpServer : HttpServer
     {
-        readonly DbManager _dbMngr = new DbManager("Data Source=ernesto-THINK\\TRA; Initial Catalog=TraData; Trusted_Connection=True");
+        readonly DbManager _db = new DbManager("Data Source=desktop-pc\\SQLDATABASE; Initial Catalog=TraData; Trusted_Connection=True");
 
         public PortalHttpServer(int port)
             : base(port)
@@ -267,6 +267,28 @@ namespace TRAWebServer
                             }
                         }
 
+                        var doc = (JArray)data["documents"];
+                        if (doc.Any())
+                        {
+                            response.results.documents = new JObject();
+                            response.results.documents.successes = new JArray();
+                            response.results.documents.failures = new JArray();
+
+                            for (var i = 0; i < doc.Count(); i++)
+                            {
+                                if (WorkDocuments(doc[i]))
+                                {
+                                    doc[i]["document"] = null;
+                                    response.results.documents.successes.Add(doc[i]);
+                                }
+                                else
+                                {
+                                    doc[i]["document"] = null;
+                                    response.results.documents.failures.Add(doc[i]);
+                                }
+                            }
+                        }
+
                         break;
                     default:
                         // define default case
@@ -304,10 +326,10 @@ namespace TRAWebServer
                 const string query = @"UPDATE Apoint 
                                           SET ap_status     = @ap_status
                                         WHERE Ap_num   = @Ap_num";
-                var cmd = new SqlCommand(query, _dbMngr.Connection);
+                var cmd = new SqlCommand(query, _db.Connection);
                 cmd.Parameters.AddWithValue("@ap_status", data["ap_status"].ToString());
                 cmd.Parameters.AddWithValue("@Ap_num", data["Ap_num"].ToString());
-                _dbMngr.ExecuteNonQuery(cmd);
+                _db.ExecuteNonQuery(cmd);
                 return true;
             }
             catch (Exception e)
@@ -350,7 +372,7 @@ namespace TRAWebServer
                                    WHERE pt_rec_type       = @pt_rec_type
                                      AND pt_rec_no         = @pt_rec_no
                                      AND pt_rec_suffx      = @pt_rec_suffx";
-                var cmd = new SqlCommand(query, _dbMngr.Connection);
+                var cmd = new SqlCommand(query, _db.Connection);
                 cmd.Parameters.AddWithValue("@pt_last_name", data["pt_last_name"].ToString());
                 cmd.Parameters.AddWithValue("@pt_first_name", data["pt_first_name"].ToString());
                 cmd.Parameters.AddWithValue("@pt_init_name", data["pt_init_name"].ToString());
@@ -377,7 +399,7 @@ namespace TRAWebServer
                 cmd.Parameters.AddWithValue("@pt_rec_type", data["pt_rec_type"].ToString());
                 cmd.Parameters.AddWithValue("@pt_rec_no", data["pt_rec_no"].ToString());
                 cmd.Parameters.AddWithValue("@pt_rec_suffx", data["pt_rec_suffx"].ToString());
-                _dbMngr.ExecuteNonQuery(cmd);
+                _db.ExecuteNonQuery(cmd);
 
                 // photo handler
 
@@ -399,27 +421,6 @@ namespace TRAWebServer
 
         }
 
-        private static void ImageBase64ToImageDirectoryByRecTypeRecNoRecSuffixAndCategory(string base64Img, string type, string no, string sufix, string category)
-        {
-            if (base64Img == "") return;
-            try
-            {
-                var photo = Convert.FromBase64String(base64Img.Substring(base64Img.IndexOf(',') + 1));
-                using (var stream = new MemoryStream(photo, 0, photo.Length))
-                {
-                    var img = Image.FromStream(stream);
-                    var imgfrmt = img.RawFormat;
-                    img.Save(
-                        Server.TraDirectory + "\\Patients\\" + category + "-" + type + "-" + no + "-" + sufix + ".png", imgfrmt);
-                    img.Dispose();
-                }
-            }
-            catch (Exception e)
-            {
-                Server.WriteDisplay(e);
-            }
-        }
-
         private dynamic GetInsuranceByRecTypeMumberSuffixAndOrden(string type, string no, string suffix, string orden)
         {
             const string query = @"SELECT * 
@@ -428,12 +429,12 @@ namespace TRAWebServer
                                           AND pi_pat_no   = @pi_pat_no
                                           AND pi_pat_sufx = @pi_pat_sufx
                                           AND pi_orden    = @pi_orden";
-            var cmd = new SqlCommand(query, _dbMngr.Connection);
+            var cmd = new SqlCommand(query, _db.Connection);
             cmd.Parameters.AddWithValue("@pi_pat_type", type);
             cmd.Parameters.AddWithValue("@pi_pat_no", no);
             cmd.Parameters.AddWithValue("@pi_pat_sufx", suffix);
             cmd.Parameters.AddWithValue("@pi_orden", orden);
-            return _dbMngr.GetDataTableResults(cmd);
+            return _db.GetDataTableResults(cmd);
         }
 
         private dynamic WorkInsurence(JToken ins)
@@ -461,11 +462,11 @@ namespace TRAWebServer
                                WHERE pi_pat_type    = @pi_pat_type 
                                  AND pi_pat_no      = @pi_pat_no  
                                  AND pi_pat_sufx    = @pi_pat_sufx";
-                    cmd = new SqlCommand(query, _dbMngr.Connection);
+                    cmd = new SqlCommand(query, _db.Connection);
                     cmd.Parameters.AddWithValue("@pi_pat_type", ins["pi_pat_type"].ToString());
                     cmd.Parameters.AddWithValue("@pi_pat_no", ins["pi_pat_no"].ToString());
                     cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
-                    table = _dbMngr.GetDataTableResults(cmd);
+                    table = _db.GetDataTableResults(cmd);
                     int nextOrden;
                     int nextDisplay;
                     if (table.Rows.Count == 0)
@@ -531,7 +532,7 @@ namespace TRAWebServer
                                         @pi_relation,
                                         @pi_id_subscriber );
                                  SELECT SCOPE_IDENTITY();";
-                    cmd = new SqlCommand(query, _dbMngr.Connection);
+                    cmd = new SqlCommand(query, _db.Connection);
                     cmd.Parameters.AddWithValue("@pi_pat_type", ins["pi_pat_type"].ToString());
                     cmd.Parameters.AddWithValue("@pi_pat_no", ins["pi_pat_no"].ToString());
                     cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
@@ -558,18 +559,18 @@ namespace TRAWebServer
                     cmd.Parameters.AddWithValue("@pi_zip", ins["pi_zip"].ToString());
                     cmd.Parameters.AddWithValue("@pi_relation", ins["pi_relation"].ToString());
                     cmd.Parameters.AddWithValue("@pi_id_subscriber", ins["pi_id_subscriber"].ToString());
-                    _dbMngr.ExecuteNonQuery(cmd);
+                    _db.ExecuteNonQuery(cmd);
 
                     query = @"SELECT * 
                                 FROM DAT8000 
                                WHERE pi_pat_type    = @pi_pat_type 
                                  AND pi_pat_no      = @pi_pat_no  
                                  AND pi_pat_sufx    = @pi_pat_sufx";
-                    cmd = new SqlCommand(query, _dbMngr.Connection);
+                    cmd = new SqlCommand(query, _db.Connection);
                     cmd.Parameters.AddWithValue("@pi_pat_type", ins["pi_pat_type"].ToString());
                     cmd.Parameters.AddWithValue("@pi_pat_no", ins["pi_pat_no"].ToString());
                     cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
-                    _dbMngr.GetDataTableResults(cmd);
+                    _db.GetDataTableResults(cmd);
 
                     ImageBase64ToImageDirectoryByRecTypeRecNoRecSuffixAndCategory(
                         ins["pi_image"].ToString(),
@@ -601,7 +602,7 @@ namespace TRAWebServer
                                      AND pi_pat_no                  = @pi_pat_no
                                      AND pi_pat_sufx                = @pi_pat_sufx
                                      AND pi_orden                   = @pi_orden";
-                cmd = new SqlCommand(query, _dbMngr.Connection);
+                cmd = new SqlCommand(query, _db.Connection);
                 cmd.Parameters.AddWithValue("@pi_exp_date", ins["pi_exp_date"].ToString());
                 cmd.Parameters.AddWithValue("@pi_work_place", ins["pi_work_place"].ToString());
                 cmd.Parameters.AddWithValue("@pi_address_1", ins["pi_address_1"].ToString());
@@ -615,7 +616,7 @@ namespace TRAWebServer
                 cmd.Parameters.AddWithValue("@pi_pat_no", ins["pi_pat_no"].ToString());
                 cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
                 cmd.Parameters.AddWithValue("@pi_orden", ins["pi_orden"].ToString());
-                _dbMngr.ExecuteNonQuery(cmd);
+                _db.ExecuteNonQuery(cmd);
 
                 ImageBase64ToImageDirectoryByRecTypeRecNoRecSuffixAndCategory(
                     ins["pi_image"].ToString(),
@@ -633,6 +634,43 @@ namespace TRAWebServer
                 return false;
             }
 
+
+        }
+
+        private static void ImageBase64ToImageDirectoryByRecTypeRecNoRecSuffixAndCategory(string base64Img, string type, string no, string sufix, string category)
+        {
+            if (base64Img == "") return;
+            try
+            {
+                var photo = Convert.FromBase64String(base64Img.Substring(base64Img.IndexOf(',') + 1));
+                var stream = new MemoryStream(photo, 0, photo.Length);
+                var img = Image.FromStream(stream);
+                img.Save(String.Format("{0}\\Patients\\{1}-{2}-{3}-{4}.png", Server.TraDirectory, category, type, no, sufix), img.RawFormat);
+                img.Dispose();
+            }
+            catch (Exception e)
+            {
+                Server.WriteDisplay(e);
+            }
+        }
+
+        private static bool WorkDocuments(JToken data)
+        {
+
+            try
+            {
+                var bytes = Convert.FromBase64String((string) data["document"]);
+                var stream = new FileStream(String.Format("{0}\\Patients\\{1}", Server.TraDirectory, data["documentName"]), FileMode.CreateNew);
+                var writer = new BinaryWriter(stream);
+                writer.Write(bytes, 0, bytes.Length);
+                writer.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Server.WriteDisplay(e);
+                return false;
+            }
 
         }
 

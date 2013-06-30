@@ -15,7 +15,7 @@ namespace TRAWebServer
     static class Scheduler
     {
 
-        public static DbManager Db = new DbManager("Data Source=ernesto-THINK\\TRA; Initial Catalog=TraData; Trusted_Connection=True");
+        private static readonly DbManager Db = new DbManager("Data Source=desktop-pc\\SQLDATABASE; Initial Catalog=TraData; Trusted_Connection=True");
 
         public static void Run()
         {
@@ -24,7 +24,6 @@ namespace TRAWebServer
                 {
                     appointments = NewApointments(), 
                     books = GetBooks(), 
-                    referrals = GetReferrals(), 
                     insuranceCombo = GetInsuranceComboData(),
                     facultyCombo = GetFacultyComboData()
                 };
@@ -185,15 +184,7 @@ namespace TRAWebServer
             
         }
 
-        private static Array GetReferrals()
-        {
-//            const string query = @"Select * FROM DAT9397F";
-//            var cmd = new SqlCommand(query, Db.Connection);
-//            var table = Db.GetDataTableResults(cmd);
-//            return ConvertTableToArray(table, "TRAWebServer.DataClasses.Referring");
-                return new byte[0]; 
-        }
-
+ 
         public static dynamic Send(string action, string jdata)
         {
             try

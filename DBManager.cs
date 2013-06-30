@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace TRAWebServer
 {
-    class DbManager
+    public class DbManager
     {
         private string _connString;
 
