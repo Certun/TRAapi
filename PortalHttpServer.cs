@@ -14,11 +14,11 @@ namespace TRAWebServer
 
     public class PortalHttpServer : HttpServer
     {
-        readonly DbManager _db = new DbManager("Data Source=desktop-pc\\SQLDATABASE; Initial Catalog=TraData; Trusted_Connection=True");
-
+        private readonly DbManager _db;
         public PortalHttpServer(int port)
             : base(port)
         {
+            _db  = new DbManager(Server.DataConnString);
 
         }
 

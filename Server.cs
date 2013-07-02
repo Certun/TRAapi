@@ -12,7 +12,7 @@ namespace TRAWebServer
     {
         public static HttpServer HttpServer;
 
-        public static Form2 MainForm = new Form2();
+        public static Form2 MainForm;
         public static Thread MainThread;
         public static bool Debug = false;
 
@@ -21,6 +21,8 @@ namespace TRAWebServer
         public static int ServerPort;
         public static string SecretKey;
         public static string TraDirectory;
+
+        public static string DataConnString;
 
         public static string PatientImgCategory;
         public static string InsuranceImgCategory;
@@ -33,6 +35,8 @@ namespace TRAWebServer
         {
 
             LoadAppConfigSetting();
+
+            MainForm = new Form2();
 
             MainForm.FormClosing += mainForm_FormClosing;
             MainForm.resetBtn.Click += resetBtn_Click;
@@ -65,6 +69,7 @@ namespace TRAWebServer
             PatientImgCategory      = config.AppSettings.Settings["patientImgCategory"].Value;
             InsuranceImgCategory    = config.AppSettings.Settings["insuranceImgCategory"].Value;
             DocumentsCategory       = config.AppSettings.Settings["documentsCategory"].Value;
+            DataConnString = ConfigurationManager.ConnectionStrings["DataConnString"].ConnectionString;
         }
 
         static void requestTest_Click(object sender, EventArgs e)
