@@ -15,10 +15,12 @@ namespace TRAWebServer
     static class Scheduler
     {
 
-        private static readonly DbManager Db = new DbManager("Data Source=desktop-pc\\SQLDATABASE; Initial Catalog=TraData; Trusted_Connection=True");
+        private static DbManager _db;
+
 
         public static void Run()
         {
+            _db = new DbManager(Server.DataConnString);
             // get all data
             var data = new
                 {
@@ -90,39 +92,39 @@ namespace TRAWebServer
         private static DataTable GetNewAppointments()
         {
             const string query = @"SELECT * FROM Apoint WHERE web_portal_status = 0";
-            var cmd = new SqlCommand(query, Db.Connection);
-            return Db.GetDataTableResults(cmd);
+            var cmd = new SqlCommand(query, _db.Connection);
+            return _db.GetDataTableResults(cmd);
         }
 
         public static void UpdateAppointmentByAppointmentNumber(string appNum, bool success)
         {
             const string query = @"UPDATE Apoint SET web_portal_status = @Status WHERE Ap_num = @AppNum";
-            var cmd = new SqlCommand(query, Db.Connection);
+            var cmd = new SqlCommand(query, _db.Connection);
             var status = success ? "1" : "9";
             cmd.Parameters.AddWithValue("@Status", status);
             cmd.Parameters.AddWithValue("@AppNum", appNum);
-            Db.ExecuteNonQuery(cmd);
+            _db.ExecuteNonQuery(cmd);
         }
 
         private static DataRow GetPatientDemogrphicsByRecordNum(string type, string no, string suffix)
         {
             const string query = @"SELECT * FROM DAT2000 WHERE pt_rec_type= @AppRecType and pt_rec_no= @PtRecNo and pt_rec_suffx= @PtRecSuffx";
-            var cmd = new SqlCommand(query, Db.Connection);
+            var cmd = new SqlCommand(query, _db.Connection);
             cmd.Parameters.AddWithValue("@AppRecType", type);
             cmd.Parameters.AddWithValue("@PtRecNo", no);
             cmd.Parameters.AddWithValue("@PtRecSuffx", suffix);
-            var patient = Db.GetDataTableResults(cmd);
+            var patient = _db.GetDataTableResults(cmd);
             return patient.Rows[0];
         }
 
         private static Array GetPatientInsurancesByRecNum(string type, string no, string suffix)
         {
             const string query = @"SELECT * FROM DAT8000 WHERE pi_pat_type=@AppRecType and pi_pat_no=@PtRecNo and pi_pat_sufx=@PtRecSuffx";
-            var cmd = new SqlCommand(query, Db.Connection);
+            var cmd = new SqlCommand(query, _db.Connection);
             cmd.Parameters.AddWithValue("@AppRecType", type);
             cmd.Parameters.AddWithValue("@PtRecNo", no);
             cmd.Parameters.AddWithValue("@PtRecSuffx", suffix);
-            var table = Db.GetDataTableResults(cmd);
+            var table = _db.GetDataTableResults(cmd);
             return ConvertTableToArray(table, "TRAWebServer.DataClasses.Insurance");
         }
 
@@ -133,8 +135,8 @@ namespace TRAWebServer
         private static Array GetBooks()
         {
             const string query = @"SELECT * FROM Book_Table WHERE Book_Code != '0'";
-            var cmd = new SqlCommand(query, Db.Connection);
-            var table = Db.GetDataTableResults(cmd);
+            var cmd = new SqlCommand(query, _db.Connection);
+            var table = _db.GetDataTableResults(cmd);
             return ConvertTableToArray(table, "TRAWebServer.DataClasses.Books");
         }
 
@@ -145,8 +147,8 @@ namespace TRAWebServer
         private static Array GetInsuranceComboData()
         {
             const string query = @"SELECT INS_CODE, INS_NAME FROM DAT3000";
-            var cmd = new SqlCommand(query, Db.Connection);
-            var table = Db.GetDataTableResults(cmd);
+            var cmd = new SqlCommand(query, _db.Connection);
+            var table = _db.GetDataTableResults(cmd);
             return ConvertTableToArray(table, "TRAWebServer.DataClasses.InsuranceCombo");
         }
 
@@ -157,8 +159,8 @@ namespace TRAWebServer
         private static Array GetFacultyComboData()
         {
             const string query = @"SELECT fac_code, fac_last_name + ', ' + fac_first_name + ' ' + fac_init_name AS fac_fullname FROM DAT9397F";
-            var cmd = new SqlCommand(query, Db.Connection);
-            var table = Db.GetDataTableResults(cmd);
+            var cmd = new SqlCommand(query, _db.Connection);
+            var table = _db.GetDataTableResults(cmd);
             return ConvertTableToArray(table, "TRAWebServer.DataClasses.FacultyCombo");
         }
 

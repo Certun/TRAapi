@@ -33,7 +33,7 @@ namespace TRAWebServer
             secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
             traDirectory.Text = ConfigurationManager.AppSettings["traDirectory"];
 
-            var db = new DbManager("Data Source=desktop-pc\\SQLDATABASE; Initial Catalog=TraData; Trusted_Connection=True");
+            var db = new DbManager(Server.DataConnString);
             const string query = @"SELECT * FROM scan_groups";
             var cmd = new SqlCommand(query, db.Connection);
             var categories = db.GetDataTableResults(cmd);
