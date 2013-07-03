@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Windows.Forms;
 using System.Configuration;
 
@@ -27,11 +28,12 @@ namespace TRAWebServer
         }
         private void Form2_Load(object sender, EventArgs e)
         {
-            host.Text = ConfigurationManager.AppSettings["host"];
-            serverIp.Text = ConfigurationManager.AppSettings["serverIp"];
-            serverPort.Text = ConfigurationManager.AppSettings["serverPort"];
-            secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
-            traDirectory.Text = ConfigurationManager.AppSettings["traDirectory"];
+            host.Text = Server.Host;
+            serverIp.Text = Server.ServerIp;
+            serverPort.Text = Server.ServerPort.ToString(CultureInfo.InvariantCulture);
+            secretKey.Text = Server.SecretKey;
+            docServer.Text = Server.DocServer;
+            docDirectory.Text = Server.DocDirectory;
 
             var db = new DbManager(Server.DataConnString);
             const string query = @"SELECT * FROM scan_groups";
@@ -41,9 +43,10 @@ namespace TRAWebServer
             patientImgCategory.DataSource = new DataView(categories);
             insuranceImgCategory.DataSource = new DataView(categories);
             documentsCategory.DataSource = new DataView(categories);
-            patientImgCategory.Text = ConfigurationManager.AppSettings["patientImgCategory"];
-            insuranceImgCategory.Text = ConfigurationManager.AppSettings["insuranceImgCategory"];
-            documentsCategory.Text = ConfigurationManager.AppSettings["documentsCategory"];
+
+            patientImgCategory.SelectedValue = Server.PatientImgCategory;
+            insuranceImgCategory.SelectedValue = Server.InsuranceImgCategory;
+            documentsCategory.SelectedValue = Server.DocumentsCategory;
 
 
         }
@@ -79,10 +82,11 @@ namespace TRAWebServer
             serverIp.Text = ConfigurationManager.AppSettings["serverIp"];
             serverPort.Text = ConfigurationManager.AppSettings["serverPort"];
             secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
-            traDirectory.Text = ConfigurationManager.AppSettings["traDirectory"];
-            patientImgCategory.Text = ConfigurationManager.AppSettings["patientImgCategory"];
-            insuranceImgCategory.Text = ConfigurationManager.AppSettings["insuranceImgCategory"];
-            documentsCategory.Text = ConfigurationManager.AppSettings["documentsCategory"];
+            docDirectory.Text = ConfigurationManager.AppSettings["docDirectory"];
+            docServer.Text = ConfigurationManager.AppSettings["docServer"];
+            patientImgCategory.SelectedValue = ConfigurationManager.AppSettings["patientImgCategory"];
+            insuranceImgCategory.SelectedValue = ConfigurationManager.AppSettings["insuranceImgCategory"];
+            documentsCategory.SelectedValue = ConfigurationManager.AppSettings["documentsCategory"];
         }
 
         private void serverIp_TextChanged(object sender, EventArgs e)

@@ -20,7 +20,8 @@ namespace TRAWebServer
         public static string ServerIp;
         public static int ServerPort;
         public static string SecretKey;
-        public static string TraDirectory;
+        public static string DocServer;
+        public static string DocDirectory;
 
         public static string DataConnString;
 
@@ -65,7 +66,8 @@ namespace TRAWebServer
             ServerIp     = config.AppSettings.Settings["serverIp"].Value;
             ServerPort   = Convert.ToInt32(config.AppSettings.Settings["serverPort"].Value);
             SecretKey    = config.AppSettings.Settings["secretKey"].Value;
-            TraDirectory = config.AppSettings.Settings["traDirectory"].Value;
+            DocServer    = config.AppSettings.Settings["docServer"].Value;
+            DocDirectory = config.AppSettings.Settings["docDirectory"].Value;
             PatientImgCategory      = config.AppSettings.Settings["patientImgCategory"].Value;
             InsuranceImgCategory    = config.AppSettings.Settings["insuranceImgCategory"].Value;
             DocumentsCategory       = config.AppSettings.Settings["documentsCategory"].Value;
@@ -169,7 +171,8 @@ namespace TRAWebServer
             config.AppSettings.Settings["serverIp"].Value       = MainForm.serverIp.Text.Trim();
             config.AppSettings.Settings["serverPort"].Value     = MainForm.serverPort.Text.Trim();
             config.AppSettings.Settings["secretKey"].Value      = MainForm.secretKey.Text.Trim();
-            config.AppSettings.Settings["traDirectory"].Value   = MainForm.traDirectory.Text.Trim();
+            config.AppSettings.Settings["docDirectory"].Value   = MainForm.docDirectory.Text.Trim();
+            config.AppSettings.Settings["docServer"].Value      = MainForm.docServer.Text.Trim();
             config.AppSettings.Settings["patientImgCategory"].Value     = MainForm.patientImgCategory.Text.Trim();
             config.AppSettings.Settings["insuranceImgCategory"].Value   = MainForm.insuranceImgCategory.Text.Trim();
             config.AppSettings.Settings["documentsCategory"].Value      = MainForm.documentsCategory.Text.Trim();

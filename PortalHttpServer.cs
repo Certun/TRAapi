@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Globalization;
+﻿using System.Globalization;
 using Newtonsoft.Json;
 using System;
 using System.Data;
@@ -15,6 +14,7 @@ namespace TRAWebServer
     public class PortalHttpServer : HttpServer
     {
         private readonly DbManager _db;
+
         public PortalHttpServer(int port)
             : base(port)
         {
@@ -250,10 +250,6 @@ namespace TRAWebServer
                                 if (isGood.GetType() == typeof (DataTable))
                                 {
                                     ins[i]["pi_orden"] = isGood.Rows[0]["pi_orden"].ToString();
-
-//                                    var returnData = (DataRow) isGood.Rows[0];
-//                                    var insurance = new Insurance();
-//                                    ConvertDataRowtoObject(returnData, insurance);
                                     response.results.insurance.successes.Add(ins[i]);
                                 }
                                 else if(isGood)
@@ -309,7 +305,6 @@ namespace TRAWebServer
             }
             #endregion
 
-
             // JOSN convert
             var jresponse = JsonConvert.SerializeObject(response);
             // Send back response
@@ -346,32 +341,32 @@ namespace TRAWebServer
             try
             {
                 const string query = @"UPDATE DAT2000
-                                     SET pt_last_name      = @pt_last_name,
-                                         pt_first_name     = @pt_first_name,
-                                         pt_init_name      = @pt_init_name,
-                                         pt_sex            = @pt_sex,
-                                         pt_civil_status   = @pt_civil_status,
-                                         pt_birth_date     = @pt_birth_date,
-                                         pt_p_address_1    = @pt_p_address_1,
-                                         pt_p_address_2    = @pt_p_address_2,
-                                         pt_p_city         = @pt_p_city,
-                                         pt_p_state        = @pt_p_state,
-                                         pt_p_zip          = @pt_p_zip,
-                                         pt_r_address_1    = @pt_r_address_1,
-                                         pt_r_address_2    = @pt_r_address_2,
-                                         pt_r_city         = @pt_r_city,
-                                         pt_r_state        = @pt_r_state,
-                                         pt_r_zip          = @pt_r_zip,
-                                         pt_home_phone     = @pt_home_phone,
-                                         pt_work_phone     = @pt_work_phone,
-                                         pt_religion       = @pt_religion,
-                                         pt_email          = @pt_email,
-                                         pt_cel_phone      = @pt_cel_phone,
-                                         pt_language       = @pt_language,
-                                         pt_race           = @pt_race
-                                   WHERE pt_rec_type       = @pt_rec_type
-                                     AND pt_rec_no         = @pt_rec_no
-                                     AND pt_rec_suffx      = @pt_rec_suffx";
+                                          SET pt_last_name      = @pt_last_name,
+                                              pt_first_name     = @pt_first_name,
+                                              pt_init_name      = @pt_init_name,
+                                              pt_sex            = @pt_sex,
+                                              pt_civil_status   = @pt_civil_status,
+                                              pt_birth_date     = @pt_birth_date,
+                                              pt_p_address_1    = @pt_p_address_1,
+                                              pt_p_address_2    = @pt_p_address_2,
+                                              pt_p_city         = @pt_p_city,
+                                              pt_p_state        = @pt_p_state,
+                                              pt_p_zip          = @pt_p_zip,
+                                              pt_r_address_1    = @pt_r_address_1,
+                                              pt_r_address_2    = @pt_r_address_2,
+                                              pt_r_city         = @pt_r_city,
+                                              pt_r_state        = @pt_r_state,
+                                              pt_r_zip          = @pt_r_zip,
+                                              pt_home_phone     = @pt_home_phone,
+                                              pt_work_phone     = @pt_work_phone,
+                                              pt_religion       = @pt_religion,
+                                              pt_email          = @pt_email,
+                                              pt_cel_phone      = @pt_cel_phone,
+                                              pt_language       = @pt_language,
+                                              pt_race           = @pt_race
+                                        WHERE pt_rec_type       = @pt_rec_type
+                                          AND pt_rec_no         = @pt_rec_no
+                                          AND pt_rec_suffx      = @pt_rec_suffx";
                 var cmd = new SqlCommand(query, _db.Connection);
                 cmd.Parameters.AddWithValue("@pt_last_name", data["pt_last_name"].ToString());
                 cmd.Parameters.AddWithValue("@pt_first_name", data["pt_first_name"].ToString());
@@ -402,14 +397,13 @@ namespace TRAWebServer
                 _db.ExecuteNonQuery(cmd);
 
                 // photo handler
-
-
-                ImageBase64ToImageDirectoryByRecTypeRecNoRecSuffixAndCategory(
+                SaveDocument(
                     data["pt_photo_id"].ToString(),
+                    "pateint-photo",
+                    Server.PatientImgCategory,
                     data["pt_rec_type"].ToString(),
                     data["pt_rec_no"].ToString(),
-                    data["pt_rec_suffx"].ToString(),
-                    "pateint-id"
+                    data["pi_pat_sufx"].ToString()
                     );
                 return true;
             }
@@ -424,11 +418,11 @@ namespace TRAWebServer
         private dynamic GetInsuranceByRecTypeMumberSuffixAndOrden(string type, string no, string suffix, string orden)
         {
             const string query = @"SELECT * 
-                                         FROM DAT8000 
-                                        WHERE pi_pat_type = @pi_pat_type
-                                          AND pi_pat_no   = @pi_pat_no
-                                          AND pi_pat_sufx = @pi_pat_sufx
-                                          AND pi_orden    = @pi_orden";
+                                     FROM DAT8000 
+                                    WHERE pi_pat_type = @pi_pat_type
+                                      AND pi_pat_no   = @pi_pat_no
+                                      AND pi_pat_sufx = @pi_pat_sufx
+                                      AND pi_orden    = @pi_orden";
             var cmd = new SqlCommand(query, _db.Connection);
             cmd.Parameters.AddWithValue("@pi_pat_type", type);
             cmd.Parameters.AddWithValue("@pi_pat_no", no);
@@ -572,13 +566,15 @@ namespace TRAWebServer
                     cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
                     _db.GetDataTableResults(cmd);
 
-                    ImageBase64ToImageDirectoryByRecTypeRecNoRecSuffixAndCategory(
+                    SaveDocument(
                         ins["pi_image"].ToString(),
+                        "insurance-" + nextOrden.ToString(CultureInfo.InvariantCulture),
+                        Server.InsuranceImgCategory,
                         ins["pi_pat_type"].ToString(),
                         ins["pi_pat_no"].ToString(),
-                        ins["pi_pat_sufx"].ToString(),
-                        "insurance-" + nextOrden.ToString(CultureInfo.InvariantCulture)
+                        ins["pi_pat_sufx"].ToString()
                         );
+
 
                     return GetInsuranceByRecTypeMumberSuffixAndOrden(
                         (string) ins["pi_pat_type"],
@@ -589,19 +585,19 @@ namespace TRAWebServer
                 }
 
                 query = @"UPDATE DAT8000
-                                     SET pi_exp_date                = @pi_exp_date,
-                                         pi_work_place              = @pi_work_place,
-                                         pi_address_1               = @pi_address_1,
-                                         pi_address_2               = @pi_address_2,
-                                         pi_city                    = @pi_city,
-                                         pi_state                   = @pi_state,
-                                         pi_zip                     = @pi_zip,
-                                         pi_relation                = @pi_relation
+                             SET pi_exp_date                = @pi_exp_date,
+                                 pi_work_place              = @pi_work_place,
+                                 pi_address_1               = @pi_address_1,
+                                 pi_address_2               = @pi_address_2,
+                                 pi_city                    = @pi_city,
+                                 pi_state                   = @pi_state,
+                                 pi_zip                     = @pi_zip,
+                                 pi_relation                = @pi_relation
 
-                                   WHERE pi_pat_type                = @pi_pat_type
-                                     AND pi_pat_no                  = @pi_pat_no
-                                     AND pi_pat_sufx                = @pi_pat_sufx
-                                     AND pi_orden                   = @pi_orden";
+                           WHERE pi_pat_type                = @pi_pat_type
+                             AND pi_pat_no                  = @pi_pat_no
+                             AND pi_pat_sufx                = @pi_pat_sufx
+                             AND pi_orden                   = @pi_orden";
                 cmd = new SqlCommand(query, _db.Connection);
                 cmd.Parameters.AddWithValue("@pi_exp_date", ins["pi_exp_date"].ToString());
                 cmd.Parameters.AddWithValue("@pi_work_place", ins["pi_work_place"].ToString());
@@ -618,13 +614,15 @@ namespace TRAWebServer
                 cmd.Parameters.AddWithValue("@pi_orden", ins["pi_orden"].ToString());
                 _db.ExecuteNonQuery(cmd);
 
-                ImageBase64ToImageDirectoryByRecTypeRecNoRecSuffixAndCategory(
-                    ins["pi_image"].ToString(),
-                    ins["pi_pat_type"].ToString(),
-                    ins["pi_pat_no"].ToString(),
-                    ins["pi_pat_sufx"].ToString(),
-                    "insurance-" + ins["pi_orden"]
-                    );
+                SaveDocument(
+                ins["pi_image"].ToString(),
+                "insurance-" + ins["pi_orden"],
+                Server.InsuranceImgCategory,
+                ins["pi_pat_type"].ToString(),
+                ins["pi_pat_no"].ToString(),
+                ins["pi_pat_sufx"].ToString()
+                );
+
 
                 return true;
             }
@@ -637,41 +635,92 @@ namespace TRAWebServer
 
         }
 
-        private static void ImageBase64ToImageDirectoryByRecTypeRecNoRecSuffixAndCategory(string base64Img, string type, string no, string sufix, string category)
+        private bool WorkDocuments(JToken data)
         {
-            if (base64Img == "") return;
-            try
-            {
-                var photo = Convert.FromBase64String(base64Img.Substring(base64Img.IndexOf(',') + 1));
-                var stream = new MemoryStream(photo, 0, photo.Length);
-                var img = Image.FromStream(stream);
-                img.Save(String.Format("{0}\\Patients\\{1}-{2}-{3}-{4}.png", Server.TraDirectory, category, type, no, sufix), img.RawFormat);
-                img.Dispose();
-            }
-            catch (Exception e)
-            {
-                Server.WriteDisplay(e);
-            }
+
+            return SaveDocument(
+                data["document"].ToString(),
+                data["documentName"].ToString(),
+                Server.DocumentsCategory,
+                data["scan_rec_type"].ToString(),
+                data["scan_rec_no"].ToString(),
+                data["scan_rec_sufix"].ToString()
+                );
         }
 
-        private static bool WorkDocuments(JToken data)
+        private bool SaveDocument(string document, string name, string cat, string type, string no, string suffix )
         {
-
             try
             {
-                var bytes = Convert.FromBase64String((string) data["document"]);
-                var stream = new FileStream(String.Format("{0}\\Patients\\{1}", Server.TraDirectory, data["documentName"]), FileMode.CreateNew);
+                if (document == "") return false;
+                var path = GetDocPathByCategory(cat);
+                var bytes = Convert.FromBase64String(document);
+                var newName = DateTime.Now.ToString("yyyyMMdd-HHmmss") + "-" + name;
+                var stream = new FileStream(String.Format("\\\\" + Server.DocServer + "\\{0}\\{1}", path, newName), FileMode.CreateNew);
                 var writer = new BinaryWriter(stream);
                 writer.Write(bytes, 0, bytes.Length);
                 writer.Close();
-                return true;
+                return InsertDocumentDataToSql(type, no, suffix, Server.DocumentsCategory, newName, path);
             }
             catch (Exception e)
             {
                 Server.WriteDisplay(e);
                 return false;
             }
+        }
 
+        private static string GetDocPathByCategory(string category)
+        {
+            var dt = DateTime.Now;
+            var year = dt.ToString("yyyy");
+            var month = dt.ToString("MM");
+            var path = String.Format("{0}\\000\\{1}\\{2}\\{3}\\", Server.DocDirectory, year, year + "-" + month, category);
+            Directory.CreateDirectory("\\\\" + Server.DocServer + "\\" + path);
+            return path;
+        }
+
+        private bool InsertDocumentDataToSql(string type, string no, string suffix, string category, string name, string path)
+        {
+            try
+            {
+                const string query = @"INSERT INTO scanned
+                                                 ( scan_rec_type,
+                                                   scan_rec_no,
+                                                   scan_rec_sufx,
+                                                   scan_group_code,
+                                                   scan_file_name,
+                                                   scan_path,
+                                                   scan_created_date,
+                                                   scan_updated_date,
+                                                   scan_user_id )
+                                           VALUES( @type,
+                                                   @no,
+                                                   @suffix,
+                                                   @category,
+                                                   @name,
+                                                   @path,
+                                                   @idate,
+                                                   @udate,
+                                                   @user)";
+                var cmd = new SqlCommand(query, _db.Connection);
+                cmd.Parameters.AddWithValue("@type", type);
+                cmd.Parameters.AddWithValue("@no", no);
+                cmd.Parameters.AddWithValue("@suffix", suffix);
+                cmd.Parameters.AddWithValue("@category", category);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@path", path);
+                cmd.Parameters.AddWithValue("@idate", DateTime.Now.ToString("s"));
+                cmd.Parameters.AddWithValue("@udate", DateTime.Now.ToString("s"));
+                cmd.Parameters.AddWithValue("@user", "web");
+                _db.ExecuteNonQuery(cmd);
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                Server.WriteDisplay(e);
+                return false;
+            }
         }
 
         #endregion
