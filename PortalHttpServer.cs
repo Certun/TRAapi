@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text;
 using Newtonsoft.Json;
 using System;
 using System.Data;
@@ -15,8 +16,7 @@ namespace TRAWebServer
     {
         private readonly DbManager _db;
 
-        public PortalHttpServer(int port)
-            : base(port)
+        public PortalHttpServer(int port) : base(port)
         {
             _db  = new DbManager(Server.DataConnString);
 
@@ -194,16 +194,17 @@ namespace TRAWebServer
                 switch (action)
                 {
                     case "setSync":
-
+                        /////////////////////////////////////////
+                        // Here is where the request is handle //
+                        /////////////////////////////////////////
                         response.results = new JObject();
-                        
+                        // appointments
                         var app = (JArray) data["appointments"];
                         if (app.Any())
                         {
                             response.results.appointments = new JObject();
                             response.results.appointments.successes = new JArray();
                             response.results.appointments.failures = new JArray();
-                            
                             for (var i = 0; i < app.Count(); i++)
                             {
                                 if (WorkAppointment(app[i]))
@@ -216,7 +217,7 @@ namespace TRAWebServer
                                 }
                             }
                         }
-
+                        // patients demographics
                         var pat = (JArray)data["patients"];
                         if (pat.Any())
                         {
@@ -236,7 +237,7 @@ namespace TRAWebServer
                                 }
                             }
                         }
-
+                        // insurance
                         var ins = (JArray) data["insurance"];
                         if (ins.Any())
                         {
@@ -262,7 +263,7 @@ namespace TRAWebServer
                                 }
                             }
                         }
-
+                        // documents
                         var doc = (JArray)data["documents"];
                         if (doc.Any())
                         {
@@ -274,13 +275,35 @@ namespace TRAWebServer
                             {
                                 if (WorkDocuments(doc[i]))
                                 {
-                                    doc[i]["document"] = null;
+                                    doc[i]["document"] = null; // do not return the document back
                                     response.results.documents.successes.Add(doc[i]);
                                 }
                                 else
                                 {
-                                    doc[i]["document"] = null;
+                                    doc[i]["document"] = null; // do not return the document back
                                     response.results.documents.failures.Add(doc[i]);
+                                }
+                            }
+                        }
+                        // signatures are handle very similar to documents
+                        var sig = (JArray)data["signatures"];
+                        if (sig.Any())
+                        {
+                            response.results.signatures = new JObject();
+                            response.results.signatures.successes = new JArray();
+                            response.results.signatures.failures = new JArray();
+
+                            for (var i = 0; i < sig.Count(); i++)
+                            {
+                                if (WorkSignatures(sig[i]))
+                                {
+                                    sig[i]["pdf"] = null; // do not return the pdf back
+                                    response.results.signatures.successes.Add(sig[i]);
+                                }
+                                else
+                                {
+                                    sig[i]["pdf"] = null; // do not return the pdf back
+                                    response.results.signatures.failures.Add(sig[i]);
                                 }
                             }
                         }
@@ -648,14 +671,28 @@ namespace TRAWebServer
                 );
         }
 
+        private bool WorkSignatures(JToken data)
+        {
+
+            return SaveDocument(
+                data["pdf"].ToString(),
+                data["title"].ToString(),
+                Server.DocumentsCategory,
+                data["recNum_type"].ToString(),
+                data["recNum_no"].ToString(),
+                data["recNum_suffx"].ToString()
+                );
+        }
+
         private bool SaveDocument(string document, string name, string cat, string type, string no, string suffix )
         {
             try
             {
                 if (document == "") return false;
+                var parsename = new StringBuilder(name);
                 var path = GetDocPathByCategory(cat);
                 var bytes = Convert.FromBase64String(document);
-                var newName = DateTime.Now.ToString("yyyyMMdd-HHmmss") + "-" + name;
+                var newName = DateTime.Now.ToString("yyyyMMdd-HHmmss") + "-" + parsename.Replace(" ", "_");
                 var stream = new FileStream(String.Format("\\\\" + Server.DocServer + "\\{0}\\{1}", path, newName), FileMode.CreateNew);
                 var writer = new BinaryWriter(stream);
                 writer.Write(bytes, 0, bytes.Length);
