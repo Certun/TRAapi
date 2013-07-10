@@ -150,6 +150,12 @@ namespace TRAWebServer
         #endregion
 
         #region POST Request
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="inputData"></param>
         public override void HandlePostRequest(HttpProcessor p, StreamReader inputData)
         {
             var rawData = inputData.ReadToEnd();
@@ -337,6 +343,11 @@ namespace TRAWebServer
 
         #region  Workers
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         private bool WorkAppointment(JToken data)
         {
             try
@@ -359,6 +370,11 @@ namespace TRAWebServer
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         private bool WorkPaitnet(JToken data)
         {
             try
@@ -438,6 +454,14 @@ namespace TRAWebServer
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="no"></param>
+        /// <param name="suffix"></param>
+        /// <param name="orden"></param>
+        /// <returns></returns>
         private dynamic GetInsuranceByRecTypeMumberSuffixAndOrden(string type, string no, string suffix, string orden)
         {
             const string query = @"SELECT * 
@@ -454,6 +478,11 @@ namespace TRAWebServer
             return _db.GetDataTableResults(cmd);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ins"></param>
+        /// <returns></returns>
         private dynamic WorkInsurence(JToken ins)
         {
             try
@@ -658,6 +687,11 @@ namespace TRAWebServer
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         private bool WorkDocuments(JToken data)
         {
 
@@ -671,12 +705,17 @@ namespace TRAWebServer
                 );
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         private bool WorkSignatures(JToken data)
         {
 
             return SaveDocument(
                 data["pdf"].ToString(),
-                data["title"].ToString(),
+                data["title"] + ".pdf",  // ad .pdf to the letter litle
                 Server.DocumentsCategory,
                 data["recNum_type"].ToString(),
                 data["recNum_no"].ToString(),
@@ -684,6 +723,16 @@ namespace TRAWebServer
                 );
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="name"></param>
+        /// <param name="cat"></param>
+        /// <param name="type"></param>
+        /// <param name="no"></param>
+        /// <param name="suffix"></param>
+        /// <returns></returns>
         private bool SaveDocument(string document, string name, string cat, string type, string no, string suffix )
         {
             try
@@ -706,6 +755,11 @@ namespace TRAWebServer
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         private static string GetDocPathByCategory(string category)
         {
             var dt = DateTime.Now;
@@ -716,6 +770,16 @@ namespace TRAWebServer
             return path;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="no"></param>
+        /// <param name="suffix"></param>
+        /// <param name="category"></param>
+        /// <param name="name"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
         private bool InsertDocumentDataToSql(string type, string no, string suffix, string category, string name, string path)
         {
             try

@@ -173,9 +173,9 @@ namespace TRAWebServer
             config.AppSettings.Settings["secretKey"].Value      = MainForm.secretKey.Text.Trim();
             config.AppSettings.Settings["docDirectory"].Value   = MainForm.docDirectory.Text.Trim();
             config.AppSettings.Settings["docServer"].Value      = MainForm.docServer.Text.Trim();
-            config.AppSettings.Settings["patientImgCategory"].Value     = MainForm.patientImgCategory.Text.Trim();
-            config.AppSettings.Settings["insuranceImgCategory"].Value   = MainForm.insuranceImgCategory.Text.Trim();
-            config.AppSettings.Settings["documentsCategory"].Value      = MainForm.documentsCategory.Text.Trim();
+            config.AppSettings.Settings["patientImgCategory"].Value     = MainForm.patientImgCategory.SelectedValue.ToString();
+            config.AppSettings.Settings["insuranceImgCategory"].Value   = MainForm.insuranceImgCategory.SelectedValue.ToString();
+            config.AppSettings.Settings["documentsCategory"].Value      = MainForm.documentsCategory.SelectedValue.ToString();
 
             config.Save();
             ConfigurationManager.RefreshSection("appSettings");
