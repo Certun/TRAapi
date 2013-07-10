@@ -16,6 +16,7 @@ namespace TRAWebServer
     {
 
         private static DbManager _db;
+        private const string AppToSyncStatus = "0";
 
 
         public static void Run()
@@ -91,14 +92,14 @@ namespace TRAWebServer
 
         private static DataTable GetNewAppointments()
         {
-            const string query = @"SELECT * FROM Apoint WHERE web_portal_status = 0";
+            const string query = @"SELECT * FROM Apoint WHERE ap_status = '" + AppToSyncStatus + "'";
             var cmd = new SqlCommand(query, _db.Connection);
             return _db.GetDataTableResults(cmd);
         }
 
         public static void UpdateAppointmentByAppointmentNumber(string appNum, bool success)
         {
-            const string query = @"UPDATE Apoint SET web_portal_status = @Status WHERE Ap_num = @AppNum";
+            const string query = @"UPDATE Apoint SET ap_status = @Status WHERE Ap_num = @AppNum";
             var cmd = new SqlCommand(query, _db.Connection);
             var status = success ? "1" : "9";
             cmd.Parameters.AddWithValue("@Status", status);
@@ -232,7 +233,7 @@ namespace TRAWebServer
                 }
                 return tableArray;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                // Server.WriteDisplay(ex);
