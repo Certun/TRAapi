@@ -80,6 +80,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telerik.OpenAccess, Version=2013.2.611.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2013.2.611.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
     <Reference Include="Telerik.WinControls, Version=2013.2.612.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
     <Reference Include="Telerik.WinControls.RichTextBox, Version=2013.2.612.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
     <Reference Include="Telerik.WinControls.Themes.Aqua, Version=2013.2.612.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
@@ -94,12 +96,25 @@
     <Compile Include="DataClasses\Appointment.cs" />
     <Compile Include="DataClasses\FacultyCombo.cs" />
     <Compile Include="DataClasses\InsuranceCombo.cs" />
+    <Compile Include="DataModels\Apoint.generated.cs" />
+    <Compile Include="DataModels\BookTable.generated.cs" />
+    <Compile Include="DataModels\DAT2000.generated.cs" />
+    <Compile Include="DataModels\DAT3000.generated.cs" />
+    <Compile Include="DataModels\DAT8000.generated.cs" />
+    <Compile Include="DataModels\DAT9397F.generated.cs" />
+    <Compile Include="DataModels\ScanGroup.generated.cs" />
+    <Compile Include="DataModels\Scanned.generated.cs" />
+    <Compile Include="EntitiesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Scheduler.cs" />
+    <Compile Include="Syncer.cs" />
     <Compile Include="DataClasses\Books.cs" />
     <Compile Include="DataClasses\Referring.cs" />
     <Compile Include="DbManager.cs" />
@@ -137,6 +152,13 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <OpenAccessDeploy Include="EntitiesModel.rlinq">
+      <Generator>MetaModelCodeGenerator</Generator>
+      <LastGenOutput>EntitiesModel.cs</LastGenOutput>
+    </OpenAccessDeploy>
+    <None Include="EntitiesModel.rlinq.diagram">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -180,4 +202,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Condition="Exists('$(MSBuildExtensionsPath)\OpenAccess.targets')" Project="$(MSBuildExtensionsPath)\OpenAccess.targets" />
 </Project>

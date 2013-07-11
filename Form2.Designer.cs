@@ -35,10 +35,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabDisplay = new System.Windows.Forms.TabPage();
             this.StartStop = new System.Windows.Forms.Button();
-            this.requestTest = new System.Windows.Forms.Button();
+            this.forceSync = new System.Windows.Forms.Button();
             this.enableDebug = new System.Windows.Forms.CheckBox();
             this.tabSettings = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.docServer = new System.Windows.Forms.TextBox();
             this.documentsCategory = new System.Windows.Forms.ComboBox();
             this.insuranceImgCategory = new System.Windows.Forms.ComboBox();
             this.patientImgCategory = new System.Windows.Forms.ComboBox();
@@ -58,8 +60,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.secretKey = new System.Windows.Forms.TextBox();
             this.configSave = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.docServer = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabDisplay.SuspendLayout();
@@ -118,7 +118,7 @@
             // tabDisplay
             // 
             this.tabDisplay.Controls.Add(this.StartStop);
-            this.tabDisplay.Controls.Add(this.requestTest);
+            this.tabDisplay.Controls.Add(this.forceSync);
             this.tabDisplay.Controls.Add(this.enableDebug);
             this.tabDisplay.Controls.Add(this.display);
             this.tabDisplay.Controls.Add(this.resetBtn);
@@ -142,18 +142,18 @@
             this.StartStop.UseVisualStyleBackColor = true;
             this.StartStop.Click += new System.EventHandler(this.StartStop_Click);
             // 
-            // requestTest
+            // forceSync
             // 
-            this.requestTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.requestTest.AutoSize = true;
-            this.requestTest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.requestTest.Location = new System.Drawing.Point(261, 380);
-            this.requestTest.Name = "requestTest";
-            this.requestTest.Size = new System.Drawing.Size(75, 23);
-            this.requestTest.TabIndex = 7;
-            this.requestTest.Text = "Send Test";
-            this.requestTest.UseVisualStyleBackColor = true;
-            this.requestTest.Click += new System.EventHandler(this.requestTest_Click);
+            this.forceSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.forceSync.AutoSize = true;
+            this.forceSync.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.forceSync.Location = new System.Drawing.Point(261, 380);
+            this.forceSync.Name = "forceSync";
+            this.forceSync.Size = new System.Drawing.Size(75, 23);
+            this.forceSync.TabIndex = 7;
+            this.forceSync.Text = "Force Sync";
+            this.forceSync.UseVisualStyleBackColor = true;
+            this.forceSync.Click += new System.EventHandler(this.requestTest_Click);
             // 
             // enableDebug
             // 
@@ -208,6 +208,24 @@
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Document Categories";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label9.Location = new System.Drawing.Point(9, 112);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(90, 13);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Document Server";
+            // 
+            // docServer
+            // 
+            this.docServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.docServer.Location = new System.Drawing.Point(136, 109);
+            this.docServer.Name = "docServer";
+            this.docServer.Size = new System.Drawing.Size(293, 20);
+            this.docServer.TabIndex = 11;
             // 
             // documentsCategory
             // 
@@ -410,24 +428,6 @@
             this.configSave.UseVisualStyleBackColor = true;
             this.configSave.Click += new System.EventHandler(this.saveSettings_Click);
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label9.Location = new System.Drawing.Point(9, 112);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(90, 13);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "Document Server";
-            // 
-            // docServer
-            // 
-            this.docServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.docServer.Location = new System.Drawing.Point(136, 109);
-            this.docServer.Name = "docServer";
-            this.docServer.Size = new System.Drawing.Size(293, 20);
-            this.docServer.TabIndex = 11;
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -464,7 +464,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.Button requestTest;
+        public System.Windows.Forms.Button forceSync;
         public System.Windows.Forms.CheckBox enableDebug;
         public System.Windows.Forms.Button StartStop;
         public System.Windows.Forms.Button configSave;

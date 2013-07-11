@@ -14,17 +14,14 @@ namespace TRAWebServer
 
     public class PortalHttpServer : HttpServer
     {
-        private readonly DbManager _db;
+        private readonly EntitiesModel _conn;
 
         public PortalHttpServer(int port) : base(port)
         {
-            _db  = new DbManager(Server.DataConnString);
-
+            _conn = new EntitiesModel();
         }
-
         // allow get actions array
         private readonly string[] _getActions = new[] {"*"};
-
         // allow set action array
         private readonly string[] _setActions = new[] {
             "setPatientData",
@@ -196,7 +193,6 @@ namespace TRAWebServer
                     data = JArray.Parse(unscapedData);
                 }
 
-
                 switch (action)
                 {
                     case "setSync":
@@ -256,7 +252,7 @@ namespace TRAWebServer
                                 var isGood = WorkInsurence(ins[i]);
                                 if (isGood.GetType() == typeof (DataTable))
                                 {
-                                    ins[i]["pi_orden"] = isGood.Rows[0]["pi_orden"].ToString();
+                                    ins[i]["piorden"] = isGood.Rows[0]["piorden"].ToString();
                                     response.results.insurance.successes.Add(ins[i]);
                                 }
                                 else if(isGood)
@@ -352,13 +348,9 @@ namespace TRAWebServer
         {
             try
             {
-                const string query = @"UPDATE Apoint 
-                                          SET ap_status     = @ap_status
-                                        WHERE Ap_num   = @Ap_num";
-                var cmd = new SqlCommand(query, _db.Connection);
-                cmd.Parameters.AddWithValue("@ap_status", data["ap_status"].ToString());
-                cmd.Parameters.AddWithValue("@Ap_num", data["Ap_num"].ToString());
-                _db.ExecuteNonQuery(cmd);
+                var app = _conn.Apoints.Single(a => a.apnum == data["apnum"].ToString());
+                app.apstatus = data["apstatus"].ToString();
+                _conn.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -379,70 +371,44 @@ namespace TRAWebServer
         {
             try
             {
-                const string query = @"UPDATE DAT2000
-                                          SET pt_last_name      = @pt_last_name,
-                                              pt_first_name     = @pt_first_name,
-                                              pt_init_name      = @pt_init_name,
-                                              pt_sex            = @pt_sex,
-                                              pt_civil_status   = @pt_civil_status,
-                                              pt_birth_date     = @pt_birth_date,
-                                              pt_p_address_1    = @pt_p_address_1,
-                                              pt_p_address_2    = @pt_p_address_2,
-                                              pt_p_city         = @pt_p_city,
-                                              pt_p_state        = @pt_p_state,
-                                              pt_p_zip          = @pt_p_zip,
-                                              pt_r_address_1    = @pt_r_address_1,
-                                              pt_r_address_2    = @pt_r_address_2,
-                                              pt_r_city         = @pt_r_city,
-                                              pt_r_state        = @pt_r_state,
-                                              pt_r_zip          = @pt_r_zip,
-                                              pt_home_phone     = @pt_home_phone,
-                                              pt_work_phone     = @pt_work_phone,
-                                              pt_religion       = @pt_religion,
-                                              pt_email          = @pt_email,
-                                              pt_cel_phone      = @pt_cel_phone,
-                                              pt_language       = @pt_language,
-                                              pt_race           = @pt_race
-                                        WHERE pt_rec_type       = @pt_rec_type
-                                          AND pt_rec_no         = @pt_rec_no
-                                          AND pt_rec_suffx      = @pt_rec_suffx";
-                var cmd = new SqlCommand(query, _db.Connection);
-                cmd.Parameters.AddWithValue("@pt_last_name", data["pt_last_name"].ToString());
-                cmd.Parameters.AddWithValue("@pt_first_name", data["pt_first_name"].ToString());
-                cmd.Parameters.AddWithValue("@pt_init_name", data["pt_init_name"].ToString());
-                cmd.Parameters.AddWithValue("@pt_sex", data["pt_sex"].ToString());
-                cmd.Parameters.AddWithValue("@pt_civil_status", data["pt_civil_status"].ToString());
-                cmd.Parameters.AddWithValue("@pt_birth_date", data["pt_birth_date"].ToString());
-                cmd.Parameters.AddWithValue("@pt_p_address_1", data["pt_p_address_1"].ToString());
-                cmd.Parameters.AddWithValue("@pt_p_address_2", data["pt_p_address_2"].ToString());
-                cmd.Parameters.AddWithValue("@pt_p_city", data["pt_p_city"].ToString());
-                cmd.Parameters.AddWithValue("@pt_p_state", data["pt_p_state"].ToString());
-                cmd.Parameters.AddWithValue("@pt_p_zip", data["pt_p_zip"].ToString());
-                cmd.Parameters.AddWithValue("@pt_r_address_1", data["pt_r_address_1"].ToString());
-                cmd.Parameters.AddWithValue("@pt_r_address_2", data["pt_r_address_2"].ToString());
-                cmd.Parameters.AddWithValue("@pt_r_city", data["pt_r_city"].ToString());
-                cmd.Parameters.AddWithValue("@pt_r_state", data["pt_r_state"].ToString());
-                cmd.Parameters.AddWithValue("@pt_r_zip", data["pt_r_zip"].ToString());
-                cmd.Parameters.AddWithValue("@pt_home_phone", data["pt_home_phone"].ToString());
-                cmd.Parameters.AddWithValue("@pt_work_phone", data["pt_work_phone"].ToString());
-                cmd.Parameters.AddWithValue("@pt_religion", data["pt_religion"].ToString());
-                cmd.Parameters.AddWithValue("@pt_email", data["pt_email"].ToString());
-                cmd.Parameters.AddWithValue("@pt_cel_phone", data["pt_cel_phone"].ToString());
-                cmd.Parameters.AddWithValue("@pt_language", data["pt_language"].ToString());
-                cmd.Parameters.AddWithValue("@pt_race", data["pt_race"].ToString());
-                cmd.Parameters.AddWithValue("@pt_rec_type", data["pt_rec_type"].ToString());
-                cmd.Parameters.AddWithValue("@pt_rec_no", data["pt_rec_no"].ToString());
-                cmd.Parameters.AddWithValue("@pt_rec_suffx", data["pt_rec_suffx"].ToString());
-                _db.ExecuteNonQuery(cmd);
+                var dat2000 = _conn.DAT2000.Single(p =>
+                    p.ptrectype == ToChar(data["ptrectype"].ToString()) &&
+                    p.ptrecno == data["ptrecno"].ToString() &&
+                    p.ptrecsuffx == data["ptrecsuffx"].ToString()
+                    );
+
+                dat2000.ptlastname = data["ptlastname"].ToString();
+                dat2000.ptfirstname = data["ptfirstname"].ToString();
+                dat2000.ptinitname = data["ptinitname"].ToString();
+                dat2000.ptsex = ToChar(data["ptsex"].ToString());
+                dat2000.ptcivilstatus = ToChar(data["ptcivilstatus"].ToString());
+                dat2000.ptbirthdate = Convert.ToDateTime(data["ptbirthdate"].ToString());
+                dat2000.ptpaddress1 = data["ptp_address1"].ToString();
+                dat2000.ptpaddress2 = data["ptp_address2"].ToString();
+                dat2000.ptpcity = data["ptp_city"].ToString();
+                dat2000.ptpstate = data["ptp_state"].ToString();
+                dat2000.ptpzip = data["ptp_zip"].ToString();
+                dat2000.ptraddress1 = data["ptr_address1"].ToString();
+                dat2000.ptraddress2 = data["ptr_address2"].ToString();
+                dat2000.ptrcity = data["ptr_city"].ToString();
+                dat2000.ptrstate = data["ptr_state"].ToString();
+                dat2000.ptrzip = data["ptr_zip"].ToString();
+                dat2000.pthomephone = data["pthomephone"].ToString();
+                dat2000.ptworkphone = data["ptworkphone"].ToString();
+                dat2000.ptemail = data["ptemail"].ToString();
+                dat2000.ptcelphone = data["ptcelphone"].ToString();
+                dat2000.ptlanguage = ToChar(data["ptlanguage"].ToString());
+                dat2000.ptrace = ToChar(data["ptrace"].ToString());
+                _conn.SaveChanges();
 
                 // photo handler
                 SaveDocument(
-                    data["pt_photo_id"].ToString(),
+                    data["ptphotoid"].ToString(),
                     "pateint-photo",
                     Server.PatientImgCategory,
-                    data["pt_rec_type"].ToString(),
-                    data["pt_rec_no"].ToString(),
-                    data["pi_pat_sufx"].ToString()
+                    ToChar(data["ptrectype"].ToString()),
+                    data["ptrecno"].ToString(),
+                    data["pipatsufx"].ToString()
                     );
                 return true;
             }
@@ -457,225 +423,110 @@ namespace TRAWebServer
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="no"></param>
-        /// <param name="suffix"></param>
-        /// <param name="orden"></param>
-        /// <returns></returns>
-        private dynamic GetInsuranceByRecTypeMumberSuffixAndOrden(string type, string no, string suffix, string orden)
-        {
-            const string query = @"SELECT * 
-                                     FROM DAT8000 
-                                    WHERE pi_pat_type = @pi_pat_type
-                                      AND pi_pat_no   = @pi_pat_no
-                                      AND pi_pat_sufx = @pi_pat_sufx
-                                      AND pi_orden    = @pi_orden";
-            var cmd = new SqlCommand(query, _db.Connection);
-            cmd.Parameters.AddWithValue("@pi_pat_type", type);
-            cmd.Parameters.AddWithValue("@pi_pat_no", no);
-            cmd.Parameters.AddWithValue("@pi_pat_sufx", suffix);
-            cmd.Parameters.AddWithValue("@pi_orden", orden);
-            return _db.GetDataTableResults(cmd);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="ins"></param>
         /// <returns></returns>
         private dynamic WorkInsurence(JToken ins)
         {
             try
             {
-                // check is insurance exist
-                var table = GetInsuranceByRecTypeMumberSuffixAndOrden(
-                    (string) ins["pi_pat_type"],
-                    (string) ins["pi_pat_no"],
-                    (string) ins["pi_pat_sufx"],
-                    (string) ins["pi_orden"]
+                // try to fin the insurance
+                var d8000 = _conn.DAT8000.SingleOrDefault(d =>
+                    d.pipattype == ToChar(ins["pipattype"].ToString()) &&
+                    d.pipatno == ins["pipatno"].ToString() &&
+                    d.pipatsufx == ins["pipatsufx"].ToString() &&
+                    d.piorden == Convert.ToByte(ins["piorden"].ToString())
                     );
-
-                string query;
-                SqlCommand cmd;
-
-                // if a new insurance
-                if (table.Rows.Count == 0)
+                
+                // if not found
+                if (d8000 == null)
                 {
                     // get next orden number
-                    query = @"SELECT MAX(pi_orden)          AS next_orden, 
-                                     MAX(pi_display_order)  AS pi_display_order 
-                                FROM DAT8000 
-                               WHERE pi_pat_type    = @pi_pat_type 
-                                 AND pi_pat_no      = @pi_pat_no  
-                                 AND pi_pat_sufx    = @pi_pat_sufx";
-                    cmd = new SqlCommand(query, _db.Connection);
-                    cmd.Parameters.AddWithValue("@pi_pat_type", ins["pi_pat_type"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_pat_no", ins["pi_pat_no"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
-                    table = _db.GetDataTableResults(cmd);
-                    int nextOrden;
-                    int nextDisplay;
-                    if (table.Rows.Count == 0)
-                    {
-                        nextOrden = 1;
-                        nextDisplay = 1;
-                    }
-                    else
-                    {
-                        nextOrden = Convert.ToInt32(table.Rows[0]["next_orden"].ToString()) + 1;
-                        nextDisplay = Convert.ToInt32(table.Rows[0]["pi_display_order"].ToString()) + 1;
-                    }
-                    // build INSERT SQL
-                    query = @"INSERT INTO DAT8000
-                                      ( pi_pat_type,
-                                        pi_pat_no,
-                                        pi_pat_sufx,
-                                        pi_orden,
-                                        pi_display_order,
-                                        pi_last_name,
-                                        pi_first_name,
-                                        pi_init_name,
-                                        pi_type,
-                                        pi_ins_code,
-                                        pi_group,
-                                        pi_exp_date,
-                                        pi_subscriber_last_name,
-                                        pi_subscriber_first_name,
-                                        pi_subscriber_init,
-                                        pi_sex,
-                                        pi_work_place,
-                                        pi_birth_date,
-                                        pi_address_1,
-                                        pi_address_2,
-                                        pi_city,
-                                        pi_state,
-                                        pi_zip,
-                                        pi_relation,
-                                        pi_id_subscriber )
-                                VALUES( @pi_pat_type,
-                                        @pi_pat_no,
-                                        @pi_pat_sufx,
-                                        @pi_orden,
-                                        @pi_display_order,
-                                        @pi_last_name,
-                                        @pi_first_name,
-                                        @pi_init_name,
-                                        @pi_type,
-                                        @pi_ins_code,
-                                        @pi_group,
-                                        @pi_exp_date,
-                                        @pi_subscriber_last_name,
-                                        @pi_subscriber_first_name,
-                                        @pi_subscriber_init,
-                                        @pi_sex,
-                                        @pi_work_place,
-                                        @pi_birth_date,
-                                        @pi_address_1,
-                                        @pi_address_2,
-                                        @pi_city,
-                                        @pi_state,
-                                        @pi_zip,
-                                        @pi_relation,
-                                        @pi_id_subscriber );
-                                 SELECT SCOPE_IDENTITY();";
-                    cmd = new SqlCommand(query, _db.Connection);
-                    cmd.Parameters.AddWithValue("@pi_pat_type", ins["pi_pat_type"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_pat_no", ins["pi_pat_no"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_orden", nextOrden);
-                    cmd.Parameters.AddWithValue("@pi_display_order", nextDisplay);
-                    cmd.Parameters.AddWithValue("@pi_last_name", ins["pi_last_name"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_first_name", ins["pi_first_name"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_init_name", ins["pi_init_name"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_type", "T"); // defautlt "T" insert value
-                    cmd.Parameters.AddWithValue("@pi_ins_code", ins["pi_ins_code"].ToString());
-                        // defautlt "999" insert value
-                    cmd.Parameters.AddWithValue("@pi_group", ins["pi_group"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_exp_date", ins["pi_exp_date"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_subscriber_last_name", ins["pi_subscriber_last_name"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_subscriber_first_name", ins["pi_subscriber_first_name"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_subscriber_init", ins["pi_subscriber_init"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_sex", ins["pi_sex"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_work_place", ins["pi_work_place"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_birth_date", ins["pi_birth_date"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_address_1", ins["pi_address_1"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_address_2", ins["pi_address_2"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_city", ins["pi_city"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_state", ins["pi_state"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_zip", ins["pi_zip"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_relation", ins["pi_relation"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_id_subscriber", ins["pi_id_subscriber"].ToString());
-                    _db.ExecuteNonQuery(cmd);
+                    var maxO = (from d in _conn.DAT8000
+                                where d.pipattype == ToChar(ins["pipattype"].ToString()) &&
+                                     d.pipatno == ins["pipatno"].ToString() &&
+                                     d.pipatsufx == ins["pipatsufx"].ToString()
+                              select d.piorden).Max();
 
-                    query = @"SELECT * 
-                                FROM DAT8000 
-                               WHERE pi_pat_type    = @pi_pat_type 
-                                 AND pi_pat_no      = @pi_pat_no  
-                                 AND pi_pat_sufx    = @pi_pat_sufx";
-                    cmd = new SqlCommand(query, _db.Connection);
-                    cmd.Parameters.AddWithValue("@pi_pat_type", ins["pi_pat_type"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_pat_no", ins["pi_pat_no"].ToString());
-                    cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
-                    _db.GetDataTableResults(cmd);
+                    var maxD = (from d in _conn.DAT8000
+                                where d.pipattype == ToChar(ins["pipattype"].ToString()) &&
+                                     d.pipatno == ins["pipatno"].ToString() &&
+                                     d.pipatsufx == ins["pipatsufx"].ToString()
+                              select d.pidisplayorder).Max();
+
+                    var nextOrden = Convert.ToInt32(maxO + 1); // maxO is never Null
+                    var nextDisplay = maxD != null ? Convert.ToInt32(maxD + 1) : 1;
+
+                    // Insert new Insurance to the database
+                    d8000 = new DAT8000()
+                        {
+                            pipattype = ToChar(ins["pipattype"].ToString()),
+                            pipatno = ins["pipatno"].ToString(),
+                            pipatsufx = ins["pipatsufx"].ToString(),
+                            piorden = Convert.ToByte(nextOrden),
+                            pidisplayorder = Convert.ToByte(nextDisplay),
+                            pilastname = ins["pilastname"].ToString(),
+                            pifirstname = ins["pifirstname"].ToString(),
+                            piinitname = ins["piinitname"].ToString(),
+                            pitype = ToChar(ins["pitype"].ToString()),
+                            piinscode = ins["piinscode"].ToString(),
+                            pigroup = ins["pigroup"].ToString(),
+                            piexpdate = Convert.ToDateTime(ins["piexpdate"]),
+                            pisubscriberlastname = ins["pisubscriberlastname"].ToString(),
+                            pisubscriberfirstname = ins["pisubscriberfirstname"].ToString(),
+                            pisubscriberinit = ToChar(ins["pisubscriberinit"].ToString()),
+                            pisex = ToChar(ins["pisex"].ToString()),
+                            piworkplace = ins["piworkplace"].ToString(),
+                            pibirthdate = Convert.ToDateTime(ins["pibirthdate"].ToString()),
+                            piaddress1 = ins["piaddress1"].ToString(),
+                            piaddress2 = ins["piaddress2"].ToString(),
+                            picity = ins["picity"].ToString(),
+                            pistate = ins["pistate"].ToString(),
+                            pizip = ins["pizip"].ToString(),
+                            pirelation = ToChar(ins["pirelation"].ToString()),
+                            piidsubscriber = ins["piidsubscriber"].ToString(),
+                        };
+                    _conn.Add(d8000);
+                    _conn.SaveChanges();
+
 
                     SaveDocument(
-                        ins["pi_image"].ToString(),
+                        ins["piimage"].ToString(),
                         "insurance-" + nextOrden.ToString(CultureInfo.InvariantCulture),
                         Server.InsuranceImgCategory,
-                        ins["pi_pat_type"].ToString(),
-                        ins["pi_pat_no"].ToString(),
-                        ins["pi_pat_sufx"].ToString()
+                        ToChar(ins["pipattype"].ToString()),
+                        ins["pipatno"].ToString(),
+                        ins["pipatsufx"].ToString()
                         );
 
 
-                    return GetInsuranceByRecTypeMumberSuffixAndOrden(
-                        (string) ins["pi_pat_type"],
-                        (string) ins["pi_pat_no"],
-                        (string) ins["pi_pat_sufx"],
-                        nextOrden.ToString(CultureInfo.InvariantCulture)
-                        );
+                    return d8000;
                 }
 
-                query = @"UPDATE DAT8000
-                             SET pi_exp_date                = @pi_exp_date,
-                                 pi_work_place              = @pi_work_place,
-                                 pi_address_1               = @pi_address_1,
-                                 pi_address_2               = @pi_address_2,
-                                 pi_city                    = @pi_city,
-                                 pi_state                   = @pi_state,
-                                 pi_zip                     = @pi_zip,
-                                 pi_relation                = @pi_relation
+                // update insurance...
+                d8000 = _conn.DAT8000.Single(d=>
+                    d.pipattype == ToChar(ins["pipattype"].ToString()) &&
+                    d.pipatno == ins["pipattype"].ToString() &&
+                    d.pipatsufx == ins["pipattype"].ToString()
+                    );
 
-                           WHERE pi_pat_type                = @pi_pat_type
-                             AND pi_pat_no                  = @pi_pat_no
-                             AND pi_pat_sufx                = @pi_pat_sufx
-                             AND pi_orden                   = @pi_orden";
-                cmd = new SqlCommand(query, _db.Connection);
-                cmd.Parameters.AddWithValue("@pi_exp_date", ins["pi_exp_date"].ToString());
-                cmd.Parameters.AddWithValue("@pi_work_place", ins["pi_work_place"].ToString());
-                cmd.Parameters.AddWithValue("@pi_address_1", ins["pi_address_1"].ToString());
-                cmd.Parameters.AddWithValue("@pi_address_2", ins["pi_address_2"].ToString());
-                cmd.Parameters.AddWithValue("@pi_city", ins["pi_city"].ToString());
-                cmd.Parameters.AddWithValue("@pi_state", ins["pi_state"].ToString());
-                cmd.Parameters.AddWithValue("@pi_zip", ins["pi_zip"].ToString());
-                cmd.Parameters.AddWithValue("@pi_relation", ins["pi_relation"].ToString());
-
-                cmd.Parameters.AddWithValue("@pi_pat_type", ins["pi_pat_type"].ToString());
-                cmd.Parameters.AddWithValue("@pi_pat_no", ins["pi_pat_no"].ToString());
-                cmd.Parameters.AddWithValue("@pi_pat_sufx", ins["pi_pat_sufx"].ToString());
-                cmd.Parameters.AddWithValue("@pi_orden", ins["pi_orden"].ToString());
-                _db.ExecuteNonQuery(cmd);
+                d8000.piexpdate = Convert.ToDateTime(ins["piexpdate"].ToString());
+                d8000.piworkplace = ins["piworkplace"].ToString();
+                d8000.piaddress1 = ins["piaddress1"].ToString();
+                d8000.piaddress2 = ins["piaddress2"].ToString();
+                d8000.picity = ins["picity"].ToString();
+                d8000.pistate = ins["pistate"].ToString();
+                d8000.pizip = ins["pizip"].ToString();
+                d8000.pirelation = ToChar(ins["pirelation"].ToString());
+                _conn.SaveChanges();
 
                 SaveDocument(
-                ins["pi_image"].ToString(),
-                "insurance-" + ins["pi_orden"],
-                Server.InsuranceImgCategory,
-                ins["pi_pat_type"].ToString(),
-                ins["pi_pat_no"].ToString(),
-                ins["pi_pat_sufx"].ToString()
+                    ins["piimage"].ToString(),
+                    "insurance-" + ins["piorden"],
+                    Server.InsuranceImgCategory,
+                    ToChar(ins["pipattype"].ToString()),
+                    ins["pipatno"].ToString(),
+                    ins["pipatsufx"].ToString()
                 );
-
-
                 return true;
             }
             catch (Exception e)
@@ -694,14 +545,13 @@ namespace TRAWebServer
         /// <returns></returns>
         private bool WorkDocuments(JToken data)
         {
-
             return SaveDocument(
                 data["document"].ToString(),
                 data["documentName"].ToString(),
                 Server.DocumentsCategory,
-                data["scan_rec_type"].ToString(),
-                data["scan_rec_no"].ToString(),
-                data["scan_rec_sufix"].ToString()
+                ToChar(data["scanrectype"].ToString()),
+                data["scanrecno"].ToString(),
+                data["scanrecsufix"].ToString()
                 );
         }
 
@@ -712,14 +562,13 @@ namespace TRAWebServer
         /// <returns></returns>
         private bool WorkSignatures(JToken data)
         {
-
             return SaveDocument(
                 data["pdf"].ToString(),
                 data["title"] + ".pdf",  // ad .pdf to the letter litle
                 Server.DocumentsCategory,
-                data["recNum_type"].ToString(),
-                data["recNum_no"].ToString(),
-                data["recNum_suffx"].ToString()
+                ToChar(data["recnumtype"].ToString()),
+                data["recnumno"].ToString(),
+                data["recnumsuffx"].ToString()
                 );
         }
 
@@ -733,7 +582,7 @@ namespace TRAWebServer
         /// <param name="no"></param>
         /// <param name="suffix"></param>
         /// <returns></returns>
-        private bool SaveDocument(string document, string name, string cat, string type, string no, string suffix )
+        private bool SaveDocument(string document, string name, string cat, char type, string no, string suffix )
         {
             try
             {
@@ -780,47 +629,41 @@ namespace TRAWebServer
         /// <param name="name"></param>
         /// <param name="path"></param>
         /// <returns></returns>
-        private bool InsertDocumentDataToSql(string type, string no, string suffix, string category, string name, string path)
+        private bool InsertDocumentDataToSql(char type, string no, string suffix, string category, string name, string path)
         {
             try
             {
-                const string query = @"INSERT INTO scanned
-                                                 ( scan_rec_type,
-                                                   scan_rec_no,
-                                                   scan_rec_sufx,
-                                                   scan_group_code,
-                                                   scan_file_name,
-                                                   scan_path,
-                                                   scan_created_date,
-                                                   scan_updated_date,
-                                                   scan_user_id )
-                                           VALUES( @type,
-                                                   @no,
-                                                   @suffix,
-                                                   @category,
-                                                   @name,
-                                                   @path,
-                                                   @idate,
-                                                   @udate,
-                                                   @user)";
-                var cmd = new SqlCommand(query, _db.Connection);
-                cmd.Parameters.AddWithValue("@type", type);
-                cmd.Parameters.AddWithValue("@no", no);
-                cmd.Parameters.AddWithValue("@suffix", suffix);
-                cmd.Parameters.AddWithValue("@category", category);
-                cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@path", path);
-                cmd.Parameters.AddWithValue("@idate", DateTime.Now.ToString("s"));
-                cmd.Parameters.AddWithValue("@udate", DateTime.Now.ToString("s"));
-                cmd.Parameters.AddWithValue("@user", "web");
-                _db.ExecuteNonQuery(cmd);
+                _conn.Add(new Scanned
+                    {
+                        scanrectype = type,
+                        scanrecno = no,
+                        scanrecsufx = suffix,
+                        scangroupcode = category,
+                        scanfilename = name,
+                        scanpath = path,
+                        scancreateddate = DateTime.Now,
+                        scanupdateddate = DateTime.Now,
+                        scanuserid = "web"
+                    });
+                _conn.SaveChanges();
                 return true;
-
             }
             catch (Exception e)
             {
                 Server.WriteDisplay(e);
                 return false;
+            }
+        }
+
+        private static char ToChar(string str)
+        {
+            try
+            {
+                return Convert.ToChar(str);
+            }
+            catch (Exception)
+            {
+                return Convert.ToChar(" ");
             }
         }
 

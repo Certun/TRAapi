@@ -9,10 +9,13 @@ namespace TRAWebServer
         public static string SecretKey = string.Empty;
         public static string Host = string.Empty;
 
-
         readonly RestClient _client;
         RestRequest _request;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
         public HttpRest(string url)
         {
             // TODO: Complete member initialization
@@ -20,19 +23,27 @@ namespace TRAWebServer
             SetSecretKey();
         }
 
-        private void SetSecretKey()
+        /// <summary>
+        /// 
+        /// </summary>
+        private static void SetSecretKey()
         {
             //TODO get secretKey form App.config
-            SecretKey = "carli";
+            SecretKey = Server.SecretKey;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public string Send(string action, dynamic data)
         {
             // convert object or int to string (JSON)
             data = data.ToString();
 
-            if (!isJson(data))
+            if (!IsJson(data))
             {
                 // if data is not a json send a GET
                 if (Server.Debug)
@@ -65,7 +76,12 @@ namespace TRAWebServer
             return content;
         }
 
-        private bool isJson(string str)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        private static bool IsJson(string str)
         {
             str = str.Trim();
             return ((str.StartsWith("{") && str.EndsWith("}")) || (str.StartsWith("[") && str.EndsWith("]")));

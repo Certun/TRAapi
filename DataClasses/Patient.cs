@@ -70,6 +70,5 @@ namespace TRAWebServer.DataClasses
         public string pt_race { set; get; }
         public string pt_celsup { set; get; }
         public string pt_emr_mrn { set; get; }
-        public string pt_photo_id { set; get; }
     }
 }

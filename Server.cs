@@ -41,7 +41,7 @@ namespace TRAWebServer
 
             MainForm.FormClosing += mainForm_FormClosing;
             MainForm.resetBtn.Click += resetBtn_Click;
-            MainForm.requestTest.Click += requestTest_Click;
+            MainForm.forceSync.Click += forceSync_Click;
             MainForm.StartStop.Click +=StartStop_Click;
             MainForm.configSave.Click +=configSave_Click;
 
@@ -71,10 +71,10 @@ namespace TRAWebServer
             PatientImgCategory      = config.AppSettings.Settings["patientImgCategory"].Value;
             InsuranceImgCategory    = config.AppSettings.Settings["insuranceImgCategory"].Value;
             DocumentsCategory       = config.AppSettings.Settings["documentsCategory"].Value;
-            DataConnString = ConfigurationManager.ConnectionStrings["DataConnString"].ConnectionString;
+            DataConnString = ConfigurationManager.ConnectionStrings["TraDataConnection"].ConnectionString;
         }
 
-        static void requestTest_Click(object sender, EventArgs e)
+        static void forceSync_Click(object sender, EventArgs e)
         {
             var requestThread = new Thread(SendRequest);
             requestThread.Start();
@@ -82,35 +82,7 @@ namespace TRAWebServer
 
         public static void SendRequest()
         {
-
-            Scheduler.Run();
-
-//            mainForm.enableDebug.Checked = false;
-//            const string url = "http://certun.com/salus/dataProvider/Api.php";
-//            const url = "http://localhost/salus/app/dataProvider/Api.php";
-
-
-//            CsPortalWeb.ProcessNewAppointmentByApointmentNumber("A0000000000001150020130619051731910000");
-
-//            var rest = new HttpRest(url);
-//            // Test GET request
-//            if (debug) Server.WriteDisplay("************* Sending GET Request *************");
-//            string response = rest.Send("getPatientData", "16");
-//            if (debug)
-//            {
-//                WriteDisplay("URL: " + url);
-//                WriteDisplay("Response: " + response);
-//            }
-//
-//            // Test POST request
-//            if (debug) Server.WriteDisplay("************* Sending POST Request *************");
-//            response = rest.Send("setPatientData", "{\"id\":19,\"fname\":\"API TEst\"}");
-//            if (debug)
-//            {
-//                WriteDisplay("URL: " + url);
-//                WriteDisplay("Response: " + response);
-//            }
-            
+            Syncer.SyncApps();          
         }
 
         static void StartStop_Click(object sender, EventArgs e)
@@ -186,7 +158,7 @@ namespace TRAWebServer
 
         private static void Cron_OnCronTrigger(CronObject cronObject)
         {
-            Scheduler.Run();
+            Syncer.SyncApps();
           
         }
 

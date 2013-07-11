@@ -36,7 +36,5 @@
         public string pi_cover_desc { set; get; }
         public string pi_notes { set; get; }
         public string pi_display_order { set; get; }
-        public string pi_image { set; get; }
-
     }
 }

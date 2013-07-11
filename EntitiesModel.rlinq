@@ -1,0 +1,1645 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="EntitiesModel" namespace="TRAWebServer" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+  <orm:orm name="EntitiesModel" backend="mssql" xmlns:orm="http://tempuri.org/ORM">
+    <orm:namespace name="TRAWebServer" default="true">
+      <orm:class name="Scanned" uniqueId="863728cb-bc6a-4574-96de-b3f9eec450c8">
+        <orm:table name="scanned" />
+        <orm:identity>
+          <orm:multiple-field>
+            <orm:single-field field-name="_scanrectype" />
+            <orm:single-field field-name="_scanrecno" />
+            <orm:single-field field-name="_scanrecsufx" />
+            <orm:single-field field-name="_scangroupcode" />
+            <orm:single-field field-name="_scanfilename" />
+          </orm:multiple-field>
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_scanrectype" property="scanrectype" behavior="readwrite" uniqueId="8b424586-3ea4-4518-ba0b-8046d82b6f56" type="System.Char">
+          <orm:column name="scan_rec_type" sql-type="char" nullable="false" length="1" scale="0" primary-key="true" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_scanrecno" property="scanrecno" behavior="readwrite" uniqueId="decea108-cb1d-4375-8e16-027c9f559322" type="System.String">
+          <orm:column name="scan_rec_no" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scanrecsufx" property="scanrecsufx" behavior="readwrite" uniqueId="219ea6c7-ae6d-498f-9230-75d2e739403a" type="System.String">
+          <orm:column name="scan_rec_sufx" sql-type="char" nullable="false" length="2" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_scangroupcode" property="scangroupcode" behavior="readwrite" uniqueId="a2355d4d-145a-480e-8be1-91a812836072" type="System.String">
+          <orm:column name="scan_group_code" sql-type="char" nullable="false" length="2" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_scanfilename" property="scanfilename" behavior="readwrite" uniqueId="92cebbf1-6af9-41ed-acb9-3be0b497b8fd" type="System.String">
+          <orm:column name="scan_file_name" sql-type="varchar" nullable="false" length="256" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scanpath" property="scanpath" behavior="readwrite" uniqueId="5fd55d80-4e3e-4c38-b91f-870afcbcff56" type="System.String">
+          <orm:column name="scan_path" sql-type="varchar" nullable="true" length="256" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scancreateddate" property="scancreateddate" behavior="readwrite" uniqueId="9e552336-fcd3-4a2c-a99b-9543a1230cd2" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="scan_created_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_scanupdateddate" property="scanupdateddate" behavior="readwrite" uniqueId="9eac4747-8e53-41dd-87b6-218be8efc171" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="scan_updated_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_scanuserid" property="scanuserid" behavior="readwrite" uniqueId="22d7a656-8b41-470c-843b-cb7a5c171fe7" type="System.String">
+          <orm:column name="scan_user_id" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scannotes" property="scannotes" behavior="readwrite" uniqueId="6c6a8e00-3055-4a56-b096-ad0c544173eb" type="System.String">
+          <orm:column name="scan_notes" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_scanorderid" property="scanorderid" behavior="readwrite" uniqueId="2abcb3c7-a7e0-482d-ad3c-0358a7fa50a0" type="System.String">
+          <orm:column name="scan_order_id" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scanstatus" property="scanstatus" behavior="readwrite" uniqueId="23ec11bc-6c30-4bb6-a6b7-d148cedd0dec" type="System.String">
+          <orm:column name="scan_status" sql-type="varchar" nullable="true" length="2" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scanmodality" property="scanmodality" behavior="readwrite" uniqueId="9b26fcce-266e-4ecb-9d9f-4a2e714bd334" type="System.String">
+          <orm:column name="scan_modality" sql-type="varchar" nullable="true" length="3" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scanloc" property="scanloc" behavior="readwrite" uniqueId="c83a02c1-3829-4854-ab90-20322d858b46" type="System.String">
+          <orm:column name="scan_loc" sql-type="varchar" nullable="true" length="3" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scanmoduserid" property="scanmoduserid" behavior="readwrite" uniqueId="675dd398-1362-4364-a59b-4b98eabd146a" type="System.String">
+          <orm:column name="scan_mod_user_id" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scansign" property="scansign" behavior="readwrite" uniqueId="0c6b1f7d-dc57-430c-8e99-8004297d2d6b" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="scan_sign" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_scansigndate" property="scansigndate" behavior="readwrite" uniqueId="27c8e4f9-7941-4a84-9275-735e78c0190f" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="scan_sign_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_scansignuser" property="scansignuser" behavior="readwrite" uniqueId="d6fff760-4760-42f8-9aa1-65352b458a20" type="System.String">
+          <orm:column name="scan_sign_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scandepts" property="scandepts" behavior="readwrite" uniqueId="eb408d30-286c-4edc-b4fd-ecc7d4caa37b" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="scan_depts" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_scanpacskey" property="scanpacskey" behavior="readwrite" uniqueId="cfc5740d-1724-48f6-b373-7dbe825ad982" type="System.String">
+          <orm:column name="scan_PacsKey" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scanstudyuid" property="scanstudyuid" behavior="readwrite" uniqueId="ce4a9ae1-637a-4995-85ee-d463fac5dc72" type="System.String">
+          <orm:column name="scan_Study_UID" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scantransuser" property="scantransuser" behavior="readwrite" uniqueId="15c3b4c1-d42e-4a9f-815e-8ed143c00ad7" type="System.String">
+          <orm:column name="scan_trans_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scantransdate" property="scantransdate" behavior="readwrite" uniqueId="5730a25c-1d5e-46a5-a518-11ea57be69fa" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="scan_trans_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_scanlock" property="scanlock" behavior="readwrite" uniqueId="0ddcfd6b-8bf6-4a48-9adf-a4a90cc59ff3" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="scan_lock" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scantransfile" property="scantransfile" behavior="readwrite" uniqueId="82560c56-7700-4777-bd01-db24c545d23b" type="System.String">
+          <orm:column name="scan_trans_file" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scantranspath" property="scantranspath" behavior="readwrite" uniqueId="247e1c84-ba34-4f51-928c-f104a07a2dbc" type="System.String">
+          <orm:column name="scan_trans_path" sql-type="varchar" nullable="true" length="256" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scandicom" property="scandicom" behavior="readwrite" uniqueId="c661603e-7cdd-4f4b-971a-928e096e99fe" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="scan_Dicom" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scandictateuser" property="scandictateuser" behavior="readwrite" uniqueId="603e63be-e64d-438d-9afd-487600512fe6" type="System.String">
+          <orm:column name="scan_dictate_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scandictatedate" property="scandictatedate" behavior="readwrite" uniqueId="5190e90f-239f-4638-88b8-a632704f85b3" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="scan_dictate_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_scanreport" property="scanreport" behavior="readwrite" uniqueId="56d8c5e4-9702-4f4c-856b-d90af0bb4c99" type="System.String">
+          <orm:column name="scan_report" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_scanreportaccno" property="scanreportaccno" behavior="readwrite" uniqueId="ba7d1503-3890-4c1f-b67f-c3fd5043e02a" type="System.String">
+          <orm:column name="scan_report_accno" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scanvar01" property="scanvar01" behavior="readwrite" uniqueId="7047b0c4-fcfe-4892-9c0b-0d5e4618d028" type="System.String">
+          <orm:column name="scan_var01" sql-type="varchar" nullable="true" length="5" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scanvar02" property="scanvar02" behavior="readwrite" uniqueId="e48a666e-3cdb-4679-9366-4f0b1b4f7f87" type="System.String">
+          <orm:column name="scan_var02" sql-type="varchar" nullable="true" length="5" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scangroup" property="scangroup" behavior="readwrite" uniqueId="72b7229b-2f28-45b1-a48e-f3777c78a965" type="TRAWebServer.ScanGroup">
+          <orm:reference uniqueId="13e14480-ff3a-420e-bcd6-30afd9b58b07">
+            <orm:sharedfield name="_scangroupcode" target-class="TRAWebServer.ScanGroup" target-field="_groupcode" />
+            <orm:constraint name="FK_scanned_scan_groups" destination-table="scan_groups" />
+          </orm:reference>
+        </orm:field>
+      </orm:class>
+      <orm:class name="ScanGroup" uniqueId="13328199-46d1-47f5-9444-065366e1d1c8">
+        <orm:table name="scan_groups" />
+        <orm:identity>
+          <orm:single-field field-name="_groupcode" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_groupcode" property="groupcode" behavior="readwrite" uniqueId="766f65cc-a529-47ef-afaf-a392c8249401" type="System.String">
+          <orm:column name="group_code" sql-type="char" nullable="false" length="2" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_groupdescription" property="groupdescription" behavior="readwrite" uniqueId="1e68e892-1bcf-4a07-8bec-2dc7730dcdbe" type="System.String">
+          <orm:column name="group_description" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_grouppath" property="grouppath" behavior="readwrite" uniqueId="1a144036-3375-499b-9acf-f01bd1581baa" type="System.String">
+          <orm:column name="group_path" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_groupsign" property="groupsign" behavior="readwrite" uniqueId="a2e2d62f-a0ce-436d-9b63-bd750c659888" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="group_sign" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_groupdocworklist" property="groupdocworklist" behavior="readwrite" uniqueId="d95cbde0-8439-4261-b18c-0dbb5b31d210" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="group_DocWorkList" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_scanneds" property="Scanneds" behavior="readwrite" uniqueId="cf60c40f-b3fa-4621-b8e9-bbcfe82d6886" type="TRAWebServer.Scanned">
+          <orm:collection element-class="TRAWebServer.Scanned" inverse-field="_scangroup" order-by="" uniqueId="13e14480-ff3a-420e-bcd6-30afd9b58b07" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="DAT9397F" uniqueId="aa9b6c9a-57d5-4d87-a765-29825b6887f6">
+        <orm:table name="DAT9397F" />
+        <orm:identity>
+          <orm:single-field field-name="_faccode" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_faccode" property="faccode" behavior="readwrite" uniqueId="1ef7ebea-c5f2-484d-a9f5-c337a0db283b" type="System.String">
+          <orm:column name="fac_code" sql-type="varchar" nullable="false" length="7" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_faclastname" property="faclastname" behavior="readwrite" uniqueId="4d765670-b06a-42c0-ad6c-c5d1b6cbe3c0" type="System.String">
+          <orm:column name="fac_last_name" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_facfirstname" property="facfirstname" behavior="readwrite" uniqueId="b95bd2d1-d223-480d-b4bc-77971548323f" type="System.String">
+          <orm:column name="fac_first_name" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_facinitname" property="facinitname" behavior="readwrite" uniqueId="3b8c1846-fc7d-466a-b0f0-092a91472704" type="System.String">
+          <orm:column name="fac_init_name" sql-type="varchar" nullable="true" length="25" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_facaddress01" property="facaddress01" behavior="readwrite" uniqueId="e61b11e2-784e-4b81-a490-bad30406c345" type="System.String">
+          <orm:column name="fac_address_01" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_facaddress02" property="facaddress02" behavior="readwrite" uniqueId="c1800b60-d361-47a1-9a4f-25fd63640c94" type="System.String">
+          <orm:column name="fac_address_02" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_faccity" property="faccity" behavior="readwrite" uniqueId="09cea13c-92c8-4fab-93b9-12c25bf4b2e2" type="System.String">
+          <orm:column name="fac_city" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_facstate" property="facstate" behavior="readwrite" uniqueId="e68276c9-1fe8-4dc7-866a-ed0b06b0dcd2" type="System.String">
+          <orm:column name="fac_state" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_faczipcode" property="faczipcode" behavior="readwrite" uniqueId="4a5a7d99-d920-487c-81b8-c65c7e37eabe" type="System.String">
+          <orm:column name="fac_zip_code" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_facsocsec" property="facsocsec" behavior="readwrite" uniqueId="25b74108-f18c-4a65-a2d9-c87c5c227207" type="System.String">
+          <orm:column name="fac_soc_sec" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_faclicno" property="faclicno" behavior="readwrite" uniqueId="afd7929c-9fa6-4898-8c26-3a21fe126c5c" type="System.String">
+          <orm:column name="fac_lic_no" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_facupin" property="facupin" behavior="readwrite" uniqueId="c30506d1-493a-42be-9b55-5d78c09a05c2" type="System.String">
+          <orm:column name="fac_upin" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_facacceptmc" property="facacceptmc" behavior="readwrite" uniqueId="10667a05-790a-4dd0-9bd5-ec068a264012" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="fac_accept_mc" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_facremarks" property="facremarks" behavior="readwrite" uniqueId="52665668-e17c-4d59-8a52-8af0440365a8" type="System.String">
+          <orm:column name="fac_remarks" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_facnationalid" property="facnationalid" behavior="readwrite" uniqueId="d4f1fa4a-f977-4f69-a39a-d7a03f4075c4" type="System.String">
+          <orm:column name="fac_national_id" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_facphone" property="facphone" behavior="readwrite" uniqueId="2dd2e59d-01cf-4c3e-ac97-9d7a7edbe5f1" type="System.String">
+          <orm:column name="fac_phone" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_factax" property="factax" behavior="readwrite" uniqueId="21a06ef8-01dc-468d-ae8e-661868b75881" type="System.String">
+          <orm:column name="fac_tax" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_facemail" property="facemail" behavior="readwrite" uniqueId="a01a71c4-8813-42bb-a41a-35d62fe753e5" type="System.String">
+          <orm:column name="fac_email" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_factel" property="factel" behavior="readwrite" uniqueId="5f3decd0-f237-4665-a8e0-ae861b29f701" type="System.String">
+          <orm:column name="fac_tel" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_faccel" property="faccel" behavior="readwrite" uniqueId="e4335293-b7c6-48a9-a3f7-38ecf788f948" type="System.String">
+          <orm:column name="fac_cel" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_facfax" property="facfax" behavior="readwrite" uniqueId="33213069-0f0e-47ae-8be1-f897b1a1cafa" type="System.String">
+          <orm:column name="fac_fax" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:index name="IX_DAT9397F">
+          <orm:columnMapping>
+            <orm:column name="fac_last_name" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT9397F_2">
+          <orm:columnMapping>
+            <orm:column name="fac_national_id" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="DAT8000" uniqueId="2ff7405c-f8e7-4f0d-b7b1-492be11972a1">
+        <orm:table name="DAT8000" />
+        <orm:identity>
+          <orm:multiple-field>
+            <orm:single-field field-name="_pipattype" />
+            <orm:single-field field-name="_pipatno" />
+            <orm:single-field field-name="_pipatsufx" />
+            <orm:single-field field-name="_piorden" />
+          </orm:multiple-field>
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_pipattype" property="pipattype" behavior="readwrite" uniqueId="44c6ece7-d4c3-4f44-9a0e-94a0ce49eba9" type="System.Char">
+          <orm:column name="pi_pat_type" sql-type="char" nullable="false" length="1" scale="0" primary-key="true" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_pipatno" property="pipatno" behavior="readwrite" uniqueId="a399f03c-60b9-4dc3-bf1f-c11108528082" type="System.String">
+          <orm:column name="pi_pat_no" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_pipatsufx" property="pipatsufx" behavior="readwrite" uniqueId="4fcc873e-672c-4a3b-9426-eb4b258ddba4" type="System.String">
+          <orm:column name="pi_pat_sufx" sql-type="char" nullable="false" length="2" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_piorden" property="piorden" behavior="readwrite" uniqueId="edb679dd-3f2e-492f-ba8f-2363cabe7d49" type="System.Byte">
+          <orm:column name="pi_orden" sql-type="tinyint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Byte" />
+        </orm:field>
+        <orm:field name="_pitype" property="pitype" behavior="readwrite" uniqueId="41282f6e-04bf-469a-ba1e-3a0c0df40927" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pi_type" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_piinscode" property="piinscode" behavior="readwrite" uniqueId="105e4054-89b2-49f0-8105-64d0bbb8149b" type="System.String">
+          <orm:column name="pi_ins_code" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_pilastname" property="pilastname" behavior="readwrite" uniqueId="36f7386e-d6ac-4d68-a285-3aa8d09c734f" type="System.String">
+          <orm:column name="pi_last_name" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_pifirstname" property="pifirstname" behavior="readwrite" uniqueId="fa28256e-7b0b-4ecb-966f-7bdde3b0c291" type="System.String">
+          <orm:column name="pi_first_name" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_piinitname" property="piinitname" behavior="readwrite" uniqueId="ecafd137-11ff-4280-a067-c495e4e63402" type="System.String">
+          <orm:column name="pi_init_name" sql-type="varchar" nullable="true" length="25" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_pisex" property="pisex" behavior="readwrite" uniqueId="e0228af8-2173-4338-aade-e0d71d5311d7" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pi_sex" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_pisocsec" property="pisocsec" behavior="readwrite" uniqueId="bc1f82b8-1fcb-4fe4-9342-f80114aeb8c6" type="System.String">
+          <orm:column name="pi_soc_sec" sql-type="varchar" nullable="true" length="9" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_pisocsecsufx" property="pisocsecsufx" behavior="readwrite" uniqueId="c066d002-d9e8-46c1-b225-a654c48aa577" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pi_soc_sec_sufx" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_piworkplace" property="piworkplace" behavior="readwrite" uniqueId="d54296e1-d395-4371-a771-67a51138aea4" type="System.String">
+          <orm:column name="pi_work_place" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_pibirthdate" property="pibirthdate" behavior="readwrite" uniqueId="eead8b28-e604-4fed-9ac5-58122085f299" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pi_birth_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_piaddress1" property="piaddress1" behavior="readwrite" uniqueId="9ef5a01a-052e-48f7-b0b0-d6b8e011b9ea" type="System.String">
+          <orm:column name="pi_address_1" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_piaddress2" property="piaddress2" behavior="readwrite" uniqueId="8267d1c5-2f20-464a-96b6-7c2ced9673ca" type="System.String">
+          <orm:column name="pi_address_2" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_picity" property="picity" behavior="readwrite" uniqueId="27677fb0-817c-4397-bcd8-b8ddbf28b864" type="System.String">
+          <orm:column name="pi_city" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_pistate" property="pistate" behavior="readwrite" uniqueId="cd26ff5e-7350-49f8-9907-81d93bbe8cf6" type="System.String">
+          <orm:column name="pi_state" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_pizip" property="pizip" behavior="readwrite" uniqueId="d37d58b7-bc5e-43f1-b4e7-1d7c8d015489" type="System.String">
+          <orm:column name="pi_zip" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_piidsubscriber" property="piidsubscriber" behavior="readwrite" uniqueId="f61528ca-dc67-47ce-b680-d330c835e84a" type="System.String">
+          <orm:column name="pi_id_subscriber" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_piidpatient" property="piidpatient" behavior="readwrite" uniqueId="201e5750-7162-43ca-a7e4-569f5ca42eb4" type="System.String">
+          <orm:column name="pi_id_patient" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_pigroup" property="pigroup" behavior="readwrite" uniqueId="40f96634-3da8-4645-bb69-f007f9db3443" type="System.String">
+          <orm:column name="pi_group" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_picover" property="picover" behavior="readwrite" uniqueId="a252f81f-b042-4fda-9d3c-93845ef12656" type="System.String">
+          <orm:column name="pi_cover" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_pirelation" property="pirelation" behavior="readwrite" uniqueId="d0c24e69-4ba8-4295-b1e7-5d256dc4497d" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pi_relation" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_piexpdate" property="piexpdate" behavior="readwrite" uniqueId="06ef58a0-4709-4691-9445-075b4ea24d77" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pi_exp_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_piaccdate" property="piaccdate" behavior="readwrite" uniqueId="caea0ca8-52b1-4194-8ac5-d984cf2ac3c3" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pi_acc_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_picondemp" property="picondemp" behavior="readwrite" uniqueId="ccba6080-e305-4cae-922a-30d8b8e4c5f7" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pi_cond_emp" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_picondacc" property="picondacc" behavior="readwrite" uniqueId="0c100e24-f9c4-4bba-96c2-ce199d9256be" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pi_cond_acc" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_pisubscriberlastname" property="pisubscriberlastname" behavior="readwrite" uniqueId="b2c3d2f6-02d9-4aa4-bc03-7362e50726a8" type="System.String">
+          <orm:column name="pi_subscriber_last_name" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_pisubscriberfirstname" property="pisubscriberfirstname" behavior="readwrite" uniqueId="03393e92-8087-43c4-9d10-0117d680853b" type="System.String">
+          <orm:column name="pi_subscriber_first_name" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_pisubscriberinit" property="pisubscriberinit" behavior="readwrite" uniqueId="135a179a-d387-4624-9ba4-815d1e894dee" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pi_subscriber_init" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_picoverdesc" property="picoverdesc" behavior="readwrite" uniqueId="db0fbeff-ebf1-4867-af99-8af9d70c08d1" type="System.String">
+          <orm:column name="pi_cover_desc" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_pinotes" property="pinotes" behavior="readwrite" uniqueId="2f3639c0-e090-4f85-8444-cc4a452af72d" type="System.String">
+          <orm:column name="pi_notes" sql-type="varchar" nullable="true" length="320" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_pidisplayorder" property="pidisplayorder" behavior="readwrite" uniqueId="9e6ae4e5-1080-4ae0-922b-3ee2f221d2e9" type="System.Nullable`1[[System.Byte, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pi_display_order" sql-type="tinyint" nullable="true" length="0" scale="0" ado-type="Byte" />
+        </orm:field>
+        <orm:field name="_dat2000" property="dat2000" behavior="readwrite" uniqueId="e3c86e39-87cd-4059-8f2b-d2ec48732f30" type="TRAWebServer.DAT2000">
+          <orm:reference uniqueId="b6554f75-b748-4093-8c69-53c20c2914fd">
+            <orm:sharedfield name="_pipattype" target-class="TRAWebServer.DAT2000" target-field="_ptrectype" />
+            <orm:sharedfield name="_pipatno" target-class="TRAWebServer.DAT2000" target-field="_ptrecno" />
+            <orm:sharedfield name="_pipatsufx" target-class="TRAWebServer.DAT2000" target-field="_ptrecsuffx" />
+            <orm:constraint name="FK_DAT8000_DAT2000" destination-table="DAT2000" />
+          </orm:reference>
+        </orm:field>
+        <orm:index name="IX_DAT8000">
+          <orm:columnMapping>
+            <orm:column name="pi_pat_type" sql-type="char" nullable="false" length="1" scale="0" primary-key="true" ado-type="Character" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT8000_1">
+          <orm:columnMapping>
+            <orm:column name="pi_last_name" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT8000_2">
+          <orm:columnMapping>
+            <orm:column name="pi_id_subscriber" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT8000_3">
+          <orm:columnMapping>
+            <orm:column name="pi_id_patient" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="DAT2000" uniqueId="95eb0172-f85b-4074-b1b7-30955c456868">
+        <orm:table name="DAT2000" />
+        <orm:identity>
+          <orm:multiple-field>
+            <orm:single-field field-name="_ptrectype" />
+            <orm:single-field field-name="_ptrecno" />
+            <orm:single-field field-name="_ptrecsuffx" />
+          </orm:multiple-field>
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_ptrectype" property="ptrectype" behavior="readwrite" uniqueId="ae570275-7073-45f0-8be4-456a14be5b87" type="System.Char">
+          <orm:column name="pt_rec_type" sql-type="char" nullable="false" length="1" scale="0" primary-key="true" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptrecno" property="ptrecno" behavior="readwrite" uniqueId="d48e275c-287e-48af-b6e5-c3101974eb94" type="System.String">
+          <orm:column name="pt_rec_no" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptrecsuffx" property="ptrecsuffx" behavior="readwrite" uniqueId="45f19ac7-86fe-4226-82f2-fe00cdfd6911" type="System.String">
+          <orm:column name="pt_rec_suffx" sql-type="char" nullable="false" length="2" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_ptlastname" property="ptlastname" behavior="readwrite" uniqueId="6baa8ed4-eeb0-47fd-9095-9b6a511cd5c9" type="System.String">
+          <orm:column name="pt_last_name" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptfirstname" property="ptfirstname" behavior="readwrite" uniqueId="782a37bf-8aa3-4072-9a8b-21aaab3e6206" type="System.String">
+          <orm:column name="pt_first_name" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptinitname" property="ptinitname" behavior="readwrite" uniqueId="f7fc2436-e06e-4b5e-96f5-b420830e8e39" type="System.String">
+          <orm:column name="pt_init_name" sql-type="varchar" nullable="true" length="25" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptsocsec" property="ptsocsec" behavior="readwrite" uniqueId="12824e18-0ad0-4085-865d-4ea2a8a92201" type="System.String">
+          <orm:column name="pt_soc_sec" sql-type="varchar" nullable="true" length="9" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptsocsecsufx" property="ptsocsecsufx" behavior="readwrite" uniqueId="54d8dc61-2ded-4b79-afb9-ece59214b72c" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_soc_sec_sufx" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptsex" property="ptsex" behavior="readwrite" uniqueId="1032e10a-6aa2-49cc-85ec-4738abe4955e" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_sex" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptcivilstatus" property="ptcivilstatus" behavior="readwrite" uniqueId="c8955cb8-d349-4218-87d6-1b358a4d3f0c" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_civil_status" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptspouselastname" property="ptspouselastname" behavior="readwrite" uniqueId="16c32e2a-ac32-4c79-9dc1-bd89b8950b45" type="System.String">
+          <orm:column name="pt_spouse_last_name" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptspousefirstname" property="ptspousefirstname" behavior="readwrite" uniqueId="3a3e2bbe-6c9a-4a84-9fc5-f3a8129c216f" type="System.String">
+          <orm:column name="pt_spouse_first_name" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptspouseinit" property="ptspouseinit" behavior="readwrite" uniqueId="9e5f56d0-d0a1-4b71-8d82-9edffcea4434" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_spouse_init" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptmotherlastname" property="ptmotherlastname" behavior="readwrite" uniqueId="b1ec68a7-987c-4c6d-ba02-f8d4ef34bb36" type="System.String">
+          <orm:column name="pt_mother_last_name" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptmotherfirstname" property="ptmotherfirstname" behavior="readwrite" uniqueId="ccff5c45-618f-4936-9acf-3d96c6f2dc0e" type="System.String">
+          <orm:column name="pt_mother_first_name" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptmotherinit" property="ptmotherinit" behavior="readwrite" uniqueId="2bf6c70d-4ab3-429e-85e2-8228addda156" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_mother_init" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptfatherlastname" property="ptfatherlastname" behavior="readwrite" uniqueId="3aefaced-9dd7-42d6-b554-982416ac8336" type="System.String">
+          <orm:column name="pt_father_last_name" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptfatherfirstname" property="ptfatherfirstname" behavior="readwrite" uniqueId="1f80fa8a-c2b6-4140-b156-eca4d998f68b" type="System.String">
+          <orm:column name="pt_father_first_name" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptfatherinit" property="ptfatherinit" behavior="readwrite" uniqueId="0d018a7e-67c9-4f4c-b5c3-83b985face6c" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_father_init" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptbirthdate" property="ptbirthdate" behavior="readwrite" uniqueId="c8a82451-eadd-48fd-8781-84e543e29843" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_birth_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_ptenterdate" property="ptenterdate" behavior="readwrite" uniqueId="54d28431-3f55-4536-8f57-2f5e6d3a997b" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_enter_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_ptbillingdate" property="ptbillingdate" behavior="readwrite" uniqueId="a887acf9-64a8-4fc6-be28-a5188d8d874d" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_billing_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_ptbillingstatus" property="ptbillingstatus" behavior="readwrite" uniqueId="48d7ba1c-be27-4e69-afc1-07b95409d961" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_billing_status" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptpaddress1" property="ptpaddress1" behavior="readwrite" uniqueId="e3c4d9f0-5c99-4b48-aedd-6b53116538d3" type="System.String">
+          <orm:column name="pt_p_address_1" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptpaddress2" property="ptpaddress2" behavior="readwrite" uniqueId="54414835-89e8-40cc-bf86-b14df1039145" type="System.String">
+          <orm:column name="pt_p_address_2" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptpcity" property="ptpcity" behavior="readwrite" uniqueId="22f41351-ef35-4c5e-bbb2-12372a62117f" type="System.String">
+          <orm:column name="pt_p_city" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptpstate" property="ptpstate" behavior="readwrite" uniqueId="b236ab0f-afe8-4751-9b72-e8e2d20769c0" type="System.String">
+          <orm:column name="pt_p_state" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_ptpzip" property="ptpzip" behavior="readwrite" uniqueId="85061596-3b72-4c28-a998-2d7cb5d7d57c" type="System.String">
+          <orm:column name="pt_p_zip" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptraddress1" property="ptraddress1" behavior="readwrite" uniqueId="f0072914-2c99-4ebc-af5b-c7ead3738a3e" type="System.String">
+          <orm:column name="pt_r_address_1" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptraddress2" property="ptraddress2" behavior="readwrite" uniqueId="d8dac631-67a0-43cb-bc0f-a1335c498e60" type="System.String">
+          <orm:column name="pt_r_address_2" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptrcity" property="ptrcity" behavior="readwrite" uniqueId="a505019f-7cdc-45e5-949a-32781c1ef483" type="System.String">
+          <orm:column name="pt_r_city" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptrstate" property="ptrstate" behavior="readwrite" uniqueId="0b46f5df-5c2e-4197-9574-51b942226cb3" type="System.String">
+          <orm:column name="pt_r_state" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_ptrzip" property="ptrzip" behavior="readwrite" uniqueId="1f981f3f-ab2b-4346-bad8-aa26a40e5a2d" type="System.String">
+          <orm:column name="pt_r_zip" sql-type="varchar" nullable="true" length="9" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_pthomephone" property="pthomephone" behavior="readwrite" uniqueId="aacc97d8-d095-4e34-85aa-64357e31699b" type="System.String">
+          <orm:column name="pt_home_phone" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptworkphone" property="ptworkphone" behavior="readwrite" uniqueId="490df708-4fb4-4238-b09f-34672ec3ad92" type="System.String">
+          <orm:column name="pt_work_phone" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptworkext" property="ptworkext" behavior="readwrite" uniqueId="3910fd7f-575e-4a1a-a726-78d1ccede26f" type="System.String">
+          <orm:column name="pt_work_ext" sql-type="varchar" nullable="true" length="5" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptrespphone" property="ptrespphone" behavior="readwrite" uniqueId="ccd86af7-1e07-4544-a834-acdb627fc57d" type="System.String">
+          <orm:column name="pt_resp_phone" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptworkplace" property="ptworkplace" behavior="readwrite" uniqueId="0b36f371-9abf-4712-80f5-2d5e8e9e20e0" type="System.String">
+          <orm:column name="pt_work_place" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptworktitle" property="ptworktitle" behavior="readwrite" uniqueId="7b51f8a9-839b-4526-bd0f-a4c2eb5ef361" type="System.String">
+          <orm:column name="pt_work_title" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptresplastname" property="ptresplastname" behavior="readwrite" uniqueId="365a220b-e40d-474e-b015-cd8c4fc1733b" type="System.String">
+          <orm:column name="pt_resp_last_name" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptrespfirstname" property="ptrespfirstname" behavior="readwrite" uniqueId="941c5cb2-5254-4729-bcf4-3d7331f757dc" type="System.String">
+          <orm:column name="pt_resp_first_name" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptrespinit" property="ptrespinit" behavior="readwrite" uniqueId="b36092ec-9969-45ff-b29a-907a656e79ff" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_resp_init" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptaccnttype" property="ptaccnttype" behavior="readwrite" uniqueId="e4c45661-c255-4d96-9ee5-b261b0acb9d3" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_accnt_type" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptaccntno" property="ptaccntno" behavior="readwrite" uniqueId="573318fa-6d6d-487a-ba82-d120355f46c0" type="System.String">
+          <orm:column name="pt_accnt_no" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptaccntsufx" property="ptaccntsufx" behavior="readwrite" uniqueId="df38b4f9-1213-40ce-b925-6755784f169d" type="System.String">
+          <orm:column name="pt_accnt_sufx" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_ptrefering" property="ptrefering" behavior="readwrite" uniqueId="4ccad714-9010-4bf1-ac98-3bd2c27aef4b" type="System.String">
+          <orm:column name="pt_refering" sql-type="varchar" nullable="true" length="7" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptaccntdoctor" property="ptaccntdoctor" behavior="readwrite" uniqueId="0e4d6b28-6d60-4f12-b2ec-c5cbf35e67c5" type="System.String">
+          <orm:column name="pt_accnt_doctor" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_ptreligion" property="ptreligion" behavior="readwrite" uniqueId="b09c2c27-8b25-4a05-9e70-41623dc38fac" type="System.String">
+          <orm:column name="pt_religion" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptbirthplace" property="ptbirthplace" behavior="readwrite" uniqueId="3c3646a0-6cad-48ed-bf94-c684da433e4c" type="System.String">
+          <orm:column name="pt_birth_place" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptresponsiblerelation" property="ptresponsiblerelation" behavior="readwrite" uniqueId="8bba79e1-e158-4aa7-a3a0-682a85d3a2dd" type="System.String">
+          <orm:column name="pt_responsible_relation" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptweight" property="ptweight" behavior="readwrite" uniqueId="d0b960b3-1655-49ae-bd6b-59ccde06d82a" type="System.Nullable`1[[System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_weight" sql-type="smallint" nullable="true" length="0" scale="0" ado-type="Int16" />
+        </orm:field>
+        <orm:field name="_ptautlast1" property="ptautlast1" behavior="readwrite" uniqueId="66d1bcfc-92d1-4cd6-96e6-f506f2c1c086" type="System.String">
+          <orm:column name="pt_aut_last_1" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptautfirst1" property="ptautfirst1" behavior="readwrite" uniqueId="9ba93cf0-018a-4adc-b45b-6fe3ebe4cd67" type="System.String">
+          <orm:column name="pt_aut_first_1" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptautinit1" property="ptautinit1" behavior="readwrite" uniqueId="051d2179-dbc5-4fe6-b472-0b0dd5ba600c" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_aut_init_1" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptautlast2" property="ptautlast2" behavior="readwrite" uniqueId="401d66a7-caac-44c5-b490-81bac3088f94" type="System.String">
+          <orm:column name="pt_aut_last_2" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptautfirst2" property="ptautfirst2" behavior="readwrite" uniqueId="5ee5b2eb-bebb-421a-8a76-6c993b2c7de4" type="System.String">
+          <orm:column name="pt_aut_first_2" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptautinit2" property="ptautinit2" behavior="readwrite" uniqueId="306d24a8-c83e-47a5-b357-94196ae2dc97" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_aut_init_2" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptemail" property="ptemail" behavior="readwrite" uniqueId="e79f5852-3078-449c-8566-1334ddce623a" type="System.String">
+          <orm:column name="pt_email" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptcelphone" property="ptcelphone" behavior="readwrite" uniqueId="1c30174f-9e92-47c3-953b-4476625d21fc" type="System.String">
+          <orm:column name="pt_cel_phone" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_ptautdocmsg" property="ptautdocmsg" behavior="readwrite" uniqueId="c9ece609-4679-4ef2-9d8b-5ce6da16ada4" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_aut_doc_msg" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptautpatmsg" property="ptautpatmsg" behavior="readwrite" uniqueId="9f0dbf93-6b64-4f2b-b63f-ac6a2ba7245e" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_aut_pat_msg" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_ptethnic" property="ptethnic" behavior="readwrite" uniqueId="50e89493-e4c3-471b-bb8a-8b29a10418d3" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_ethnic" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_ptlanguage" property="ptlanguage" behavior="readwrite" uniqueId="5f5e7024-df56-4484-a214-d1ad6dcdc88b" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_language" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_ptrace" property="ptrace" behavior="readwrite" uniqueId="849c7441-da06-4c7d-b5e0-7e41799217b8" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_race" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_ptcelsup" property="ptcelsup" behavior="readwrite" uniqueId="3cae59a5-5c52-45a7-b552-94d0b7214d57" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="pt_celsup" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_ptemrmrn" property="ptemrmrn" behavior="readwrite" uniqueId="cb789591-3524-48b8-bc94-2c233d46f14c" type="System.String">
+          <orm:column name="pt_emr_mrn" sql-type="varchar" nullable="true" length="25" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_dAT8000" property="DAT8000" behavior="readwrite" uniqueId="6888d163-5130-4cec-ae54-be38704f29ae" type="TRAWebServer.DAT8000">
+          <orm:collection element-class="TRAWebServer.DAT8000" inverse-field="_dat2000" order-by="" uniqueId="b6554f75-b748-4093-8c69-53c20c2914fd" />
+        </orm:field>
+        <orm:index name="IX_DAT2000">
+          <orm:columnMapping>
+            <orm:column name="pt_last_name" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT2000_1">
+          <orm:columnMapping>
+            <orm:column name="pt_soc_sec" sql-type="varchar" nullable="true" length="9" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT2000_FIRST">
+          <orm:columnMapping>
+            <orm:column name="pt_first_name" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="BookTable" uniqueId="d0be7f2a-7d45-487a-abbd-2d6cd7fa4fde">
+        <orm:table name="Book_Table" />
+        <orm:identity>
+          <orm:single-field field-name="_bookcode" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_bookcode" property="bookcode" behavior="readwrite" uniqueId="1a958355-6f95-4c39-8f94-f871dd070811" type="System.Int32">
+          <orm:column name="Book_Code" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_doccode" property="doccode" behavior="readwrite" uniqueId="c77e30fd-92d3-46d1-941d-d6428aaf571c" type="System.String">
+          <orm:column name="Doc_code" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_espcode" property="espcode" behavior="readwrite" uniqueId="3f0ce177-441f-4872-9cf5-7ee75414f366" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="Esp_code" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_loccode" property="loccode" behavior="readwrite" uniqueId="3990c866-68c7-4a2c-a43d-05999515457b" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="Loc_code" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_bookname" property="bookname" behavior="readwrite" uniqueId="1790de11-9806-4d79-97aa-a4fff939227c" type="System.String">
+          <orm:column name="Book_name" sql-type="nchar" nullable="true" length="20" scale="0" ado-type="UnicodeStringFixedLength" />
+        </orm:field>
+        <orm:field name="_docname" property="docname" behavior="readwrite" uniqueId="ec9955aa-761d-40e9-99cf-575a11f6bc8a" type="System.String">
+          <orm:column name="Doc_name" sql-type="nchar" nullable="true" length="20" scale="0" ado-type="UnicodeStringFixedLength" />
+        </orm:field>
+        <orm:field name="_espname" property="espname" behavior="readwrite" uniqueId="f12da101-f7f1-4e5b-ae27-7446261057da" type="System.String">
+          <orm:column name="Esp_name" sql-type="nchar" nullable="true" length="20" scale="0" ado-type="UnicodeStringFixedLength" />
+        </orm:field>
+        <orm:field name="_locname" property="locname" behavior="readwrite" uniqueId="ce57ff45-44e7-4e56-9e9a-bf3af4fa94e5" type="System.String">
+          <orm:column name="Loc_name" sql-type="nchar" nullable="true" length="20" scale="0" ado-type="UnicodeStringFixedLength" />
+        </orm:field>
+        <orm:field name="_inter" property="inter" behavior="readwrite" uniqueId="eab53ba7-e280-48fb-8099-a6a27823bdf4" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="Inter" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_bookstarttime" property="bookstarttime" behavior="readwrite" uniqueId="88ee20ad-dcc1-4560-8cde-696f2bb305e8" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="Book_StartTime" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_bookendtime" property="bookendtime" behavior="readwrite" uniqueId="6b8aefff-8f2d-4817-b9bf-78efafb8ae4e" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="Book_EndTime" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="Apoint" uniqueId="bfe5b8a8-aa48-42b1-8301-2ddcd433a91a">
+        <orm:table name="Apoint" />
+        <orm:identity>
+          <orm:multiple-field>
+            <orm:single-field field-name="_bookcode" />
+            <orm:single-field field-name="_entertime" />
+            <orm:single-field field-name="_apnum" />
+          </orm:multiple-field>
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_bookcode" property="bookcode" behavior="readwrite" uniqueId="ef86dcc7-4d7c-48bb-b5de-4b3059ef0b8f" type="System.Int32">
+          <orm:column name="book_code" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_entertime" property="entertime" behavior="readwrite" uniqueId="e781e91e-823b-45c0-a47e-e79cbba0a5fd" type="System.DateTime">
+          <orm:column name="Enter_time" sql-type="datetime" nullable="false" length="0" scale="0" primary-key="true" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_apnum" property="apnum" behavior="readwrite" uniqueId="4db5eaa5-7e94-4cfd-b22f-e64a5afe2b9a" type="System.String">
+          <orm:column name="Ap_num" sql-type="varchar" nullable="false" length="38" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apprectype" property="apprectype" behavior="readwrite" uniqueId="8cb15e08-c3f4-4fe1-9de7-1ec6fcbfe874" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="app_rec_type" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apprecno" property="apprecno" behavior="readwrite" uniqueId="e32a4c74-4fa2-4fe4-a161-15905caa21a3" type="System.String">
+          <orm:column name="app_rec_no" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apprecsuff" property="apprecsuff" behavior="readwrite" uniqueId="efd3bed8-74c3-4079-a267-2fb6119b17d7" type="System.String">
+          <orm:column name="app_rec_suff" sql-type="varchar" nullable="true" length="2" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apppatid" property="apppatid" behavior="readwrite" uniqueId="8623502d-04fd-450e-8d67-d43caaa6b243" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="app_pat_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_elapsedtime" property="elapsedtime" behavior="readwrite" uniqueId="66a0be98-e8bf-4fd8-9ea9-300d93c512ee" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="Elapsed_time" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_apstatus" property="apstatus" behavior="readwrite" uniqueId="9d90a771-898c-42ea-84a3-0592e9417ef7" type="System.String">
+          <orm:column name="ap_status" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apnotes" property="apnotes" behavior="readwrite" uniqueId="e67ef720-1eea-453f-9b8b-37657ef4afe8" type="System.String">
+          <orm:column name="ap_Notes" sql-type="nchar" nullable="true" length="500" scale="0" ado-type="UnicodeStringFixedLength" />
+        </orm:field>
+        <orm:field name="_espcode" property="espcode" behavior="readwrite" uniqueId="10f86590-780a-48ec-8da2-46877633c7ee" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="esp_code" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_proccode" property="proccode" behavior="readwrite" uniqueId="a8bf52e8-05fc-4d26-9694-926508424571" type="System.String">
+          <orm:column name="Proc_code" sql-type="varchar" nullable="true" length="10" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apins" property="apins" behavior="readwrite" uniqueId="77640dbc-4bc2-4f3a-9766-00c388d14af4" type="System.String">
+          <orm:column name="ap_ins" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_appack" property="appack" behavior="readwrite" uniqueId="f30fb44f-09a9-4ebb-9fa2-062b441c2c82" type="System.String">
+          <orm:column name="app_ack" sql-type="varchar" nullable="true" length="22" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apcreateuser" property="apcreateuser" behavior="readwrite" uniqueId="bb094ca9-2bd5-4012-8ec5-c09a38f2b330" type="System.String">
+          <orm:column name="ap_create_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apcreatedate" property="apcreatedate" behavior="readwrite" uniqueId="c084f2a7-4549-410d-993b-d95b03a636f6" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ap_create_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_apmoduser" property="apmoduser" behavior="readwrite" uniqueId="b2063ac9-d262-404b-950a-308820803c6b" type="System.String">
+          <orm:column name="ap_mod_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apmoddate" property="apmoddate" behavior="readwrite" uniqueId="291784c5-61b2-484d-9ebb-9d11d5628bb8" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ap_mod_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dat2000" property="DAT2000" behavior="readwrite" uniqueId="d88b8008-2de2-48b7-beac-7f0381ca7cbf" type="TRAWebServer.DAT2000">
+          <orm:reference uniqueId="74e392b0-0bbf-465b-b46b-7e69d6afd27e">
+            <orm:sharedfield name="_apprectype" target-class="TRAWebServer.DAT2000" target-field="_ptrectype" />
+            <orm:sharedfield name="_apprecno" target-class="TRAWebServer.DAT2000" target-field="_ptrecno" />
+            <orm:sharedfield name="_apprecsuff" target-class="TRAWebServer.DAT2000" target-field="_ptrecsuffx" />
+          </orm:reference>
+        </orm:field>
+        <orm:index name="IX_Apoint">
+          <orm:columnMapping>
+            <orm:column name="app_rec_type" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+          <orm:columnMapping>
+            <orm:column name="app_rec_no" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+          <orm:columnMapping>
+            <orm:column name="app_rec_suff" sql-type="varchar" nullable="true" length="2" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="DAT3000" uniqueId="3676a361-ed9f-4f19-8855-07a5466114a1">
+        <orm:table name="DAT3000" />
+        <orm:identity>
+          <orm:single-field field-name="_inscode" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_inscode" property="inscode" behavior="readwrite" uniqueId="c215749f-cdc1-4285-a165-bb3f45a21b5f" type="System.String">
+          <orm:column name="INS_CODE" sql-type="char" nullable="false" length="3" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_inssinonim" property="inssinonim" behavior="readwrite" uniqueId="58406052-1fb1-4181-ac6f-bff4c55cfff9" type="System.String">
+          <orm:column name="INS_SINONIM" sql-type="varchar" nullable="true" length="5" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insname" property="insname" behavior="readwrite" uniqueId="16e84537-e5d5-4944-87be-e564a158facc" type="System.String">
+          <orm:column name="INS_NAME" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insaddress1" property="insaddress1" behavior="readwrite" uniqueId="b934b1c0-faf3-4446-91ae-73e43c96a026" type="System.String">
+          <orm:column name="INS_ADDRESS1" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insaddress2" property="insaddress2" behavior="readwrite" uniqueId="03b10b78-0018-4a22-9ec8-52533c99f12f" type="System.String">
+          <orm:column name="INS_ADDRESS2" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_inscity" property="inscity" behavior="readwrite" uniqueId="8ddefa5a-a201-44d1-b1a3-15fc14440929" type="System.String">
+          <orm:column name="INS_CITY" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insstate" property="insstate" behavior="readwrite" uniqueId="afd2ca35-e5b0-4d40-a165-f10e699d713f" type="System.String">
+          <orm:column name="INS_STATE" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_inszipcode" property="inszipcode" behavior="readwrite" uniqueId="b6664cf5-1882-4cae-899a-c2384eb494e5" type="System.String">
+          <orm:column name="INS_ZIP_CODE" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insphone1" property="insphone1" behavior="readwrite" uniqueId="bbf47740-d247-4f3f-aae9-ab2c3ccaa109" type="System.String">
+          <orm:column name="INS_PHONE1" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insphone2" property="insphone2" behavior="readwrite" uniqueId="0afa434f-1dfb-4bbf-b48a-ec7866dfb4b9" type="System.String">
+          <orm:column name="INS_PHONE2" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_inscontact" property="inscontact" behavior="readwrite" uniqueId="71b09f86-bc1c-4cd7-9802-08d7c750465c" type="System.String">
+          <orm:column name="INS_CONTACT" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insbillingcycle" property="insbillingcycle" behavior="readwrite" uniqueId="d06c363f-4832-4c49-9a0b-bc445638ca49" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="INS_BILLING_CYCLE" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insprintfee" property="insprintfee" behavior="readwrite" uniqueId="4e658ff2-e7eb-476a-9c15-133a5bbce24f" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="INS_PRINT_FEE" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insconversion" property="insconversion" behavior="readwrite" uniqueId="eb4d08dc-1a32-4cc2-939a-f2481c07bb21" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="INS_CONVERSION" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insocna" property="insocna" behavior="readwrite" uniqueId="65c0d35e-e1d6-4bc5-b008-5de20ffe7cf3" type="System.String">
+          <orm:column name="INS_OCNA" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insremitance" property="insremitance" behavior="readwrite" uniqueId="cd4e97ca-232c-47cf-a0d8-97cd73e8c497" type="System.String">
+          <orm:column name="INS_REMITANCE" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_inspayerid" property="inspayerid" behavior="readwrite" uniqueId="3ca670e1-406e-4819-a539-caf97964dcc0" type="System.String">
+          <orm:column name="INS_PAYER_ID" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insessno" property="insessno" behavior="readwrite" uniqueId="127c9def-caac-4333-b873-967c6d8bf1e8" type="System.String">
+          <orm:column name="INS_ESS_NO" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_inssecondaryid" property="inssecondaryid" behavior="readwrite" uniqueId="615ef7a6-d9c0-4c73-9fcc-9b4adf7da0f7" type="System.String">
+          <orm:column name="INS_SECONDARY_ID" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insbillingunits" property="insbillingunits" behavior="readwrite" uniqueId="aa8ef923-c68d-4fd7-ab90-a8f26b9e2ac6" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ins_billing_units" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insrenderingrefqualifier" property="insrenderingrefqualifier" behavior="readwrite" uniqueId="3fc68ec0-296d-453d-a43c-d6b64135e9a1" type="System.String">
+          <orm:column name="ins_rendering_ref_qualifier" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_insreferingrefqualifier" property="insreferingrefqualifier" behavior="readwrite" uniqueId="3d15a2f4-4ecc-49ca-a416-0fde29c99d47" type="System.String">
+          <orm:column name="ins_refering_ref_qualifier" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_insbillingrefqualifier" property="insbillingrefqualifier" behavior="readwrite" uniqueId="ec735d4d-b200-440a-be79-11a19bd96bb2" type="System.String">
+          <orm:column name="ins_billing_ref_qualifier" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_inssecondarypayer" property="inssecondarypayer" behavior="readwrite" uniqueId="b3b319cc-861c-4293-b043-2a07ebaaec55" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ins_secondary_payer" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insreceivercode" property="insreceivercode" behavior="readwrite" uniqueId="add877a6-fd8d-4eb3-8a3b-7e5b811cbcaf" type="System.String">
+          <orm:column name="ins_receiver_code" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insinterchangereceiverid" property="insinterchangereceiverid" behavior="readwrite" uniqueId="4eeb5269-be0f-4fa5-a892-f36f5be80fa9" type="System.String">
+          <orm:column name="ins_interchange_receiver_id" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insinterchangeid" property="insinterchangeid" behavior="readwrite" uniqueId="52459a42-f957-49c0-bcb9-e948434f7277" type="System.String">
+          <orm:column name="ins_interchange_id" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_inssubmitterid" property="inssubmitterid" behavior="readwrite" uniqueId="78a99110-eec1-4895-a449-1ebef706d033" type="System.String">
+          <orm:column name="ins_submitter_id" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_inssubmittername" property="inssubmittername" behavior="readwrite" uniqueId="a14e3f2a-7aa0-489c-85e6-232b3ec55dbe" type="System.String">
+          <orm:column name="ins_submitter_name" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insmedicare" property="insmedicare" behavior="readwrite" uniqueId="29dc3499-05f3-4c65-9bed-ffdbd9259948" type="System.Nullable`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ins_medicare" sql-type="bit" nullable="true" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_inspath" property="inspath" behavior="readwrite" uniqueId="74f63af5-7ef1-46e8-b48c-a58a58daee4a" type="System.String">
+          <orm:column name="ins_path" sql-type="varchar" nullable="true" length="256" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_inshipaafileprefix" property="inshipaafileprefix" behavior="readwrite" uniqueId="3bbffd7a-9fc9-4646-9e29-f78dbe225e9a" type="System.String">
+          <orm:column name="ins_hipaafile_prefix" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_inshipaafilesuffix" property="inshipaafilesuffix" behavior="readwrite" uniqueId="c2d905ab-e480-49bd-aef4-589b1b3be3cb" type="System.String">
+          <orm:column name="ins_hipaafile_suffix" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_insprintid" property="insprintid" behavior="readwrite" uniqueId="471d0c30-0087-4dea-bddc-c80d2ce07c20" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ins_print_id" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insubfileprefix" property="insubfileprefix" behavior="readwrite" uniqueId="7adae45e-0740-4b81-beef-8199101452bb" type="System.String">
+          <orm:column name="ins_ubfile_prefix" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_insubfilesuffix" property="insubfilesuffix" behavior="readwrite" uniqueId="94cca57b-fa5c-455b-ab67-460e1cb6d2f3" type="System.String">
+          <orm:column name="ins_ubfile_suffix" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_insubpath" property="insubpath" behavior="readwrite" uniqueId="07a8d9ac-2f97-43cf-be84-ed8bbaf65f10" type="System.String">
+          <orm:column name="ins_ub_path" sql-type="varchar" nullable="true" length="256" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insubrenderingrefqualifier" property="insubrenderingrefqualifier" behavior="readwrite" uniqueId="32878a7b-dc7b-4b80-b0f7-4857807d484b" type="System.String">
+          <orm:column name="ins_ub_rendering_ref_qualifier" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_insubreferingrefqualifier" property="insubreferingrefqualifier" behavior="readwrite" uniqueId="aa759d5a-0d39-4222-9eb1-01de1afc0f77" type="System.String">
+          <orm:column name="ins_ub_refering_ref_qualifier" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_insubbillingrefqualifier" property="insubbillingrefqualifier" behavior="readwrite" uniqueId="72945258-5628-484d-b4e2-04d8637348f2" type="System.String">
+          <orm:column name="ins_ub_billing_ref_qualifier" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_insubsecondaryid" property="insubsecondaryid" behavior="readwrite" uniqueId="c8c33ead-c464-436a-858d-61e2b492b0c9" type="System.String">
+          <orm:column name="ins_ub_secondary_id" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insubreceivercode" property="insubreceivercode" behavior="readwrite" uniqueId="79c35a7d-3e86-43a5-8129-ad66331581a8" type="System.String">
+          <orm:column name="ins_ub_receiver_code" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insubinterchangereceiverid" property="insubinterchangereceiverid" behavior="readwrite" uniqueId="85b52eb1-9f4f-4768-89c0-3b60c4f62aaa" type="System.String">
+          <orm:column name="ins_ub_interchange_receiver_id" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insubinterchangeid" property="insubinterchangeid" behavior="readwrite" uniqueId="fb2084e3-8dc9-48a8-8dd8-00e635999fda" type="System.String">
+          <orm:column name="ins_ub_interchange_id" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_insubsubmitterid" property="insubsubmitterid" behavior="readwrite" uniqueId="9169cccd-291a-4773-bf04-e75463a0ed6c" type="System.String">
+          <orm:column name="ins_ub_submitter_id" sql-type="varchar" nullable="true" length="80" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insubsubmittername" property="insubsubmittername" behavior="readwrite" uniqueId="38728e05-dc3b-4105-95cb-dd2654794091" type="System.String">
+          <orm:column name="ins_ub_submitter_name" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insbillingaddress" property="insbillingaddress" behavior="readwrite" uniqueId="4ffbf25e-4378-42a6-85ac-f82bfccf1416" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ins_billing_address" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insinterchangeisa07id" property="insinterchangeisa07id" behavior="readwrite" uniqueId="1c3005db-140d-4d72-92f9-cb5b84aa27bc" type="System.String">
+          <orm:column name="ins_interchange_isa07_id" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        </orm:field>
+        <orm:field name="_insaskreferring" property="insaskreferring" behavior="readwrite" uniqueId="1610234d-0185-477a-a4c1-e0e814165903" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ins_ask_referring" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insprintreferring" property="insprintreferring" behavior="readwrite" uniqueId="c282f990-7470-4448-9cbe-35ba881bd33f" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ins_print_referring" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_inscompprintfee" property="inscompprintfee" behavior="readwrite" uniqueId="0e6079f7-af8f-4189-8feb-65ef3e901158" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ins_comp_print_fee" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_inspaypath" property="inspaypath" behavior="readwrite" uniqueId="066ba05b-0c0a-449b-9d98-4427c3fff885" type="System.String">
+          <orm:column name="ins_pay_path" sql-type="varchar" nullable="true" length="256" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insbillproviderno" property="insbillproviderno" behavior="readwrite" uniqueId="9a9ce0ed-c49b-491d-8b18-d7dbd30ec013" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ins_bill_provider_no" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insbillupin" property="insbillupin" behavior="readwrite" uniqueId="c897777a-09b6-4d46-9636-26b1b8df2860" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ins_bill_upin" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insdeductible" property="insdeductible" behavior="readwrite" uniqueId="e56af8f6-b546-4926-83bf-8e2800fe5582" type="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ins_deductible" sql-type="decimal" nullable="true" length="9" scale="2" ado-type="Decimal" />
+        </orm:field>
+        <orm:field name="_insaskprono" property="insaskprono" behavior="readwrite" uniqueId="8b8f0e38-2973-4b6e-9f86-ba848bf675c7" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ins_ask_pro_no" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_insprovesp" property="insprovesp" behavior="readwrite" uniqueId="fa45a958-1058-48e7-b8bf-1576cb33bfb1" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="INS_PROV_ESP" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insprovloc" property="insprovloc" behavior="readwrite" uniqueId="3d204f23-573d-4efa-bf4f-a8e2b2f1dc00" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="INS_PROV_LOC" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insprovdoc" property="insprovdoc" behavior="readwrite" uniqueId="f455794d-1915-4944-beea-b7ba2a7f9155" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="INS_PROV_DOC" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:field name="_insinovamed" property="insinovamed" behavior="readwrite" uniqueId="b430c3a4-3c79-4717-ac68-1cc6d9810da4" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="Ins_Inova_Med" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        </orm:field>
+        <orm:index name="IX_DAT3000_2">
+          <orm:columnMapping>
+            <orm:column name="INS_NAME" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT3000_1">
+          <orm:columnMapping>
+            <orm:column name="INS_SINONIM" sql-type="varchar" nullable="true" length="5" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+    </orm:namespace>
+    <orm:schema schema="">
+      <orm:table name="scanned">
+        <orm:column name="scan_rec_type" sql-type="char" nullable="false" length="1" scale="0" primary-key="true" ado-type="Character" />
+        <orm:column name="scan_rec_no" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="scan_rec_sufx" sql-type="char" nullable="false" length="2" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        <orm:column name="scan_group_code" sql-type="char" nullable="false" length="2" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        <orm:column name="scan_file_name" sql-type="varchar" nullable="false" length="256" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="scan_path" sql-type="varchar" nullable="true" length="256" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_created_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="scan_updated_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="scan_user_id" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_notes" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="scan_order_id" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_status" sql-type="varchar" nullable="true" length="2" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_modality" sql-type="varchar" nullable="true" length="3" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_loc" sql-type="varchar" nullable="true" length="3" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_mod_user_id" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_sign" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="scan_sign_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="scan_sign_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_depts" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="scan_PacsKey" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_Study_UID" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_trans_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_trans_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="scan_lock" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_trans_file" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_trans_path" sql-type="varchar" nullable="true" length="256" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_Dicom" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_dictate_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_dictate_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="scan_report" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="scan_report_accno" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_var01" sql-type="varchar" nullable="true" length="5" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="scan_var02" sql-type="varchar" nullable="true" length="5" scale="0" ado-type="StringVariableLength" />
+        <orm:constraint name="FK_scanned_scan_groups" destination-table="scan_groups">
+          <orm:column name="scan_group_code" sql-type="char" nullable="false" length="2" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="scan_groups">
+        <orm:column name="group_code" sql-type="char" nullable="false" length="2" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        <orm:column name="group_description" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="group_path" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="group_sign" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="group_DocWorkList" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
+      <orm:table name="DAT9397F">
+        <orm:column name="fac_code" sql-type="varchar" nullable="false" length="7" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="fac_last_name" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_first_name" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_init_name" sql-type="varchar" nullable="true" length="25" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_address_01" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_address_02" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_city" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_state" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="fac_zip_code" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_soc_sec" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_lic_no" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_upin" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_accept_mc" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="fac_remarks" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_national_id" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_phone" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_tax" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_email" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_tel" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_cel" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="fac_fax" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:index name="IX_DAT9397F">
+          <orm:columnMapping>
+            <orm:column name="fac_last_name" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT9397F_2">
+          <orm:columnMapping>
+            <orm:column name="fac_national_id" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:table>
+      <orm:table name="DAT8000">
+        <orm:column name="pi_pat_type" sql-type="char" nullable="false" length="1" scale="0" primary-key="true" ado-type="Character" />
+        <orm:column name="pi_pat_no" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="pi_pat_sufx" sql-type="char" nullable="false" length="2" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        <orm:column name="pi_orden" sql-type="tinyint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Byte" />
+        <orm:column name="pi_type" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pi_ins_code" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="pi_last_name" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_first_name" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_init_name" sql-type="varchar" nullable="true" length="25" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_sex" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pi_soc_sec" sql-type="varchar" nullable="true" length="9" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_soc_sec_sufx" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pi_work_place" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_birth_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="pi_address_1" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_address_2" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_city" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_state" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="pi_zip" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_id_subscriber" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_id_patient" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_group" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_cover" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="pi_relation" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pi_exp_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="pi_acc_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="pi_cond_emp" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pi_cond_acc" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pi_subscriber_last_name" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_subscriber_first_name" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_subscriber_init" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pi_cover_desc" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_notes" sql-type="varchar" nullable="true" length="320" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pi_display_order" sql-type="tinyint" nullable="true" length="0" scale="0" ado-type="Byte" />
+        <orm:index name="IX_DAT8000">
+          <orm:columnMapping>
+            <orm:column name="pi_pat_type" sql-type="char" nullable="false" length="1" scale="0" primary-key="true" ado-type="Character" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT8000_1">
+          <orm:columnMapping>
+            <orm:column name="pi_last_name" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT8000_2">
+          <orm:columnMapping>
+            <orm:column name="pi_id_subscriber" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT8000_3">
+          <orm:columnMapping>
+            <orm:column name="pi_id_patient" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="FK_DAT8000_DAT2000" destination-table="DAT2000">
+          <orm:column name="pi_pat_type" sql-type="char" nullable="false" length="1" scale="0" primary-key="true" ado-type="Character" />
+          <orm:column name="pi_pat_no" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
+          <orm:column name="pi_pat_sufx" sql-type="char" nullable="false" length="2" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="DAT2000">
+        <orm:column name="pt_rec_type" sql-type="char" nullable="false" length="1" scale="0" primary-key="true" ado-type="Character" />
+        <orm:column name="pt_rec_no" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="pt_rec_suffx" sql-type="char" nullable="false" length="2" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        <orm:column name="pt_last_name" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_first_name" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_init_name" sql-type="varchar" nullable="true" length="25" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_soc_sec" sql-type="varchar" nullable="true" length="9" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_soc_sec_sufx" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_sex" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_civil_status" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_spouse_last_name" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_spouse_first_name" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_spouse_init" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_mother_last_name" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_mother_first_name" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_mother_init" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_father_last_name" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_father_first_name" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_father_init" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_birth_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="pt_enter_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="pt_billing_date" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="pt_billing_status" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_p_address_1" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_p_address_2" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_p_city" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_p_state" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="pt_p_zip" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_r_address_1" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_r_address_2" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_r_city" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_r_state" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="pt_r_zip" sql-type="varchar" nullable="true" length="9" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_home_phone" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_work_phone" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_work_ext" sql-type="varchar" nullable="true" length="5" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_resp_phone" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_work_place" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_work_title" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_resp_last_name" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_resp_first_name" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_resp_init" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_accnt_type" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_accnt_no" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_accnt_sufx" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="pt_refering" sql-type="varchar" nullable="true" length="7" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_accnt_doctor" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="pt_religion" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_birth_place" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_responsible_relation" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_weight" sql-type="smallint" nullable="true" length="0" scale="0" ado-type="Int16" />
+        <orm:column name="pt_aut_last_1" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_aut_first_1" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_aut_init_1" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_aut_last_2" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_aut_first_2" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_aut_init_2" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_email" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_cel_phone" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="pt_aut_doc_msg" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_aut_pat_msg" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="pt_ethnic" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="pt_language" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="pt_race" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="pt_celsup" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="pt_emr_mrn" sql-type="varchar" nullable="true" length="25" scale="0" ado-type="StringVariableLength" />
+        <orm:index name="IX_DAT2000">
+          <orm:columnMapping>
+            <orm:column name="pt_last_name" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT2000_1">
+          <orm:columnMapping>
+            <orm:column name="pt_soc_sec" sql-type="varchar" nullable="true" length="9" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT2000_FIRST">
+          <orm:columnMapping>
+            <orm:column name="pt_first_name" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:table>
+      <orm:table name="Book_Table">
+        <orm:column name="Book_Code" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="Doc_code" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="Esp_code" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Loc_code" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Book_name" sql-type="nchar" nullable="true" length="20" scale="0" ado-type="UnicodeStringFixedLength" />
+        <orm:column name="Doc_name" sql-type="nchar" nullable="true" length="20" scale="0" ado-type="UnicodeStringFixedLength" />
+        <orm:column name="Esp_name" sql-type="nchar" nullable="true" length="20" scale="0" ado-type="UnicodeStringFixedLength" />
+        <orm:column name="Loc_name" sql-type="nchar" nullable="true" length="20" scale="0" ado-type="UnicodeStringFixedLength" />
+        <orm:column name="Inter" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Book_StartTime" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="Book_EndTime" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+      </orm:table>
+      <orm:table name="Apoint">
+        <orm:column name="book_code" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="Enter_time" sql-type="datetime" nullable="false" length="0" scale="0" primary-key="true" ado-type="DateTime" />
+        <orm:column name="Ap_num" sql-type="varchar" nullable="false" length="38" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="app_rec_type" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="app_rec_no" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="app_rec_suff" sql-type="varchar" nullable="true" length="2" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="app_pat_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Elapsed_time" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ap_status" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ap_Notes" sql-type="nchar" nullable="true" length="500" scale="0" ado-type="UnicodeStringFixedLength" />
+        <orm:column name="esp_code" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Proc_code" sql-type="varchar" nullable="true" length="10" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ap_ins" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="app_ack" sql-type="varchar" nullable="true" length="22" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ap_create_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ap_create_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ap_mod_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ap_mod_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:index name="IX_Apoint">
+          <orm:columnMapping>
+            <orm:column name="app_rec_type" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+          <orm:columnMapping>
+            <orm:column name="app_rec_no" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+          <orm:columnMapping>
+            <orm:column name="app_rec_suff" sql-type="varchar" nullable="true" length="2" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:table>
+      <orm:table name="DAT3000">
+        <orm:column name="INS_CODE" sql-type="char" nullable="false" length="3" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        <orm:column name="INS_SINONIM" sql-type="varchar" nullable="true" length="5" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_NAME" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_ADDRESS1" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_ADDRESS2" sql-type="varchar" nullable="true" length="55" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_CITY" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_STATE" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="INS_ZIP_CODE" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_PHONE1" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_PHONE2" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_CONTACT" sql-type="varchar" nullable="true" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_BILLING_CYCLE" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="INS_PRINT_FEE" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="INS_CONVERSION" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="INS_OCNA" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_REMITANCE" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_PAYER_ID" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_ESS_NO" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_SECONDARY_ID" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_billing_units" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="ins_rendering_ref_qualifier" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_refering_ref_qualifier" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_billing_ref_qualifier" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_secondary_payer" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="ins_receiver_code" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_interchange_receiver_id" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_interchange_id" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_submitter_id" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_submitter_name" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_medicare" sql-type="bit" nullable="true" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="ins_path" sql-type="varchar" nullable="true" length="256" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_hipaafile_prefix" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_hipaafile_suffix" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_print_id" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="ins_ubfile_prefix" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_ubfile_suffix" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_ub_path" sql-type="varchar" nullable="true" length="256" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_ub_rendering_ref_qualifier" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_ub_refering_ref_qualifier" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_ub_billing_ref_qualifier" sql-type="char" nullable="true" length="3" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_ub_secondary_id" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_ub_receiver_code" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_ub_interchange_receiver_id" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_ub_interchange_id" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_ub_submitter_id" sql-type="varchar" nullable="true" length="80" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_ub_submitter_name" sql-type="varchar" nullable="true" length="35" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_billing_address" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="ins_interchange_isa07_id" sql-type="char" nullable="true" length="2" scale="0" ado-type="StringFixedLength" />
+        <orm:column name="ins_ask_referring" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="ins_print_referring" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="ins_comp_print_fee" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="ins_pay_path" sql-type="varchar" nullable="true" length="256" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ins_bill_provider_no" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="ins_bill_upin" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="ins_deductible" sql-type="decimal" nullable="true" length="9" scale="2" ado-type="Decimal" />
+        <orm:column name="ins_ask_pro_no" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="INS_PROV_ESP" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="INS_PROV_LOC" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="INS_PROV_DOC" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="Ins_Inova_Med" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:index name="IX_DAT3000_2">
+          <orm:columnMapping>
+            <orm:column name="INS_NAME" sql-type="varchar" nullable="true" length="60" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_DAT3000_1">
+          <orm:columnMapping>
+            <orm:column name="INS_SINONIM" sql-type="varchar" nullable="true" length="5" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:table>
+    </orm:schema>
+    <orm:relational-naming-settings>
+      <orm:remove-camel-case>False</orm:remove-camel-case>
+      <orm:source-strategy>Property</orm:source-strategy>
+    </orm:relational-naming-settings>
+  </orm:orm>
+  <ModelSettings xmlns="">
+    <AppConfigConnectionPropertyName>TraDataConnection1</AppConfigConnectionPropertyName>
+    <AppConfigConnectionString>data source=DESKTOP-PC\SQL2012;initial catalog=TraData;persist security info=True;user id=sa;password=couz2431</AppConfigConnectionString>
+    <InitialCatalog>TraData</InitialCatalog>
+    <NamingSettings>
+      <ClassRules>
+        <CaseMode>PascalCase</CaseMode>
+        <PluralizationMode>Singularize</PluralizationMode>
+        <RemoveUnderscore>true</RemoveUnderscore>
+        <UnderscoreAsWordDelimiter>true</UnderscoreAsWordDelimiter>
+      </ClassRules>
+      <FieldRules>
+        <AddPrefix>_</AddPrefix>
+        <CaseMode>CamelCase</CaseMode>
+        <RemoveUnderscore>true</RemoveUnderscore>
+        <UnderscoreAsWordDelimiter>true</UnderscoreAsWordDelimiter>
+      </FieldRules>
+      <PropertyRules>
+        <CaseMode>Lower</CaseMode>
+        <RemoveUnderscore>true</RemoveUnderscore>
+        <UnderscoreAsWordDelimiter>true</UnderscoreAsWordDelimiter>
+      </PropertyRules>
+    </NamingSettings>
+    <CodeGenerationSettings>
+      <OutputProjectName>TRAWebServer</OutputProjectName>
+      <OutputProjectFolder>DataModels\</OutputProjectFolder>
+      <OutputPath>DataModels\</OutputPath>
+      <MappingDefinitionType>Xml</MappingDefinitionType>
+    </CodeGenerationSettings>
+    <SchemaUpdateSettings />
+    <BackendConfigurationSettings>
+      <BackendConfiguration>
+        <Backend>MsSql</Backend>
+        <ProviderName>System.Data.SqlClient</ProviderName>
+      </BackendConfiguration>
+    </BackendConfigurationSettings>
+  </ModelSettings>
+  <Types>
+    <DomainClass Id="863728cb-bc6a-4574-96de-b3f9eec450c8" name="Scanned" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="92cebbf1-6af9-41ed-acb9-3be0b497b8fd" name="scanfilename" label="scanfilename : String" kind="Persistent" identity="true" fieldName="_scanfilename" />
+      <Property Id="a2355d4d-145a-480e-8be1-91a812836072" name="scangroupcode" label="scangroupcode : String" kind="Persistent" identity="true" fieldName="_scangroupcode" />
+      <Property Id="decea108-cb1d-4375-8e16-027c9f559322" name="scanrecno" label="scanrecno : String" kind="Persistent" identity="true" fieldName="_scanrecno" />
+      <Property Id="219ea6c7-ae6d-498f-9230-75d2e739403a" name="scanrecsufx" label="scanrecsufx : String" kind="Persistent" identity="true" fieldName="_scanrecsufx" />
+      <Property Id="8b424586-3ea4-4518-ba0b-8046d82b6f56" name="scanrectype" type="Char" label="scanrectype : Char" kind="Persistent" identity="true" fieldName="_scanrectype" />
+      <Property Id="9e552336-fcd3-4a2c-a99b-9543a1230cd2" name="scancreateddate" type="DateTime" label="scancreateddate : DateTime" nullable="true" kind="Persistent" fieldName="_scancreateddate" />
+      <Property Id="eb408d30-286c-4edc-b4fd-ecc7d4caa37b" name="scandepts" type="Int32" label="scandepts : Int32" nullable="true" kind="Persistent" fieldName="_scandepts" />
+      <Property Id="c661603e-7cdd-4f4b-971a-928e096e99fe" name="scandicom" type="Char" label="scandicom : Char" nullable="true" kind="Persistent" fieldName="_scandicom" />
+      <Property Id="5190e90f-239f-4638-88b8-a632704f85b3" name="scandictatedate" type="DateTime" label="scandictatedate : DateTime" nullable="true" kind="Persistent" fieldName="_scandictatedate" />
+      <Property Id="603e63be-e64d-438d-9afd-487600512fe6" name="scandictateuser" label="scandictateuser : String" kind="Persistent" fieldName="_scandictateuser" />
+      <Property Id="c83a02c1-3829-4854-ab90-20322d858b46" name="scanloc" label="scanloc : String" kind="Persistent" fieldName="_scanloc" />
+      <Property Id="0ddcfd6b-8bf6-4a48-9adf-a4a90cc59ff3" name="scanlock" type="Char" label="scanlock : Char" nullable="true" kind="Persistent" fieldName="_scanlock" />
+      <Property Id="9b26fcce-266e-4ecb-9d9f-4a2e714bd334" name="scanmodality" label="scanmodality : String" kind="Persistent" fieldName="_scanmodality" />
+      <Property Id="675dd398-1362-4364-a59b-4b98eabd146a" name="scanmoduserid" label="scanmoduserid : String" kind="Persistent" fieldName="_scanmoduserid" />
+      <Property Id="6c6a8e00-3055-4a56-b096-ad0c544173eb" name="scannotes" label="scannotes : String" kind="Persistent" fieldName="_scannotes" />
+      <Property Id="2abcb3c7-a7e0-482d-ad3c-0358a7fa50a0" name="scanorderid" label="scanorderid : String" kind="Persistent" fieldName="_scanorderid" />
+      <Property Id="cfc5740d-1724-48f6-b373-7dbe825ad982" name="scanpacskey" label="scanpacskey : String" kind="Persistent" fieldName="_scanpacskey" />
+      <Property Id="5fd55d80-4e3e-4c38-b91f-870afcbcff56" name="scanpath" label="scanpath : String" kind="Persistent" fieldName="_scanpath" />
+      <Property Id="56d8c5e4-9702-4f4c-856b-d90af0bb4c99" name="scanreport" label="scanreport : String" kind="Persistent" fieldName="_scanreport" />
+      <Property Id="ba7d1503-3890-4c1f-b67f-c3fd5043e02a" name="scanreportaccno" label="scanreportaccno : String" kind="Persistent" fieldName="_scanreportaccno" />
+      <Property Id="0c6b1f7d-dc57-430c-8e99-8004297d2d6b" name="scansign" type="Char" label="scansign : Char" nullable="true" kind="Persistent" fieldName="_scansign" />
+      <Property Id="27c8e4f9-7941-4a84-9275-735e78c0190f" name="scansigndate" type="DateTime" label="scansigndate : DateTime" nullable="true" kind="Persistent" fieldName="_scansigndate" />
+      <Property Id="d6fff760-4760-42f8-9aa1-65352b458a20" name="scansignuser" label="scansignuser : String" kind="Persistent" fieldName="_scansignuser" />
+      <Property Id="23ec11bc-6c30-4bb6-a6b7-d148cedd0dec" name="scanstatus" label="scanstatus : String" kind="Persistent" fieldName="_scanstatus" />
+      <Property Id="ce4a9ae1-637a-4995-85ee-d463fac5dc72" name="scanstudyuid" label="scanstudyuid : String" kind="Persistent" fieldName="_scanstudyuid" />
+      <Property Id="5730a25c-1d5e-46a5-a518-11ea57be69fa" name="scantransdate" type="DateTime" label="scantransdate : DateTime" nullable="true" kind="Persistent" fieldName="_scantransdate" />
+      <Property Id="82560c56-7700-4777-bd01-db24c545d23b" name="scantransfile" label="scantransfile : String" kind="Persistent" fieldName="_scantransfile" />
+      <Property Id="247e1c84-ba34-4f51-928c-f104a07a2dbc" name="scantranspath" label="scantranspath : String" kind="Persistent" fieldName="_scantranspath" />
+      <Property Id="15c3b4c1-d42e-4a9f-815e-8ed143c00ad7" name="scantransuser" label="scantransuser : String" kind="Persistent" fieldName="_scantransuser" />
+      <Property Id="9eac4747-8e53-41dd-87b6-218be8efc171" name="scanupdateddate" type="DateTime" label="scanupdateddate : DateTime" nullable="true" kind="Persistent" fieldName="_scanupdateddate" />
+      <Property Id="22d7a656-8b41-470c-843b-cb7a5c171fe7" name="scanuserid" label="scanuserid : String" kind="Persistent" fieldName="_scanuserid" />
+      <Property Id="7047b0c4-fcfe-4892-9c0b-0d5e4618d028" name="scanvar01" label="scanvar01 : String" kind="Persistent" fieldName="_scanvar01" />
+      <Property Id="e48a666e-3cdb-4679-9366-4f0b1b4f7f87" name="scanvar02" label="scanvar02 : String" kind="Persistent" fieldName="_scanvar02" />
+      <AssociationTargets>
+        <Association Id="13e14480-ff3a-420e-bcd6-30afd9b58b07" SourceMultiplicity="One" name="ScannedHasScanGroup">
+          <DomainClassMoniker name="/EntitiesModel/ScanGroup" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="3fad9a03-a057-4eb4-bb2d-8b3dd43d1c62">
+              <NavigationalPropertyMoniker name="/EntitiesModel/ScanGroup/Scanneds" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="eaf8ca44-c70f-4d14-a314-2af27cdec265">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Scanned/scangroup" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="7f0be825-46d5-4678-9725-7ca78e8170ea">
+          <NavigationalProperty Id="72b7229b-2f28-45b1-a48e-f3777c78a965" name="scangroup" type="ScanGroup" label="scangroup : ScanGroup" nullable="true" kind="Persistent" fieldName="_scangroup" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="13328199-46d1-47f5-9444-065366e1d1c8" name="ScanGroup" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="766f65cc-a529-47ef-afaf-a392c8249401" name="groupcode" label="groupcode : String" kind="Persistent" identity="true" fieldName="_groupcode" />
+      <Property Id="1e68e892-1bcf-4a07-8bec-2dc7730dcdbe" name="groupdescription" label="groupdescription : String" kind="Persistent" fieldName="_groupdescription" />
+      <Property Id="d95cbde0-8439-4261-b18c-0dbb5b31d210" name="groupdocworklist" type="Char" label="groupdocworklist : Char" nullable="true" kind="Persistent" fieldName="_groupdocworklist" />
+      <Property Id="1a144036-3375-499b-9acf-f01bd1581baa" name="grouppath" label="grouppath : String" kind="Persistent" fieldName="_grouppath" />
+      <Property Id="a2e2d62f-a0ce-436d-9b63-bd750c659888" name="groupsign" type="Char" label="groupsign : Char" nullable="true" kind="Persistent" fieldName="_groupsign" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="63d716cc-5ec0-4dbe-a60f-a58ad223e976">
+          <NavigationalProperty Id="cf60c40f-b3fa-4621-b8e9-bbcfe82d6886" name="Scanneds" type="IList&lt;Scanned&gt;" label="Scanneds : IList&lt;Scanned&gt;" nullable="true" kind="Persistent" fieldName="_scanneds" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="aa9b6c9a-57d5-4d87-a765-29825b6887f6" name="DAT9397F" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="1ef7ebea-c5f2-484d-a9f5-c337a0db283b" name="faccode" label="faccode : String" kind="Persistent" identity="true" fieldName="_faccode" />
+      <Property Id="10667a05-790a-4dd0-9bd5-ec068a264012" name="facacceptmc" type="Char" label="facacceptmc : Char" nullable="true" kind="Persistent" fieldName="_facacceptmc" />
+      <Property Id="e61b11e2-784e-4b81-a490-bad30406c345" name="facaddress01" label="facaddress01 : String" kind="Persistent" fieldName="_facaddress01" />
+      <Property Id="c1800b60-d361-47a1-9a4f-25fd63640c94" name="facaddress02" label="facaddress02 : String" kind="Persistent" fieldName="_facaddress02" />
+      <Property Id="e4335293-b7c6-48a9-a3f7-38ecf788f948" name="faccel" label="faccel : String" kind="Persistent" fieldName="_faccel" />
+      <Property Id="09cea13c-92c8-4fab-93b9-12c25bf4b2e2" name="faccity" label="faccity : String" kind="Persistent" fieldName="_faccity" />
+      <Property Id="a01a71c4-8813-42bb-a41a-35d62fe753e5" name="facemail" label="facemail : String" kind="Persistent" fieldName="_facemail" />
+      <Property Id="33213069-0f0e-47ae-8be1-f897b1a1cafa" name="facfax" label="facfax : String" kind="Persistent" fieldName="_facfax" />
+      <Property Id="b95bd2d1-d223-480d-b4bc-77971548323f" name="facfirstname" label="facfirstname : String" kind="Persistent" fieldName="_facfirstname" />
+      <Property Id="3b8c1846-fc7d-466a-b0f0-092a91472704" name="facinitname" label="facinitname : String" kind="Persistent" fieldName="_facinitname" />
+      <Property Id="4d765670-b06a-42c0-ad6c-c5d1b6cbe3c0" name="faclastname" label="faclastname : String" kind="Persistent" fieldName="_faclastname" />
+      <Property Id="afd7929c-9fa6-4898-8c26-3a21fe126c5c" name="faclicno" label="faclicno : String" kind="Persistent" fieldName="_faclicno" />
+      <Property Id="d4f1fa4a-f977-4f69-a39a-d7a03f4075c4" name="facnationalid" label="facnationalid : String" kind="Persistent" fieldName="_facnationalid" />
+      <Property Id="2dd2e59d-01cf-4c3e-ac97-9d7a7edbe5f1" name="facphone" label="facphone : String" kind="Persistent" fieldName="_facphone" />
+      <Property Id="52665668-e17c-4d59-8a52-8af0440365a8" name="facremarks" label="facremarks : String" kind="Persistent" fieldName="_facremarks" />
+      <Property Id="25b74108-f18c-4a65-a2d9-c87c5c227207" name="facsocsec" label="facsocsec : String" kind="Persistent" fieldName="_facsocsec" />
+      <Property Id="e68276c9-1fe8-4dc7-866a-ed0b06b0dcd2" name="facstate" label="facstate : String" kind="Persistent" fieldName="_facstate" />
+      <Property Id="21a06ef8-01dc-468d-ae8e-661868b75881" name="factax" label="factax : String" kind="Persistent" fieldName="_factax" />
+      <Property Id="5f3decd0-f237-4665-a8e0-ae861b29f701" name="factel" label="factel : String" kind="Persistent" fieldName="_factel" />
+      <Property Id="c30506d1-493a-42be-9b55-5d78c09a05c2" name="facupin" label="facupin : String" kind="Persistent" fieldName="_facupin" />
+      <Property Id="4a5a7d99-d920-487c-81b8-c65c7e37eabe" name="faczipcode" label="faczipcode : String" kind="Persistent" fieldName="_faczipcode" />
+    </DomainClass>
+    <DomainClass Id="2ff7405c-f8e7-4f0d-b7b1-492be11972a1" name="DAT8000" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="edb679dd-3f2e-492f-ba8f-2363cabe7d49" name="piorden" type="Byte" label="piorden : Byte" kind="Persistent" identity="true" fieldName="_piorden" />
+      <Property Id="a399f03c-60b9-4dc3-bf1f-c11108528082" name="pipatno" label="pipatno : String" kind="Persistent" identity="true" fieldName="_pipatno" />
+      <Property Id="4fcc873e-672c-4a3b-9426-eb4b258ddba4" name="pipatsufx" label="pipatsufx : String" kind="Persistent" identity="true" fieldName="_pipatsufx" />
+      <Property Id="44c6ece7-d4c3-4f44-9a0e-94a0ce49eba9" name="pipattype" type="Char" label="pipattype : Char" kind="Persistent" identity="true" fieldName="_pipattype" />
+      <Property Id="caea0ca8-52b1-4194-8ac5-d984cf2ac3c3" name="piaccdate" type="DateTime" label="piaccdate : DateTime" nullable="true" kind="Persistent" fieldName="_piaccdate" />
+      <Property Id="9ef5a01a-052e-48f7-b0b0-d6b8e011b9ea" name="piaddress1" label="piaddress1 : String" kind="Persistent" fieldName="_piaddress1" />
+      <Property Id="8267d1c5-2f20-464a-96b6-7c2ced9673ca" name="piaddress2" label="piaddress2 : String" kind="Persistent" fieldName="_piaddress2" />
+      <Property Id="eead8b28-e604-4fed-9ac5-58122085f299" name="pibirthdate" type="DateTime" label="pibirthdate : DateTime" nullable="true" kind="Persistent" fieldName="_pibirthdate" />
+      <Property Id="27677fb0-817c-4397-bcd8-b8ddbf28b864" name="picity" label="picity : String" kind="Persistent" fieldName="_picity" />
+      <Property Id="0c100e24-f9c4-4bba-96c2-ce199d9256be" name="picondacc" type="Char" label="picondacc : Char" nullable="true" kind="Persistent" fieldName="_picondacc" />
+      <Property Id="ccba6080-e305-4cae-922a-30d8b8e4c5f7" name="picondemp" type="Char" label="picondemp : Char" nullable="true" kind="Persistent" fieldName="_picondemp" />
+      <Property Id="a252f81f-b042-4fda-9d3c-93845ef12656" name="picover" label="picover : String" kind="Persistent" fieldName="_picover" />
+      <Property Id="db0fbeff-ebf1-4867-af99-8af9d70c08d1" name="picoverdesc" label="picoverdesc : String" kind="Persistent" fieldName="_picoverdesc" />
+      <Property Id="9e6ae4e5-1080-4ae0-922b-3ee2f221d2e9" name="pidisplayorder" type="Byte" label="pidisplayorder : Byte" nullable="true" kind="Persistent" fieldName="_pidisplayorder" />
+      <Property Id="06ef58a0-4709-4691-9445-075b4ea24d77" name="piexpdate" type="DateTime" label="piexpdate : DateTime" nullable="true" kind="Persistent" fieldName="_piexpdate" />
+      <Property Id="fa28256e-7b0b-4ecb-966f-7bdde3b0c291" name="pifirstname" label="pifirstname : String" kind="Persistent" fieldName="_pifirstname" />
+      <Property Id="40f96634-3da8-4645-bb69-f007f9db3443" name="pigroup" label="pigroup : String" kind="Persistent" fieldName="_pigroup" />
+      <Property Id="201e5750-7162-43ca-a7e4-569f5ca42eb4" name="piidpatient" label="piidpatient : String" kind="Persistent" fieldName="_piidpatient" />
+      <Property Id="f61528ca-dc67-47ce-b680-d330c835e84a" name="piidsubscriber" label="piidsubscriber : String" kind="Persistent" fieldName="_piidsubscriber" />
+      <Property Id="ecafd137-11ff-4280-a067-c495e4e63402" name="piinitname" label="piinitname : String" kind="Persistent" fieldName="_piinitname" />
+      <Property Id="105e4054-89b2-49f0-8105-64d0bbb8149b" name="piinscode" label="piinscode : String" kind="Persistent" fieldName="_piinscode" />
+      <Property Id="36f7386e-d6ac-4d68-a285-3aa8d09c734f" name="pilastname" label="pilastname : String" kind="Persistent" fieldName="_pilastname" />
+      <Property Id="2f3639c0-e090-4f85-8444-cc4a452af72d" name="pinotes" label="pinotes : String" kind="Persistent" fieldName="_pinotes" />
+      <Property Id="d0c24e69-4ba8-4295-b1e7-5d256dc4497d" name="pirelation" type="Char" label="pirelation : Char" nullable="true" kind="Persistent" fieldName="_pirelation" />
+      <Property Id="e0228af8-2173-4338-aade-e0d71d5311d7" name="pisex" type="Char" label="pisex : Char" nullable="true" kind="Persistent" fieldName="_pisex" />
+      <Property Id="bc1f82b8-1fcb-4fe4-9342-f80114aeb8c6" name="pisocsec" label="pisocsec : String" kind="Persistent" fieldName="_pisocsec" />
+      <Property Id="c066d002-d9e8-46c1-b225-a654c48aa577" name="pisocsecsufx" type="Char" label="pisocsecsufx : Char" nullable="true" kind="Persistent" fieldName="_pisocsecsufx" />
+      <Property Id="cd26ff5e-7350-49f8-9907-81d93bbe8cf6" name="pistate" label="pistate : String" kind="Persistent" fieldName="_pistate" />
+      <Property Id="03393e92-8087-43c4-9d10-0117d680853b" name="pisubscriberfirstname" label="pisubscriberfirstname : String" kind="Persistent" fieldName="_pisubscriberfirstname" />
+      <Property Id="135a179a-d387-4624-9ba4-815d1e894dee" name="pisubscriberinit" type="Char" label="pisubscriberinit : Char" nullable="true" kind="Persistent" fieldName="_pisubscriberinit" />
+      <Property Id="b2c3d2f6-02d9-4aa4-bc03-7362e50726a8" name="pisubscriberlastname" label="pisubscriberlastname : String" kind="Persistent" fieldName="_pisubscriberlastname" />
+      <Property Id="41282f6e-04bf-469a-ba1e-3a0c0df40927" name="pitype" type="Char" label="pitype : Char" nullable="true" kind="Persistent" fieldName="_pitype" />
+      <Property Id="d54296e1-d395-4371-a771-67a51138aea4" name="piworkplace" label="piworkplace : String" kind="Persistent" fieldName="_piworkplace" />
+      <Property Id="d37d58b7-bc5e-43f1-b4e7-1d7c8d015489" name="pizip" label="pizip : String" kind="Persistent" fieldName="_pizip" />
+      <AssociationTargets>
+        <Association Id="b6554f75-b748-4093-8c69-53c20c2914fd" SourceMultiplicity="One" name="DAT8000HasDAT2000">
+          <DomainClassMoniker name="/EntitiesModel/DAT2000" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="ae103a5c-7c94-4664-a020-b53c6ec7d55a">
+              <NavigationalPropertyMoniker name="/EntitiesModel/DAT2000/DAT8000" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="2a17fff9-81b3-4fe2-acb2-2908c9962ae7">
+              <NavigationalPropertyMoniker name="/EntitiesModel/DAT8000/dat2000" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="4a7e5ab1-bb94-4bee-bcba-a025bc773458">
+          <NavigationalProperty Id="e3c86e39-87cd-4059-8f2b-d2ec48732f30" name="dat2000" type="DAT2000" label="dat2000 : DAT2000" nullable="true" kind="Persistent" fieldName="_dat2000" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="95eb0172-f85b-4074-b1b7-30955c456868" name="DAT2000" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="d48e275c-287e-48af-b6e5-c3101974eb94" name="ptrecno" label="ptrecno : String" kind="Persistent" identity="true" fieldName="_ptrecno" />
+      <Property Id="45f19ac7-86fe-4226-82f2-fe00cdfd6911" name="ptrecsuffx" label="ptrecsuffx : String" kind="Persistent" identity="true" fieldName="_ptrecsuffx" />
+      <Property Id="ae570275-7073-45f0-8be4-456a14be5b87" name="ptrectype" type="Char" label="ptrectype : Char" kind="Persistent" identity="true" fieldName="_ptrectype" />
+      <Property Id="0e4d6b28-6d60-4f12-b2ec-c5cbf35e67c5" name="ptaccntdoctor" label="ptaccntdoctor : String" kind="Persistent" fieldName="_ptaccntdoctor" />
+      <Property Id="573318fa-6d6d-487a-ba82-d120355f46c0" name="ptaccntno" label="ptaccntno : String" kind="Persistent" fieldName="_ptaccntno" />
+      <Property Id="df38b4f9-1213-40ce-b925-6755784f169d" name="ptaccntsufx" label="ptaccntsufx : String" kind="Persistent" fieldName="_ptaccntsufx" />
+      <Property Id="e4c45661-c255-4d96-9ee5-b261b0acb9d3" name="ptaccnttype" type="Char" label="ptaccnttype : Char" nullable="true" kind="Persistent" fieldName="_ptaccnttype" />
+      <Property Id="c9ece609-4679-4ef2-9d8b-5ce6da16ada4" name="ptautdocmsg" type="Char" label="ptautdocmsg : Char" nullable="true" kind="Persistent" fieldName="_ptautdocmsg" />
+      <Property Id="9ba93cf0-018a-4adc-b45b-6fe3ebe4cd67" name="ptautfirst1" label="ptautfirst1 : String" kind="Persistent" fieldName="_ptautfirst1" />
+      <Property Id="5ee5b2eb-bebb-421a-8a76-6c993b2c7de4" name="ptautfirst2" label="ptautfirst2 : String" kind="Persistent" fieldName="_ptautfirst2" />
+      <Property Id="051d2179-dbc5-4fe6-b472-0b0dd5ba600c" name="ptautinit1" type="Char" label="ptautinit1 : Char" nullable="true" kind="Persistent" fieldName="_ptautinit1" />
+      <Property Id="306d24a8-c83e-47a5-b357-94196ae2dc97" name="ptautinit2" type="Char" label="ptautinit2 : Char" nullable="true" kind="Persistent" fieldName="_ptautinit2" />
+      <Property Id="66d1bcfc-92d1-4cd6-96e6-f506f2c1c086" name="ptautlast1" label="ptautlast1 : String" kind="Persistent" fieldName="_ptautlast1" />
+      <Property Id="401d66a7-caac-44c5-b490-81bac3088f94" name="ptautlast2" label="ptautlast2 : String" kind="Persistent" fieldName="_ptautlast2" />
+      <Property Id="9f0dbf93-6b64-4f2b-b63f-ac6a2ba7245e" name="ptautpatmsg" type="Char" label="ptautpatmsg : Char" nullable="true" kind="Persistent" fieldName="_ptautpatmsg" />
+      <Property Id="a887acf9-64a8-4fc6-be28-a5188d8d874d" name="ptbillingdate" type="DateTime" label="ptbillingdate : DateTime" nullable="true" kind="Persistent" fieldName="_ptbillingdate" />
+      <Property Id="48d7ba1c-be27-4e69-afc1-07b95409d961" name="ptbillingstatus" type="Char" label="ptbillingstatus : Char" nullable="true" kind="Persistent" fieldName="_ptbillingstatus" />
+      <Property Id="c8a82451-eadd-48fd-8781-84e543e29843" name="ptbirthdate" type="DateTime" label="ptbirthdate : DateTime" nullable="true" kind="Persistent" fieldName="_ptbirthdate" />
+      <Property Id="3c3646a0-6cad-48ed-bf94-c684da433e4c" name="ptbirthplace" label="ptbirthplace : String" kind="Persistent" fieldName="_ptbirthplace" />
+      <Property Id="1c30174f-9e92-47c3-953b-4476625d21fc" name="ptcelphone" label="ptcelphone : String" kind="Persistent" fieldName="_ptcelphone" />
+      <Property Id="3cae59a5-5c52-45a7-b552-94d0b7214d57" name="ptcelsup" type="Int32" label="ptcelsup : Int32" nullable="true" kind="Persistent" fieldName="_ptcelsup" />
+      <Property Id="c8955cb8-d349-4218-87d6-1b358a4d3f0c" name="ptcivilstatus" type="Char" label="ptcivilstatus : Char" nullable="true" kind="Persistent" fieldName="_ptcivilstatus" />
+      <Property Id="e79f5852-3078-449c-8566-1334ddce623a" name="ptemail" label="ptemail : String" kind="Persistent" fieldName="_ptemail" />
+      <Property Id="cb789591-3524-48b8-bc94-2c233d46f14c" name="ptemrmrn" label="ptemrmrn : String" kind="Persistent" fieldName="_ptemrmrn" />
+      <Property Id="54d28431-3f55-4536-8f57-2f5e6d3a997b" name="ptenterdate" type="DateTime" label="ptenterdate : DateTime" nullable="true" kind="Persistent" fieldName="_ptenterdate" />
+      <Property Id="50e89493-e4c3-471b-bb8a-8b29a10418d3" name="ptethnic" type="Int32" label="ptethnic : Int32" nullable="true" kind="Persistent" fieldName="_ptethnic" />
+      <Property Id="1f80fa8a-c2b6-4140-b156-eca4d998f68b" name="ptfatherfirstname" label="ptfatherfirstname : String" kind="Persistent" fieldName="_ptfatherfirstname" />
+      <Property Id="0d018a7e-67c9-4f4c-b5c3-83b985face6c" name="ptfatherinit" type="Char" label="ptfatherinit : Char" nullable="true" kind="Persistent" fieldName="_ptfatherinit" />
+      <Property Id="3aefaced-9dd7-42d6-b554-982416ac8336" name="ptfatherlastname" label="ptfatherlastname : String" kind="Persistent" fieldName="_ptfatherlastname" />
+      <Property Id="782a37bf-8aa3-4072-9a8b-21aaab3e6206" name="ptfirstname" label="ptfirstname : String" kind="Persistent" fieldName="_ptfirstname" />
+      <Property Id="aacc97d8-d095-4e34-85aa-64357e31699b" name="pthomephone" label="pthomephone : String" kind="Persistent" fieldName="_pthomephone" />
+      <Property Id="f7fc2436-e06e-4b5e-96f5-b420830e8e39" name="ptinitname" label="ptinitname : String" kind="Persistent" fieldName="_ptinitname" />
+      <Property Id="5f5e7024-df56-4484-a214-d1ad6dcdc88b" name="ptlanguage" type="Int32" label="ptlanguage : Int32" nullable="true" kind="Persistent" fieldName="_ptlanguage" />
+      <Property Id="6baa8ed4-eeb0-47fd-9095-9b6a511cd5c9" name="ptlastname" label="ptlastname : String" kind="Persistent" fieldName="_ptlastname" />
+      <Property Id="ccff5c45-618f-4936-9acf-3d96c6f2dc0e" name="ptmotherfirstname" label="ptmotherfirstname : String" kind="Persistent" fieldName="_ptmotherfirstname" />
+      <Property Id="2bf6c70d-4ab3-429e-85e2-8228addda156" name="ptmotherinit" type="Char" label="ptmotherinit : Char" nullable="true" kind="Persistent" fieldName="_ptmotherinit" />
+      <Property Id="b1ec68a7-987c-4c6d-ba02-f8d4ef34bb36" name="ptmotherlastname" label="ptmotherlastname : String" kind="Persistent" fieldName="_ptmotherlastname" />
+      <Property Id="e3c4d9f0-5c99-4b48-aedd-6b53116538d3" name="ptpaddress1" label="ptpaddress1 : String" kind="Persistent" fieldName="_ptpaddress1" />
+      <Property Id="54414835-89e8-40cc-bf86-b14df1039145" name="ptpaddress2" label="ptpaddress2 : String" kind="Persistent" fieldName="_ptpaddress2" />
+      <Property Id="22f41351-ef35-4c5e-bbb2-12372a62117f" name="ptpcity" label="ptpcity : String" kind="Persistent" fieldName="_ptpcity" />
+      <Property Id="b236ab0f-afe8-4751-9b72-e8e2d20769c0" name="ptpstate" label="ptpstate : String" kind="Persistent" fieldName="_ptpstate" />
+      <Property Id="85061596-3b72-4c28-a998-2d7cb5d7d57c" name="ptpzip" label="ptpzip : String" kind="Persistent" fieldName="_ptpzip" />
+      <Property Id="849c7441-da06-4c7d-b5e0-7e41799217b8" name="ptrace" type="Int32" label="ptrace : Int32" nullable="true" kind="Persistent" fieldName="_ptrace" />
+      <Property Id="f0072914-2c99-4ebc-af5b-c7ead3738a3e" name="ptraddress1" label="ptraddress1 : String" kind="Persistent" fieldName="_ptraddress1" />
+      <Property Id="d8dac631-67a0-43cb-bc0f-a1335c498e60" name="ptraddress2" label="ptraddress2 : String" kind="Persistent" fieldName="_ptraddress2" />
+      <Property Id="a505019f-7cdc-45e5-949a-32781c1ef483" name="ptrcity" label="ptrcity : String" kind="Persistent" fieldName="_ptrcity" />
+      <Property Id="4ccad714-9010-4bf1-ac98-3bd2c27aef4b" name="ptrefering" label="ptrefering : String" kind="Persistent" fieldName="_ptrefering" />
+      <Property Id="b09c2c27-8b25-4a05-9e70-41623dc38fac" name="ptreligion" label="ptreligion : String" kind="Persistent" fieldName="_ptreligion" />
+      <Property Id="941c5cb2-5254-4729-bcf4-3d7331f757dc" name="ptrespfirstname" label="ptrespfirstname : String" kind="Persistent" fieldName="_ptrespfirstname" />
+      <Property Id="b36092ec-9969-45ff-b29a-907a656e79ff" name="ptrespinit" type="Char" label="ptrespinit : Char" nullable="true" kind="Persistent" fieldName="_ptrespinit" />
+      <Property Id="365a220b-e40d-474e-b015-cd8c4fc1733b" name="ptresplastname" label="ptresplastname : String" kind="Persistent" fieldName="_ptresplastname" />
+      <Property Id="8bba79e1-e158-4aa7-a3a0-682a85d3a2dd" name="ptresponsiblerelation" label="ptresponsiblerelation : String" kind="Persistent" fieldName="_ptresponsiblerelation" />
+      <Property Id="ccd86af7-1e07-4544-a834-acdb627fc57d" name="ptrespphone" label="ptrespphone : String" kind="Persistent" fieldName="_ptrespphone" />
+      <Property Id="0b46f5df-5c2e-4197-9574-51b942226cb3" name="ptrstate" label="ptrstate : String" kind="Persistent" fieldName="_ptrstate" />
+      <Property Id="1f981f3f-ab2b-4346-bad8-aa26a40e5a2d" name="ptrzip" label="ptrzip : String" kind="Persistent" fieldName="_ptrzip" />
+      <Property Id="1032e10a-6aa2-49cc-85ec-4738abe4955e" name="ptsex" type="Char" label="ptsex : Char" nullable="true" kind="Persistent" fieldName="_ptsex" />
+      <Property Id="12824e18-0ad0-4085-865d-4ea2a8a92201" name="ptsocsec" label="ptsocsec : String" kind="Persistent" fieldName="_ptsocsec" />
+      <Property Id="54d8dc61-2ded-4b79-afb9-ece59214b72c" name="ptsocsecsufx" type="Char" label="ptsocsecsufx : Char" nullable="true" kind="Persistent" fieldName="_ptsocsecsufx" />
+      <Property Id="3a3e2bbe-6c9a-4a84-9fc5-f3a8129c216f" name="ptspousefirstname" label="ptspousefirstname : String" kind="Persistent" fieldName="_ptspousefirstname" />
+      <Property Id="9e5f56d0-d0a1-4b71-8d82-9edffcea4434" name="ptspouseinit" type="Char" label="ptspouseinit : Char" nullable="true" kind="Persistent" fieldName="_ptspouseinit" />
+      <Property Id="16c32e2a-ac32-4c79-9dc1-bd89b8950b45" name="ptspouselastname" label="ptspouselastname : String" kind="Persistent" fieldName="_ptspouselastname" />
+      <Property Id="d0b960b3-1655-49ae-bd6b-59ccde06d82a" name="ptweight" type="Int16" label="ptweight : Int16" nullable="true" kind="Persistent" fieldName="_ptweight" />
+      <Property Id="3910fd7f-575e-4a1a-a726-78d1ccede26f" name="ptworkext" label="ptworkext : String" kind="Persistent" fieldName="_ptworkext" />
+      <Property Id="490df708-4fb4-4238-b09f-34672ec3ad92" name="ptworkphone" label="ptworkphone : String" kind="Persistent" fieldName="_ptworkphone" />
+      <Property Id="0b36f371-9abf-4712-80f5-2d5e8e9e20e0" name="ptworkplace" label="ptworkplace : String" kind="Persistent" fieldName="_ptworkplace" />
+      <Property Id="7b51f8a9-839b-4526-bd0f-a4c2eb5ef361" name="ptworktitle" label="ptworktitle : String" kind="Persistent" fieldName="_ptworktitle" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="da4e6c36-f877-40b9-88f1-4c610d2658e7">
+          <NavigationalProperty Id="6888d163-5130-4cec-ae54-be38704f29ae" name="DAT8000" type="IList&lt;DAT8000&gt;" label="DAT8000 : IList&lt;DAT8000&gt;" nullable="true" kind="Persistent" fieldName="_dAT8000" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="d0be7f2a-7d45-487a-abbd-2d6cd7fa4fde" name="BookTable" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="1a958355-6f95-4c39-8f94-f871dd070811" name="bookcode" type="Int32" label="bookcode : Int32" kind="Persistent" identity="true" fieldName="_bookcode" />
+      <Property Id="6b8aefff-8f2d-4817-b9bf-78efafb8ae4e" name="bookendtime" type="DateTime" label="bookendtime : DateTime" nullable="true" kind="Persistent" fieldName="_bookendtime" />
+      <Property Id="1790de11-9806-4d79-97aa-a4fff939227c" name="bookname" label="bookname : String" kind="Persistent" fieldName="_bookname" />
+      <Property Id="88ee20ad-dcc1-4560-8cde-696f2bb305e8" name="bookstarttime" type="DateTime" label="bookstarttime : DateTime" nullable="true" kind="Persistent" fieldName="_bookstarttime" />
+      <Property Id="c77e30fd-92d3-46d1-941d-d6428aaf571c" name="doccode" label="doccode : String" kind="Persistent" fieldName="_doccode" />
+      <Property Id="ec9955aa-761d-40e9-99cf-575a11f6bc8a" name="docname" label="docname : String" kind="Persistent" fieldName="_docname" />
+      <Property Id="3f0ce177-441f-4872-9cf5-7ee75414f366" name="espcode" type="Int32" label="espcode : Int32" nullable="true" kind="Persistent" fieldName="_espcode" />
+      <Property Id="f12da101-f7f1-4e5b-ae27-7446261057da" name="espname" label="espname : String" kind="Persistent" fieldName="_espname" />
+      <Property Id="eab53ba7-e280-48fb-8099-a6a27823bdf4" name="inter" type="Int32" label="inter : Int32" nullable="true" kind="Persistent" fieldName="_inter" />
+      <Property Id="3990c866-68c7-4a2c-a43d-05999515457b" name="loccode" type="Int32" label="loccode : Int32" nullable="true" kind="Persistent" fieldName="_loccode" />
+      <Property Id="ce57ff45-44e7-4e56-9e9a-bf3af4fa94e5" name="locname" label="locname : String" kind="Persistent" fieldName="_locname" />
+    </DomainClass>
+    <DomainClass Id="bfe5b8a8-aa48-42b1-8301-2ddcd433a91a" name="Apoint" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="4db5eaa5-7e94-4cfd-b22f-e64a5afe2b9a" name="apnum" label="apnum : String" kind="Persistent" identity="true" fieldName="_apnum" />
+      <Property Id="ef86dcc7-4d7c-48bb-b5de-4b3059ef0b8f" name="bookcode" type="Int32" label="bookcode : Int32" kind="Persistent" identity="true" fieldName="_bookcode" />
+      <Property Id="e781e91e-823b-45c0-a47e-e79cbba0a5fd" name="entertime" type="DateTime" label="entertime : DateTime" kind="Persistent" identity="true" fieldName="_entertime" />
+      <Property Id="c084f2a7-4549-410d-993b-d95b03a636f6" name="apcreatedate" type="DateTime" label="apcreatedate : DateTime" nullable="true" kind="Persistent" fieldName="_apcreatedate" />
+      <Property Id="bb094ca9-2bd5-4012-8ec5-c09a38f2b330" name="apcreateuser" label="apcreateuser : String" kind="Persistent" fieldName="_apcreateuser" />
+      <Property Id="77640dbc-4bc2-4f3a-9766-00c388d14af4" name="apins" label="apins : String" kind="Persistent" fieldName="_apins" />
+      <Property Id="291784c5-61b2-484d-9ebb-9d11d5628bb8" name="apmoddate" type="DateTime" label="apmoddate : DateTime" nullable="true" kind="Persistent" fieldName="_apmoddate" />
+      <Property Id="b2063ac9-d262-404b-950a-308820803c6b" name="apmoduser" label="apmoduser : String" kind="Persistent" fieldName="_apmoduser" />
+      <Property Id="e67ef720-1eea-453f-9b8b-37657ef4afe8" name="apnotes" label="apnotes : String" kind="Persistent" fieldName="_apnotes" />
+      <Property Id="f30fb44f-09a9-4ebb-9fa2-062b441c2c82" name="appack" label="appack : String" kind="Persistent" fieldName="_appack" />
+      <Property Id="8623502d-04fd-450e-8d67-d43caaa6b243" name="apppatid" type="Int32" label="apppatid : Int32" nullable="true" kind="Persistent" fieldName="_apppatid" />
+      <Property Id="e32a4c74-4fa2-4fe4-a161-15905caa21a3" name="apprecno" label="apprecno : String" kind="Persistent" fieldName="_apprecno" />
+      <Property Id="efd3bed8-74c3-4079-a267-2fb6119b17d7" name="apprecsuff" label="apprecsuff : String" kind="Persistent" fieldName="_apprecsuff" />
+      <Property Id="8cb15e08-c3f4-4fe1-9de7-1ec6fcbfe874" name="apprectype" type="Char" label="apprectype : Char" nullable="true" kind="Persistent" fieldName="_apprectype" />
+      <Property Id="9d90a771-898c-42ea-84a3-0592e9417ef7" name="apstatus" label="apstatus : String" kind="Persistent" fieldName="_apstatus" />
+      <Property Id="66a0be98-e8bf-4fd8-9ea9-300d93c512ee" name="elapsedtime" type="DateTime" label="elapsedtime : DateTime" nullable="true" kind="Persistent" fieldName="_elapsedtime" />
+      <Property Id="10f86590-780a-48ec-8da2-46877633c7ee" name="espcode" type="Int32" label="espcode : Int32" nullable="true" kind="Persistent" fieldName="_espcode" />
+      <Property Id="a8bf52e8-05fc-4d26-9694-926508424571" name="proccode" label="proccode : String" kind="Persistent" fieldName="_proccode" />
+      <AssociationTargets>
+        <Association Id="74e392b0-0bbf-465b-b46b-7e69d6afd27e" SourceMultiplicity="ZeroOne" name="ApointHasDAT2000">
+          <DomainClassMoniker name="/EntitiesModel/DAT2000" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="8da8fa12-2e9c-419e-a56e-3eb54a3ef87c">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Apoint/DAT2000" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="d45a23bc-7fdb-4b7c-9f32-a35b76b24ef3">
+          <NavigationalProperty Id="d88b8008-2de2-48b7-beac-7f0381ca7cbf" name="DAT2000" type="DAT2000" label="DAT2000 : DAT2000" nullable="true" kind="Persistent" fieldName="_dat2000" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="3676a361-ed9f-4f19-8855-07a5466114a1" name="DAT3000" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="c215749f-cdc1-4285-a165-bb3f45a21b5f" name="inscode" label="inscode : String" kind="Persistent" identity="true" fieldName="_inscode" />
+      <Property Id="b934b1c0-faf3-4446-91ae-73e43c96a026" name="insaddress1" label="insaddress1 : String" kind="Persistent" fieldName="_insaddress1" />
+      <Property Id="03b10b78-0018-4a22-9ec8-52533c99f12f" name="insaddress2" label="insaddress2 : String" kind="Persistent" fieldName="_insaddress2" />
+      <Property Id="8b8f0e38-2973-4b6e-9f86-ba848bf675c7" name="insaskprono" type="Char" label="insaskprono : Char" nullable="true" kind="Persistent" fieldName="_insaskprono" />
+      <Property Id="1610234d-0185-477a-a4c1-e0e814165903" name="insaskreferring" type="Char" label="insaskreferring : Char" nullable="true" kind="Persistent" fieldName="_insaskreferring" />
+      <Property Id="4ffbf25e-4378-42a6-85ac-f82bfccf1416" name="insbillingaddress" type="Char" label="insbillingaddress : Char" nullable="true" kind="Persistent" fieldName="_insbillingaddress" />
+      <Property Id="d06c363f-4832-4c49-9a0b-bc445638ca49" name="insbillingcycle" type="Char" label="insbillingcycle : Char" nullable="true" kind="Persistent" fieldName="_insbillingcycle" />
+      <Property Id="ec735d4d-b200-440a-be79-11a19bd96bb2" name="insbillingrefqualifier" label="insbillingrefqualifier : String" kind="Persistent" fieldName="_insbillingrefqualifier" />
+      <Property Id="aa8ef923-c68d-4fd7-ab90-a8f26b9e2ac6" name="insbillingunits" type="Char" label="insbillingunits : Char" nullable="true" kind="Persistent" fieldName="_insbillingunits" />
+      <Property Id="9a9ce0ed-c49b-491d-8b18-d7dbd30ec013" name="insbillproviderno" type="Char" label="insbillproviderno : Char" nullable="true" kind="Persistent" fieldName="_insbillproviderno" />
+      <Property Id="c897777a-09b6-4d46-9636-26b1b8df2860" name="insbillupin" type="Char" label="insbillupin : Char" nullable="true" kind="Persistent" fieldName="_insbillupin" />
+      <Property Id="8ddefa5a-a201-44d1-b1a3-15fc14440929" name="inscity" label="inscity : String" kind="Persistent" fieldName="_inscity" />
+      <Property Id="0e6079f7-af8f-4189-8feb-65ef3e901158" name="inscompprintfee" type="Char" label="inscompprintfee : Char" nullable="true" kind="Persistent" fieldName="_inscompprintfee" />
+      <Property Id="71b09f86-bc1c-4cd7-9802-08d7c750465c" name="inscontact" label="inscontact : String" kind="Persistent" fieldName="_inscontact" />
+      <Property Id="eb4d08dc-1a32-4cc2-939a-f2481c07bb21" name="insconversion" type="Char" label="insconversion : Char" nullable="true" kind="Persistent" fieldName="_insconversion" />
+      <Property Id="e56af8f6-b546-4926-83bf-8e2800fe5582" name="insdeductible" type="Decimal" label="insdeductible : Decimal" nullable="true" kind="Persistent" fieldName="_insdeductible" />
+      <Property Id="127c9def-caac-4333-b873-967c6d8bf1e8" name="insessno" label="insessno : String" kind="Persistent" fieldName="_insessno" />
+      <Property Id="3bbffd7a-9fc9-4646-9e29-f78dbe225e9a" name="inshipaafileprefix" label="inshipaafileprefix : String" kind="Persistent" fieldName="_inshipaafileprefix" />
+      <Property Id="c2d905ab-e480-49bd-aef4-589b1b3be3cb" name="inshipaafilesuffix" label="inshipaafilesuffix : String" kind="Persistent" fieldName="_inshipaafilesuffix" />
+      <Property Id="b430c3a4-3c79-4717-ac68-1cc6d9810da4" name="insinovamed" type="Char" label="insinovamed : Char" nullable="true" kind="Persistent" fieldName="_insinovamed" />
+      <Property Id="52459a42-f957-49c0-bcb9-e948434f7277" name="insinterchangeid" label="insinterchangeid : String" kind="Persistent" fieldName="_insinterchangeid" />
+      <Property Id="1c3005db-140d-4d72-92f9-cb5b84aa27bc" name="insinterchangeisa07id" label="insinterchangeisa07id : String" kind="Persistent" fieldName="_insinterchangeisa07id" />
+      <Property Id="4eeb5269-be0f-4fa5-a892-f36f5be80fa9" name="insinterchangereceiverid" label="insinterchangereceiverid : String" kind="Persistent" fieldName="_insinterchangereceiverid" />
+      <Property Id="29dc3499-05f3-4c65-9bed-ffdbd9259948" name="insmedicare" type="Boolean" label="insmedicare : Boolean" nullable="true" kind="Persistent" fieldName="_insmedicare" />
+      <Property Id="16e84537-e5d5-4944-87be-e564a158facc" name="insname" label="insname : String" kind="Persistent" fieldName="_insname" />
+      <Property Id="65c0d35e-e1d6-4bc5-b008-5de20ffe7cf3" name="insocna" label="insocna : String" kind="Persistent" fieldName="_insocna" />
+      <Property Id="74f63af5-7ef1-46e8-b48c-a58a58daee4a" name="inspath" label="inspath : String" kind="Persistent" fieldName="_inspath" />
+      <Property Id="3ca670e1-406e-4819-a539-caf97964dcc0" name="inspayerid" label="inspayerid : String" kind="Persistent" fieldName="_inspayerid" />
+      <Property Id="066ba05b-0c0a-449b-9d98-4427c3fff885" name="inspaypath" label="inspaypath : String" kind="Persistent" fieldName="_inspaypath" />
+      <Property Id="bbf47740-d247-4f3f-aae9-ab2c3ccaa109" name="insphone1" label="insphone1 : String" kind="Persistent" fieldName="_insphone1" />
+      <Property Id="0afa434f-1dfb-4bbf-b48a-ec7866dfb4b9" name="insphone2" label="insphone2 : String" kind="Persistent" fieldName="_insphone2" />
+      <Property Id="4e658ff2-e7eb-476a-9c15-133a5bbce24f" name="insprintfee" type="Char" label="insprintfee : Char" nullable="true" kind="Persistent" fieldName="_insprintfee" />
+      <Property Id="471d0c30-0087-4dea-bddc-c80d2ce07c20" name="insprintid" type="Char" label="insprintid : Char" nullable="true" kind="Persistent" fieldName="_insprintid" />
+      <Property Id="c282f990-7470-4448-9cbe-35ba881bd33f" name="insprintreferring" type="Char" label="insprintreferring : Char" nullable="true" kind="Persistent" fieldName="_insprintreferring" />
+      <Property Id="f455794d-1915-4944-beea-b7ba2a7f9155" name="insprovdoc" type="Char" label="insprovdoc : Char" nullable="true" kind="Persistent" fieldName="_insprovdoc" />
+      <Property Id="fa45a958-1058-48e7-b8bf-1576cb33bfb1" name="insprovesp" type="Char" label="insprovesp : Char" nullable="true" kind="Persistent" fieldName="_insprovesp" />
+      <Property Id="3d204f23-573d-4efa-bf4f-a8e2b2f1dc00" name="insprovloc" type="Char" label="insprovloc : Char" nullable="true" kind="Persistent" fieldName="_insprovloc" />
+      <Property Id="add877a6-fd8d-4eb3-8a3b-7e5b811cbcaf" name="insreceivercode" label="insreceivercode : String" kind="Persistent" fieldName="_insreceivercode" />
+      <Property Id="3d15a2f4-4ecc-49ca-a416-0fde29c99d47" name="insreferingrefqualifier" label="insreferingrefqualifier : String" kind="Persistent" fieldName="_insreferingrefqualifier" />
+      <Property Id="cd4e97ca-232c-47cf-a0d8-97cd73e8c497" name="insremitance" label="insremitance : String" kind="Persistent" fieldName="_insremitance" />
+      <Property Id="3fc68ec0-296d-453d-a43c-d6b64135e9a1" name="insrenderingrefqualifier" label="insrenderingrefqualifier : String" kind="Persistent" fieldName="_insrenderingrefqualifier" />
+      <Property Id="615ef7a6-d9c0-4c73-9fcc-9b4adf7da0f7" name="inssecondaryid" label="inssecondaryid : String" kind="Persistent" fieldName="_inssecondaryid" />
+      <Property Id="b3b319cc-861c-4293-b043-2a07ebaaec55" name="inssecondarypayer" type="Char" label="inssecondarypayer : Char" nullable="true" kind="Persistent" fieldName="_inssecondarypayer" />
+      <Property Id="58406052-1fb1-4181-ac6f-bff4c55cfff9" name="inssinonim" label="inssinonim : String" kind="Persistent" fieldName="_inssinonim" />
+      <Property Id="afd2ca35-e5b0-4d40-a165-f10e699d713f" name="insstate" label="insstate : String" kind="Persistent" fieldName="_insstate" />
+      <Property Id="78a99110-eec1-4895-a449-1ebef706d033" name="inssubmitterid" label="inssubmitterid : String" kind="Persistent" fieldName="_inssubmitterid" />
+      <Property Id="a14e3f2a-7aa0-489c-85e6-232b3ec55dbe" name="inssubmittername" label="inssubmittername : String" kind="Persistent" fieldName="_inssubmittername" />
+      <Property Id="72945258-5628-484d-b4e2-04d8637348f2" name="insubbillingrefqualifier" label="insubbillingrefqualifier : String" kind="Persistent" fieldName="_insubbillingrefqualifier" />
+      <Property Id="7adae45e-0740-4b81-beef-8199101452bb" name="insubfileprefix" label="insubfileprefix : String" kind="Persistent" fieldName="_insubfileprefix" />
+      <Property Id="94cca57b-fa5c-455b-ab67-460e1cb6d2f3" name="insubfilesuffix" label="insubfilesuffix : String" kind="Persistent" fieldName="_insubfilesuffix" />
+      <Property Id="fb2084e3-8dc9-48a8-8dd8-00e635999fda" name="insubinterchangeid" label="insubinterchangeid : String" kind="Persistent" fieldName="_insubinterchangeid" />
+      <Property Id="85b52eb1-9f4f-4768-89c0-3b60c4f62aaa" name="insubinterchangereceiverid" label="insubinterchangereceiverid : String" kind="Persistent" fieldName="_insubinterchangereceiverid" />
+      <Property Id="07a8d9ac-2f97-43cf-be84-ed8bbaf65f10" name="insubpath" label="insubpath : String" kind="Persistent" fieldName="_insubpath" />
+      <Property Id="79c35a7d-3e86-43a5-8129-ad66331581a8" name="insubreceivercode" label="insubreceivercode : String" kind="Persistent" fieldName="_insubreceivercode" />
+      <Property Id="aa759d5a-0d39-4222-9eb1-01de1afc0f77" name="insubreferingrefqualifier" label="insubreferingrefqualifier : String" kind="Persistent" fieldName="_insubreferingrefqualifier" />
+      <Property Id="32878a7b-dc7b-4b80-b0f7-4857807d484b" name="insubrenderingrefqualifier" label="insubrenderingrefqualifier : String" kind="Persistent" fieldName="_insubrenderingrefqualifier" />
+      <Property Id="c8c33ead-c464-436a-858d-61e2b492b0c9" name="insubsecondaryid" label="insubsecondaryid : String" kind="Persistent" fieldName="_insubsecondaryid" />
+      <Property Id="9169cccd-291a-4773-bf04-e75463a0ed6c" name="insubsubmitterid" label="insubsubmitterid : String" kind="Persistent" fieldName="_insubsubmitterid" />
+      <Property Id="38728e05-dc3b-4105-95cb-dd2654794091" name="insubsubmittername" label="insubsubmittername : String" kind="Persistent" fieldName="_insubsubmittername" />
+      <Property Id="b6664cf5-1882-4cae-899a-c2384eb494e5" name="inszipcode" label="inszipcode : String" kind="Persistent" fieldName="_inszipcode" />
+    </DomainClass>
+  </Types>
+  <domainContext>
+    <domainModelHasDomainContext Id="64c04797-105a-417f-a39d-65dce4003508">
+      <domainContainer name="EntitiesModel" namespace="TRAWebServer" showPropertiesCompartment="true">
+        <entitySetProperty name="Scanneds" namespace="TRAWebServer" type="Scanned" label="Scanneds : IQueryable&lt;TRAWebServer.Scanned&gt;" />
+        <entitySetProperty name="ScanGroups" namespace="TRAWebServer" type="ScanGroup" label="ScanGroups : IQueryable&lt;TRAWebServer.ScanGroup&gt;" />
+        <entitySetProperty name="DAT9397Fs" namespace="TRAWebServer" type="DAT9397F" label="DAT9397Fs : IQueryable&lt;TRAWebServer.DAT9397F&gt;" />
+        <entitySetProperty name="DAT8000" namespace="TRAWebServer" type="DAT8000" label="DAT8000 : IQueryable&lt;TRAWebServer.DAT8000&gt;" />
+        <entitySetProperty name="DAT2000" namespace="TRAWebServer" type="DAT2000" label="DAT2000 : IQueryable&lt;TRAWebServer.DAT2000&gt;" />
+        <entitySetProperty name="BookTables" namespace="TRAWebServer" type="BookTable" label="BookTables : IQueryable&lt;TRAWebServer.BookTable&gt;" />
+        <entitySetProperty name="Apoints" namespace="TRAWebServer" type="Apoint" label="Apoints : IQueryable&lt;TRAWebServer.Apoint&gt;" />
+        <entitySetProperty name="DAT3000" namespace="TRAWebServer" type="DAT3000" label="DAT3000 : IQueryable&lt;TRAWebServer.DAT3000&gt;" />
+      </domainContainer>
+    </domainModelHasDomainContext>
+  </domainContext>
+</DomainModel>
