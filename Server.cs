@@ -30,15 +30,14 @@ namespace TRAWebServer
         public static string DocumentsCategory;
 
         public static CronObject Cron;
-
+        public static Flags Flag;
 
         public static void Main(String[] args)
         {
 
             LoadAppConfigSetting();
-
             MainForm = new Form2();
-
+            Flag = new Flags();
             MainForm.FormClosing += mainForm_FormClosing;
             MainForm.resetBtn.Click += resetBtn_Click;
             MainForm.forceSync.Click += forceSync_Click;
@@ -46,6 +45,9 @@ namespace TRAWebServer
             MainForm.configSave.Click +=configSave_Click;
 
             Application.Run(MainForm);
+
+ 
+            
         }
 
         public static void ReStartServer()
@@ -165,6 +167,16 @@ namespace TRAWebServer
         static void resetBtn_Click(object sender, EventArgs e)
         {
             MainForm.display.ResetText();
+
+            var flg = Flag.Program("frm2000").Type("RPT").Code(2).GetFlag();
+            var val = Flag.Program("frm2000").Type("RPT").Code(4).GetValue();
+            WriteDisplay(flg);
+            WriteDisplay(val);
+
+
+            var foo = Flag.Program("frm2000").Type("RPT").Code(6);
+            WriteDisplay(foo.GetFlag());
+            WriteDisplay(foo.GetValue());
         }
 
         static void mainForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -98,6 +98,7 @@
     <Compile Include="DataClasses\InsuranceCombo.cs" />
     <Compile Include="DataModels\Apoint.generated.cs" />
     <Compile Include="DataModels\BookTable.generated.cs" />
+    <Compile Include="DataModels\DAT0000.generated.cs" />
     <Compile Include="DataModels\DAT2000.generated.cs" />
     <Compile Include="DataModels\DAT3000.generated.cs" />
     <Compile Include="DataModels\DAT8000.generated.cs" />
@@ -109,6 +110,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="Flags.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

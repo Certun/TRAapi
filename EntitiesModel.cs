@@ -114,11 +114,23 @@ namespace TRAWebServer
 			}
 		}
 		
+		public IQueryable<DAT0000> DAT0000 
+		{
+			get
+			{
+				return this.GetAll<DAT0000>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
 			backend.Backend = "MsSql";
 			backend.ProviderName = "System.Data.SqlClient";
+			backend.Logging.LogEvents = LoggingLevel.Normal;
+			backend.Logging.MetricStoreSnapshotInterval = 0;
+			backend.Logging.Downloader.Filename = "Log";
+			backend.Logging.Downloader.EventText = true;
 			return backend;
 		}
 	}
@@ -154,6 +166,10 @@ namespace TRAWebServer
 			get;
 		}
 		IQueryable<DAT3000> DAT3000
+		{
+			get;
+		}
+		IQueryable<DAT0000> DAT0000
 		{
 			get;
 		}

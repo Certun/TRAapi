@@ -383,16 +383,16 @@ namespace TRAWebServer
                 dat2000.ptsex = ToChar(data["ptsex"].ToString());
                 dat2000.ptcivilstatus = ToChar(data["ptcivilstatus"].ToString());
                 dat2000.ptbirthdate = Convert.ToDateTime(data["ptbirthdate"].ToString());
-                dat2000.ptpaddress1 = data["ptp_address1"].ToString();
-                dat2000.ptpaddress2 = data["ptp_address2"].ToString();
-                dat2000.ptpcity = data["ptp_city"].ToString();
-                dat2000.ptpstate = data["ptp_state"].ToString();
-                dat2000.ptpzip = data["ptp_zip"].ToString();
-                dat2000.ptraddress1 = data["ptr_address1"].ToString();
-                dat2000.ptraddress2 = data["ptr_address2"].ToString();
-                dat2000.ptrcity = data["ptr_city"].ToString();
-                dat2000.ptrstate = data["ptr_state"].ToString();
-                dat2000.ptrzip = data["ptr_zip"].ToString();
+                dat2000.ptpaddress1 = data["ptpaddress1"].ToString();
+                dat2000.ptpaddress2 = data["ptpaddress2"].ToString();
+                dat2000.ptpcity = data["ptpcity"].ToString();
+                dat2000.ptpstate = data["ptpstate"].ToString();
+                dat2000.ptpzip = data["ptpzip"].ToString();
+                dat2000.ptraddress1 = data["ptraddress1"].ToString();
+                dat2000.ptraddress2 = data["ptraddress2"].ToString();
+                dat2000.ptrcity = data["ptrcity"].ToString();
+                dat2000.ptrstate = data["ptrstate"].ToString();
+                dat2000.ptrzip = data["ptrzip"].ToString();
                 dat2000.pthomephone = data["pthomephone"].ToString();
                 dat2000.ptworkphone = data["ptworkphone"].ToString();
                 dat2000.ptemail = data["ptemail"].ToString();
@@ -408,7 +408,7 @@ namespace TRAWebServer
                     Server.PatientImgCategory,
                     ToChar(data["ptrectype"].ToString()),
                     data["ptrecno"].ToString(),
-                    data["pipatsufx"].ToString()
+                    data["ptrecsuffx"].ToString()
                     );
                 return true;
             }
@@ -429,12 +429,14 @@ namespace TRAWebServer
         {
             try
             {
+                var pipattype = ToChar(ins["pipattype"].ToString());
+                var piorden = ToByte(ins["piorden"].ToString());
                 // try to fin the insurance
                 var d8000 = _conn.DAT8000.SingleOrDefault(d =>
-                    d.pipattype == ToChar(ins["pipattype"].ToString()) &&
+                    d.pipattype == pipattype &&
                     d.pipatno == ins["pipatno"].ToString() &&
                     d.pipatsufx == ins["pipatsufx"].ToString() &&
-                    d.piorden == Convert.ToByte(ins["piorden"].ToString())
+                    d.piorden == piorden
                     );
                 
                 // if not found
@@ -499,7 +501,7 @@ namespace TRAWebServer
                         );
 
 
-                    return d8000;
+                    return true;
                 }
 
                 // update insurance...
@@ -589,7 +591,7 @@ namespace TRAWebServer
                 if (document == "") return false;
                 var parsename = new StringBuilder(name);
                 var path = GetDocPathByCategory(cat);
-                var bytes = Convert.FromBase64String(document);
+                var bytes = Convert.FromBase64String(document.Substring(document.IndexOf(',') + 1));
                 var newName = DateTime.Now.ToString("yyyyMMdd-HHmmss") + "-" + parsename.Replace(" ", "_");
                 var stream = new FileStream(String.Format("\\\\" + Server.DocServer + "\\{0}\\{1}", path, newName), FileMode.CreateNew);
                 var writer = new BinaryWriter(stream);
@@ -664,6 +666,18 @@ namespace TRAWebServer
             catch (Exception)
             {
                 return Convert.ToChar(" ");
+            }
+        }
+
+        private static byte ToByte(string str)
+        {
+            try
+            {
+                return Convert.ToByte(str);
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
 
