@@ -5,11 +5,10 @@ using System;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Data.SqlClient;
 using Newtonsoft.Json.Linq;
 using RestSharp.Contrib;
 
-namespace TRAWebServer
+namespace TRAWebServer.Classes
 {
 
     public class PortalHttpServer : HttpServer
@@ -57,9 +56,6 @@ namespace TRAWebServer
             else
             {
                 // start valid reqiest --------------------------------------------------------------->>>>
-                // Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;
-                var dbMngr = new DbManager("Data Source=ernesto-THINK\\TRA; Initial Catalog=TraData; Trusted_Connection=True");
-                var data = new DataSet();
                 // store header action for easiest access
                 var action = (string) p.HttpHeaders["Action"];
                 // request if a single data for example and ID of a patient or an appoointment book
@@ -71,23 +67,8 @@ namespace TRAWebServer
 
                     case "getPatientData":
                         // DO STUFF HERE!
-                        var query = @"SELECT * FROM DAT2000 WHERE pt_portal_id = @portalId";
-                        var cmd = new SqlCommand(query, dbMngr.Connection);
-                        cmd.Parameters.AddWithValue("@portalId", request);
-                        var results = dbMngr.GetDataTableResults(cmd);
 
-                        results.TableName = "patient";
-                        data.Tables.Add(results);
-
-                        query = @"SELECT * FROM Apoint WHERE book_code = '1'";
-                        cmd = new SqlCommand(query, dbMngr.Connection);
-
-                        results = dbMngr.GetDataTableResults(cmd);
-                        results.TableName = "appointment";
-                        data.Tables.Add(results);
-
-                        response.results = data;
-
+                        response.results = new {};
 
                         // define success
                         response.success = true;
@@ -459,7 +440,7 @@ namespace TRAWebServer
                     var nextDisplay = maxD != null ? Convert.ToInt32(maxD + 1) : 1;
 
                     // Insert new Insurance to the database
-                    d8000 = new DAT8000()
+                    d8000 = new DAT8000
                         {
                             pipattype = ToChar(ins["pipattype"].ToString()),
                             pipatno = ins["pipatno"].ToString(),
@@ -485,7 +466,7 @@ namespace TRAWebServer
                             pistate = ins["pistate"].ToString(),
                             pizip = ins["pizip"].ToString(),
                             pirelation = ToChar(ins["pirelation"].ToString()),
-                            piidsubscriber = ins["piidsubscriber"].ToString(),
+                            piidsubscriber = ins["piidsubscriber"].ToString()
                         };
                     _conn.Add(d8000);
                     _conn.SaveChanges();

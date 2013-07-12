@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
-namespace TRAWebServer
+namespace TRAWebServer.Classes
 {
     static class Syncer
     {

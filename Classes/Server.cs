@@ -6,7 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Rlc.Cron;
 
-namespace TRAWebServer
+namespace TRAWebServer.Classes
 {
     public class Server
     {

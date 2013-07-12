@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using System.Configuration;
+using TRAWebServer.Classes;
 
 namespace TRAWebServer
 {
@@ -35,14 +36,19 @@ namespace TRAWebServer
             docServer.Text = Server.DocServer;
             docDirectory.Text = Server.DocDirectory;
 
-            var db = new DbManager(Server.DataConnString);
-            const string query = @"SELECT * FROM scan_groups";
-            var cmd = new SqlCommand(query, db.Connection);
-            var categories = db.GetDataTableResults(cmd);
+            var conn = new EntitiesModel();
+            var grplist = conn.ScanGroups.ToList();
 
-            patientImgCategory.DataSource = new DataView(categories);
-            insuranceImgCategory.DataSource = new DataView(categories);
-            documentsCategory.DataSource = new DataView(categories);
+            // New table.
+            var table = new DataTable();
+            table.Columns.Add("group_code");
+            table.Columns.Add("group_description");
+            // Add rows.
+            foreach (var g in grplist) table.Rows.Add(g.groupcode, g.groupdescription);
+            
+            patientImgCategory.DataSource = new DataView(table);
+            insuranceImgCategory.DataSource = new DataView(table);
+            documentsCategory.DataSource = new DataView(table);
 
             patientImgCategory.SelectedValue = Server.PatientImgCategory;
             insuranceImgCategory.SelectedValue = Server.InsuranceImgCategory;

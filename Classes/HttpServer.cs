@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace TRAWebServer
+namespace TRAWebServer.Classes
 {
     public abstract class HttpServer
     {

@@ -93,9 +93,6 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataClasses\Appointment.cs" />
-    <Compile Include="DataClasses\FacultyCombo.cs" />
-    <Compile Include="DataClasses\InsuranceCombo.cs" />
     <Compile Include="DataModels\Apoint.generated.cs" />
     <Compile Include="DataModels\BookTable.generated.cs" />
     <Compile Include="DataModels\DAT0000.generated.cs" />
@@ -110,36 +107,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
-    <Compile Include="Flags.cs" />
+    <Compile Include="Classes\Flags.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Syncer.cs" />
-    <Compile Include="DataClasses\Books.cs" />
-    <Compile Include="DataClasses\Referring.cs" />
-    <Compile Include="DbManager.cs" />
+    <Compile Include="Classes\Syncer.cs" />
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="HttpProcessor.cs" />
-    <Compile Include="HttpRest.cs" />
-    <Compile Include="HttpServer.cs" />
-    <Compile Include="DataClasses\Insurance.cs" />
-    <Compile Include="DataClasses\Patient.cs" />
-    <Compile Include="PortalHttpServer.cs" />
+    <Compile Include="Classes\HttpProcessor.cs" />
+    <Compile Include="Classes\HttpRest.cs" />
+    <Compile Include="Classes\HttpServer.cs" />
+    <Compile Include="Classes\PortalHttpServer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RequestData.cs" />
-    <Compile Include="Response.cs" />
-    <Compile Include="Server.cs" />
+    <Compile Include="Classes\RequestData.cs" />
+    <Compile Include="Classes\Response.cs" />
+    <Compile Include="Classes\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +188,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
