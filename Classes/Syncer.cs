@@ -11,7 +11,7 @@ namespace TRAWebServer.Classes
     {
 
         private static EntitiesModel _conn;
-        private const string AppToSyncStatus = "0";
+        private const string AppToSyncStatus = "True";
 
         /// <summary>
         /// 
@@ -102,7 +102,10 @@ namespace TRAWebServer.Classes
         /// <returns></returns>
         private static IEnumerable<Apoint> GetNewAppointments()
         {
-            return _conn.Apoints.Where(a => a.apstatus == AppToSyncStatus);
+            return _conn.Apoints.Where(a => 
+                a.apstatus == AppToSyncStatus &&
+                a.entertime > Convert.ToDateTime(Server.StartDate)
+                );
         }
 
         /// <summary>
@@ -166,6 +169,7 @@ namespace TRAWebServer.Classes
                     Server.WriteDisplay("Something went wront with the web portal");
                     return "";
                 }
+                return null;
                 return JObject.Parse(response.Content);
             }
             catch (Exception ex)

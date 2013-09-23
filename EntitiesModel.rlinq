@@ -672,7 +672,7 @@
           <orm:column name="ap_status" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_apnotes" property="apnotes" behavior="readwrite" uniqueId="e67ef720-1eea-453f-9b8b-37657ef4afe8" type="System.String">
-          <orm:column name="ap_Notes" sql-type="nchar" nullable="true" length="500" scale="0" ado-type="UnicodeStringFixedLength" />
+          <orm:column name="ap_Notes" sql-type="varchar" nullable="true" length="500" scale="0" ado-type="UnicodeStringFixedLength" />
         </orm:field>
         <orm:field name="_espcode" property="espcode" behavior="readwrite" uniqueId="10f86590-780a-48ec-8da2-46877633c7ee" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="esp_code" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
@@ -925,22 +925,22 @@
         </orm:identity>
         <orm:concurrency strategy="changed" />
         <orm:field name="_sysprogram" property="sysprogram" behavior="readwrite" uniqueId="09928413-f464-4be5-9dab-30d96a726943" type="System.String">
-          <orm:column nullable="false" primary-key="true" length="15" name="sys_program" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="sys_program" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_systype" property="systype" behavior="readwrite" uniqueId="0492ff8c-62dc-4689-9dc6-13651f1c3a58" type="System.String">
-          <orm:column nullable="false" primary-key="true" length="3" name="sys_type" scale="0" sql-type="char" ado-type="StringFixedLength" />
+          <orm:column name="sys_type" sql-type="char" nullable="false" length="3" scale="0" primary-key="true" ado-type="StringFixedLength" />
         </orm:field>
         <orm:field name="_syscode" property="syscode" behavior="readwrite" uniqueId="c7edb21e-739c-4568-85d3-cd658d5a41c7" type="System.Byte">
-          <orm:column nullable="false" primary-key="true" length="0" name="sys_code" scale="0" sql-type="tinyint" ado-type="Byte" />
+          <orm:column name="sys_code" sql-type="tinyint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Byte" />
         </orm:field>
         <orm:field name="_sysflag" property="sysflag" behavior="readwrite" uniqueId="94aecad8-c622-43c8-a2c0-271806987f83" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="1" name="sys_flag" scale="0" sql-type="char" ado-type="Character" />
+          <orm:column name="sys_flag" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
         </orm:field>
         <orm:field name="_sysvalue" property="sysvalue" behavior="readwrite" uniqueId="7ce1914b-501e-4c09-9db6-340d957fbd20" type="System.String">
-          <orm:column nullable="true" length="150" name="sys_value" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="sys_value" sql-type="varchar" nullable="true" length="150" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_sysdescription" property="sysdescription" behavior="readwrite" uniqueId="88d7485d-83e9-478d-ba3d-71c8770c35a3" type="System.String">
-          <orm:column nullable="true" length="350" name="sys_description" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="sys_description" sql-type="varchar" nullable="true" length="350" scale="0" ado-type="StringVariableLength" />
         </orm:field>
       </orm:class>
     </orm:namespace>
@@ -1190,7 +1190,7 @@
         <orm:column name="app_pat_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         <orm:column name="Elapsed_time" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         <orm:column name="ap_status" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
-        <orm:column name="ap_Notes" sql-type="nchar" nullable="true" length="500" scale="0" ado-type="UnicodeStringFixedLength" />
+        <orm:column name="ap_Notes" sql-type="varchar" nullable="true" length="500" scale="0" ado-type="UnicodeStringFixedLength" />
         <orm:column name="esp_code" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         <orm:column name="Proc_code" sql-type="varchar" nullable="true" length="10" scale="0" ado-type="StringVariableLength" />
         <orm:column name="ap_ins" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
@@ -1284,12 +1284,12 @@
         </orm:index>
       </orm:table>
       <orm:table name="DAT0000">
-        <orm:column nullable="false" primary-key="true" length="15" name="sys_program" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="false" primary-key="true" length="3" name="sys_type" scale="0" sql-type="char" ado-type="StringFixedLength" />
-        <orm:column nullable="false" primary-key="true" length="0" name="sys_code" scale="0" sql-type="tinyint" ado-type="Byte" />
-        <orm:column nullable="true" length="1" name="sys_flag" scale="0" sql-type="char" ado-type="Character" />
-        <orm:column nullable="true" length="150" name="sys_value" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="true" length="350" name="sys_description" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column name="sys_program" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="sys_type" sql-type="char" nullable="false" length="3" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        <orm:column name="sys_code" sql-type="tinyint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Byte" />
+        <orm:column name="sys_flag" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="sys_value" sql-type="varchar" nullable="true" length="150" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="sys_description" sql-type="varchar" nullable="true" length="350" scale="0" ado-type="StringVariableLength" />
       </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>

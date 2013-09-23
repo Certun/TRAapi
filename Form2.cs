@@ -32,6 +32,7 @@ namespace TRAWebServer
             host.Text = Server.Host;
             serverIp.Text = Server.ServerIp;
             serverPort.Text = Server.ServerPort.ToString(CultureInfo.InvariantCulture);
+            startDate.Text = Server.StartDate;
             secretKey.Text = Server.SecretKey;
             docServer.Text = Server.DocServer;
             docDirectory.Text = Server.DocDirectory;
@@ -87,6 +88,7 @@ namespace TRAWebServer
             host.Text = ConfigurationManager.AppSettings["host"];
             serverIp.Text = ConfigurationManager.AppSettings["serverIp"];
             serverPort.Text = ConfigurationManager.AppSettings["serverPort"];
+            startDate.Text = ConfigurationManager.AppSettings["startDate"];
             secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
             docDirectory.Text = ConfigurationManager.AppSettings["docDirectory"];
             docServer.Text = ConfigurationManager.AppSettings["docServer"];
@@ -100,15 +102,10 @@ namespace TRAWebServer
 
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void patientImgCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-        
+       
     }
 }
