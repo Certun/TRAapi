@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="EntitiesModel" namespace="TRAWebServer" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="EntitiesModel" namespace="WebPortal" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
   <orm:orm name="EntitiesModel" backend="mssql" xmlns:orm="http://tempuri.org/ORM">
-    <orm:namespace name="TRAWebServer" default="true">
+    <orm:namespace name="WebPortal" default="true">
       <orm:class name="Scanned" uniqueId="863728cb-bc6a-4574-96de-b3f9eec450c8">
         <orm:table name="scanned" />
         <orm:identity>
@@ -113,9 +113,9 @@
         <orm:field name="_scanvar02" property="scanvar02" behavior="readwrite" uniqueId="e48a666e-3cdb-4679-9366-4f0b1b4f7f87" type="System.String">
           <orm:column name="scan_var02" sql-type="varchar" nullable="true" length="5" scale="0" ado-type="StringVariableLength" />
         </orm:field>
-        <orm:field name="_scangroup" property="scangroup" behavior="readwrite" uniqueId="72b7229b-2f28-45b1-a48e-f3777c78a965" type="TRAWebServer.ScanGroup">
+        <orm:field name="_scangroup" property="scangroup" behavior="readwrite" uniqueId="72b7229b-2f28-45b1-a48e-f3777c78a965" type="WebPortal.ScanGroup">
           <orm:reference uniqueId="13e14480-ff3a-420e-bcd6-30afd9b58b07">
-            <orm:sharedfield name="_scangroupcode" target-class="TRAWebServer.ScanGroup" target-field="_groupcode" />
+            <orm:sharedfield name="_scangroupcode" target-class="WebPortal.ScanGroup" target-field="_groupcode" />
             <orm:constraint name="FK_scanned_scan_groups" destination-table="scan_groups" />
           </orm:reference>
         </orm:field>
@@ -141,8 +141,8 @@
         <orm:field name="_groupdocworklist" property="groupdocworklist" behavior="readwrite" uniqueId="d95cbde0-8439-4261-b18c-0dbb5b31d210" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="group_DocWorkList" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
         </orm:field>
-        <orm:field name="_scanneds" property="Scanneds" behavior="readwrite" uniqueId="cf60c40f-b3fa-4621-b8e9-bbcfe82d6886" type="TRAWebServer.Scanned">
-          <orm:collection element-class="TRAWebServer.Scanned" inverse-field="_scangroup" order-by="" uniqueId="13e14480-ff3a-420e-bcd6-30afd9b58b07" />
+        <orm:field name="_scanneds" property="Scanneds" behavior="readwrite" uniqueId="cf60c40f-b3fa-4621-b8e9-bbcfe82d6886" type="WebPortal.Scanned">
+          <orm:collection element-class="WebPortal.Scanned" inverse-field="_scangroup" order-by="" uniqueId="13e14480-ff3a-420e-bcd6-30afd9b58b07" />
         </orm:field>
       </orm:class>
       <orm:class name="DAT9397F" uniqueId="aa9b6c9a-57d5-4d87-a765-29825b6887f6">
@@ -338,11 +338,11 @@
         <orm:field name="_pidisplayorder" property="pidisplayorder" behavior="readwrite" uniqueId="9e6ae4e5-1080-4ae0-922b-3ee2f221d2e9" type="System.Nullable`1[[System.Byte, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="pi_display_order" sql-type="tinyint" nullable="true" length="0" scale="0" ado-type="Byte" />
         </orm:field>
-        <orm:field name="_dat2000" property="dat2000" behavior="readwrite" uniqueId="e3c86e39-87cd-4059-8f2b-d2ec48732f30" type="TRAWebServer.DAT2000">
+        <orm:field name="_dat2000" property="dat2000" behavior="readwrite" uniqueId="e3c86e39-87cd-4059-8f2b-d2ec48732f30" type="WebPortal.DAT2000">
           <orm:reference uniqueId="b6554f75-b748-4093-8c69-53c20c2914fd">
-            <orm:sharedfield name="_pipattype" target-class="TRAWebServer.DAT2000" target-field="_ptrectype" />
-            <orm:sharedfield name="_pipatno" target-class="TRAWebServer.DAT2000" target-field="_ptrecno" />
-            <orm:sharedfield name="_pipatsufx" target-class="TRAWebServer.DAT2000" target-field="_ptrecsuffx" />
+            <orm:sharedfield name="_pipattype" target-class="WebPortal.DAT2000" target-field="_ptrectype" />
+            <orm:sharedfield name="_pipatno" target-class="WebPortal.DAT2000" target-field="_ptrecno" />
+            <orm:sharedfield name="_pipatsufx" target-class="WebPortal.DAT2000" target-field="_ptrecsuffx" />
             <orm:constraint name="FK_DAT8000_DAT2000" destination-table="DAT2000" />
           </orm:reference>
         </orm:field>
@@ -575,8 +575,8 @@
         <orm:field name="_ptemrmrn" property="ptemrmrn" behavior="readwrite" uniqueId="cb789591-3524-48b8-bc94-2c233d46f14c" type="System.String">
           <orm:column name="pt_emr_mrn" sql-type="varchar" nullable="true" length="25" scale="0" ado-type="StringVariableLength" />
         </orm:field>
-        <orm:field name="_dAT8000" property="DAT8000" behavior="readwrite" uniqueId="6888d163-5130-4cec-ae54-be38704f29ae" type="TRAWebServer.DAT8000">
-          <orm:collection element-class="TRAWebServer.DAT8000" inverse-field="_dat2000" order-by="" uniqueId="b6554f75-b748-4093-8c69-53c20c2914fd" />
+        <orm:field name="_dAT8000" property="DAT8000" behavior="readwrite" uniqueId="6888d163-5130-4cec-ae54-be38704f29ae" type="WebPortal.DAT8000">
+          <orm:collection element-class="WebPortal.DAT8000" inverse-field="_dat2000" order-by="" uniqueId="b6554f75-b748-4093-8c69-53c20c2914fd" />
         </orm:field>
         <orm:index name="IX_DAT2000">
           <orm:columnMapping>
@@ -698,11 +698,11 @@
         <orm:field name="_apmoddate" property="apmoddate" behavior="readwrite" uniqueId="291784c5-61b2-484d-9ebb-9d11d5628bb8" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="ap_mod_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         </orm:field>
-        <orm:field name="_dat2000" property="DAT2000" behavior="readwrite" uniqueId="d88b8008-2de2-48b7-beac-7f0381ca7cbf" type="TRAWebServer.DAT2000">
+        <orm:field name="_dat2000" property="DAT2000" uniqueId="d88b8008-2de2-48b7-beac-7f0381ca7cbf" type="WebPortal.DAT2000">
           <orm:reference uniqueId="74e392b0-0bbf-465b-b46b-7e69d6afd27e">
-            <orm:sharedfield name="_apprectype" target-class="TRAWebServer.DAT2000" target-field="_ptrectype" />
-            <orm:sharedfield name="_apprecno" target-class="TRAWebServer.DAT2000" target-field="_ptrecno" />
-            <orm:sharedfield name="_apprecsuff" target-class="TRAWebServer.DAT2000" target-field="_ptrecsuffx" />
+            <orm:sharedfield name="_apprectype" target-class="WebPortal.DAT2000" target-field="_ptrectype" />
+            <orm:sharedfield name="_apprecno" target-class="WebPortal.DAT2000" target-field="_ptrecno" />
+            <orm:sharedfield name="_apprecsuff" target-class="WebPortal.DAT2000" target-field="_ptrecsuffx" />
           </orm:reference>
         </orm:field>
         <orm:index name="IX_Apoint">
@@ -925,22 +925,22 @@
         </orm:identity>
         <orm:concurrency strategy="changed" />
         <orm:field name="_sysprogram" property="sysprogram" behavior="readwrite" uniqueId="09928413-f464-4be5-9dab-30d96a726943" type="System.String">
-          <orm:column nullable="false" primary-key="true" length="15" name="sys_program" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="sys_program" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_systype" property="systype" behavior="readwrite" uniqueId="0492ff8c-62dc-4689-9dc6-13651f1c3a58" type="System.String">
-          <orm:column nullable="false" primary-key="true" length="3" name="sys_type" scale="0" sql-type="char" ado-type="StringFixedLength" />
+          <orm:column name="sys_type" sql-type="char" nullable="false" length="3" scale="0" primary-key="true" ado-type="StringFixedLength" />
         </orm:field>
         <orm:field name="_syscode" property="syscode" behavior="readwrite" uniqueId="c7edb21e-739c-4568-85d3-cd658d5a41c7" type="System.Byte">
-          <orm:column nullable="false" primary-key="true" length="0" name="sys_code" scale="0" sql-type="tinyint" ado-type="Byte" />
+          <orm:column name="sys_code" sql-type="tinyint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Byte" />
         </orm:field>
         <orm:field name="_sysflag" property="sysflag" behavior="readwrite" uniqueId="94aecad8-c622-43c8-a2c0-271806987f83" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="1" name="sys_flag" scale="0" sql-type="char" ado-type="Character" />
+          <orm:column name="sys_flag" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
         </orm:field>
         <orm:field name="_sysvalue" property="sysvalue" behavior="readwrite" uniqueId="7ce1914b-501e-4c09-9db6-340d957fbd20" type="System.String">
-          <orm:column nullable="true" length="150" name="sys_value" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="sys_value" sql-type="varchar" nullable="true" length="150" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_sysdescription" property="sysdescription" behavior="readwrite" uniqueId="88d7485d-83e9-478d-ba3d-71c8770c35a3" type="System.String">
-          <orm:column nullable="true" length="350" name="sys_description" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="sys_description" sql-type="varchar" nullable="true" length="350" scale="0" ado-type="StringVariableLength" />
         </orm:field>
       </orm:class>
     </orm:namespace>
@@ -1284,12 +1284,12 @@
         </orm:index>
       </orm:table>
       <orm:table name="DAT0000">
-        <orm:column nullable="false" primary-key="true" length="15" name="sys_program" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="false" primary-key="true" length="3" name="sys_type" scale="0" sql-type="char" ado-type="StringFixedLength" />
-        <orm:column nullable="false" primary-key="true" length="0" name="sys_code" scale="0" sql-type="tinyint" ado-type="Byte" />
-        <orm:column nullable="true" length="1" name="sys_flag" scale="0" sql-type="char" ado-type="Character" />
-        <orm:column nullable="true" length="150" name="sys_value" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="true" length="350" name="sys_description" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column name="sys_program" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="sys_type" sql-type="char" nullable="false" length="3" scale="0" primary-key="true" ado-type="StringFixedLength" />
+        <orm:column name="sys_code" sql-type="tinyint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Byte" />
+        <orm:column name="sys_flag" sql-type="char" nullable="true" length="1" scale="0" ado-type="Character" />
+        <orm:column name="sys_value" sql-type="varchar" nullable="true" length="150" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="sys_description" sql-type="varchar" nullable="true" length="350" scale="0" ado-type="StringVariableLength" />
       </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
@@ -1300,7 +1300,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>TraDataConnection1</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>data source=DESKTOP-PC\SQL2012;initial catalog=TraData;persist security info=True;user id=sa;password=couz2431</AppConfigConnectionString>
+    <AppConfigConnectionString>data source=SAAPSER1\trasql;initial catalog=salus;persist security info=True;user id=sa;password=couz2431</AppConfigConnectionString>
     <InitialCatalog>TraData</InitialCatalog>
     <NamingSettings>
       <ClassRules>
@@ -1322,13 +1322,13 @@
       </PropertyRules>
     </NamingSettings>
     <CodeGenerationSettings>
-      <OutputProjectName>TRAWebServer</OutputProjectName>
+      <OutputProjectName>WebPortal</OutputProjectName>
       <OutputProjectFolder>DataModels\</OutputProjectFolder>
       <OutputPath>DataModels\</OutputPath>
       <MappingDefinitionType>Xml</MappingDefinitionType>
     </CodeGenerationSettings>
     <SchemaUpdateSettings>
-      <DeploymentProject>TRAWebServer</DeploymentProject>
+      <DeploymentProject>WebPortal</DeploymentProject>
     </SchemaUpdateSettings>
     <BackendConfigurationSettings>
       <BackendConfiguration>
@@ -1344,7 +1344,7 @@
     </BackendConfigurationSettings>
   </ModelSettings>
   <Types>
-    <DomainClass Id="863728cb-bc6a-4574-96de-b3f9eec450c8" name="Scanned" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="863728cb-bc6a-4574-96de-b3f9eec450c8" name="Scanned" namespace="WebPortal" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="92cebbf1-6af9-41ed-acb9-3be0b497b8fd" name="scanfilename" label="scanfilename : String" kind="Persistent" identity="true" fieldName="_scanfilename" />
       <Property Id="a2355d4d-145a-480e-8be1-91a812836072" name="scangroupcode" label="scangroupcode : String" kind="Persistent" identity="true" fieldName="_scangroupcode" />
       <Property Id="decea108-cb1d-4375-8e16-027c9f559322" name="scanrecno" label="scanrecno : String" kind="Persistent" identity="true" fieldName="_scanrecno" />
@@ -1399,7 +1399,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="13328199-46d1-47f5-9444-065366e1d1c8" name="ScanGroup" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="13328199-46d1-47f5-9444-065366e1d1c8" name="ScanGroup" namespace="WebPortal" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="766f65cc-a529-47ef-afaf-a392c8249401" name="groupcode" label="groupcode : String" kind="Persistent" identity="true" fieldName="_groupcode" />
       <Property Id="1e68e892-1bcf-4a07-8bec-2dc7730dcdbe" name="groupdescription" label="groupdescription : String" kind="Persistent" fieldName="_groupdescription" />
       <Property Id="d95cbde0-8439-4261-b18c-0dbb5b31d210" name="groupdocworklist" type="Char" label="groupdocworklist : Char" nullable="true" kind="Persistent" fieldName="_groupdocworklist" />
@@ -1411,7 +1411,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="aa9b6c9a-57d5-4d87-a765-29825b6887f6" name="DAT9397F" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="aa9b6c9a-57d5-4d87-a765-29825b6887f6" name="DAT9397F" namespace="WebPortal" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="1ef7ebea-c5f2-484d-a9f5-c337a0db283b" name="faccode" label="faccode : String" kind="Persistent" identity="true" fieldName="_faccode" />
       <Property Id="10667a05-790a-4dd0-9bd5-ec068a264012" name="facacceptmc" type="Char" label="facacceptmc : Char" nullable="true" kind="Persistent" fieldName="_facacceptmc" />
       <Property Id="e61b11e2-784e-4b81-a490-bad30406c345" name="facaddress01" label="facaddress01 : String" kind="Persistent" fieldName="_facaddress01" />
@@ -1434,7 +1434,7 @@
       <Property Id="c30506d1-493a-42be-9b55-5d78c09a05c2" name="facupin" label="facupin : String" kind="Persistent" fieldName="_facupin" />
       <Property Id="4a5a7d99-d920-487c-81b8-c65c7e37eabe" name="faczipcode" label="faczipcode : String" kind="Persistent" fieldName="_faczipcode" />
     </DomainClass>
-    <DomainClass Id="2ff7405c-f8e7-4f0d-b7b1-492be11972a1" name="DAT8000" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="2ff7405c-f8e7-4f0d-b7b1-492be11972a1" name="DAT8000" namespace="WebPortal" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="edb679dd-3f2e-492f-ba8f-2363cabe7d49" name="piorden" type="Byte" label="piorden : Byte" kind="Persistent" identity="true" fieldName="_piorden" />
       <Property Id="a399f03c-60b9-4dc3-bf1f-c11108528082" name="pipatno" label="pipatno : String" kind="Persistent" identity="true" fieldName="_pipatno" />
       <Property Id="4fcc873e-672c-4a3b-9426-eb4b258ddba4" name="pipatsufx" label="pipatsufx : String" kind="Persistent" identity="true" fieldName="_pipatsufx" />
@@ -1490,7 +1490,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="95eb0172-f85b-4074-b1b7-30955c456868" name="DAT2000" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="95eb0172-f85b-4074-b1b7-30955c456868" name="DAT2000" namespace="WebPortal" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="d48e275c-287e-48af-b6e5-c3101974eb94" name="ptrecno" label="ptrecno : String" kind="Persistent" identity="true" fieldName="_ptrecno" />
       <Property Id="45f19ac7-86fe-4226-82f2-fe00cdfd6911" name="ptrecsuffx" label="ptrecsuffx : String" kind="Persistent" identity="true" fieldName="_ptrecsuffx" />
       <Property Id="ae570275-7073-45f0-8be4-456a14be5b87" name="ptrectype" type="Char" label="ptrectype : Char" kind="Persistent" identity="true" fieldName="_ptrectype" />
@@ -1563,7 +1563,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="d0be7f2a-7d45-487a-abbd-2d6cd7fa4fde" name="BookTable" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="d0be7f2a-7d45-487a-abbd-2d6cd7fa4fde" name="BookTable" namespace="WebPortal" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="1a958355-6f95-4c39-8f94-f871dd070811" name="bookcode" type="Int32" label="bookcode : Int32" kind="Persistent" identity="true" fieldName="_bookcode" />
       <Property Id="6b8aefff-8f2d-4817-b9bf-78efafb8ae4e" name="bookendtime" type="DateTime" label="bookendtime : DateTime" nullable="true" kind="Persistent" fieldName="_bookendtime" />
       <Property Id="1790de11-9806-4d79-97aa-a4fff939227c" name="bookname" label="bookname : String" kind="Persistent" fieldName="_bookname" />
@@ -1576,7 +1576,7 @@
       <Property Id="3990c866-68c7-4a2c-a43d-05999515457b" name="loccode" type="Int32" label="loccode : Int32" nullable="true" kind="Persistent" fieldName="_loccode" />
       <Property Id="ce57ff45-44e7-4e56-9e9a-bf3af4fa94e5" name="locname" label="locname : String" kind="Persistent" fieldName="_locname" />
     </DomainClass>
-    <DomainClass Id="bfe5b8a8-aa48-42b1-8301-2ddcd433a91a" name="Apoint" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="bfe5b8a8-aa48-42b1-8301-2ddcd433a91a" name="Apoint" namespace="WebPortal" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="4db5eaa5-7e94-4cfd-b22f-e64a5afe2b9a" name="apnum" label="apnum : String" kind="Persistent" identity="true" fieldName="_apnum" />
       <Property Id="ef86dcc7-4d7c-48bb-b5de-4b3059ef0b8f" name="bookcode" type="Int32" label="bookcode : Int32" kind="Persistent" identity="true" fieldName="_bookcode" />
       <Property Id="e781e91e-823b-45c0-a47e-e79cbba0a5fd" name="entertime" type="DateTime" label="entertime : DateTime" kind="Persistent" identity="true" fieldName="_entertime" />
@@ -1607,11 +1607,11 @@
       </AssociationTargets>
       <navigationalProperties>
         <classHasNavigationalProperties Id="d45a23bc-7fdb-4b7c-9f32-a35b76b24ef3">
-          <NavigationalProperty Id="d88b8008-2de2-48b7-beac-7f0381ca7cbf" name="DAT2000" type="DAT2000" label="DAT2000 : DAT2000" nullable="true" kind="Persistent" fieldName="_dat2000" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="d88b8008-2de2-48b7-beac-7f0381ca7cbf" name="DAT2000" type="DAT2000" label="DAT2000 : DAT2000" nullable="true" fieldName="_dat2000" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="3676a361-ed9f-4f19-8855-07a5466114a1" name="DAT3000" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="3676a361-ed9f-4f19-8855-07a5466114a1" name="DAT3000" namespace="WebPortal" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="c215749f-cdc1-4285-a165-bb3f45a21b5f" name="inscode" label="inscode : String" kind="Persistent" identity="true" fieldName="_inscode" />
       <Property Id="b934b1c0-faf3-4446-91ae-73e43c96a026" name="insaddress1" label="insaddress1 : String" kind="Persistent" fieldName="_insaddress1" />
       <Property Id="03b10b78-0018-4a22-9ec8-52533c99f12f" name="insaddress2" label="insaddress2 : String" kind="Persistent" fieldName="_insaddress2" />
@@ -1673,7 +1673,7 @@
       <Property Id="38728e05-dc3b-4105-95cb-dd2654794091" name="insubsubmittername" label="insubsubmittername : String" kind="Persistent" fieldName="_insubsubmittername" />
       <Property Id="b6664cf5-1882-4cae-899a-c2384eb494e5" name="inszipcode" label="inszipcode : String" kind="Persistent" fieldName="_inszipcode" />
     </DomainClass>
-    <DomainClass Id="04abb577-6410-402f-9ba2-84d334c7c1b6" name="DAT0000" namespace="TRAWebServer" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="04abb577-6410-402f-9ba2-84d334c7c1b6" name="DAT0000" namespace="WebPortal" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="c7edb21e-739c-4568-85d3-cd658d5a41c7" name="syscode" type="Byte" label="syscode : Byte" kind="Persistent" identity="true" fieldName="_syscode" />
       <Property Id="09928413-f464-4be5-9dab-30d96a726943" name="sysprogram" label="sysprogram : String" kind="Persistent" identity="true" fieldName="_sysprogram" />
       <Property Id="0492ff8c-62dc-4689-9dc6-13651f1c3a58" name="systype" label="systype : String" kind="Persistent" identity="true" fieldName="_systype" />
@@ -1684,16 +1684,16 @@
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="64c04797-105a-417f-a39d-65dce4003508">
-      <domainContainer name="EntitiesModel" namespace="TRAWebServer" showPropertiesCompartment="true">
-        <entitySetProperty name="Scanneds" namespace="TRAWebServer" type="Scanned" label="Scanneds : IQueryable&lt;TRAWebServer.Scanned&gt;" />
-        <entitySetProperty name="ScanGroups" namespace="TRAWebServer" type="ScanGroup" label="ScanGroups : IQueryable&lt;TRAWebServer.ScanGroup&gt;" />
-        <entitySetProperty name="DAT9397Fs" namespace="TRAWebServer" type="DAT9397F" label="DAT9397Fs : IQueryable&lt;TRAWebServer.DAT9397F&gt;" />
-        <entitySetProperty name="DAT8000" namespace="TRAWebServer" type="DAT8000" label="DAT8000 : IQueryable&lt;TRAWebServer.DAT8000&gt;" />
-        <entitySetProperty name="DAT2000" namespace="TRAWebServer" type="DAT2000" label="DAT2000 : IQueryable&lt;TRAWebServer.DAT2000&gt;" />
-        <entitySetProperty name="BookTables" namespace="TRAWebServer" type="BookTable" label="BookTables : IQueryable&lt;TRAWebServer.BookTable&gt;" />
-        <entitySetProperty name="Apoints" namespace="TRAWebServer" type="Apoint" label="Apoints : IQueryable&lt;TRAWebServer.Apoint&gt;" />
-        <entitySetProperty name="DAT3000" namespace="TRAWebServer" type="DAT3000" label="DAT3000 : IQueryable&lt;TRAWebServer.DAT3000&gt;" />
-        <entitySetProperty name="DAT0000" namespace="TRAWebServer" type="DAT0000" label="DAT0000 : IQueryable&lt;TRAWebServer.DAT0000&gt;" />
+      <domainContainer name="EntitiesModel" namespace="WebPortal" showPropertiesCompartment="true">
+        <entitySetProperty name="Scanneds" namespace="WebPortal" type="Scanned" label="Scanneds : IQueryable&lt;WebPortal.Scanned&gt;" />
+        <entitySetProperty name="ScanGroups" namespace="WebPortal" type="ScanGroup" label="ScanGroups : IQueryable&lt;WebPortal.ScanGroup&gt;" />
+        <entitySetProperty name="DAT9397Fs" namespace="WebPortal" type="DAT9397F" label="DAT9397Fs : IQueryable&lt;WebPortal.DAT9397F&gt;" />
+        <entitySetProperty name="DAT8000" namespace="WebPortal" type="DAT8000" label="DAT8000 : IQueryable&lt;WebPortal.DAT8000&gt;" />
+        <entitySetProperty name="DAT2000" namespace="WebPortal" type="DAT2000" label="DAT2000 : IQueryable&lt;WebPortal.DAT2000&gt;" />
+        <entitySetProperty name="BookTables" namespace="WebPortal" type="BookTable" label="BookTables : IQueryable&lt;WebPortal.BookTable&gt;" />
+        <entitySetProperty name="Apoints" namespace="WebPortal" type="Apoint" label="Apoints : IQueryable&lt;WebPortal.Apoint&gt;" />
+        <entitySetProperty name="DAT3000" namespace="WebPortal" type="DAT3000" label="DAT3000 : IQueryable&lt;WebPortal.DAT3000&gt;" />
+        <entitySetProperty name="DAT0000" namespace="WebPortal" type="DAT0000" label="DAT0000 : IQueryable&lt;WebPortal.DAT0000&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

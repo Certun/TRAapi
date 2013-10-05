@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace TRAWebServer.Classes
+namespace WebPortal.Classes
 {
     class RequestData
     {

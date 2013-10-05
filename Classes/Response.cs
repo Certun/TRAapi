@@ -1,4 +1,4 @@
-﻿namespace TRAWebServer.Classes
+﻿namespace WebPortal.Classes
 {
     class Response
     {

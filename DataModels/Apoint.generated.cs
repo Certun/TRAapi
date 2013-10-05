@@ -18,9 +18,9 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
-using TRAWebServer;
+using WebPortal;
 
-namespace TRAWebServer	
+namespace WebPortal	
 {
 	public partial class Apoint
 	{
@@ -55,7 +55,7 @@ namespace TRAWebServer
 		{
 			get
 			{
-				return this._apnum;
+                return this._apnum.Trim();
 			}
 			set
 			{
@@ -81,7 +81,7 @@ namespace TRAWebServer
 		{
 			get
 			{
-				return this._apprecno;
+                return this._apprecno.Trim();
 			}
 			set
 			{
@@ -94,7 +94,7 @@ namespace TRAWebServer
 		{
 			get
 			{
-				return this._apprecsuff;
+                return this._apprecsuff.Trim();
 			}
 			set
 			{
@@ -133,7 +133,7 @@ namespace TRAWebServer
 		{
 			get
 			{
-				return this._apstatus;
+                return this._apstatus.Trim();
 			}
 			set
 			{
@@ -146,7 +146,7 @@ namespace TRAWebServer
 		{
 			get
 			{
-				return this._apnotes;
+				return this._apnotes.Trim();
 			}
 			set
 			{
@@ -172,7 +172,7 @@ namespace TRAWebServer
 		{
 			get
 			{
-				return this._proccode;
+                return this._proccode.Trim();
 			}
 			set
 			{
@@ -185,7 +185,7 @@ namespace TRAWebServer
 		{
 			get
 			{
-				return this._apins;
+                return this._apins.Trim();
 			}
 			set
 			{
@@ -198,7 +198,7 @@ namespace TRAWebServer
 		{
 			get
 			{
-				return this._appack;
+                return this._appack.Trim();
 			}
 			set
 			{
@@ -211,7 +211,7 @@ namespace TRAWebServer
 		{
 			get
 			{
-				return this._apcreateuser;
+                return this._apcreateuser.Trim();
 			}
 			set
 			{
@@ -237,7 +237,7 @@ namespace TRAWebServer
 		{
 			get
 			{
-				return this._apmoduser;
+                return this._apmoduser.Trim();
 			}
 			set
 			{

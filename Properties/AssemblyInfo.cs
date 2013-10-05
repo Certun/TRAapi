@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TRA Portal Server")]
+[assembly: AssemblyTitle("Web Portal Server")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("TRA Portal Server")]
-[assembly: AssemblyCopyright("Copyright © TRA 2010")]
+[assembly: AssemblyProduct("Web Portal Server")]
+[assembly: AssemblyCopyright("Copyright © Certun 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

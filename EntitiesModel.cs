@@ -18,9 +18,9 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
-using TRAWebServer;
+using WebPortal;
 
-namespace TRAWebServer	
+namespace WebPortal	
 {
 	public partial class EntitiesModel : OpenAccessContext, IEntitiesModelUnitOfWork
 	{

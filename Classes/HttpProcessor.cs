@@ -4,7 +4,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace TRAWebServer.Classes
+namespace WebPortal.Classes
 {
     public class HttpProcessor
     {

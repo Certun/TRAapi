@@ -1,4 +1,4 @@
-﻿namespace TRAWebServer
+﻿namespace WebPortal
 {
     partial class Form2
     {
@@ -38,6 +38,8 @@
             this.forceSync = new System.Windows.Forms.Button();
             this.enableDebug = new System.Windows.Forms.CheckBox();
             this.tabSettings = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.startDate = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.docServer = new System.Windows.Forms.TextBox();
@@ -112,7 +114,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 149);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(512, 435);
+            this.tabControl1.Size = new System.Drawing.Size(512, 462);
             this.tabControl1.TabIndex = 3;
             // 
             // tabDisplay
@@ -125,7 +127,7 @@
             this.tabDisplay.Location = new System.Drawing.Point(4, 22);
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplay.Size = new System.Drawing.Size(504, 409);
+            this.tabDisplay.Size = new System.Drawing.Size(504, 436);
             this.tabDisplay.TabIndex = 0;
             this.tabDisplay.Text = "Log";
             this.tabDisplay.UseVisualStyleBackColor = true;
@@ -169,6 +171,8 @@
             // 
             // tabSettings
             // 
+            this.tabSettings.Controls.Add(this.label10);
+            this.tabSettings.Controls.Add(this.startDate);
             this.tabSettings.Controls.Add(this.groupBox1);
             this.tabSettings.Controls.Add(this.label5);
             this.tabSettings.Controls.Add(this.serverIp);
@@ -184,10 +188,30 @@
             this.tabSettings.Location = new System.Drawing.Point(4, 22);
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSettings.Size = new System.Drawing.Size(504, 409);
+            this.tabSettings.Size = new System.Drawing.Size(504, 436);
             this.tabSettings.TabIndex = 1;
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(18, 186);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(55, 13);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "Start Date";
+            // 
+            // startDate
+            // 
+            this.startDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.startDate.Location = new System.Drawing.Point(116, 178);
+            this.startDate.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
+            this.startDate.Name = "startDate";
+            this.startDate.Size = new System.Drawing.Size(365, 22);
+            this.startDate.TabIndex = 14;
+            this.startDate.Value = new System.DateTime(2013, 9, 21, 14, 2, 36, 0);
             // 
             // groupBox1
             // 
@@ -202,9 +226,9 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox1.Location = new System.Drawing.Point(18, 171);
+            this.groupBox1.Location = new System.Drawing.Point(18, 214);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(452, 183);
+            this.groupBox1.Size = new System.Drawing.Size(463, 180);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Document Categories";
@@ -308,7 +332,6 @@
             this.label6.Size = new System.Drawing.Size(72, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "Patient Image";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 
@@ -327,7 +350,7 @@
             this.serverIp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.serverIp.Location = new System.Drawing.Point(116, 53);
             this.serverIp.Name = "serverIp";
-            this.serverIp.Size = new System.Drawing.Size(354, 20);
+            this.serverIp.Size = new System.Drawing.Size(365, 20);
             this.serverIp.TabIndex = 11;
             this.serverIp.TextChanged += new System.EventHandler(this.serverIp_TextChanged);
             // 
@@ -336,9 +359,9 @@
             this.generateKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.generateKey.AutoSize = true;
             this.generateKey.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.generateKey.Location = new System.Drawing.Point(363, 142);
+            this.generateKey.Location = new System.Drawing.Point(374, 142);
             this.generateKey.Name = "generateKey";
-            this.generateKey.Size = new System.Drawing.Size(107, 23);
+            this.generateKey.Size = new System.Drawing.Size(107, 26);
             this.generateKey.TabIndex = 8;
             this.generateKey.Text = "Generate New Key";
             this.generateKey.UseVisualStyleBackColor = true;
@@ -346,8 +369,9 @@
             // 
             // configCancel
             // 
+            this.configCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.configCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.configCancel.Location = new System.Drawing.Point(342, 380);
+            this.configCancel.Location = new System.Drawing.Point(342, 407);
             this.configCancel.Name = "configCancel";
             this.configCancel.Size = new System.Drawing.Size(75, 23);
             this.configCancel.TabIndex = 7;
@@ -362,7 +386,7 @@
             this.host.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.host.Location = new System.Drawing.Point(116, 22);
             this.host.Name = "host";
-            this.host.Size = new System.Drawing.Size(354, 20);
+            this.host.Size = new System.Drawing.Size(365, 20);
             this.host.TabIndex = 6;
             this.host.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
@@ -373,7 +397,7 @@
             this.serverPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.serverPort.Location = new System.Drawing.Point(116, 84);
             this.serverPort.Name = "serverPort";
-            this.serverPort.Size = new System.Drawing.Size(354, 20);
+            this.serverPort.Size = new System.Drawing.Size(365, 20);
             this.serverPort.TabIndex = 5;
             // 
             // label3
@@ -413,14 +437,14 @@
             this.secretKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.secretKey.Location = new System.Drawing.Point(116, 116);
             this.secretKey.Name = "secretKey";
-            this.secretKey.Size = new System.Drawing.Size(354, 20);
+            this.secretKey.Size = new System.Drawing.Size(365, 20);
             this.secretKey.TabIndex = 1;
             // 
             // configSave
             // 
             this.configSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.configSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.configSave.Location = new System.Drawing.Point(423, 380);
+            this.configSave.Location = new System.Drawing.Point(423, 407);
             this.configSave.Name = "configSave";
             this.configSave.Size = new System.Drawing.Size(75, 23);
             this.configSave.TabIndex = 0;
@@ -432,13 +456,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(538, 596);
+            this.ClientSize = new System.Drawing.Size(538, 623);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(554, 634);
             this.Name = "Form2";
-            this.Text = "TRA Portal Server";
+            this.Text = "Web Portal Server";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -486,6 +510,8 @@
         public System.Windows.Forms.ComboBox patientImgCategory;
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox docServer;
+        public System.Windows.Forms.DateTimePicker startDate;
+        private System.Windows.Forms.Label label10;
 
     }
 }

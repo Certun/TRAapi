@@ -8,7 +8,7 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using RestSharp.Contrib;
 
-namespace TRAWebServer.Classes
+namespace WebPortal.Classes
 {
 
     public class PortalHttpServer : HttpServer

@@ -1,37 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
-namespace TRAWebServer.Classes
+namespace WebPortal.Classes
 {
     static class Syncer
     {
 
         private static EntitiesModel _conn;
-        private const string AppToSyncStatus = "0";
+        private const string AppToSyncStatus = "N/A";
 
         /// <summary>
         /// 
         /// </summary>
         public static void SyncApps()
         {
+            if (Server.Debug) Server.WriteDisplay("SyncApps()");
             _conn = new EntitiesModel();
             // get all data
             var data = new { appointments = GetNewAppointments() };
             // process appointments
-            var results = Send(
-                "syncApps",
-                JsonConvert.SerializeObject(
+            if (Server.Debug) Server.WriteDisplay("Before Send()");
+
+            var jdata =  JsonConvert.SerializeObject(
                     data,
                     Formatting.None,
                     new JsonSerializerSettings(){ ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
-                    )
-                );
-            // process results
+                    );
+
+            var results = Send("syncApps", jdata);
+
+            if (Server.Debug) Server.WriteDisplay(results);
+            
+            if (Server.Debug) Server.WriteDisplay("After Send()");
+
+//             process results
             ProcessResults(results);
+
         }
 
         /// <summary>
@@ -39,25 +49,27 @@ namespace TRAWebServer.Classes
         /// </summary>
         public static void SyncData()
         {
+            if (Server.Debug) Server.WriteDisplay("SyncData()");
             _conn = new EntitiesModel();
             // get all data
             var data = new
                 {
                     books = GetBooks(), 
-                    insuranceCombo = GetInsuranceComboData(),
-                    facultyCombo = GetFacultyComboData()
+                    insuranceCombo = GetInsuranceComboData()
+//                    facultyCombo = GetFacultyComboData()
                 };
             // process appointments
-            var results = Send(
-                "syncData",
-                JsonConvert.SerializeObject(
-                    data,
-                    Formatting.None,
-                    new JsonSerializerSettings() {ReferenceLoopHandling = ReferenceLoopHandling.Ignore}
-                    )
+            if (Server.Debug) Server.WriteDisplay("Before Send()");
+
+            var jdata = JsonConvert.SerializeObject(
+                data,
+                Formatting.None,
+                new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
                 );
-            // process results
-            ProcessResults(results);
+
+            Send("syncData", jdata);
+
+            if (Server.Debug) Server.WriteDisplay("After Send()");
         }
 
         /// <summary>
@@ -72,7 +84,7 @@ namespace TRAWebServer.Classes
 
                 if (!(bool)results["success"])
                 {
-                    Server.WriteDisplay((string) results["error"]);
+                    if (Server.Debug) Server.WriteDisplay((string)results["error"]);
                     return;
                 }
                 var successes = (JArray)results["successes"];
@@ -82,7 +94,7 @@ namespace TRAWebServer.Classes
                     UpdateAppointmentByAppointmentNumber((string)appNun, true);
                 }
 
-                var failueres = (JArray)results["faillures"];
+                var failueres = (JArray)results["failures"];
                 if (failueres == null) return;
                 foreach (var appNun in failueres)
                 {
@@ -102,7 +114,12 @@ namespace TRAWebServer.Classes
         /// <returns></returns>
         private static IEnumerable<Apoint> GetNewAppointments()
         {
-            return _conn.Apoints.Where(a => a.apstatus == AppToSyncStatus);
+            var appointments = _conn.Apoints.Where(a => 
+                a.apstatus == AppToSyncStatus &&
+                a.entertime > Convert.ToDateTime(DateTime.Now.AddDays(1))
+                ).Take(100);
+
+            return appointments;
         }
 
         /// <summary>
@@ -113,7 +130,7 @@ namespace TRAWebServer.Classes
         public static void UpdateAppointmentByAppointmentNumber(string appNum, bool success)
         {
             var app = _conn.Apoints.Single(a => a.apnum == appNum);
-            app.apstatus = "1";
+            app.apstatus = (success ? "Test" : "No Email");
             _conn.SaveChanges();
         }
 
@@ -154,13 +171,30 @@ namespace TRAWebServer.Classes
         {
             try
             {
+//                ServicePointManager.ServerCertificateValidationCallback +=
+//        (sender, certificate, chain, sslPolicyErrors) => true;
+
+                if (Server.Debug) Server.WriteDisplay("new RestClient()");
                 var client = new RestClient(Server.Host + "/dataProvider/Api.php");
+                if (Server.Debug) Server.WriteDisplay("new RestRequest()");
                 var request = new RestRequest("", Method.POST);
+
                 request.AddParameter("application/json", jdata, ParameterType.RequestBody);
                 request.AddHeader("Action", action);
                 request.AddHeader("Secret-Key", Server.SecretKey);
+
+                if (Server.Debug) Server.WriteDisplay("RestClient Execute()");
                 var response = (RestResponse)client.Execute(request);
-                Server.WriteDisplay(response.Content);
+//
+                if (response.ErrorMessage != "")
+                {
+                    if (Server.Debug) Server.WriteDisplay("RestRequest() ErrorMessage");
+                    if (Server.Debug) Server.WriteDisplay(response.ErrorMessage);
+                }
+               
+//                if (Server.Debug) Server.WriteDisplay("RestRequest() Content");
+//                if (Server.Debug) Server.WriteDisplay(response.Content);
+
                 if (response.Content == String.Empty)
                 {
                     Server.WriteDisplay("Something went wront with the web portal");
@@ -170,7 +204,6 @@ namespace TRAWebServer.Classes
             }
             catch (Exception ex)
             {
-
                 Server.WriteDisplay(ex);
             }
             return null;

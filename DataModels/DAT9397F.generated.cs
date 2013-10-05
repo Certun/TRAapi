@@ -19,7 +19,7 @@ using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
 
-namespace TRAWebServer	
+namespace WebPortal	
 {
 	public partial class DAT9397F
 	{

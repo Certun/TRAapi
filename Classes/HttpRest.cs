@@ -1,6 +1,6 @@
 ﻿using RestSharp;
 
-namespace TRAWebServer.Classes
+namespace WebPortal.Classes
 {
     public class HttpRest
     {
