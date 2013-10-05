@@ -13,7 +13,6 @@ namespace WebPortal.Classes
     {
 
         private static EntitiesModel _conn;
-        private const string AppToSyncStatus = "N/A";
 
         /// <summary>
         /// 
@@ -41,6 +40,9 @@ namespace WebPortal.Classes
 
 //             process results
             ProcessResults(results);
+
+            // dispose EntitiesModel 
+            _conn.Dispose();
 
         }
 
@@ -70,6 +72,9 @@ namespace WebPortal.Classes
             Send("syncData", jdata);
 
             if (Server.Debug) Server.WriteDisplay("After Send()");
+
+            // dispose EntitiesModel
+            _conn.Dispose();
         }
 
         /// <summary>
@@ -114,10 +119,10 @@ namespace WebPortal.Classes
         /// <returns></returns>
         private static IEnumerable<Apoint> GetNewAppointments()
         {
-            var appointments = _conn.Apoints.Where(a => 
-                a.apstatus == AppToSyncStatus &&
+            var appointments = _conn.Apoints.Where(a =>
+                (a.apstatus != "Procesado" && a.apstatus != "Error") &&
                 a.entertime > Convert.ToDateTime(DateTime.Now.AddDays(1))
-                ).Take(100);
+                ).Take(150);
 
             return appointments;
         }
@@ -130,7 +135,7 @@ namespace WebPortal.Classes
         public static void UpdateAppointmentByAppointmentNumber(string appNum, bool success)
         {
             var app = _conn.Apoints.Single(a => a.apnum == appNum);
-            app.apstatus = (success ? "Test" : "No Email");
+            app.apstatus = (success ? "Procesado" : "Error");
             _conn.SaveChanges();
         }
 
