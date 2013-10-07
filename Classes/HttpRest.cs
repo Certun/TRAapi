@@ -45,23 +45,23 @@ namespace WebPortal.Classes
             if (!IsJson(data))
             {
                 // if data is not a json send a GET
-                if (Server.Debug)
-                {
-                    Server.WriteDisplay("Method: GET");
-                    Server.WriteDisplay("Action: " + action);
-                    Server.WriteDisplay("Request: " + data);
-                }
+//                if (Server.Debug)
+//                {
+//                    Server.WriteDisplay("Method: GET");
+//                    Server.WriteDisplay("Action: " + action);
+//                    Server.WriteDisplay("Request: " + data);
+//                }
                 _request = new RestRequest(data, Method.GET);
             }
             else
             {
                 // if data is JOSN then send a POST
-                if (Server.Debug)
-                {
-                    Server.WriteDisplay("Method: POST");
-                    Server.WriteDisplay("Action: " + action);
-                    Server.WriteDisplay("Request Data: " + data);
-                }
+//                if (Server.Debug)
+//                {
+//                    Server.WriteDisplay("Method: POST");
+//                    Server.WriteDisplay("Action: " + action);
+//                    Server.WriteDisplay("Request Data: " + data);
+//                }
                 _request = new RestRequest("", Method.POST);
                 _request.AddParameter("application/json", data.ToString(), ParameterType.RequestBody);
             }

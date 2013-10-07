@@ -79,13 +79,12 @@ namespace WebPortal.Classes
         static void forceSync_Click(object sender, EventArgs e)
         {
             if (Server.Debug) WriteDisplay("Forcing Sync...");
-            var requestThread = new Thread(SendRequest);
-            requestThread.Start();
+            new Thread(SendRequest).Start();
         }
 
         public static void SendRequest()
         {
-            if (Server.Debug) WriteDisplay("SendRequest()");
+            if (Server.Debug) Server.WriteDisplay("************* Sending Request *************");
 //            Syncer.SyncData();
             Syncer.SyncApps();          
         }
@@ -94,40 +93,50 @@ namespace WebPortal.Classes
         {
             if (MainForm.StartStop.Text == @"Start")
             {
-//                DatabaseScheduler.Run();
-                try
-                {
-                    // Startting HTTP server
-                    HttpServer = new PortalHttpServer(ServerPort);
-                    MainThread = new Thread(HttpServer.Listen);
-                    MainThread.Start();
-                    // Starting Cron Job
-                    var now = DateTime.Now;
-                    var cronSchedule = CronSchedule.Parse("* * * * *");
-                    var cronSchedules = new List<CronSchedule> { cronSchedule };
-                    var dc = new CronObjectDataContext
-                    {
-                        Object = DateTime.Now,
-                        CronSchedules = cronSchedules,
-                        LastTrigger = now
-                    };
-                    Cron = new CronObject(dc);
-                    Cron.OnCronTrigger += Cron_OnCronTrigger;
-                    Cron.Start();
-                    // Set button text
-                    MainForm.StartStop.Text = @"Stop";
-                    MainForm.display.BackColor = Color.Aquamarine;
-
-                    WriteDisplay("Server Started on port: " + ServerPort);
-                }
-                catch (Exception)
-                {
-                    WriteDisplay("Unable to start server");
-                    MainForm.display.BackColor = Color.Tomato;
-                }
-
+                StartServer();
             }
             else
+            {
+                StopServer();
+            }
+        }
+
+        public static void StartServer()
+        {
+            try
+            {
+                // Startting HTTP server
+                HttpServer = new PortalHttpServer(ServerPort);
+                MainThread = new Thread(HttpServer.Listen);
+                MainThread.Start();
+                // Starting Cron Job
+                var now = DateTime.Now;
+                var cronSchedule = CronSchedule.Parse("* * * * *");
+                var cronSchedules = new List<CronSchedule> { cronSchedule };
+                var dc = new CronObjectDataContext
+                {
+                    Object = DateTime.Now,
+                    CronSchedules = cronSchedules,
+                    LastTrigger = now
+                };
+                Cron = new CronObject(dc);
+                Cron.OnCronTrigger += Cron_OnCronTrigger;
+                Cron.Start();
+                // Set button text
+                SetTextBtn(@"Stop");
+                SetColorDisplay(Color.Aquamarine);
+
+                WriteDisplay("Server Started on port: " + ServerPort);
+            }
+            catch (Exception)
+            {
+                WriteDisplay("Unable to start server");
+                SetColorDisplay(Color.Tomato);
+            }
+        }
+        public static void StopServer()
+        {
+            try
             {
                 // Stopping server 
                 HttpServer.Stop();
@@ -135,9 +144,15 @@ namespace WebPortal.Classes
                 Cron.Stop();
                 WriteDisplay("Server Stopped");
                 // Set button text
-                MainForm.StartStop.Text = @"Start";
-                MainForm.display.BackColor = Color.White;
+                SetTextBtn(@"Start");
+                SetColorDisplay(Color.White);
             }
+            catch (Exception)
+            {
+                WriteDisplay("Unable to stop server");
+                SetColorDisplay(Color.Tomato);
+            }
+
         }
 
         private static void configSave_Click(object sender, EventArgs e)
@@ -164,8 +179,7 @@ namespace WebPortal.Classes
 
         private static void Cron_OnCronTrigger(CronObject cronObject)
         {
-            Syncer.SyncApps();
-          
+            SendRequest();         
         }
 
         static void resetBtn_Click(object sender, EventArgs e)
@@ -186,8 +200,11 @@ namespace WebPortal.Classes
             Environment.Exit(0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
         delegate void WriteDisplayCallabck(string text);
-
         public static void WriteDisplay(dynamic msg)
         {
             string text;
@@ -199,6 +216,7 @@ namespace WebPortal.Classes
             {
                 text = msg != null ? msg.ToString() : "";
             }
+
             var dtime = "[ "+ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " ] ";
             var textBox = MainForm.display;
             if (textBox.InvokeRequired)
@@ -208,7 +226,45 @@ namespace WebPortal.Classes
             }
             else
             {
-                textBox.Text += dtime + text + Environment.NewLine;
+                textBox.Text = dtime + text + Environment.NewLine + textBox.Text;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="color"></param>
+        delegate void SetColorDisplayCallabck(Color color);
+        public static void SetColorDisplay(Color color)
+        {
+            var display = MainForm.display;
+            if (display.InvokeRequired)
+            {
+                var d = new SetColorDisplayCallabck(SetColorDisplay);
+                display.Invoke(d, new object[] { color });
+            }
+            else
+            {
+                display.BackColor = color;
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        delegate void SetTextBtnCallabck(string text);
+        public static void SetTextBtn(string text)
+        {
+            var btn = MainForm.StartStop;
+            if (btn.InvokeRequired)
+            {
+                var d = new SetTextBtnCallabck(SetTextBtn);
+                btn.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                btn.Text = text;
             }
         }
 

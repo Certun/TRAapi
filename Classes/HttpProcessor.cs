@@ -32,7 +32,7 @@ namespace WebPortal.Classes
             var data = "";
             while (true)
             {
-                int nextChar = inputStream.ReadByte();
+                var nextChar = inputStream.ReadByte();
                 if (nextChar == '\n') { break; }
                 if (nextChar == '\r') { continue; }
                 if (nextChar == -1) { Thread.Sleep(1); continue; }
@@ -74,6 +74,10 @@ namespace WebPortal.Classes
                 WriteFailure();
             }
             OutputStream.Flush();
+
+            OutputStream.Dispose();
+            _inputStream.Dispose();
+
             // bs.Flush(); // flush any remaining output
             _inputStream = null; OutputStream = null; // bs = null;            
             TcpSocket.Close();
@@ -96,13 +100,13 @@ namespace WebPortal.Classes
 
         public void ReadHeaders()
         {
-            Console.WriteLine(@"readHeaders()");
+            if (Server.Debug) Console.WriteLine(@"readHeaders()");
             String line;
             while ((line = StreamReadLine(_inputStream)) != null)
             {
                 if (line.Equals(""))
                 {
-                    Console.WriteLine(@"got headers");
+                    if (Server.Debug) Console.WriteLine(@"got headers");
                     return;
                 }
 
@@ -120,10 +124,8 @@ namespace WebPortal.Classes
 
                 var value = line.Substring(pos, line.Length - pos);
                 
-                if (Server.Debug)
-                {
-                    Server.WriteDisplay("header: " + name + ":" + value);
-                }
+                if (Server.Debug) Server.WriteDisplay("header: " + name + ":" + value);
+                
                 
                 HttpHeaders[name] = value;
             }
@@ -178,6 +180,8 @@ namespace WebPortal.Classes
             }
             Console.WriteLine(@"get post data end");
             Srv.HandlePostRequest(this, new StreamReader(ms));
+
+            ms.Dispose();
 
         }
 

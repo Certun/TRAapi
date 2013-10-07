@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Drawing;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -22,9 +24,20 @@ namespace WebPortal.Classes
 
         public void Listen()
         {
-            var localIp = IPAddress.Parse(Server.ServerIp);
-            Listener = new TcpListener(localIp, Port);
-            Listener.Start();
+            try
+            {
+                var localIp = IPAddress.Parse(Server.ServerIp);
+                Listener = new TcpListener(localIp, Port);
+                Listener.Start();
+            }
+            catch (Exception e)
+            {
+                Server.WriteDisplay(e);
+                Server.SetTextBtn(@"Start");
+                Server.SetColorDisplay(Color.White);
+                return;
+            }
+
             while (IsActive)
             {
                 try

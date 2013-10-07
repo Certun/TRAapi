@@ -19,29 +19,34 @@ namespace WebPortal.Classes
         /// </summary>
         public static void SyncApps()
         {
-            if (Server.Debug) Server.WriteDisplay("SyncApps()");
+            if (Server.Debug) Server.WriteDisplay("Creating Data Connection");
             _conn = new EntitiesModel();
-            // get all data
+            
+            if (Server.Debug) Server.WriteDisplay("Getting Appointments to Sync");
             var data = new { appointments = GetNewAppointments() };
-            // process appointments
-            if (Server.Debug) Server.WriteDisplay("Before Send()");
 
+            if (!data.appointments.Any())
+            {
+                if (Server.Debug) Server.WriteDisplay("No Appointments to Sync");
+                _conn.Dispose();
+                return;
+            }
+
+            if (Server.Debug) Server.WriteDisplay("JsonConvert Appointments");
             var jdata =  JsonConvert.SerializeObject(
-                    data,
-                    Formatting.None,
-                    new JsonSerializerSettings(){ ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
-                    );
+                data,
+                Formatting.None,
+                new JsonSerializerSettings(){ ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
+                );
 
+            if (Server.Debug) Server.WriteDisplay("Sending Appointments");
             var results = Send("syncApps", jdata);
 
+            if (Server.Debug) Server.WriteDisplay("Appointments Synced");
+            if (Server.Debug) Server.WriteDisplay("Results:");
             if (Server.Debug) Server.WriteDisplay(results);
-            
-            if (Server.Debug) Server.WriteDisplay("After Send()");
 
-//             process results
             ProcessResults(results);
-
-            // dispose EntitiesModel 
             _conn.Dispose();
 
         }
@@ -51,29 +56,27 @@ namespace WebPortal.Classes
         /// </summary>
         public static void SyncData()
         {
-            if (Server.Debug) Server.WriteDisplay("SyncData()");
+            if (Server.Debug) Server.WriteDisplay("Creating Data Connection");
             _conn = new EntitiesModel();
-            // get all data
+            
+            if (Server.Debug) Server.WriteDisplay("Getting Books and Insurances to Sync");
             var data = new
                 {
                     books = GetBooks(), 
                     insuranceCombo = GetInsuranceComboData()
 //                    facultyCombo = GetFacultyComboData()
                 };
-            // process appointments
-            if (Server.Debug) Server.WriteDisplay("Before Send()");
 
+            if (Server.Debug) Server.WriteDisplay("JsonConvert Books and Insurances");
             var jdata = JsonConvert.SerializeObject(
                 data,
                 Formatting.None,
                 new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
                 );
 
+            if (Server.Debug) Server.WriteDisplay("Sending Books and Insurances");
             Send("syncData", jdata);
-
-            if (Server.Debug) Server.WriteDisplay("After Send()");
-
-            // dispose EntitiesModel
+            if (Server.Debug) Server.WriteDisplay("Books and Insurances Synced");
             _conn.Dispose();
         }
 
@@ -85,6 +88,7 @@ namespace WebPortal.Classes
         {
             try
             {
+                if (results == null) return;
                 if (results.GetType() != typeof(JObject)) return;
 
                 if (!(bool)results["success"])
@@ -92,6 +96,7 @@ namespace WebPortal.Classes
                     if (Server.Debug) Server.WriteDisplay((string)results["error"]);
                     return;
                 }
+
                 var successes = (JArray)results["successes"];
                 if (successes == null) return;
                 foreach (var appNun in successes)
@@ -120,7 +125,16 @@ namespace WebPortal.Classes
         private static IEnumerable<Apoint> GetNewAppointments()
         {
             var appointments = _conn.Apoints.Where(a =>
-                (a.apstatus != "Procesado" && a.apstatus != "Error") &&
+                // ******* Test Line ******** //
+                // ******* Test Line ******** //
+                // ******* Test Line ******** //
+                
+                a.apstatus == "test" &&
+                //(a.apstatus != "Procesado" && a.apstatus != "Error") &&
+                
+                // ***** End Test Line ****** //
+                // ***** End Test Line ****** //
+                // ***** End Test Line ****** //
                 a.entertime > Convert.ToDateTime(DateTime.Now.AddDays(1))
                 ).Take(150);
 
@@ -196,22 +210,18 @@ namespace WebPortal.Classes
                     if (Server.Debug) Server.WriteDisplay("RestRequest() ErrorMessage");
                     if (Server.Debug) Server.WriteDisplay(response.ErrorMessage);
                 }
-               
-//                if (Server.Debug) Server.WriteDisplay("RestRequest() Content");
-//                if (Server.Debug) Server.WriteDisplay(response.Content);
 
-                if (response.Content == String.Empty)
-                {
-                    Server.WriteDisplay("Something went wront with the web portal");
-                    return "";
-                }
-                return JObject.Parse(response.Content);
+                if (response.Content != String.Empty) return JObject.Parse(response.Content);
+                
+                Server.WriteDisplay("Something went wront with the web portal");
+                return null;
             }
             catch (Exception ex)
             {
                 Server.WriteDisplay(ex);
+                return null;
             }
-            return null;
+
         }
     }
 }

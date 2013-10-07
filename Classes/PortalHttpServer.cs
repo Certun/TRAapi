@@ -67,39 +67,32 @@ namespace WebPortal.Classes
 
                     case "getPatientData":
                         // DO STUFF HERE!
-
                         response.results = new {};
-
                         // define success
                         response.success = true;
                         // define error if any
                         response.error = "";
-
-
+                        
                         break;
 
                     case "getInsuranceData":
                         // DO STUFF HERE!
-
-
+                         response.results = new {};
                         // define success
                         response.success = true;
                         // define error if any
                         response.error = "";
-
-
+                        
                         break;
 
                     case "getBooks":
                         // DO STUFF HERE!
-
-
+                        response.results = new { };
                         // define success
                         response.success = true;
                         // define error if any
                         response.error = "";
-
-
+                        
                         break;
 
                     default:
@@ -136,26 +129,33 @@ namespace WebPortal.Classes
         /// <param name="inputData"></param>
         public override void HandlePostRequest(HttpProcessor p, StreamReader inputData)
         {
+            if(Server.Debug) Server.WriteDisplay("Request Recived");
             var rawData = inputData.ReadToEnd();
             // write request success headers (THis is required for every reuqest)
             p.WriteSuccess();
             // create  new response object
-            var response = new Response();
+            var response = new Response {success = true};
             // verify secret key
             if ((string) p.HttpHeaders["Secret-Key"] != Server.SecretKey)
             {
                 // handle wrong secretkey error
+                response.success = false;
                 response.error = "Access denied";
+                if (Server.Debug) Server.WriteDisplay(response.error);
             }
             else if (String.IsNullOrEmpty((string) p.HttpHeaders["Action"]))
             {
                 // handle no action error
-                response.error = "No action provided";
+                response.success = false;
+                response.error = "No Action Provided";
+                if (Server.Debug) Server.WriteDisplay(response.error);
             }
             else if (!_setActions.Contains((string) p.HttpHeaders["Action"]))
             {
                 // handle action definition error
-                response.error = "Action not defined as a set actions";
+                response.success = false;
+                response.error = "Action Not Defined As a Set Actions";
+                if (Server.Debug) Server.WriteDisplay(response.error);
             }
             else
             {
@@ -164,6 +164,7 @@ namespace WebPortal.Classes
                 var action = (string) p.HttpHeaders["Action"];
                 dynamic data;
                 // parse the data into an object
+                if (Server.Debug) Server.WriteDisplay("UrlDecode, Decoding Data");
                 var unscapedData = HttpUtility.UrlDecode(rawData);
                 if (unscapedData.StartsWith("{"))
                 {
@@ -188,6 +189,9 @@ namespace WebPortal.Classes
                             response.results.appointments = new JObject();
                             response.results.appointments.successes = new JArray();
                             response.results.appointments.failures = new JArray();
+
+                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Appointment(s)", app.Count()));
+                            
                             for (var i = 0; i < app.Count(); i++)
                             {
                                 if (WorkAppointment(app[i]))
@@ -208,6 +212,8 @@ namespace WebPortal.Classes
                             response.results.patients.successes = new JArray();
                             response.results.patients.failures = new JArray();
 
+                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Patient(s)", app.Count()));
+
                             for (var i = 0; i < pat.Count(); i++)
                             {
                                 if (WorkPaitnet(pat[i]))
@@ -227,6 +233,8 @@ namespace WebPortal.Classes
                             response.results.insurance = new JObject();
                             response.results.insurance.successes = new JArray();
                             response.results.insurance.failures = new JArray();
+
+                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Insurance(s)", app.Count()));
 
                             for (var i = 0; i < ins.Count(); i++)
                             {
@@ -254,6 +262,8 @@ namespace WebPortal.Classes
                             response.results.documents.successes = new JArray();
                             response.results.documents.failures = new JArray();
 
+                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Document(s)", app.Count()));
+
                             for (var i = 0; i < doc.Count(); i++)
                             {
                                 if (WorkDocuments(doc[i]))
@@ -275,6 +285,8 @@ namespace WebPortal.Classes
                             response.results.signatures = new JObject();
                             response.results.signatures.successes = new JArray();
                             response.results.signatures.failures = new JArray();
+
+                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Signatures(s)", app.Count()));
 
                             for (var i = 0; i < sig.Count(); i++)
                             {
@@ -300,12 +312,8 @@ namespace WebPortal.Classes
                 }
 
                 // write this stuff on display for de bugging
-                if (Server.Debug)
-                {
-                    Server.WriteDisplay("secretKey: " + p.HttpHeaders["Secret-Key"]);
-                    Server.WriteDisplay("action: " + p.HttpHeaders["Action"]);
-                    Server.WriteDisplay("request: " + Uri.UnescapeDataString(rawData));
-                }
+                if (Server.Debug) Server.WriteDisplay("Raw String Data: " + Uri.UnescapeDataString(rawData));
+                
 
                 // end valid reqiest <<<<---------------------------------------------------------------
             }
@@ -330,7 +338,36 @@ namespace WebPortal.Classes
             try
             {
                 var app = _conn.Apoints.Single(a => a.apnum == data["apnum"].ToString());
-                app.apstatus = data["apstatus"].ToString();
+                string status;
+                switch (data["apstatus"].ToString())
+                {
+                    case  "0":
+                        status = "Procesando";
+                        break;
+                    case  "1":
+                        status = "Pendiente";
+                        break;
+                    case  "2":
+                        status = "Completado";
+                        break;
+                    case  "3":
+                        status = "Confirmado";
+                        break;
+                    case  "4":
+                        status = "Cancelado";
+                        break;
+                    case  "8":
+                        status = "Confirmacion";
+                        break;
+                    case  "9":
+                        status = "Error";
+                        break;  
+                    default:
+                        status = "N/A";
+                        break;
+                }
+
+                app.apstatus = status;
                 _conn.SaveChanges();
                 return true;
             }
@@ -385,7 +422,7 @@ namespace WebPortal.Classes
                 // photo handler
                 SaveDocument(
                     data["ptphotoid"].ToString(),
-                    "pateint-photo",
+                    "pateint-photo.jpg",
                     Server.PatientImgCategory,
                     ToChar(data["ptrectype"].ToString()),
                     data["ptrecno"].ToString(),
