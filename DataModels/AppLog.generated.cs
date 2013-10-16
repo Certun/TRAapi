@@ -18,12 +18,37 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
-using WebPortal;
 
 namespace WebPortal	
 {
-	public partial class Apoint
+	public partial class AppLog
 	{
+		private DateTime _logdate;
+		public virtual DateTime logdate
+		{
+			get
+			{
+				return this._logdate;
+			}
+			set
+			{
+				this._logdate = value;
+			}
+		}
+		
+		private string _loguser;
+		public virtual string loguser
+		{
+			get
+			{
+				return this._loguser;
+			}
+			set
+			{
+				this._loguser = value;
+			}
+		}
+		
 		private int _bookcode;
 		public virtual int bookcode
 		{
@@ -255,19 +280,6 @@ namespace WebPortal
 			set
 			{
 				this._apmoddate = value;
-			}
-		}
-		
-		private DAT2000 _dat2000;
-		public virtual DAT2000 DAT2000
-		{
-			get
-			{
-				return this._dat2000;
-			}
-			set
-			{
-				this._dat2000 = value;
 			}
 		}
 		

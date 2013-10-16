@@ -78,15 +78,16 @@ namespace WebPortal.Classes
 
         static void forceSync_Click(object sender, EventArgs e)
         {
-            if (Server.Debug) WriteDisplay("Forcing Sync...");
+            if (Debug) WriteDisplay("Forcing Sync...");
             new Thread(SendRequest).Start();
         }
 
         public static void SendRequest()
         {
-            if (Server.Debug) Server.WriteDisplay("************* Sending Request *************");
+            if (Debug) WriteDisplay("************* Sending Request *************");
 //            Syncer.SyncData();
-            Syncer.SyncApps();          
+            Syncer.SyncApps();
+            Syncer.SyncDeleted();  
         }
 
         static void StartStop_Click(object sender, EventArgs e)

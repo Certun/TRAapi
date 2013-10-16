@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -36,7 +34,7 @@ namespace WebPortal.Classes
             var jdata =  JsonConvert.SerializeObject(
                 data,
                 Formatting.None,
-                new JsonSerializerSettings(){ ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
+                new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
                 );
 
             if (Server.Debug) Server.WriteDisplay("Sending Appointments");
@@ -71,7 +69,7 @@ namespace WebPortal.Classes
             var jdata = JsonConvert.SerializeObject(
                 data,
                 Formatting.None,
-                new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
+                new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
                 );
 
             if (Server.Debug) Server.WriteDisplay("Sending Books and Insurances");
@@ -80,10 +78,77 @@ namespace WebPortal.Classes
             _conn.Dispose();
         }
 
+        public static void SyncDeleted()
+        {
+            if (Server.Debug) Server.WriteDisplay("Creating Data Connection");
+            _conn = new EntitiesModel();
+
+            if (Server.Debug) Server.WriteDisplay("Getting Deleted Appointments");
+            var data = new { appointments = GetDeletedAppointments().Select(row => row.apnum).ToArray() };
+
+            if (!data.appointments.Any())
+            {
+                if (Server.Debug) Server.WriteDisplay("No Deleted Appointments to Sync");
+                _conn.Dispose();
+                return;
+            }
+
+            if (Server.Debug) Server.WriteDisplay("JsonConvert Deleted Appointments");
+            var jdata = JsonConvert.SerializeObject(
+                data,
+                Formatting.None,
+                new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
+                );
+
+            if (Server.Debug) Server.WriteDisplay("Sending Deleted Appointments");
+            var results = Send("syncDeleted", jdata);
+            if (Server.Debug) Server.WriteDisplay("Deleted Appointments Synced");
+            
+            ProcessDeleted(results);
+            _conn.Dispose();
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="results"></param>
+        public static void ProcessDeleted(dynamic results)
+        {
+            try
+            {
+                if (results == null) return;
+                if (results.GetType() != typeof(JObject)) return;
+
+                if (!(bool)results["success"])
+                {
+                    if (Server.Debug) Server.WriteDisplay((string)results["error"]);
+                    return;
+                }
+
+                var successes = (JArray)results["successes"];
+                if (successes == null) return;
+
+                if (Server.Debug) Server.WriteDisplay(results.ToString());
+
+                foreach (var appNum in successes)
+                {
+                    var app = _conn.AppLogs.FirstOrDefault(a => a.apnum == appNum.ToString() && a.apstatus != "DELETED*");
+                    if (app != null)
+                    {
+                        app.apstatus = "DELETED*";
+                    }
+                }
+                _conn.SaveChanges();
+//                if (Server.Debug) Server.WriteDisplay("Appointment deleted total (" + successes.Count + ")");
+
+            }
+            catch (Exception ex)
+            {
+                Server.WriteDisplay(ex);
+            }
+
+        }
+
         public static void ProcessResults(dynamic results)
         {
             try
@@ -128,15 +193,33 @@ namespace WebPortal.Classes
                 // ******* Test Line ******** //
                 // ******* Test Line ******** //
                 // ******* Test Line ******** //
-                
-                a.apstatus == "test" &&
+                a.apcreateuser == "it" &&
+                (a.apstatus == "N/A" || a.apstatus == "Cambios") &&
                 //(a.apstatus != "Procesado" && a.apstatus != "Error") &&
-                
+
                 // ***** End Test Line ****** //
                 // ***** End Test Line ****** //
                 // ***** End Test Line ****** //
                 a.entertime > Convert.ToDateTime(DateTime.Now.AddDays(1))
                 ).Take(150);
+
+            return appointments;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private static IEnumerable<AppLog> GetDeletedAppointments()
+        {
+            var appointments = _conn.AppLogs.Where(a =>
+                // ******* Test Line ******** //
+                // ******* Test Line ******** //
+                // ******* Test Line ******** //
+                
+                a.apstatus == "DELETED" &&
+                a.entertime > Convert.ToDateTime(DateTime.Now)
+                ).Take(200);
 
             return appointments;
         }

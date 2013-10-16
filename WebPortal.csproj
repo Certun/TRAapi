@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModels\Apoint.generated.cs" />
+    <Compile Include="DataModels\AppLog.generated.cs" />
     <Compile Include="DataModels\BookTable.generated.cs" />
     <Compile Include="DataModels\DAT0000.generated.cs" />
     <Compile Include="DataModels\DAT2000.generated.cs" />

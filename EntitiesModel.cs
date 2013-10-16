@@ -122,6 +122,14 @@ namespace WebPortal
 			}
 		}
 		
+		public IQueryable<AppLog> AppLogs 
+		{
+			get
+			{
+				return this.GetAll<AppLog>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -170,6 +178,10 @@ namespace WebPortal
 			get;
 		}
 		IQueryable<DAT0000> DAT0000
+		{
+			get;
+		}
+		IQueryable<AppLog> AppLogs
 		{
 			get;
 		}

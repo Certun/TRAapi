@@ -943,6 +943,77 @@
           <orm:column name="sys_description" sql-type="varchar" nullable="true" length="350" scale="0" ado-type="StringVariableLength" />
         </orm:field>
       </orm:class>
+      <orm:class name="AppLog" uniqueId="fd4a241f-82b3-42fe-a2fd-f7a31c4e1453">
+        <orm:table name="AppLog" />
+        <orm:identity>
+          <orm:multiple-field>
+            <orm:single-field field-name="_logdate" />
+            <orm:single-field field-name="_loguser" />
+            <orm:single-field field-name="_bookcode" />
+          </orm:multiple-field>
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_logdate" property="logdate" behavior="readwrite" uniqueId="cf4e695c-0ed7-458a-bebb-920788d6c3ad" type="System.DateTime">
+          <orm:column nullable="false" primary-key="true" length="0" name="log_date" scale="0" sql-type="datetime" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_loguser" property="loguser" behavior="readwrite" uniqueId="011dcb71-da48-488b-b405-c4e16fe8e144" type="System.String">
+          <orm:column nullable="false" primary-key="true" length="15" name="log_user" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_bookcode" property="bookcode" behavior="readwrite" uniqueId="99b10997-f381-411d-952d-c675c2db359a" type="System.Int32">
+          <orm:column nullable="false" primary-key="true" length="0" name="book_code" scale="0" sql-type="int" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_entertime" property="entertime" behavior="readwrite" uniqueId="67a8888d-5bc4-4372-9cb0-87f1d6c1e0ab" type="System.DateTime">
+          <orm:column nullable="false" length="0" name="Enter_time" scale="0" sql-type="datetime" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_apnum" property="apnum" behavior="readwrite" uniqueId="d68fa6e0-3960-4bdd-83cd-eb4cf8f54d55" type="System.String">
+          <orm:column nullable="false" length="38" name="Ap_num" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apprectype" property="apprectype" behavior="readwrite" uniqueId="2b1b6846-5dd5-4979-b02f-0d4344799ba6" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="1" name="app_rec_type" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apprecno" property="apprecno" behavior="readwrite" uniqueId="3cebf13b-ebd3-4ecd-9e7c-35849baf6592" type="System.String">
+          <orm:column nullable="true" length="15" name="app_rec_no" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apprecsuff" property="apprecsuff" behavior="readwrite" uniqueId="a843f54c-d0aa-43fd-958d-f1abfd891901" type="System.String">
+          <orm:column nullable="true" length="2" name="app_rec_suff" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apppatid" property="apppatid" behavior="readwrite" uniqueId="0dca5a6b-87bc-4fd9-bf42-db3d90aec5a6" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="0" name="app_pat_id" scale="0" sql-type="int" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_elapsedtime" property="elapsedtime" behavior="readwrite" uniqueId="bcb708b3-76c5-4788-9431-fd18af3f66c9" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="0" name="Elapsed_time" scale="0" sql-type="smalldatetime" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_apstatus" property="apstatus" behavior="readwrite" uniqueId="a3eb284a-8b36-4a94-be8b-b955f821f7a7" type="System.String">
+          <orm:column nullable="true" length="15" name="ap_status" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apnotes" property="apnotes" behavior="readwrite" uniqueId="e6d1177d-1aa8-4bce-8bd5-cab3fb35caaa" type="System.String">
+          <orm:column nullable="true" length="500" name="ap_Notes" scale="0" sql-type="nchar" ado-type="UnicodeStringFixedLength" />
+        </orm:field>
+        <orm:field name="_espcode" property="espcode" behavior="readwrite" uniqueId="7545a593-e63d-45f8-9080-c27d678d1487" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="0" name="esp_code" scale="0" sql-type="int" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_proccode" property="proccode" behavior="readwrite" uniqueId="731cf48a-f4df-4c3c-ab81-0790749cf767" type="System.String">
+          <orm:column nullable="true" length="10" name="Proc_code" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apins" property="apins" behavior="readwrite" uniqueId="09dfa06b-b5e9-4052-bca9-be86ebd76f03" type="System.String">
+          <orm:column nullable="true" length="20" name="ap_ins" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_appack" property="appack" behavior="readwrite" uniqueId="e6311da4-06f4-4bce-a7a0-77c0d128defa" type="System.String">
+          <orm:column nullable="true" length="22" name="app_ack" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apcreateuser" property="apcreateuser" behavior="readwrite" uniqueId="6a044132-3691-43d5-8032-d726f5ed722b" type="System.String">
+          <orm:column nullable="true" length="15" name="ap_create_user" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apcreatedate" property="apcreatedate" behavior="readwrite" uniqueId="1e8da0f2-cd4a-42f8-a30a-de3dce6a9afa" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="0" name="ap_create_date" scale="0" sql-type="datetime" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_apmoduser" property="apmoduser" behavior="readwrite" uniqueId="e2c763e0-657c-45ef-8280-92d345393022" type="System.String">
+          <orm:column nullable="true" length="15" name="ap_mod_user" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_apmoddate" property="apmoddate" behavior="readwrite" uniqueId="386bba57-b69d-490f-96a0-a33d9f8da668" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="0" name="ap_mod_date" scale="0" sql-type="datetime" ado-type="DateTime" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="scanned">
@@ -1291,6 +1362,28 @@
         <orm:column name="sys_value" sql-type="varchar" nullable="true" length="150" scale="0" ado-type="StringVariableLength" />
         <orm:column name="sys_description" sql-type="varchar" nullable="true" length="350" scale="0" ado-type="StringVariableLength" />
       </orm:table>
+      <orm:table name="AppLog">
+        <orm:column nullable="false" primary-key="true" length="0" name="log_date" scale="0" sql-type="datetime" ado-type="DateTime" />
+        <orm:column nullable="false" primary-key="true" length="15" name="log_user" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column nullable="false" primary-key="true" length="0" name="book_code" scale="0" sql-type="int" ado-type="Int32" />
+        <orm:column nullable="false" length="0" name="Enter_time" scale="0" sql-type="datetime" ado-type="DateTime" />
+        <orm:column nullable="false" length="38" name="Ap_num" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column nullable="true" length="1" name="app_rec_type" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column nullable="true" length="15" name="app_rec_no" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column nullable="true" length="2" name="app_rec_suff" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column nullable="true" length="0" name="app_pat_id" scale="0" sql-type="int" ado-type="Int32" />
+        <orm:column nullable="true" length="0" name="Elapsed_time" scale="0" sql-type="smalldatetime" ado-type="DateTime" />
+        <orm:column nullable="true" length="15" name="ap_status" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column nullable="true" length="500" name="ap_Notes" scale="0" sql-type="nchar" ado-type="UnicodeStringFixedLength" />
+        <orm:column nullable="true" length="0" name="esp_code" scale="0" sql-type="int" ado-type="Int32" />
+        <orm:column nullable="true" length="10" name="Proc_code" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column nullable="true" length="20" name="ap_ins" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column nullable="true" length="22" name="app_ack" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column nullable="true" length="15" name="ap_create_user" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column nullable="true" length="0" name="ap_create_date" scale="0" sql-type="datetime" ado-type="DateTime" />
+        <orm:column nullable="true" length="15" name="ap_mod_user" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+        <orm:column nullable="true" length="0" name="ap_mod_date" scale="0" sql-type="datetime" ado-type="DateTime" />
+      </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:remove-camel-case>False</orm:remove-camel-case>
@@ -1300,7 +1393,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>TraDataConnection1</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>data source=SAAPSER1\trasql;initial catalog=salus;persist security info=True;user id=sa;password=couz2431</AppConfigConnectionString>
+    <AppConfigConnectionString>data source=ERNESTO-THINK\SQL2012;initial catalog=salus;persist security info=True;user id=sa;password=couz2431</AppConfigConnectionString>
     <InitialCatalog>TraData</InitialCatalog>
     <NamingSettings>
       <ClassRules>
@@ -1460,9 +1553,9 @@
       <Property Id="2f3639c0-e090-4f85-8444-cc4a452af72d" name="pinotes" label="pinotes : String" kind="Persistent" fieldName="_pinotes" />
       <Property Id="d0c24e69-4ba8-4295-b1e7-5d256dc4497d" name="pirelation" type="Char" label="pirelation : Char" nullable="true" kind="Persistent" fieldName="_pirelation" />
       <Property Id="e0228af8-2173-4338-aade-e0d71d5311d7" name="pisex" type="Char" label="pisex : Char" nullable="true" kind="Persistent" fieldName="_pisex" />
-      <Property Id="bc1f82b8-1fcb-4fe4-9342-f80114aeb8c6" name="pisocsec" label="pisocsec : String" kind="Persistent" fieldName="_pisocsec" />
+      <Property Id="bc1f82b8-1fcb-4fe4-9342-f80114aeb8c6" name="pisocsec" label="pisocsec : String" nullable="true" kind="Persistent" fieldName="_pisocsec" />
       <Property Id="c066d002-d9e8-46c1-b225-a654c48aa577" name="pisocsecsufx" type="Char" label="pisocsecsufx : Char" nullable="true" kind="Persistent" fieldName="_pisocsecsufx" />
-      <Property Id="cd26ff5e-7350-49f8-9907-81d93bbe8cf6" name="pistate" label="pistate : String" kind="Persistent" fieldName="_pistate" />
+      <Property Id="cd26ff5e-7350-49f8-9907-81d93bbe8cf6" name="pistate" label="pistate : String" nullable="true" kind="Persistent" fieldName="_pistate" />
       <Property Id="03393e92-8087-43c4-9d10-0117d680853b" name="pisubscriberfirstname" label="pisubscriberfirstname : String" kind="Persistent" fieldName="_pisubscriberfirstname" />
       <Property Id="135a179a-d387-4624-9ba4-815d1e894dee" name="pisubscriberinit" type="Char" label="pisubscriberinit : Char" nullable="true" kind="Persistent" fieldName="_pisubscriberinit" />
       <Property Id="b2c3d2f6-02d9-4aa4-bc03-7362e50726a8" name="pisubscriberlastname" label="pisubscriberlastname : String" kind="Persistent" fieldName="_pisubscriberlastname" />
@@ -1681,6 +1774,28 @@
       <Property Id="94aecad8-c622-43c8-a2c0-271806987f83" name="sysflag" type="Char" label="sysflag : Char" nullable="true" kind="Persistent" fieldName="_sysflag" />
       <Property Id="7ce1914b-501e-4c09-9db6-340d957fbd20" name="sysvalue" label="sysvalue : String" kind="Persistent" fieldName="_sysvalue" />
     </DomainClass>
+    <DomainClass Id="fd4a241f-82b3-42fe-a2fd-f7a31c4e1453" name="AppLog" namespace="WebPortal" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="99b10997-f381-411d-952d-c675c2db359a" name="bookcode" type="Int32" label="bookcode : Int32" kind="Persistent" identity="true" fieldName="_bookcode" />
+      <Property Id="cf4e695c-0ed7-458a-bebb-920788d6c3ad" name="logdate" type="DateTime" label="logdate : DateTime" kind="Persistent" identity="true" fieldName="_logdate" />
+      <Property Id="011dcb71-da48-488b-b405-c4e16fe8e144" name="loguser" label="loguser : String" kind="Persistent" identity="true" fieldName="_loguser" />
+      <Property Id="1e8da0f2-cd4a-42f8-a30a-de3dce6a9afa" name="apcreatedate" type="DateTime" label="apcreatedate : DateTime" nullable="true" kind="Persistent" fieldName="_apcreatedate" />
+      <Property Id="6a044132-3691-43d5-8032-d726f5ed722b" name="apcreateuser" label="apcreateuser : String" kind="Persistent" fieldName="_apcreateuser" />
+      <Property Id="09dfa06b-b5e9-4052-bca9-be86ebd76f03" name="apins" label="apins : String" kind="Persistent" fieldName="_apins" />
+      <Property Id="386bba57-b69d-490f-96a0-a33d9f8da668" name="apmoddate" type="DateTime" label="apmoddate : DateTime" nullable="true" kind="Persistent" fieldName="_apmoddate" />
+      <Property Id="e2c763e0-657c-45ef-8280-92d345393022" name="apmoduser" label="apmoduser : String" kind="Persistent" fieldName="_apmoduser" />
+      <Property Id="e6d1177d-1aa8-4bce-8bd5-cab3fb35caaa" name="apnotes" label="apnotes : String" kind="Persistent" fieldName="_apnotes" />
+      <Property Id="d68fa6e0-3960-4bdd-83cd-eb4cf8f54d55" name="apnum" label="apnum : String" kind="Persistent" fieldName="_apnum" />
+      <Property Id="e6311da4-06f4-4bce-a7a0-77c0d128defa" name="appack" label="appack : String" kind="Persistent" fieldName="_appack" />
+      <Property Id="0dca5a6b-87bc-4fd9-bf42-db3d90aec5a6" name="apppatid" type="Int32" label="apppatid : Int32" nullable="true" kind="Persistent" fieldName="_apppatid" />
+      <Property Id="3cebf13b-ebd3-4ecd-9e7c-35849baf6592" name="apprecno" label="apprecno : String" kind="Persistent" fieldName="_apprecno" />
+      <Property Id="a843f54c-d0aa-43fd-958d-f1abfd891901" name="apprecsuff" label="apprecsuff : String" kind="Persistent" fieldName="_apprecsuff" />
+      <Property Id="2b1b6846-5dd5-4979-b02f-0d4344799ba6" name="apprectype" type="Char" label="apprectype : Char" nullable="true" kind="Persistent" fieldName="_apprectype" />
+      <Property Id="a3eb284a-8b36-4a94-be8b-b955f821f7a7" name="apstatus" label="apstatus : String" kind="Persistent" fieldName="_apstatus" />
+      <Property Id="bcb708b3-76c5-4788-9431-fd18af3f66c9" name="elapsedtime" type="DateTime" label="elapsedtime : DateTime" nullable="true" kind="Persistent" fieldName="_elapsedtime" />
+      <Property Id="67a8888d-5bc4-4372-9cb0-87f1d6c1e0ab" name="entertime" type="DateTime" label="entertime : DateTime" kind="Persistent" fieldName="_entertime" />
+      <Property Id="7545a593-e63d-45f8-9080-c27d678d1487" name="espcode" type="Int32" label="espcode : Int32" nullable="true" kind="Persistent" fieldName="_espcode" />
+      <Property Id="731cf48a-f4df-4c3c-ab81-0790749cf767" name="proccode" label="proccode : String" kind="Persistent" fieldName="_proccode" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="64c04797-105a-417f-a39d-65dce4003508">
@@ -1694,6 +1809,7 @@
         <entitySetProperty name="Apoints" namespace="WebPortal" type="Apoint" label="Apoints : IQueryable&lt;WebPortal.Apoint&gt;" />
         <entitySetProperty name="DAT3000" namespace="WebPortal" type="DAT3000" label="DAT3000 : IQueryable&lt;WebPortal.DAT3000&gt;" />
         <entitySetProperty name="DAT0000" namespace="WebPortal" type="DAT0000" label="DAT0000 : IQueryable&lt;WebPortal.DAT0000&gt;" />
+        <entitySetProperty name="AppLogs" namespace="WebPortal" type="AppLog" label="AppLogs : IQueryable&lt;WebPortal.AppLog&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>
