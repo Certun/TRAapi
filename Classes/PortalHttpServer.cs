@@ -520,6 +520,7 @@ namespace WebPortal.Classes
         {
             try
             {
+                string newImg;
                 var pipattype = ToChar(ins["pipattype"].ToString());
                 var piorden = ToByte(ins["piorden"].ToString());
                 // try to fin the insurance
@@ -590,7 +591,7 @@ namespace WebPortal.Classes
                     _conn.Add(d8000);
                     _conn.SaveChanges();
 
-                    var newImg = ins["newImg"].ToString();
+                    newImg = ins["newImg"].ToString();
                     if (newImg != "" && newImg != "0")
                     {
                         SaveDocument(
@@ -620,7 +621,8 @@ namespace WebPortal.Classes
                 d8000.pirelation = ToChar(ins["pirelation"].ToString().ToUpper());
                 _conn.SaveChanges();
 
-                if (Convert.ToBoolean(ins["newImg"].ToString()))
+                newImg = ins["newImg"].ToString();
+                if (newImg != "" && newImg != "0")
                 {
                     SaveDocument(
                         ins["piimage"].ToString(),
