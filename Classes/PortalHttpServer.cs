@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Text;
 using Newtonsoft.Json;
 using System;
 using System.Data;
@@ -20,9 +19,10 @@ namespace WebPortal.Classes
             _conn = new EntitiesModel();
         }
         // allow get actions array
-        private readonly string[] _getActions = new[] {"*"};
+        private readonly string[] _getActions = {"*"};
         // allow set action array
-        private readonly string[] _setActions = new[] {
+        private readonly string[] _setActions =
+        {
             "setPatientData",
             "setAppointmentStatus",
             "setSync"
@@ -212,7 +212,7 @@ namespace WebPortal.Classes
                             response.results.patients.successes = new JArray();
                             response.results.patients.failures = new JArray();
 
-                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Patient(s)", app.Count()));
+                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Patient(s)", pat.Count()));
 
                             for (var i = 0; i < pat.Count(); i++)
                             {
@@ -234,7 +234,7 @@ namespace WebPortal.Classes
                             response.results.insurance.successes = new JArray();
                             response.results.insurance.failures = new JArray();
 
-                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Insurance(s)", app.Count()));
+                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Insurance(s)", ins.Count()));
 
                             for (var i = 0; i < ins.Count(); i++)
                             {
@@ -262,7 +262,7 @@ namespace WebPortal.Classes
                             response.results.documents.successes = new JArray();
                             response.results.documents.failures = new JArray();
 
-                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Document(s)", app.Count()));
+                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Document(s)", doc.Count()));
 
                             for (var i = 0; i < doc.Count(); i++)
                             {
@@ -286,7 +286,7 @@ namespace WebPortal.Classes
                             response.results.signatures.successes = new JArray();
                             response.results.signatures.failures = new JArray();
 
-                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Signatures(s)", app.Count()));
+                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Signatures(s)", sig.Count()));
 
                             for (var i = 0; i < sig.Count(); i++)
                             {
@@ -311,7 +311,7 @@ namespace WebPortal.Classes
                             response.results.clinical.successes = new JArray();
                             response.results.clinical.failures = new JArray();
 
-                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Clinical(s)", app.Count()));
+                            if (Server.Debug) Server.WriteDisplay(String.Format("Working {0} Clinical(s)", cli.Count()));
 
                             for (var i = 0; i < cli.Count(); i++)
                             {
@@ -420,86 +420,86 @@ namespace WebPortal.Classes
                     p.ptrecsuffx == data["ptrecsuffx"].ToString()
                     );
 
-                if (dat2000 != null)
+                if (dat2000 == null) return true;
+
+                dat2000.ptlastname = data["ptlastname"].ToString().ToUpper();
+                dat2000.ptfirstname = data["ptfirstname"].ToString().ToUpper();
+                dat2000.ptinitname = data["ptinitname"].ToString().ToUpper();
+                dat2000.ptsex = ToChar(data["ptsex"].ToString().ToUpper());
+                dat2000.ptcivilstatus = ToChar(data["ptcivilstatus"].ToString().ToUpper());
+
+                dat2000.ptspouselastname = data["ptspouselastname"].ToString().ToUpper();
+                dat2000.ptspousefirstname = data["ptspousefirstname"].ToString().ToUpper();
+                dat2000.ptspouseinit = ToChar(data["ptspouseinit"].ToString().ToUpper());
+
+                dat2000.ptmotherlastname = data["ptmotherlastname"].ToString().ToUpper();
+                dat2000.ptmotherfirstname = data["ptmotherfirstname"].ToString().ToUpper();
+                dat2000.ptmotherinit = ToChar(data["ptmotherinit"].ToString().ToUpper());
+
+                dat2000.ptfatherlastname = data["ptfatherlastname"].ToString().ToUpper();
+                dat2000.ptfatherfirstname = data["ptfatherfirstname"].ToString().ToUpper();
+                dat2000.ptfatherinit = ToChar(data["ptfatherinit"].ToString().ToUpper());
+
+                dat2000.ptbirthdate = Convert.ToDateTime(data["ptbirthdate"].ToString());
+                dat2000.ptpaddress1 = data["ptpaddress1"].ToString().ToUpper();
+                dat2000.ptpaddress2 = data["ptpaddress2"].ToString().ToUpper();
+                dat2000.ptpcity = data["ptpcity"].ToString().ToUpper();
+                dat2000.ptpstate = data["ptpstate"].ToString().ToUpper();
+                dat2000.ptpzip = data["ptpzip"].ToString().ToUpper();
+                dat2000.ptraddress1 = data["ptraddress1"].ToString().ToUpper();
+                dat2000.ptraddress2 = data["ptraddress2"].ToString().ToUpper();
+                dat2000.ptrcity = data["ptrcity"].ToString().ToUpper();
+                dat2000.ptrstate = data["ptrstate"].ToString().ToUpper();
+                dat2000.ptrzip = data["ptrzip"].ToString().ToUpper();
+
+                dat2000.pthomephone = data["pthomephone"].ToString().ToUpper();
+                dat2000.ptworkphone = data["ptworkphone"].ToString().ToUpper();
+                dat2000.ptworkext = data["ptworkext"].ToString().ToUpper();
+
+                dat2000.ptworkplace = data["ptworkplace"].ToString().ToUpper();
+                dat2000.ptworktitle = data["ptworktitle"].ToString().ToUpper();
+
+                dat2000.ptresplastname = data["ptresplastname"].ToString().ToUpper();
+                dat2000.ptrespfirstname = data["ptrespfirstname"].ToString().ToUpper();
+                dat2000.ptrespinit = ToChar(data["ptrespinit"].ToString().ToUpper());
+
+                dat2000.ptresponsiblerelation = data["ptresponsiblerelation"].ToString().ToUpper();
+                dat2000.ptrespphone = data["ptrespphone"].ToString().ToUpper();
+                dat2000.ptrefering = data["ptrefering"].ToString().ToUpper();
+
+                dat2000.ptethnic = Convert.ToInt32(data["ptethnic"].ToString());
+                dat2000.ptbirthplace = data["ptbirthplace"].ToString().ToUpper();
+
+                dat2000.ptautlast1 = data["ptautlast1"].ToString().ToUpper();
+                dat2000.ptautfirst1 = data["ptautfirst1"].ToString().ToUpper();
+                dat2000.ptautinit1 = ToChar(data["ptautinit1"].ToString().ToUpper());
+                dat2000.ptautlast2 = data["ptautlast2"].ToString().ToUpper();
+                dat2000.ptautfirst2 = data["ptautfirst2"].ToString().ToUpper();
+                dat2000.ptautinit2 = ToChar(data["ptautinit2"].ToString().ToUpper());
+
+                dat2000.ptautdocmsg = ToChar(data["ptautdocmsg"].ToString().ToUpper());
+                dat2000.ptautpatmsg = ToChar(data["ptautpatmsg"].ToString().ToUpper());
+
+                dat2000.ptemail = data["ptemail"].ToString().ToUpper();
+                dat2000.ptcelphone = data["ptcelphone"].ToString().ToUpper();
+                dat2000.ptlanguage = Convert.ToInt32(data["ptlanguage"].ToString());
+                dat2000.ptrace = Convert.ToInt32(data["ptrace"].ToString());
+
+                dat2000.ptrespfirstname = data["ptrespfirstname"].ToString();
+                _conn.SaveChanges();
+
+                // photo handler
+                var newImg = data["newImg"].ToString();
+                if (newImg != "" && newImg != "0")
                 {
-                    dat2000.ptlastname = data["ptlastname"].ToString().ToUpper();
-                    dat2000.ptfirstname = data["ptfirstname"].ToString().ToUpper();
-                    dat2000.ptinitname = data["ptinitname"].ToString().ToUpper();
-                    dat2000.ptsex = ToChar(data["ptsex"].ToString().ToUpper());
-                    dat2000.ptcivilstatus = ToChar(data["ptcivilstatus"].ToString().ToUpper());
-
-                    dat2000.ptspouselastname = data["ptspouselastname"].ToString().ToUpper();
-                    dat2000.ptspousefirstname = data["ptspousefirstname"].ToString().ToUpper();
-                    dat2000.ptspouseinit = ToChar(data["ptspouseinit"].ToString().ToUpper());
-
-                    dat2000.ptmotherlastname = data["ptmotherlastname"].ToString().ToUpper();
-                    dat2000.ptmotherfirstname = data["ptmotherfirstname"].ToString().ToUpper();
-                    dat2000.ptmotherinit = ToChar(data["ptmotherinit"].ToString().ToUpper());
-
-                    dat2000.ptfatherlastname = data["ptfatherlastname"].ToString().ToUpper();
-                    dat2000.ptfatherfirstname = data["ptfatherfirstname"].ToString().ToUpper();
-                    dat2000.ptfatherinit = ToChar(data["ptfatherinit"].ToString().ToUpper());
-
-                    dat2000.ptbirthdate = Convert.ToDateTime(data["ptbirthdate"].ToString());
-                    dat2000.ptpaddress1 = data["ptpaddress1"].ToString().ToUpper();
-                    dat2000.ptpaddress2 = data["ptpaddress2"].ToString().ToUpper();
-                    dat2000.ptpcity = data["ptpcity"].ToString().ToUpper();
-                    dat2000.ptpstate = data["ptpstate"].ToString().ToUpper();
-                    dat2000.ptpzip = data["ptpzip"].ToString().ToUpper();
-                    dat2000.ptraddress1 = data["ptraddress1"].ToString().ToUpper();
-                    dat2000.ptraddress2 = data["ptraddress2"].ToString().ToUpper();
-                    dat2000.ptrcity = data["ptrcity"].ToString().ToUpper();
-                    dat2000.ptrstate = data["ptrstate"].ToString().ToUpper();
-                    dat2000.ptrzip = data["ptrzip"].ToString().ToUpper();
-
-                    dat2000.pthomephone = data["pthomephone"].ToString().ToUpper();
-                    dat2000.ptworkphone = data["ptworkphone"].ToString().ToUpper();
-                    dat2000.ptworkext = data["ptworkext"].ToString().ToUpper();
-
-                    dat2000.ptworkplace = data["ptworkplace"].ToString().ToUpper();
-                    dat2000.ptworktitle = data["ptworktitle"].ToString().ToUpper();
-
-                    dat2000.ptresplastname = data["ptresplastname"].ToString().ToUpper();
-                    dat2000.ptrespfirstname = data["ptrespfirstname"].ToString().ToUpper();
-                    dat2000.ptrespinit = ToChar(data["ptrespinit"].ToString().ToUpper());
-
-                    dat2000.ptresponsiblerelation = data["ptresponsiblerelation"].ToString().ToUpper();
-                    dat2000.ptrespphone = data["ptrespphone"].ToString().ToUpper();
-                    dat2000.ptrefering = data["ptrefering"].ToString().ToUpper();
-
-                    dat2000.ptethnic = Convert.ToInt32(data["ptethnic"].ToString());
-                    dat2000.ptbirthplace = data["ptbirthplace"].ToString().ToUpper();
-
-                    dat2000.ptautlast1 = data["ptautlast1"].ToString().ToUpper();
-                    dat2000.ptautfirst1 = data["ptautfirst1"].ToString().ToUpper();
-                    dat2000.ptautinit1 = ToChar(data["ptautinit1"].ToString().ToUpper());
-                    dat2000.ptautlast2 = data["ptautlast2"].ToString().ToUpper();
-                    dat2000.ptautfirst2 = data["ptautfirst2"].ToString().ToUpper();
-                    dat2000.ptautinit2 = ToChar(data["ptautinit2"].ToString().ToUpper());
-
-                    dat2000.ptautdocmsg = ToChar(data["ptautdocmsg"].ToString().ToUpper());
-                    dat2000.ptautpatmsg = ToChar(data["ptautpatmsg"].ToString().ToUpper());
-
-                    dat2000.ptemail = data["ptemail"].ToString().ToUpper();
-                    dat2000.ptcelphone = data["ptcelphone"].ToString().ToUpper();
-                    dat2000.ptlanguage = Convert.ToInt32(data["ptlanguage"].ToString());
-                    dat2000.ptrace = Convert.ToInt32(data["ptrace"].ToString()); ;
-
-                    dat2000.ptrespfirstname = data["ptrespfirstname"].ToString();
-                    _conn.SaveChanges();
-
-                    // photo handler
-                    if (Convert.ToBoolean(data["newImg"].ToString()))
-                    {
-                        SaveDocument(
-                            data["ptphotoid"].ToString(),
-                            "pateint-photo.jpg",
-                            Server.PatientImgCategory,
-                            ToChar(data["ptrectype"].ToString()),
-                            data["ptrecno"].ToString(),
-                            data["ptrecsuffx"].ToString()
-                            );
-                    }
+                    SaveDocument(
+                        data["ptphotoid"].ToString(),
+                        "pateint-photo.jpg",
+                        Server.PatientImgCategory,
+                        ToChar(data["ptrectype"].ToString()),
+                        data["ptrecno"].ToString(),
+                        data["ptrecsuffx"].ToString()
+                        );
                 }
                 return true;
             }
@@ -590,7 +590,8 @@ namespace WebPortal.Classes
                     _conn.Add(d8000);
                     _conn.SaveChanges();
 
-                    if (Convert.ToBoolean(ins["newImg"].ToString()))
+                    var newImg = ins["newImg"].ToString();
+                    if (newImg != "" && newImg != "0")
                     {
                         SaveDocument(
                             ins["piimage"].ToString(),
@@ -605,12 +606,6 @@ namespace WebPortal.Classes
                 }
 
                 // update insurance...
-//                d8000 = _conn.DAT8000.Single(d=>
-//                    d.pipattype == ToChar(ins["pipattype"].ToString()) &&
-//                    d.pipatno == ins["pipattype"].ToString() &&
-//                    d.pipatsufx == ins["pipattype"].ToString()
-//                    );
-
                 if (ins["piexpdate"].ToString() != "")
                 {
                     d8000.piexpdate = Convert.ToDateTime(ins["piexpdate"].ToString());

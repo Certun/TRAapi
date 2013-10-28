@@ -24,7 +24,7 @@ namespace WebPortal
 {
 	public partial class EntitiesModel : OpenAccessContext, IEntitiesModelUnitOfWork
 	{
-		private static string connectionStringName = @"TraDataConnection1";
+		private static string connectionStringName = @"SalusConnection";
 			
 		private static BackendConfiguration backend = GetBackendConfiguration();
 				
@@ -130,6 +130,14 @@ namespace WebPortal
 			}
 		}
 		
+		public IQueryable<AppBook> AppBooks 
+		{
+			get
+			{
+				return this.GetAll<AppBook>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -182,6 +190,10 @@ namespace WebPortal
 			get;
 		}
 		IQueryable<AppLog> AppLogs
+		{
+			get;
+		}
+		IQueryable<AppBook> AppBooks
 		{
 			get;
 		}

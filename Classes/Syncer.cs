@@ -240,9 +240,9 @@ namespace WebPortal.Classes
         /// This will return an array of all books available where book_code is not 0
         /// </summary>
         /// <returns></returns>
-        private static IQueryable<BookTable> GetBooks()
+        private static Array GetBooks()
         {
-            return  _conn.BookTables.Where(b => b.bookcode != 0);
+            return  _conn.AppBooks.Where(b => b.bookcode != 0).Select(s => new {s.bookcode, s.name}).ToArray();
         }
 
         /// <summary>
@@ -258,10 +258,10 @@ namespace WebPortal.Classes
         /// The 
         /// </summary>
         /// <returns></returns>
-        private static List<DAT9397F> GetFacultyComboData()
-        {
-            return _conn.DAT9397Fs.ToList();
-        }
+//        private static List<DAT9397F> GetFacultyComboData()
+//        {
+//            return _conn.DAT9397Fs.ToList();
+//        }
 
         /// <summary>
         /// 

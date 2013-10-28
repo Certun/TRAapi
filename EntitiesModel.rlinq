@@ -114,7 +114,7 @@
           <orm:column name="scan_var02" sql-type="varchar" nullable="true" length="5" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_scangroup" property="scangroup" behavior="readwrite" uniqueId="72b7229b-2f28-45b1-a48e-f3777c78a965" type="WebPortal.ScanGroup">
-          <orm:reference uniqueId="13e14480-ff3a-420e-bcd6-30afd9b58b07">
+          <orm:reference uniqueId="13e14480-ff3a-420e-bcd6-30afd9b58b07" association-name="ScannedHasScanGroup">
             <orm:sharedfield name="_scangroupcode" target-class="WebPortal.ScanGroup" target-field="_groupcode" />
             <orm:constraint name="FK_scanned_scan_groups" destination-table="scan_groups" />
           </orm:reference>
@@ -339,7 +339,7 @@
           <orm:column name="pi_display_order" sql-type="tinyint" nullable="true" length="0" scale="0" ado-type="Byte" />
         </orm:field>
         <orm:field name="_dat2000" property="dat2000" behavior="readwrite" uniqueId="e3c86e39-87cd-4059-8f2b-d2ec48732f30" type="WebPortal.DAT2000">
-          <orm:reference uniqueId="b6554f75-b748-4093-8c69-53c20c2914fd">
+          <orm:reference uniqueId="b6554f75-b748-4093-8c69-53c20c2914fd" association-name="DAT8000HasDAT2000">
             <orm:sharedfield name="_pipattype" target-class="WebPortal.DAT2000" target-field="_ptrectype" />
             <orm:sharedfield name="_pipatno" target-class="WebPortal.DAT2000" target-field="_ptrecno" />
             <orm:sharedfield name="_pipatsufx" target-class="WebPortal.DAT2000" target-field="_ptrecsuffx" />
@@ -699,7 +699,7 @@
           <orm:column name="ap_mod_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         </orm:field>
         <orm:field name="_dat2000" property="DAT2000" uniqueId="d88b8008-2de2-48b7-beac-7f0381ca7cbf" type="WebPortal.DAT2000">
-          <orm:reference uniqueId="74e392b0-0bbf-465b-b46b-7e69d6afd27e">
+          <orm:reference uniqueId="74e392b0-0bbf-465b-b46b-7e69d6afd27e" association-name="ApointHasDAT2000">
             <orm:sharedfield name="_apprectype" target-class="WebPortal.DAT2000" target-field="_ptrectype" />
             <orm:sharedfield name="_apprecno" target-class="WebPortal.DAT2000" target-field="_ptrecno" />
             <orm:sharedfield name="_apprecsuff" target-class="WebPortal.DAT2000" target-field="_ptrecsuffx" />
@@ -954,64 +954,206 @@
         </orm:identity>
         <orm:concurrency strategy="changed" />
         <orm:field name="_logdate" property="logdate" behavior="readwrite" uniqueId="cf4e695c-0ed7-458a-bebb-920788d6c3ad" type="System.DateTime">
-          <orm:column nullable="false" primary-key="true" length="0" name="log_date" scale="0" sql-type="datetime" ado-type="DateTime" />
+          <orm:column name="log_date" sql-type="datetime" nullable="false" length="0" scale="0" primary-key="true" ado-type="DateTime" />
         </orm:field>
         <orm:field name="_loguser" property="loguser" behavior="readwrite" uniqueId="011dcb71-da48-488b-b405-c4e16fe8e144" type="System.String">
-          <orm:column nullable="false" primary-key="true" length="15" name="log_user" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="log_user" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_bookcode" property="bookcode" behavior="readwrite" uniqueId="99b10997-f381-411d-952d-c675c2db359a" type="System.Int32">
-          <orm:column nullable="false" primary-key="true" length="0" name="book_code" scale="0" sql-type="int" ado-type="Int32" />
+          <orm:column name="book_code" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         </orm:field>
         <orm:field name="_entertime" property="entertime" behavior="readwrite" uniqueId="67a8888d-5bc4-4372-9cb0-87f1d6c1e0ab" type="System.DateTime">
-          <orm:column nullable="false" length="0" name="Enter_time" scale="0" sql-type="datetime" ado-type="DateTime" />
+          <orm:column name="Enter_time" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
         </orm:field>
         <orm:field name="_apnum" property="apnum" behavior="readwrite" uniqueId="d68fa6e0-3960-4bdd-83cd-eb4cf8f54d55" type="System.String">
-          <orm:column nullable="false" length="38" name="Ap_num" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="Ap_num" sql-type="varchar" nullable="false" length="38" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_apprectype" property="apprectype" behavior="readwrite" uniqueId="2b1b6846-5dd5-4979-b02f-0d4344799ba6" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="1" name="app_rec_type" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="app_rec_type" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_apprecno" property="apprecno" behavior="readwrite" uniqueId="3cebf13b-ebd3-4ecd-9e7c-35849baf6592" type="System.String">
-          <orm:column nullable="true" length="15" name="app_rec_no" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="app_rec_no" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_apprecsuff" property="apprecsuff" behavior="readwrite" uniqueId="a843f54c-d0aa-43fd-958d-f1abfd891901" type="System.String">
-          <orm:column nullable="true" length="2" name="app_rec_suff" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="app_rec_suff" sql-type="varchar" nullable="true" length="2" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_apppatid" property="apppatid" behavior="readwrite" uniqueId="0dca5a6b-87bc-4fd9-bf42-db3d90aec5a6" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="0" name="app_pat_id" scale="0" sql-type="int" ado-type="Int32" />
+          <orm:column name="app_pat_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:field>
         <orm:field name="_elapsedtime" property="elapsedtime" behavior="readwrite" uniqueId="bcb708b3-76c5-4788-9431-fd18af3f66c9" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="0" name="Elapsed_time" scale="0" sql-type="smalldatetime" ado-type="DateTime" />
+          <orm:column name="Elapsed_time" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         </orm:field>
         <orm:field name="_apstatus" property="apstatus" behavior="readwrite" uniqueId="a3eb284a-8b36-4a94-be8b-b955f821f7a7" type="System.String">
-          <orm:column nullable="true" length="15" name="ap_status" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="ap_status" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_apnotes" property="apnotes" behavior="readwrite" uniqueId="e6d1177d-1aa8-4bce-8bd5-cab3fb35caaa" type="System.String">
-          <orm:column nullable="true" length="500" name="ap_Notes" scale="0" sql-type="nchar" ado-type="UnicodeStringFixedLength" />
+          <orm:column name="ap_Notes" sql-type="nchar" nullable="true" length="500" scale="0" ado-type="UnicodeStringFixedLength" />
         </orm:field>
         <orm:field name="_espcode" property="espcode" behavior="readwrite" uniqueId="7545a593-e63d-45f8-9080-c27d678d1487" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="0" name="esp_code" scale="0" sql-type="int" ado-type="Int32" />
+          <orm:column name="esp_code" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:field>
         <orm:field name="_proccode" property="proccode" behavior="readwrite" uniqueId="731cf48a-f4df-4c3c-ab81-0790749cf767" type="System.String">
-          <orm:column nullable="true" length="10" name="Proc_code" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="Proc_code" sql-type="varchar" nullable="true" length="10" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_apins" property="apins" behavior="readwrite" uniqueId="09dfa06b-b5e9-4052-bca9-be86ebd76f03" type="System.String">
-          <orm:column nullable="true" length="20" name="ap_ins" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="ap_ins" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_appack" property="appack" behavior="readwrite" uniqueId="e6311da4-06f4-4bce-a7a0-77c0d128defa" type="System.String">
-          <orm:column nullable="true" length="22" name="app_ack" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="app_ack" sql-type="varchar" nullable="true" length="22" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_apcreateuser" property="apcreateuser" behavior="readwrite" uniqueId="6a044132-3691-43d5-8032-d726f5ed722b" type="System.String">
-          <orm:column nullable="true" length="15" name="ap_create_user" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="ap_create_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_apcreatedate" property="apcreatedate" behavior="readwrite" uniqueId="1e8da0f2-cd4a-42f8-a30a-de3dce6a9afa" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="0" name="ap_create_date" scale="0" sql-type="datetime" ado-type="DateTime" />
+          <orm:column name="ap_create_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         </orm:field>
         <orm:field name="_apmoduser" property="apmoduser" behavior="readwrite" uniqueId="e2c763e0-657c-45ef-8280-92d345393022" type="System.String">
-          <orm:column nullable="true" length="15" name="ap_mod_user" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
+          <orm:column name="ap_mod_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_apmoddate" property="apmoddate" behavior="readwrite" uniqueId="386bba57-b69d-490f-96a0-a33d9f8da668" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="0" name="ap_mod_date" scale="0" sql-type="datetime" ado-type="DateTime" />
+          <orm:column name="ap_mod_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="AppBook" uniqueId="69a93abb-8b8b-476f-b30b-333bf9b26d0c">
+        <orm:table name="AppBook" />
+        <orm:identity>
+          <orm:multiple-field>
+            <orm:single-field field-name="_bookcode" />
+            <orm:single-field field-name="_datefrom" />
+          </orm:multiple-field>
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_bookcode" property="bookcode" behavior="readwrite" uniqueId="f5343d17-6731-4781-9c83-c8c61605141b" type="System.Int32">
+          <orm:column name="Book_Code" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_datefrom" property="datefrom" behavior="readwrite" uniqueId="4a713a69-1fa8-4197-9ea7-9077c7db6371" type="System.DateTime">
+          <orm:column name="DateFrom" sql-type="datetime" nullable="false" length="0" scale="0" primary-key="true" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dateto" property="dateto" behavior="readwrite" uniqueId="20e0e0cb-c187-407a-a388-16d985056fe1" type="System.DateTime">
+          <orm:column name="DateTo" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_name" property="name" behavior="readwrite" uniqueId="c3b04e20-cc80-4597-b597-8d705fe95fe4" type="System.String">
+          <orm:column name="Name" sql-type="nvarchar" nullable="true" length="40" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_inter" property="inter" behavior="readwrite" uniqueId="95d5b8c3-ffa6-484e-80ac-f8bdf235984e" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="Inter" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_notes" property="notes" behavior="readwrite" uniqueId="974ed57e-2779-420a-a405-61a4895914b9" type="System.String">
+          <orm:column name="Notes" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_df1" property="df1" behavior="readwrite" uniqueId="195eba89-91db-46d7-8e4a-e8eb03809ad0" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DF1" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dt1" property="dt1" behavior="readwrite" uniqueId="af5eb079-c7e1-4e76-87a5-df763a58aeb2" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DT1" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dfe1" property="dfe1" behavior="readwrite" uniqueId="95e424b9-b436-4bdf-bc3b-c62bd7b5983b" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DFE1" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dte1" property="dte1" behavior="readwrite" uniqueId="03fbd650-de92-44d7-8831-8a181d09903e" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DTE1" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_ne1" property="ne1" behavior="readwrite" uniqueId="aa12cd8b-eb7e-4971-89cd-ac4fc4f568bd" type="System.String">
+          <orm:column name="NE1" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_df2" property="df2" behavior="readwrite" uniqueId="64e409fa-e10d-4eb7-a6a9-576aa9fa4627" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DF2" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dt2" property="dt2" behavior="readwrite" uniqueId="84b17aa3-775e-4e45-b2b1-aafb89cab525" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DT2" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dfe2" property="dfe2" behavior="readwrite" uniqueId="2b8c95c9-4270-4166-be5b-09b156f68cf9" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DFE2" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dte2" property="dte2" behavior="readwrite" uniqueId="4ace5c17-057c-4780-83f1-84ac644fa1a4" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DTE2" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_ne2" property="ne2" behavior="readwrite" uniqueId="e2ad98ec-0c28-420b-86e7-8184db947f2e" type="System.String">
+          <orm:column name="NE2" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_df3" property="df3" behavior="readwrite" uniqueId="b3e6a90e-daee-4d21-abbf-a7e9200f4ed8" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DF3" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dt3" property="dt3" behavior="readwrite" uniqueId="d58d3cc1-e560-4012-9e22-13710a4cee41" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DT3" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dfe3" property="dfe3" behavior="readwrite" uniqueId="ba5554c0-b0a9-49e1-8225-cdafb5848a71" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DFE3" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dte3" property="dte3" behavior="readwrite" uniqueId="9ff02eb0-935e-46d9-922d-d7d2986bf963" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DTE3" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_ne3" property="ne3" behavior="readwrite" uniqueId="f7199106-0762-43fe-ab72-0b78375feb85" type="System.String">
+          <orm:column name="NE3" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_df4" property="df4" behavior="readwrite" uniqueId="f69ee296-8095-4838-832c-6ad27e8d6dfd" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DF4" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dt4" property="dt4" behavior="readwrite" uniqueId="32861f4e-d57d-41d3-9ae8-5059e2f84091" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DT4" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dfe4" property="dfe4" behavior="readwrite" uniqueId="88e781d4-5200-4d4b-aae7-fdfaf8149b9b" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DFE4" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dte4" property="dte4" behavior="readwrite" uniqueId="5888a348-395d-4924-a2af-84190ba1a908" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DTE4" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_ne4" property="ne4" behavior="readwrite" uniqueId="8d57c1a6-2c21-49da-b89e-cee24451ba8d" type="System.String">
+          <orm:column name="NE4" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_df5" property="df5" behavior="readwrite" uniqueId="2f5461c0-8cbb-4394-a184-9eb9efbe487b" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DF5" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dt5" property="dt5" behavior="readwrite" uniqueId="34100232-3228-4ecd-9cbf-cae93127f8c5" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DT5" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dfe5" property="dfe5" behavior="readwrite" uniqueId="82f9d7c9-7896-4cfd-91fd-31fa26c8f2e7" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DFE5" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dte5" property="dte5" behavior="readwrite" uniqueId="619fc0d3-e1c5-4f27-99d9-5b97aa4e6e5c" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DTE5" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_ne5" property="ne5" behavior="readwrite" uniqueId="48cff16a-89f5-45e9-bd80-09a8459698df" type="System.String">
+          <orm:column name="NE5" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_df6" property="df6" behavior="readwrite" uniqueId="a002fc41-6080-4a43-8237-d2a2f7db7d0e" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DF6" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dt6" property="dt6" behavior="readwrite" uniqueId="20723ea3-13c7-48c0-99fe-b3edce2be13f" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DT6" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dfe6" property="dfe6" behavior="readwrite" uniqueId="99927283-67ab-4a3c-91ff-881fdf5139cf" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DFE6" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dte6" property="dte6" behavior="readwrite" uniqueId="d996cc8d-7db7-484b-84e9-c6006f1ba2df" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DTE6" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_ne6" property="ne6" behavior="readwrite" uniqueId="f77ddac1-35ce-414c-8418-b81316123fe9" type="System.String">
+          <orm:column name="NE6" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_df0" property="df0" behavior="readwrite" uniqueId="95ae3aa9-d96d-46e9-bf8f-ba27c88e9faf" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DF0" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dt0" property="dt0" behavior="readwrite" uniqueId="de799421-f866-4392-aa27-382c574c8397" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DT0" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dfe0" property="dfe0" behavior="readwrite" uniqueId="b936c4d1-dd88-4e3a-a3ef-279e995a3e1f" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DFE0" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_dte0" property="dte0" behavior="readwrite" uniqueId="0e395225-3e73-4320-b83b-658c77e7a963" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DTE0" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_ne0" property="ne0" behavior="readwrite" uniqueId="9533c9d8-288b-467b-8fbe-8732a630d563" type="System.String">
+          <orm:column name="NE0" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_espcode" property="espcode" behavior="readwrite" uniqueId="9e6809ea-86f6-4018-a6ab-617ddfd82620" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="EspCode" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_loccode" property="loccode" behavior="readwrite" uniqueId="efb4fcae-95ff-4652-a93b-7d5899f33d6e" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="LocCode" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_doccode" property="doccode" behavior="readwrite" uniqueId="0302d7ae-0de5-478c-9ad0-849a2be7cb5a" type="System.String">
+          <orm:column name="DocCode" sql-type="varchar" nullable="true" length="3" scale="0" ado-type="StringVariableLength" />
         </orm:field>
       </orm:class>
     </orm:namespace>
@@ -1363,37 +1505,83 @@
         <orm:column name="sys_description" sql-type="varchar" nullable="true" length="350" scale="0" ado-type="StringVariableLength" />
       </orm:table>
       <orm:table name="AppLog">
-        <orm:column nullable="false" primary-key="true" length="0" name="log_date" scale="0" sql-type="datetime" ado-type="DateTime" />
-        <orm:column nullable="false" primary-key="true" length="15" name="log_user" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="false" primary-key="true" length="0" name="book_code" scale="0" sql-type="int" ado-type="Int32" />
-        <orm:column nullable="false" length="0" name="Enter_time" scale="0" sql-type="datetime" ado-type="DateTime" />
-        <orm:column nullable="false" length="38" name="Ap_num" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="true" length="1" name="app_rec_type" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="true" length="15" name="app_rec_no" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="true" length="2" name="app_rec_suff" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="true" length="0" name="app_pat_id" scale="0" sql-type="int" ado-type="Int32" />
-        <orm:column nullable="true" length="0" name="Elapsed_time" scale="0" sql-type="smalldatetime" ado-type="DateTime" />
-        <orm:column nullable="true" length="15" name="ap_status" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="true" length="500" name="ap_Notes" scale="0" sql-type="nchar" ado-type="UnicodeStringFixedLength" />
-        <orm:column nullable="true" length="0" name="esp_code" scale="0" sql-type="int" ado-type="Int32" />
-        <orm:column nullable="true" length="10" name="Proc_code" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="true" length="20" name="ap_ins" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="true" length="22" name="app_ack" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="true" length="15" name="ap_create_user" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="true" length="0" name="ap_create_date" scale="0" sql-type="datetime" ado-type="DateTime" />
-        <orm:column nullable="true" length="15" name="ap_mod_user" scale="0" sql-type="varchar" ado-type="StringVariableLength" />
-        <orm:column nullable="true" length="0" name="ap_mod_date" scale="0" sql-type="datetime" ado-type="DateTime" />
+        <orm:column name="log_date" sql-type="datetime" nullable="false" length="0" scale="0" primary-key="true" ado-type="DateTime" />
+        <orm:column name="log_user" sql-type="varchar" nullable="false" length="15" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="book_code" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="Enter_time" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="Ap_num" sql-type="varchar" nullable="false" length="38" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="app_rec_type" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="app_rec_no" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="app_rec_suff" sql-type="varchar" nullable="true" length="2" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="app_pat_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Elapsed_time" sql-type="smalldatetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ap_status" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ap_Notes" sql-type="nchar" nullable="true" length="500" scale="0" ado-type="UnicodeStringFixedLength" />
+        <orm:column name="esp_code" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Proc_code" sql-type="varchar" nullable="true" length="10" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ap_ins" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="app_ack" sql-type="varchar" nullable="true" length="22" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ap_create_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ap_create_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ap_mod_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ap_mod_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+      </orm:table>
+      <orm:table name="AppBook">
+        <orm:column name="Book_Code" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="DateFrom" sql-type="datetime" nullable="false" length="0" scale="0" primary-key="true" ado-type="DateTime" />
+        <orm:column name="DateTo" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="Name" sql-type="nvarchar" nullable="true" length="40" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="Inter" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Notes" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="DF1" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DT1" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DFE1" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DTE1" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="NE1" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="DF2" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DT2" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DFE2" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DTE2" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="NE2" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="DF3" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DT3" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DFE3" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DTE3" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="NE3" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="DF4" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DT4" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DFE4" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DTE4" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="NE4" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="DF5" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DT5" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DFE5" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DTE5" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="NE5" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="DF6" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DT6" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DFE6" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DTE6" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="NE6" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="DF0" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DT0" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DFE0" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DTE0" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="NE0" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="EspCode" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="LocCode" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="DocCode" sql-type="varchar" nullable="true" length="3" scale="0" ado-type="StringVariableLength" />
       </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
-      <orm:remove-camel-case>False</orm:remove-camel-case>
-      <orm:source-strategy>Property</orm:source-strategy>
       <orm:remove-leading-underscore>False</orm:remove-leading-underscore>
+      <orm:source-strategy>Property</orm:source-strategy>
+      <orm:remove-camel-case>False</orm:remove-camel-case>
     </orm:relational-naming-settings>
   </orm:orm>
   <ModelSettings xmlns="">
-    <AppConfigConnectionPropertyName>TraDataConnection1</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>data source=ERNESTO-THINK\SQL2012;initial catalog=salus;persist security info=True;user id=sa;password=couz2431</AppConfigConnectionString>
+    <AppConfigConnectionPropertyName>SalusConnection</AppConfigConnectionPropertyName>
+    <AppConfigConnectionString>Data Source=ERNESTO-PC\SQL2012;Initial Catalog=salus;User ID=sa;Password=couz2431</AppConfigConnectionString>
     <InitialCatalog>TraData</InitialCatalog>
     <NamingSettings>
       <ClassRules>
@@ -1413,6 +1601,7 @@
         <RemoveUnderscore>true</RemoveUnderscore>
         <UnderscoreAsWordDelimiter>true</UnderscoreAsWordDelimiter>
       </PropertyRules>
+      <NavigationPropertyRules />
     </NamingSettings>
     <CodeGenerationSettings>
       <OutputProjectName>WebPortal</OutputProjectName>
@@ -1796,6 +1985,52 @@
       <Property Id="7545a593-e63d-45f8-9080-c27d678d1487" name="espcode" type="Int32" label="espcode : Int32" nullable="true" kind="Persistent" fieldName="_espcode" />
       <Property Id="731cf48a-f4df-4c3c-ab81-0790749cf767" name="proccode" label="proccode : String" kind="Persistent" fieldName="_proccode" />
     </DomainClass>
+    <DomainClass Id="69a93abb-8b8b-476f-b30b-333bf9b26d0c" name="AppBook" namespace="WebPortal" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="f5343d17-6731-4781-9c83-c8c61605141b" name="bookcode" type="Int32" label="bookcode : Int32" kind="Persistent" identity="true" fieldName="_bookcode" />
+      <Property Id="4a713a69-1fa8-4197-9ea7-9077c7db6371" name="datefrom" type="DateTime" label="datefrom : DateTime" kind="Persistent" identity="true" fieldName="_datefrom" />
+      <Property Id="20e0e0cb-c187-407a-a388-16d985056fe1" name="dateto" type="DateTime" label="dateto : DateTime" kind="Persistent" fieldName="_dateto" />
+      <Property Id="95ae3aa9-d96d-46e9-bf8f-ba27c88e9faf" name="df0" type="DateTime" label="df0 : DateTime" nullable="true" kind="Persistent" fieldName="_df0" />
+      <Property Id="195eba89-91db-46d7-8e4a-e8eb03809ad0" name="df1" type="DateTime" label="df1 : DateTime" nullable="true" kind="Persistent" fieldName="_df1" />
+      <Property Id="64e409fa-e10d-4eb7-a6a9-576aa9fa4627" name="df2" type="DateTime" label="df2 : DateTime" nullable="true" kind="Persistent" fieldName="_df2" />
+      <Property Id="b3e6a90e-daee-4d21-abbf-a7e9200f4ed8" name="df3" type="DateTime" label="df3 : DateTime" nullable="true" kind="Persistent" fieldName="_df3" />
+      <Property Id="f69ee296-8095-4838-832c-6ad27e8d6dfd" name="df4" type="DateTime" label="df4 : DateTime" nullable="true" kind="Persistent" fieldName="_df4" />
+      <Property Id="2f5461c0-8cbb-4394-a184-9eb9efbe487b" name="df5" type="DateTime" label="df5 : DateTime" nullable="true" kind="Persistent" fieldName="_df5" />
+      <Property Id="a002fc41-6080-4a43-8237-d2a2f7db7d0e" name="df6" type="DateTime" label="df6 : DateTime" nullable="true" kind="Persistent" fieldName="_df6" />
+      <Property Id="b936c4d1-dd88-4e3a-a3ef-279e995a3e1f" name="dfe0" type="DateTime" label="dfe0 : DateTime" nullable="true" kind="Persistent" fieldName="_dfe0" />
+      <Property Id="95e424b9-b436-4bdf-bc3b-c62bd7b5983b" name="dfe1" type="DateTime" label="dfe1 : DateTime" nullable="true" kind="Persistent" fieldName="_dfe1" />
+      <Property Id="2b8c95c9-4270-4166-be5b-09b156f68cf9" name="dfe2" type="DateTime" label="dfe2 : DateTime" nullable="true" kind="Persistent" fieldName="_dfe2" />
+      <Property Id="ba5554c0-b0a9-49e1-8225-cdafb5848a71" name="dfe3" type="DateTime" label="dfe3 : DateTime" nullable="true" kind="Persistent" fieldName="_dfe3" />
+      <Property Id="88e781d4-5200-4d4b-aae7-fdfaf8149b9b" name="dfe4" type="DateTime" label="dfe4 : DateTime" nullable="true" kind="Persistent" fieldName="_dfe4" />
+      <Property Id="82f9d7c9-7896-4cfd-91fd-31fa26c8f2e7" name="dfe5" type="DateTime" label="dfe5 : DateTime" nullable="true" kind="Persistent" fieldName="_dfe5" />
+      <Property Id="99927283-67ab-4a3c-91ff-881fdf5139cf" name="dfe6" type="DateTime" label="dfe6 : DateTime" nullable="true" kind="Persistent" fieldName="_dfe6" />
+      <Property Id="0302d7ae-0de5-478c-9ad0-849a2be7cb5a" name="doccode" label="doccode : String" kind="Persistent" fieldName="_doccode" />
+      <Property Id="de799421-f866-4392-aa27-382c574c8397" name="dt0" type="DateTime" label="dt0 : DateTime" nullable="true" kind="Persistent" fieldName="_dt0" />
+      <Property Id="af5eb079-c7e1-4e76-87a5-df763a58aeb2" name="dt1" type="DateTime" label="dt1 : DateTime" nullable="true" kind="Persistent" fieldName="_dt1" />
+      <Property Id="84b17aa3-775e-4e45-b2b1-aafb89cab525" name="dt2" type="DateTime" label="dt2 : DateTime" nullable="true" kind="Persistent" fieldName="_dt2" />
+      <Property Id="d58d3cc1-e560-4012-9e22-13710a4cee41" name="dt3" type="DateTime" label="dt3 : DateTime" nullable="true" kind="Persistent" fieldName="_dt3" />
+      <Property Id="32861f4e-d57d-41d3-9ae8-5059e2f84091" name="dt4" type="DateTime" label="dt4 : DateTime" nullable="true" kind="Persistent" fieldName="_dt4" />
+      <Property Id="34100232-3228-4ecd-9cbf-cae93127f8c5" name="dt5" type="DateTime" label="dt5 : DateTime" nullable="true" kind="Persistent" fieldName="_dt5" />
+      <Property Id="20723ea3-13c7-48c0-99fe-b3edce2be13f" name="dt6" type="DateTime" label="dt6 : DateTime" nullable="true" kind="Persistent" fieldName="_dt6" />
+      <Property Id="0e395225-3e73-4320-b83b-658c77e7a963" name="dte0" type="DateTime" label="dte0 : DateTime" nullable="true" kind="Persistent" fieldName="_dte0" />
+      <Property Id="03fbd650-de92-44d7-8831-8a181d09903e" name="dte1" type="DateTime" label="dte1 : DateTime" nullable="true" kind="Persistent" fieldName="_dte1" />
+      <Property Id="4ace5c17-057c-4780-83f1-84ac644fa1a4" name="dte2" type="DateTime" label="dte2 : DateTime" nullable="true" kind="Persistent" fieldName="_dte2" />
+      <Property Id="9ff02eb0-935e-46d9-922d-d7d2986bf963" name="dte3" type="DateTime" label="dte3 : DateTime" nullable="true" kind="Persistent" fieldName="_dte3" />
+      <Property Id="5888a348-395d-4924-a2af-84190ba1a908" name="dte4" type="DateTime" label="dte4 : DateTime" nullable="true" kind="Persistent" fieldName="_dte4" />
+      <Property Id="619fc0d3-e1c5-4f27-99d9-5b97aa4e6e5c" name="dte5" type="DateTime" label="dte5 : DateTime" nullable="true" kind="Persistent" fieldName="_dte5" />
+      <Property Id="d996cc8d-7db7-484b-84e9-c6006f1ba2df" name="dte6" type="DateTime" label="dte6 : DateTime" nullable="true" kind="Persistent" fieldName="_dte6" />
+      <Property Id="9e6809ea-86f6-4018-a6ab-617ddfd82620" name="espcode" type="Int32" label="espcode : Int32" nullable="true" kind="Persistent" fieldName="_espcode" />
+      <Property Id="95d5b8c3-ffa6-484e-80ac-f8bdf235984e" name="inter" type="Int32" label="inter : Int32" nullable="true" kind="Persistent" fieldName="_inter" />
+      <Property Id="efb4fcae-95ff-4652-a93b-7d5899f33d6e" name="loccode" type="Int32" label="loccode : Int32" nullable="true" kind="Persistent" fieldName="_loccode" />
+      <Property Id="c3b04e20-cc80-4597-b597-8d705fe95fe4" name="name" label="name : String" kind="Persistent" fieldName="_name" />
+      <Property Id="9533c9d8-288b-467b-8fbe-8732a630d563" name="ne0" label="ne0 : String" kind="Persistent" fieldName="_ne0" />
+      <Property Id="aa12cd8b-eb7e-4971-89cd-ac4fc4f568bd" name="ne1" label="ne1 : String" kind="Persistent" fieldName="_ne1" />
+      <Property Id="e2ad98ec-0c28-420b-86e7-8184db947f2e" name="ne2" label="ne2 : String" kind="Persistent" fieldName="_ne2" />
+      <Property Id="f7199106-0762-43fe-ab72-0b78375feb85" name="ne3" label="ne3 : String" kind="Persistent" fieldName="_ne3" />
+      <Property Id="8d57c1a6-2c21-49da-b89e-cee24451ba8d" name="ne4" label="ne4 : String" kind="Persistent" fieldName="_ne4" />
+      <Property Id="48cff16a-89f5-45e9-bd80-09a8459698df" name="ne5" label="ne5 : String" kind="Persistent" fieldName="_ne5" />
+      <Property Id="f77ddac1-35ce-414c-8418-b81316123fe9" name="ne6" label="ne6 : String" kind="Persistent" fieldName="_ne6" />
+      <Property Id="974ed57e-2779-420a-a405-61a4895914b9" name="notes" label="notes : String" kind="Persistent" fieldName="_notes" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="64c04797-105a-417f-a39d-65dce4003508">
@@ -1810,6 +2045,7 @@
         <entitySetProperty name="DAT3000" namespace="WebPortal" type="DAT3000" label="DAT3000 : IQueryable&lt;WebPortal.DAT3000&gt;" />
         <entitySetProperty name="DAT0000" namespace="WebPortal" type="DAT0000" label="DAT0000 : IQueryable&lt;WebPortal.DAT0000&gt;" />
         <entitySetProperty name="AppLogs" namespace="WebPortal" type="AppLog" label="AppLogs : IQueryable&lt;WebPortal.AppLog&gt;" />
+        <entitySetProperty name="AppBooks" namespace="WebPortal" type="AppBook" label="AppBooks : IQueryable&lt;WebPortal.AppBook&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>
