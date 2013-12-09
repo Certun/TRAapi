@@ -440,7 +440,6 @@ namespace WebPortal.Classes
                 dat2000.ptfatherfirstname = data["ptfatherfirstname"].ToString().ToUpper();
                 dat2000.ptfatherinit = ToChar(data["ptfatherinit"].ToString().ToUpper());
 
-                dat2000.ptbirthdate = Convert.ToDateTime(data["ptbirthdate"].ToString());
                 dat2000.ptpaddress1 = data["ptpaddress1"].ToString().ToUpper();
                 dat2000.ptpaddress2 = data["ptpaddress2"].ToString().ToUpper();
                 dat2000.ptpcity = data["ptpcity"].ToString().ToUpper();
@@ -486,6 +485,15 @@ namespace WebPortal.Classes
                 dat2000.ptrace = Convert.ToInt32(data["ptrace"].ToString());
 
                 dat2000.ptrespfirstname = data["ptrespfirstname"].ToString();
+
+                // Birth Date
+                var ptbirthdate = data["ptbirthdate"].ToString();
+                if (String.IsNullOrEmpty(ptbirthdate) && ptbirthdate != "0000-00-00")
+                {
+                    dat2000.ptbirthdate = Convert.ToDateTime(ptbirthdate);
+                }
+
+
                 _conn.SaveChanges();
 
                 // photo handler
@@ -578,14 +586,16 @@ namespace WebPortal.Classes
                             piidsubscriber = ins["piidsubscriber"].ToString().ToUpper()
                         };
 
-                    if (ins["piexpdate"].ToString() != "")
+                    var piexpdate = ins["piexpdate"].ToString();
+                    if (!String.IsNullOrEmpty(piexpdate) && piexpdate != "0000-00-00")
                     {
-                        d8000.piexpdate = Convert.ToDateTime(ins["piexpdate"].ToString());
+                        d8000.piexpdate = Convert.ToDateTime(piexpdate);
                     }
 
-                    if (ins["pibirthdate"].ToString() != "")
+                    var pibirthdate = ins["pibirthdate"].ToString();
+                    if (!String.IsNullOrEmpty(pibirthdate) && pibirthdate != "0000-00-00")
                     {
-                        d8000.pibirthdate = Convert.ToDateTime(ins["pibirthdate"].ToString());
+                        d8000.pibirthdate = Convert.ToDateTime(pibirthdate);
                     }
 
                     _conn.Add(d8000);
@@ -607,9 +617,10 @@ namespace WebPortal.Classes
                 }
 
                 // update insurance...
-                if (ins["piexpdate"].ToString() != "")
+                var expdate = ins["piexpdate"].ToString();
+                if (!String.IsNullOrEmpty(expdate) && expdate != "0000-00-00")
                 {
-                    d8000.piexpdate = Convert.ToDateTime(ins["piexpdate"].ToString());
+                    d8000.piexpdate = Convert.ToDateTime(expdate);
                 }
 
                 d8000.piworkplace = ins["piworkplace"].ToString().ToUpper();

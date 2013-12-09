@@ -189,20 +189,25 @@ namespace WebPortal.Classes
         /// <returns></returns>
         private static IEnumerable<Apoint> GetNewAppointments()
         {
-            var appointments = _conn.Apoints.Where(a =>
-                // ******* Test Line ******** //
-                // ******* Test Line ******** //
-                // ******* Test Line ******** //
-                a.apcreateuser == "it" &&
-                (a.apstatus == "N/A" || a.apstatus == "Cambios") &&
-                //(a.apstatus != "Procesado" && a.apstatus != "Error") &&
+            IEnumerable<Apoint> appointments;
 
-                // ***** End Test Line ****** //
-                // ***** End Test Line ****** //
-                // ***** End Test Line ****** //
-                a.entertime > Convert.ToDateTime(DateTime.Now.AddDays(1))
-                ).Take(150);
-
+            if (Server.TestUser == String.Empty)
+            {
+                appointments = _conn.Apoints.Where(a =>
+                    a.apmoddate < Convert.ToDateTime(DateTime.Now.AddMinutes(-Convert.ToInt32(Server.SyncBuffer))) &&
+                    (a.apstatus == "N/A" || a.apstatus == "Cambios") &&
+                    a.entertime > Convert.ToDateTime(DateTime.Now.AddDays(1))
+                    ).Take(150);
+            }
+            else {
+                appointments = _conn.Apoints.Where(a =>
+                    a.apmoddate < Convert.ToDateTime(DateTime.Now.AddMinutes(-Convert.ToInt32(Server.SyncBuffer))) &&
+                    a.apcreateuser == Server.TestUser &&
+                    (a.apstatus == "N/A" || a.apstatus == "Cambios") &&
+                    a.entertime > Convert.ToDateTime(DateTime.Now.AddDays(1))
+                    ).Take(150);
+            }
+            
             return appointments;
         }
 

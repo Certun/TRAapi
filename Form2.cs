@@ -32,7 +32,7 @@ namespace WebPortal
             host.Text = Server.Host;
             serverIp.Text = Server.ServerIp;
             serverPort.Text = Server.ServerPort.ToString(CultureInfo.InvariantCulture);
-            startDate.Text = Server.StartDate;
+            testUser.Text = Server.TestUser;
             secretKey.Text = Server.SecretKey;
             docServer.Text = Server.DocServer;
             docDirectory.Text = Server.DocDirectory;
@@ -55,6 +55,7 @@ namespace WebPortal
             insuranceImgCategory.SelectedValue = Server.InsuranceImgCategory;
             documentsCategory.SelectedValue = Server.DocumentsCategory;
 
+            syncBuffer.Text = Server.SyncBuffer;
 
         }
 
@@ -88,13 +89,14 @@ namespace WebPortal
             host.Text = ConfigurationManager.AppSettings["host"];
             serverIp.Text = ConfigurationManager.AppSettings["serverIp"];
             serverPort.Text = ConfigurationManager.AppSettings["serverPort"];
-            startDate.Text = ConfigurationManager.AppSettings["startDate"];
+            testUser.Text = ConfigurationManager.AppSettings["testUser"];
             secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
             docDirectory.Text = ConfigurationManager.AppSettings["docDirectory"];
             docServer.Text = ConfigurationManager.AppSettings["docServer"];
             patientImgCategory.SelectedValue = ConfigurationManager.AppSettings["patientImgCategory"];
             insuranceImgCategory.SelectedValue = ConfigurationManager.AppSettings["insuranceImgCategory"];
             documentsCategory.SelectedValue = ConfigurationManager.AppSettings["documentsCategory"];
+            syncBuffer.Text = ConfigurationManager.AppSettings["syncBuffer"];
         }
 
         private void serverIp_TextChanged(object sender, EventArgs e)

@@ -19,7 +19,7 @@ namespace WebPortal.Classes
         public static string Host;
         public static string ServerIp;
         public static int ServerPort;
-        public static string StartDate;
+        public static string TestUser;
         public static string SecretKey;
         public static string DocServer;
         public static string DocDirectory;
@@ -29,6 +29,7 @@ namespace WebPortal.Classes
         public static string PatientImgCategory;
         public static string InsuranceImgCategory;
         public static string DocumentsCategory;
+        public static string SyncBuffer;
 
         public static CronObject Cron;
 //        public static Flags Flag;
@@ -63,13 +64,14 @@ namespace WebPortal.Classes
             Host         = config.AppSettings.Settings["host"].Value;
             ServerIp     = config.AppSettings.Settings["serverIp"].Value;
             ServerPort   = Convert.ToInt32(config.AppSettings.Settings["serverPort"].Value);
-            StartDate    = config.AppSettings.Settings["startDate"].Value;
             SecretKey    = config.AppSettings.Settings["secretKey"].Value;
+            TestUser     = config.AppSettings.Settings["testUser"].Value;
             DocServer    = config.AppSettings.Settings["docServer"].Value;
             DocDirectory = config.AppSettings.Settings["docDirectory"].Value;
             PatientImgCategory      = config.AppSettings.Settings["patientImgCategory"].Value;
             InsuranceImgCategory    = config.AppSettings.Settings["insuranceImgCategory"].Value;
             DocumentsCategory       = config.AppSettings.Settings["documentsCategory"].Value;
+            SyncBuffer              = config.AppSettings.Settings["syncBuffer"].Value;
             DataConnString = ConfigurationManager.ConnectionStrings["TraDataConnection"].ConnectionString;
         }
 
@@ -160,13 +162,14 @@ namespace WebPortal.Classes
             config.AppSettings.Settings["host"].Value           = MainForm.host.Text.Trim();
             config.AppSettings.Settings["serverIp"].Value       = MainForm.serverIp.Text.Trim();
             config.AppSettings.Settings["serverPort"].Value     = MainForm.serverPort.Text.Trim();
-            config.AppSettings.Settings["startDate"].Value      = MainForm.startDate.Text.Trim();
+            config.AppSettings.Settings["testUser"].Value       = MainForm.testUser.Text.Trim();
             config.AppSettings.Settings["secretKey"].Value      = MainForm.secretKey.Text.Trim();
             config.AppSettings.Settings["docDirectory"].Value   = MainForm.docDirectory.Text.Trim();
             config.AppSettings.Settings["docServer"].Value      = MainForm.docServer.Text.Trim();
             config.AppSettings.Settings["patientImgCategory"].Value     = MainForm.patientImgCategory.SelectedValue.ToString();
             config.AppSettings.Settings["insuranceImgCategory"].Value   = MainForm.insuranceImgCategory.SelectedValue.ToString();
             config.AppSettings.Settings["documentsCategory"].Value      = MainForm.documentsCategory.SelectedValue.ToString();
+            config.AppSettings.Settings["syncbuffer"].Value = MainForm.syncBuffer.Text.ToString();
             config.Save();
             ConfigurationManager.RefreshSection("appSettings");
             LoadAppConfigSetting();
