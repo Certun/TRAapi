@@ -67,7 +67,7 @@ namespace WebPortal
 		{
 			get
 			{
-				return this._name;
+                return this._name.Trim();
 			}
 			set
 			{
@@ -93,7 +93,7 @@ namespace WebPortal
 		{
 			get
 			{
-				return this._notes;
+                return this._notes.Trim();
 			}
 			set
 			{
@@ -158,7 +158,7 @@ namespace WebPortal
 		{
 			get
 			{
-				return this._ne1;
+                return this._ne1.Trim();
 			}
 			set
 			{
@@ -223,7 +223,7 @@ namespace WebPortal
 		{
 			get
 			{
-				return this._ne2;
+                return this._ne2.Trim();
 			}
 			set
 			{
@@ -288,7 +288,7 @@ namespace WebPortal
 		{
 			get
 			{
-				return this._ne3;
+                return this._ne3.Trim();
 			}
 			set
 			{
@@ -353,7 +353,7 @@ namespace WebPortal
 		{
 			get
 			{
-				return this._ne4;
+                return this._ne4.Trim();
 			}
 			set
 			{
@@ -418,7 +418,7 @@ namespace WebPortal
 		{
 			get
 			{
-				return this._ne5;
+                return this._ne5.Trim();
 			}
 			set
 			{
@@ -483,7 +483,7 @@ namespace WebPortal
 		{
 			get
 			{
-				return this._ne6;
+                return this._ne6.Trim();
 			}
 			set
 			{
@@ -548,7 +548,7 @@ namespace WebPortal
 		{
 			get
 			{
-				return this._ne0;
+                return this._ne0.Trim();
 			}
 			set
 			{
@@ -587,7 +587,7 @@ namespace WebPortal
 		{
 			get
 			{
-				return this._doccode;
+                return this._doccode.Trim();
 			}
 			set
 			{

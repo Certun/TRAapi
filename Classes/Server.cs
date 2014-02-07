@@ -20,6 +20,7 @@ namespace WebPortal.Classes
         public static string ServerIp;
         public static int ServerPort;
         public static string TestUser;
+        public static string TestArea;
         public static string SecretKey;
         public static string DocServer;
         public static string DocDirectory;
@@ -37,7 +38,7 @@ namespace WebPortal.Classes
         public static void Main(String[] args)
         {
             LoadAppConfigSetting();
-            MainForm = new Form2();
+            MainForm = new Form2 {Text = @"Web Portal Server - v1.2.285"};
 //            Flag = new Flags();
             MainForm.FormClosing += mainForm_FormClosing;
             MainForm.resetBtn.Click += resetBtn_Click;
@@ -66,6 +67,7 @@ namespace WebPortal.Classes
             ServerPort   = Convert.ToInt32(config.AppSettings.Settings["serverPort"].Value);
             SecretKey    = config.AppSettings.Settings["secretKey"].Value;
             TestUser     = config.AppSettings.Settings["testUser"].Value;
+            TestArea     = config.AppSettings.Settings["testArea"].Value;
             DocServer    = config.AppSettings.Settings["docServer"].Value;
             DocDirectory = config.AppSettings.Settings["docDirectory"].Value;
             PatientImgCategory      = config.AppSettings.Settings["patientImgCategory"].Value;
@@ -84,9 +86,9 @@ namespace WebPortal.Classes
         public static void SendRequest()
         {
             if (Debug) WriteDisplay("************* Sending Request *************");
-            Syncer.SyncData();
+            //Syncer.SyncData();
             Syncer.SyncApps();
-            Syncer.SyncDeleted();  
+            //Syncer.SyncDeleted();  
         }
 
         static void StartStop_Click(object sender, EventArgs e)
@@ -163,13 +165,14 @@ namespace WebPortal.Classes
             config.AppSettings.Settings["serverIp"].Value       = MainForm.serverIp.Text.Trim();
             config.AppSettings.Settings["serverPort"].Value     = MainForm.serverPort.Text.Trim();
             config.AppSettings.Settings["testUser"].Value       = MainForm.testUser.Text.Trim();
+            config.AppSettings.Settings["testArea"].Value       = MainForm.testArea.Text.Trim();
             config.AppSettings.Settings["secretKey"].Value      = MainForm.secretKey.Text.Trim();
             config.AppSettings.Settings["docDirectory"].Value   = MainForm.docDirectory.Text.Trim();
             config.AppSettings.Settings["docServer"].Value      = MainForm.docServer.Text.Trim();
             config.AppSettings.Settings["patientImgCategory"].Value     = MainForm.patientImgCategory.SelectedValue.ToString();
             config.AppSettings.Settings["insuranceImgCategory"].Value   = MainForm.insuranceImgCategory.SelectedValue.ToString();
             config.AppSettings.Settings["documentsCategory"].Value      = MainForm.documentsCategory.SelectedValue.ToString();
-            config.AppSettings.Settings["syncbuffer"].Value = MainForm.syncBuffer.Text.ToString();
+            config.AppSettings.Settings["syncbuffer"].Value = MainForm.syncBuffer.Text;
             config.Save();
             ConfigurationManager.RefreshSection("appSettings");
             LoadAppConfigSetting();

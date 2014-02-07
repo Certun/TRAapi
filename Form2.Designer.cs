@@ -38,9 +38,11 @@
             this.forceSync = new System.Windows.Forms.Button();
             this.enableDebug = new System.Windows.Forms.CheckBox();
             this.tabSettings = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.testUser = new System.Windows.Forms.TextBox();
             this.syncBuffer = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.docServer = new System.Windows.Forms.TextBox();
             this.documentsCategory = new System.Windows.Forms.ComboBox();
@@ -62,14 +64,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.secretKey = new System.Windows.Forms.TextBox();
             this.configSave = new System.Windows.Forms.Button();
-            this.testUser = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.testArea = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabDisplay.SuspendLayout();
             this.tabSettings.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.syncBuffer)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // display
@@ -117,7 +119,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 149);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(512, 462);
+            this.tabControl1.Size = new System.Drawing.Size(512, 499);
             this.tabControl1.TabIndex = 3;
             // 
             // tabDisplay
@@ -130,7 +132,7 @@
             this.tabDisplay.Location = new System.Drawing.Point(4, 22);
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplay.Size = new System.Drawing.Size(504, 461);
+            this.tabDisplay.Size = new System.Drawing.Size(504, 436);
             this.tabDisplay.TabIndex = 0;
             this.tabDisplay.Text = "Log";
             this.tabDisplay.UseVisualStyleBackColor = true;
@@ -174,6 +176,8 @@
             // 
             // tabSettings
             // 
+            this.tabSettings.Controls.Add(this.label12);
+            this.tabSettings.Controls.Add(this.testArea);
             this.tabSettings.Controls.Add(this.label10);
             this.tabSettings.Controls.Add(this.testUser);
             this.tabSettings.Controls.Add(this.syncBuffer);
@@ -193,10 +197,46 @@
             this.tabSettings.Location = new System.Drawing.Point(4, 22);
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSettings.Size = new System.Drawing.Size(504, 436);
+            this.tabSettings.Size = new System.Drawing.Size(504, 473);
             this.tabSettings.TabIndex = 1;
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(14, 178);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(67, 13);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "Test User(s):";
+            // 
+            // testUser
+            // 
+            this.testUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.testUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.testUser.Location = new System.Drawing.Point(116, 175);
+            this.testUser.Name = "testUser";
+            this.testUser.Size = new System.Drawing.Size(365, 20);
+            this.testUser.TabIndex = 15;
+            // 
+            // syncBuffer
+            // 
+            this.syncBuffer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.syncBuffer.Location = new System.Drawing.Point(116, 148);
+            this.syncBuffer.Name = "syncBuffer";
+            this.syncBuffer.Size = new System.Drawing.Size(120, 20);
+            this.syncBuffer.TabIndex = 13;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(15, 150);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(90, 13);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "Sync Buffer (min):";
             // 
             // groupBox1
             // 
@@ -211,29 +251,12 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox1.Location = new System.Drawing.Point(18, 214);
+            this.groupBox1.Location = new System.Drawing.Point(18, 242);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(463, 178);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Document Categories";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(15, 150);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(90, 13);
-            this.label11.TabIndex = 14;
-            this.label11.Text = "Sync Buffer (min):";
-            // 
-            // syncBuffer
-            // 
-            this.syncBuffer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.syncBuffer.Location = new System.Drawing.Point(116, 148);
-            this.syncBuffer.Name = "syncBuffer";
-            this.syncBuffer.Size = new System.Drawing.Size(120, 20);
-            this.syncBuffer.TabIndex = 13;
             // 
             // label9
             // 
@@ -373,7 +396,7 @@
             // 
             this.configCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.configCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.configCancel.Location = new System.Drawing.Point(342, 407);
+            this.configCancel.Location = new System.Drawing.Point(342, 444);
             this.configCancel.Name = "configCancel";
             this.configCancel.Size = new System.Drawing.Size(75, 23);
             this.configCancel.TabIndex = 7;
@@ -446,7 +469,7 @@
             // 
             this.configSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.configSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.configSave.Location = new System.Drawing.Point(423, 407);
+            this.configSave.Location = new System.Drawing.Point(423, 444);
             this.configSave.Name = "configSave";
             this.configSave.Size = new System.Drawing.Size(75, 23);
             this.configSave.TabIndex = 0;
@@ -454,30 +477,30 @@
             this.configSave.UseVisualStyleBackColor = true;
             this.configSave.Click += new System.EventHandler(this.saveSettings_Click);
             // 
-            // testUser
+            // testArea
             // 
-            this.testUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.testArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.testUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.testUser.Location = new System.Drawing.Point(116, 175);
-            this.testUser.Name = "testUser";
-            this.testUser.Size = new System.Drawing.Size(365, 20);
-            this.testUser.TabIndex = 15;
+            this.testArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.testArea.Location = new System.Drawing.Point(116, 206);
+            this.testArea.Name = "testArea";
+            this.testArea.Size = new System.Drawing.Size(365, 20);
+            this.testArea.TabIndex = 17;
             // 
-            // label10
+            // label12
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(14, 178);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(53, 13);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "Test User";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(14, 208);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(67, 13);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "Test Area(s):";
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(538, 623);
+            this.ClientSize = new System.Drawing.Size(538, 660);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -492,9 +515,9 @@
             this.tabDisplay.PerformLayout();
             this.tabSettings.ResumeLayout(false);
             this.tabSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.syncBuffer)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.syncBuffer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -536,6 +559,8 @@
         public System.Windows.Forms.NumericUpDown syncBuffer;
         private System.Windows.Forms.Label label10;
         public System.Windows.Forms.TextBox testUser;
+        private System.Windows.Forms.Label label12;
+        public System.Windows.Forms.TextBox testArea;
 
     }
 }

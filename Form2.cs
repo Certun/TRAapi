@@ -33,6 +33,7 @@ namespace WebPortal
             serverIp.Text = Server.ServerIp;
             serverPort.Text = Server.ServerPort.ToString(CultureInfo.InvariantCulture);
             testUser.Text = Server.TestUser;
+            testArea.Text = Server.TestArea;
             secretKey.Text = Server.SecretKey;
             docServer.Text = Server.DocServer;
             docDirectory.Text = Server.DocDirectory;
@@ -90,6 +91,7 @@ namespace WebPortal
             serverIp.Text = ConfigurationManager.AppSettings["serverIp"];
             serverPort.Text = ConfigurationManager.AppSettings["serverPort"];
             testUser.Text = ConfigurationManager.AppSettings["testUser"];
+            testArea.Text = ConfigurationManager.AppSettings["testArea"];
             secretKey.Text = ConfigurationManager.AppSettings["secretKey"];
             docDirectory.Text = ConfigurationManager.AppSettings["docDirectory"];
             docServer.Text = ConfigurationManager.AppSettings["docServer"];

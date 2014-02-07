@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -189,26 +190,42 @@ namespace WebPortal.Classes
         /// <returns></returns>
         private static IEnumerable<Apoint> GetNewAppointments()
         {
-            IEnumerable<Apoint> appointments;
 
-            if (Server.TestUser == String.Empty)
+            string[] areas;
+            string[] users;
+            string[] where;
+
+            var appointments = _conn.Apoints.Where(a =>
+                a.apmoddate < Convert.ToDateTime(DateTime.Now.AddMinutes(-Convert.ToInt32(Server.SyncBuffer))) &&
+                (a.apstatus == "N/A" || a.apstatus == "Cambios") &&
+                a.entertime > Convert.ToDateTime(DateTime.Now.AddDays(1))
+                );
+
+            // filter test areas by espaciality code
+            if (Server.TestArea != String.Empty)
             {
-                appointments = _conn.Apoints.Where(a =>
-                    a.apmoddate < Convert.ToDateTime(DateTime.Now.AddMinutes(-Convert.ToInt32(Server.SyncBuffer))) &&
-                    (a.apstatus == "N/A" || a.apstatus == "Cambios") &&
-                    a.entertime > Convert.ToDateTime(DateTime.Now.AddDays(1))
-                    ).Take(150);
+                areas = Server.TestArea.Split(';');
+                where = new string[areas.Count()];
+                for (var i = 0; i < areas.Length; i++)
+                {
+                    where[i] = String.Format(@"espcode == {0}", areas[i].Trim());
+                }
+                appointments =  appointments.Where(String.Join(" or ", where));
             }
-            else {
-                appointments = _conn.Apoints.Where(a =>
-                    a.apmoddate < Convert.ToDateTime(DateTime.Now.AddMinutes(-Convert.ToInt32(Server.SyncBuffer))) &&
-                    a.apcreateuser == Server.TestUser &&
-                    (a.apstatus == "N/A" || a.apstatus == "Cambios") &&
-                    a.entertime > Convert.ToDateTime(DateTime.Now.AddDays(1))
-                    ).Take(150);
+
+            // filter test users
+            if (Server.TestUser != String.Empty)
+            {
+                users = Server.TestUser.Split(';');
+                where = new string[users.Count()];
+                for (var i = 0; i < users.Length; i++)
+                {
+                    where[i] = String.Format(@"apcreateuser == ""{0}""", users[i].Trim());
+                }
+                appointments = appointments.Where(String.Join(" or ", where));
+
             }
-            
-            return appointments;
+            return appointments.Take(50);
         }
 
         /// <summary>
