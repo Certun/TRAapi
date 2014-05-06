@@ -370,7 +370,7 @@ namespace WebPortal.Classes
                         status = "Procesando";
                         break;
                     case  "1":
-                        status = "Pendiente";
+                        status = "Procesado";
                         break;
                     case  "2":
                         status = "Completado";
@@ -382,7 +382,7 @@ namespace WebPortal.Classes
                         status = "Cancelado";
                         break;
                     case  "8":
-                        status = "Confirmacion";
+                        status = "Conf. Enviada";
                         break;
                     case  "9":
                         status = "Error";
@@ -466,6 +466,7 @@ namespace WebPortal.Classes
                 dat2000.ptrespphone = data["ptrespphone"].ToString().ToUpper();
                 dat2000.ptrefering = data["ptrefering"].ToString().ToUpper();
 
+                dat2000.ptreligion = data["ptreligion"].ToString().ToUpper();
                 dat2000.ptethnic = Convert.ToInt32(data["ptethnic"].ToString());
                 dat2000.ptbirthplace = data["ptbirthplace"].ToString().ToUpper();
 
@@ -777,6 +778,7 @@ namespace WebPortal.Classes
                         scanpath = path,
                         scancreateddate = DateTime.Now,
                         scanupdateddate = DateTime.Now,
+                        scansign = 'N',
                         scanuserid = "web"
                     });
                 _conn.SaveChanges();

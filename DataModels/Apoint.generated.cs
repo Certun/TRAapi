@@ -55,7 +55,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._apnum.Trim();
+				return this._apnum;
 			}
 			set
 			{
@@ -81,7 +81,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._apprecno.Trim();
+				return this._apprecno;
 			}
 			set
 			{
@@ -94,7 +94,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._apprecsuff.Trim();
+				return this._apprecsuff;
 			}
 			set
 			{
@@ -133,7 +133,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._apstatus.Trim();
+				return this._apstatus;
 			}
 			set
 			{
@@ -144,10 +144,11 @@ namespace WebPortal
 		private string _apnotes;
 		public virtual string apnotes
 		{
-			get
-			{
-				return this._apnotes.Trim();
-			}
+            get
+            {
+                if (!String.IsNullOrEmpty(this._apnotes)) return this._apnotes.Trim();
+                return this._apnotes;
+            }
 			set
 			{
 				this._apnotes = value;
@@ -172,7 +173,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._proccode.Trim();
+				return this._proccode;
 			}
 			set
 			{
@@ -185,7 +186,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._apins.Trim();
+				return this._apins;
 			}
 			set
 			{
@@ -198,7 +199,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._appack.Trim();
+				return this._appack;
 			}
 			set
 			{
@@ -211,7 +212,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._apcreateuser.Trim();
+				return this._apcreateuser;
 			}
 			set
 			{
@@ -237,7 +238,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._apmoduser.Trim();
+				return this._apmoduser;
 			}
 			set
 			{
@@ -255,6 +256,19 @@ namespace WebPortal
 			set
 			{
 				this._apmoddate = value;
+			}
+		}
+		
+		private DateTime? _apbooktime;
+		public virtual DateTime? apbooktime
+		{
+			get
+			{
+				return this._apbooktime;
+			}
+			set
+			{
+				this._apbooktime = value;
 			}
 		}
 		

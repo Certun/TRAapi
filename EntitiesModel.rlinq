@@ -698,6 +698,9 @@
         <orm:field name="_apmoddate" property="apmoddate" behavior="readwrite" uniqueId="291784c5-61b2-484d-9ebb-9d11d5628bb8" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="ap_mod_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         </orm:field>
+        <orm:field name="_apbooktime" property="apbooktime" behavior="readwrite" uniqueId="c389654f-10a6-4c35-8b06-6b9da3b5fc9e" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ap_BookTime" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
         <orm:field name="_dat2000" property="DAT2000" uniqueId="d88b8008-2de2-48b7-beac-7f0381ca7cbf" type="WebPortal.DAT2000">
           <orm:reference uniqueId="74e392b0-0bbf-465b-b46b-7e69d6afd27e" association-name="ApointHasDAT2000">
             <orm:sharedfield name="_apprectype" target-class="WebPortal.DAT2000" target-field="_ptrectype" />
@@ -1412,6 +1415,7 @@
         <orm:column name="ap_create_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         <orm:column name="ap_mod_user" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
         <orm:column name="ap_mod_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ap_BookTime" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         <orm:index name="IX_Apoint">
           <orm:columnMapping>
             <orm:column name="app_rec_type" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
@@ -1581,7 +1585,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>SalusConnection</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>Data Source=ERNESTO-PC\SQL2012;Initial Catalog=salus;User ID=sa;Password=couz2431</AppConfigConnectionString>
+    <AppConfigConnectionString>data source=ERNESTO-MACPC\SQL2012;initial catalog=salus;user id=sa;password=couz2431</AppConfigConnectionString>
     <InitialCatalog>TraData</InitialCatalog>
     <NamingSettings>
       <ClassRules>
@@ -1877,6 +1881,7 @@
       <Property Id="66a0be98-e8bf-4fd8-9ea9-300d93c512ee" name="elapsedtime" type="DateTime" label="elapsedtime : DateTime" nullable="true" kind="Persistent" fieldName="_elapsedtime" />
       <Property Id="10f86590-780a-48ec-8da2-46877633c7ee" name="espcode" type="Int32" label="espcode : Int32" nullable="true" kind="Persistent" fieldName="_espcode" />
       <Property Id="a8bf52e8-05fc-4d26-9694-926508424571" name="proccode" label="proccode : String" kind="Persistent" fieldName="_proccode" />
+      <Property Id="c389654f-10a6-4c35-8b06-6b9da3b5fc9e" name="apbooktime" type="DateTime" label="apbooktime : DateTime" nullable="true" kind="Persistent" fieldName="_apbooktime" />
       <AssociationTargets>
         <Association Id="74e392b0-0bbf-465b-b46b-7e69d6afd27e" SourceMultiplicity="ZeroOne" name="ApointHasDAT2000">
           <DomainClassMoniker name="/EntitiesModel/DAT2000" />

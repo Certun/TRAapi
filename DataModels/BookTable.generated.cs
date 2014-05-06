@@ -41,7 +41,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._doccode.Trim();
+				return this._doccode;
 			}
 			set
 			{
@@ -80,7 +80,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._bookname.Trim();
+				return this._bookname;
 			}
 			set
 			{
@@ -93,7 +93,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._docname.Trim();
+				return this._docname;
 			}
 			set
 			{
@@ -106,7 +106,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._espname.Trim();
+				return this._espname;
 			}
 			set
 			{
@@ -119,7 +119,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._locname.Trim();
+				return this._locname;
 			}
 			set
 			{

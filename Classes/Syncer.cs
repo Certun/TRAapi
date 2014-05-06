@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
+using System.Net;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using Telerik.OpenAccess;
 
 namespace WebPortal.Classes
 {
@@ -190,21 +193,18 @@ namespace WebPortal.Classes
         /// <returns></returns>
         private static IEnumerable<Apoint> GetNewAppointments()
         {
-
-            string[] areas;
-            string[] users;
             string[] where;
 
             var appointments = _conn.Apoints.Where(a =>
                 a.apmoddate < Convert.ToDateTime(DateTime.Now.AddMinutes(-Convert.ToInt32(Server.SyncBuffer))) &&
-                (a.apstatus == "N/A" || a.apstatus == "Cambios") &&
-                a.entertime > Convert.ToDateTime(DateTime.Now.AddDays(1))
+                a.apstatus == "" &&
+                a.apbooktime > Convert.ToDateTime(DateTime.Now.AddDays(1))
                 );
 
             // filter test areas by espaciality code
             if (Server.TestArea != String.Empty)
             {
-                areas = Server.TestArea.Split(';');
+                var areas = Server.TestArea.Split(';');
                 where = new string[areas.Count()];
                 for (var i = 0; i < areas.Length; i++)
                 {
@@ -216,7 +216,7 @@ namespace WebPortal.Classes
             // filter test users
             if (Server.TestUser != String.Empty)
             {
-                users = Server.TestUser.Split(';');
+                var users = Server.TestUser.Split(';');
                 where = new string[users.Count()];
                 for (var i = 0; i < users.Length; i++)
                 {
@@ -297,27 +297,40 @@ namespace WebPortal.Classes
             {
 //                ServicePointManager.ServerCertificateValidationCallback +=
 //        (sender, certificate, chain, sslPolicyErrors) => true;
+                ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
 
                 if (Server.Debug) Server.WriteDisplay("new RestClient()");
                 var client = new RestClient(Server.Host + "/dataProvider/Api.php");
                 if (Server.Debug) Server.WriteDisplay("new RestRequest()");
-                var request = new RestRequest("", Method.POST);
+                var request = new RestRequest(Method.POST);
 
-                request.AddParameter("application/json", jdata, ParameterType.RequestBody);
+                request.AddHeader("Accept", "application/json");
                 request.AddHeader("Action", action);
                 request.AddHeader("Secret-Key", Server.SecretKey);
+                request.AddParameter("application/json", jdata, ParameterType.RequestBody);
 
                 if (Server.Debug) Server.WriteDisplay("RestClient Execute()");
-                var response = (RestResponse)client.Execute(request);
-//
-                if (response.ErrorMessage != "")
+                if (Server.Debug) Server.WriteDisplay("Host " + Server.Host);
+
+                var response = (RestResponse) client.Execute(request);
+
+                if (!String.IsNullOrEmpty(response.ErrorMessage))
                 {
                     if (Server.Debug) Server.WriteDisplay("RestRequest() ErrorMessage");
                     if (Server.Debug) Server.WriteDisplay(response.ErrorMessage);
                 }
 
-                if (response.Content != String.Empty) return JObject.Parse(response.Content);
-                
+                var bytes = Encoding.Default.GetBytes(response.Content);
+                response.Content = Encoding.UTF8.GetString(bytes).TrimStart('?'); // remove ? athta apaears when convert to UTF8
+                if (Server.Debug) Server.WriteDisplay("Response: " + response.Content);
+
+                if (response.Content != String.Empty)
+                {
+                    if (Server.Debug) Server.WriteDisplay("JObject.Parse");
+                    var jobject = JObject.Parse(response.Content.Trim());
+                    if (Server.Debug) Server.WriteDisplay("JObject.Parse Complete");
+                    return jobject;
+                }
                 Server.WriteDisplay("Something went wront with the web portal");
                 return null;
             }

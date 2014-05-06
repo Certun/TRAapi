@@ -28,7 +28,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inscode.Trim();
+				return this._inscode;
 			}
 			set
 			{
@@ -41,7 +41,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inssinonim.Trim();
+				return this._inssinonim;
 			}
 			set
 			{
@@ -54,7 +54,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insname.Trim();
+				return this._insname;
 			}
 			set
 			{
@@ -67,7 +67,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insaddress1.Trim();
+				return this._insaddress1;
 			}
 			set
 			{
@@ -80,7 +80,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insaddress2.Trim();
+				return this._insaddress2;
 			}
 			set
 			{
@@ -93,7 +93,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inscity.Trim();
+				return this._inscity;
 			}
 			set
 			{
@@ -106,7 +106,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insstate.Trim();
+				return this._insstate;
 			}
 			set
 			{
@@ -119,7 +119,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inszipcode.Trim();
+				return this._inszipcode;
 			}
 			set
 			{
@@ -132,7 +132,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insphone1.Trim();
+				return this._insphone1;
 			}
 			set
 			{
@@ -145,7 +145,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insphone2.Trim();
+				return this._insphone2;
 			}
 			set
 			{
@@ -158,7 +158,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inscontact.Trim();
+				return this._inscontact;
 			}
 			set
 			{
@@ -210,7 +210,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insocna.Trim();
+				return this._insocna;
 			}
 			set
 			{
@@ -223,7 +223,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insremitance.Trim();
+				return this._insremitance;
 			}
 			set
 			{
@@ -236,7 +236,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inspayerid.Trim();
+				return this._inspayerid;
 			}
 			set
 			{
@@ -249,7 +249,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insessno.Trim();
+				return this._insessno;
 			}
 			set
 			{
@@ -262,7 +262,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inssecondaryid.Trim();
+				return this._inssecondaryid;
 			}
 			set
 			{
@@ -288,7 +288,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insrenderingrefqualifier.Trim();
+				return this._insrenderingrefqualifier;
 			}
 			set
 			{
@@ -301,7 +301,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insreferingrefqualifier.Trim();
+				return this._insreferingrefqualifier;
 			}
 			set
 			{
@@ -314,7 +314,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insbillingrefqualifier.Trim();
+				return this._insbillingrefqualifier;
 			}
 			set
 			{
@@ -340,7 +340,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insreceivercode.Trim();
+				return this._insreceivercode;
 			}
 			set
 			{
@@ -353,7 +353,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insinterchangereceiverid.Trim();
+				return this._insinterchangereceiverid;
 			}
 			set
 			{
@@ -366,7 +366,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insinterchangeid.Trim();
+				return this._insinterchangeid;
 			}
 			set
 			{
@@ -379,7 +379,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inssubmitterid.Trim();
+				return this._inssubmitterid;
 			}
 			set
 			{
@@ -392,7 +392,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inssubmittername.Trim();
+				return this._inssubmittername;
 			}
 			set
 			{
@@ -418,7 +418,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inspath.Trim();
+				return this._inspath;
 			}
 			set
 			{
@@ -431,7 +431,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inshipaafileprefix.Trim();
+				return this._inshipaafileprefix;
 			}
 			set
 			{
@@ -444,7 +444,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inshipaafilesuffix.Trim();
+				return this._inshipaafilesuffix;
 			}
 			set
 			{
@@ -470,7 +470,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insubfileprefix.Trim();
+				return this._insubfileprefix;
 			}
 			set
 			{
@@ -483,7 +483,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insubfilesuffix.Trim();
+				return this._insubfilesuffix;
 			}
 			set
 			{
@@ -496,7 +496,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insubpath.Trim();
+				return this._insubpath;
 			}
 			set
 			{
@@ -509,7 +509,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insubrenderingrefqualifier.Trim();
+				return this._insubrenderingrefqualifier;
 			}
 			set
 			{
@@ -522,7 +522,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insubreferingrefqualifier.Trim();
+				return this._insubreferingrefqualifier;
 			}
 			set
 			{
@@ -535,7 +535,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insubbillingrefqualifier.Trim();
+				return this._insubbillingrefqualifier;
 			}
 			set
 			{
@@ -548,7 +548,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insubsecondaryid.Trim();
+				return this._insubsecondaryid;
 			}
 			set
 			{
@@ -561,7 +561,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insubreceivercode.Trim();
+				return this._insubreceivercode;
 			}
 			set
 			{
@@ -574,7 +574,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insubinterchangereceiverid.Trim();
+				return this._insubinterchangereceiverid;
 			}
 			set
 			{
@@ -587,7 +587,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insubinterchangeid.Trim();
+				return this._insubinterchangeid;
 			}
 			set
 			{
@@ -600,7 +600,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insubsubmitterid.Trim();
+				return this._insubsubmitterid;
 			}
 			set
 			{
@@ -613,7 +613,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insubsubmittername.Trim();
+				return this._insubsubmittername;
 			}
 			set
 			{
@@ -639,7 +639,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._insinterchangeisa07id.Trim();
+				return this._insinterchangeisa07id;
 			}
 			set
 			{
@@ -691,7 +691,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._inspaypath.Trim();
+				return this._inspaypath;
 			}
 			set
 			{

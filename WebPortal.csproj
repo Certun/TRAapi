@@ -72,8 +72,9 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RestSharp">
-      <HintPath>.\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="Rlc.Cron">
       <HintPath>.\Rlc.Cron.dll</HintPath>
@@ -98,6 +99,11 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telerik.OpenAccess.Runtime, Version=2013.3.1014.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Telerik\OpenAccess ORM\bin\Telerik.OpenAccess.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />

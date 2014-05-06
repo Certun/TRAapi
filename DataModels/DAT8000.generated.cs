@@ -42,7 +42,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._pipatno.Trim();
+				return this._pipatno;
 			}
 			set
 			{
@@ -55,7 +55,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._pipatsufx.Trim();
+				return this._pipatsufx;
 			}
 			set
 			{
@@ -94,7 +94,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._piinscode.Trim();
+				return this._piinscode;
 			}
 			set
 			{
@@ -107,7 +107,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._pilastname.Trim();
+				return this._pilastname;
 			}
 			set
 			{
@@ -120,7 +120,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._pifirstname.Trim();
+				return this._pifirstname;
 			}
 			set
 			{
@@ -133,7 +133,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._piinitname.Trim();
+				return this._piinitname;
 			}
 			set
 			{
@@ -159,7 +159,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._pisocsec;
+				return this._pisocsec;
 			}
 			set
 			{
@@ -185,7 +185,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._piworkplace.Trim();
+				return this._piworkplace;
 			}
 			set
 			{
@@ -211,7 +211,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._piaddress1.Trim();
+				return this._piaddress1;
 			}
 			set
 			{
@@ -224,7 +224,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._piaddress2.Trim();
+				return this._piaddress2;
 			}
 			set
 			{
@@ -237,7 +237,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._picity.Trim();
+				return this._picity;
 			}
 			set
 			{
@@ -250,7 +250,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._pistate.Trim();
+				return this._pistate;
 			}
 			set
 			{
@@ -263,7 +263,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._pizip.Trim();
+				return this._pizip;
 			}
 			set
 			{
@@ -276,7 +276,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._piidsubscriber.Trim();
+				return this._piidsubscriber;
 			}
 			set
 			{
@@ -289,7 +289,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._piidpatient;
+				return this._piidpatient;
 			}
 			set
 			{
@@ -302,7 +302,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._pigroup;
+				return this._pigroup;
 			}
 			set
 			{
@@ -315,7 +315,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._picover;
+				return this._picover;
 			}
 			set
 			{
@@ -393,7 +393,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._pisubscriberlastname;
+				return this._pisubscriberlastname;
 			}
 			set
 			{
@@ -406,7 +406,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._pisubscriberfirstname;
+				return this._pisubscriberfirstname;
 			}
 			set
 			{
@@ -432,7 +432,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._picoverdesc;
+				return this._picoverdesc;
 			}
 			set
 			{
@@ -445,7 +445,7 @@ namespace WebPortal
 		{
 			get
 			{
-                return this._pinotes;
+				return this._pinotes;
 			}
 			set
 			{

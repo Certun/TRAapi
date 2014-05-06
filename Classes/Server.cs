@@ -86,9 +86,9 @@ namespace WebPortal.Classes
         public static void SendRequest()
         {
             if (Debug) WriteDisplay("************* Sending Request *************");
-            //Syncer.SyncData();
+            Syncer.SyncData();
             Syncer.SyncApps();
-            //Syncer.SyncDeleted();  
+            Syncer.SyncDeleted();  
         }
 
         static void StartStop_Click(object sender, EventArgs e)
