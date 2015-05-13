@@ -196,9 +196,14 @@ namespace WebPortal.Classes
             string[] where;
 
             var appointments = _conn.Apoints.Where(a =>
-                a.apmoddate < Convert.ToDateTime(DateTime.Now.AddMinutes(-Convert.ToInt32(Server.SyncBuffer))) &&
-                a.apstatus == "" &&
-                a.apbooktime > Convert.ToDateTime(DateTime.Now.AddDays(1))
+                    a.apmoddate < Convert.ToDateTime(DateTime.Now.AddMinutes(-Convert.ToInt32(Server.SyncBuffer))) &&
+                    (
+                        a.apstatus == "*" ||
+                        (
+                            a.apstatus == "" &&
+                            a.apbooktime > Convert.ToDateTime(DateTime.Now.AddDays(1))
+                        )
+                    )
                 );
 
             // filter test areas by espaciality code
